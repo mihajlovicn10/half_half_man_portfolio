@@ -45,7 +45,7 @@ src/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/your-project-name.git
+git clone https://github.com/your-username/half_half_man_portfolio.git
 ```
 
 2. Install dependencies:
