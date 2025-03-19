@@ -8,7 +8,8 @@ const Navbar = () => {
 
   const navItems = [
     { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
+    { name: 'About', path: '/', scroll: 'about' },
+    { name: 'Services', path: '/', scroll: 'services' },
     { name: 'Tech Stack', path: '/tech-stack' },
     { name: 'Projects', path: '/projects' },
     { name: 'Blog', path: '/blog' },
@@ -19,6 +20,17 @@ const Navbar = () => {
     { name: 'FAQ', path: '/faq' },
     { name: 'Privacy Policy', path: '/privacy-policy' },
   ];
+
+  const handleNavClick = (item, e) => {
+    if (item.scroll) {
+      e.preventDefault();
+      const element = document.getElementById(item.scroll);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        setIsMenuOpen(false);
+      }
+    }
+  };
 
   return (
     <nav className="bg-primary w-full fixed top-0 left-0 z-50 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.15)]">
@@ -39,6 +51,7 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
+                onClick={(e) => handleNavClick(item, e)}
                 className="text-muted hover:text-tertiary px-4 py-2 text-sm font-medium transition-all duration-200 hover:bg-secondary/10 rounded-md relative group"
               >
                 {item.name}
@@ -143,8 +156,8 @@ const Navbar = () => {
             <Link
               key={item.name}
               to={item.path}
+              onClick={(e) => handleNavClick(item, e)}
               className="text-muted hover:text-tertiary hover:bg-secondary/10 block px-4 py-2 text-base font-medium transition-colors duration-200"
-              onClick={() => setIsMenuOpen(false)}
             >
               {item.name}
             </Link>

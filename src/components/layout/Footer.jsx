@@ -52,7 +52,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-primary fixed bottom-0 left-0 right-0 w-screen">
+    <footer className="bg-primary w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)]">
       <div className="w-full">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pl-8 pr-8 py-6">
           {/* Brand Section */}
@@ -111,8 +111,8 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-secondary/20 mt-2 pt-2 pl-8 pr-8 pb-2">
-          <p className="text-muted text-sm text-center">
+        <div className="border-t border-secondary/20 mt-2 pt-2 pl-8 pr-8">
+          <p className="text-muted text-sm text-center pb-2">
             © {currentYear} Half Half Man. All rights reserved.
           </p>
         </div>
