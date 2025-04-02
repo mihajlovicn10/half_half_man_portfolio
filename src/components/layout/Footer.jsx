@@ -6,15 +6,16 @@ const Footer = () => {
   const footerLinks = {
     navigation: [
       { name: 'Home', path: '/' },
-      { name: 'About', path: '/about' },
       { name: 'Tech Stack', path: '/tech-stack' },
       { name: 'Projects', path: '/projects' },
       { name: 'Blog', path: '/blog' },
       { name: 'Contact', path: '/contact' },
+      { name: 'FAQ', path: '/faq' },
+      { name: 'Privacy Policy', path: '/privacy-policy' },
     ],
     social: [
-      { name: 'GitHub', url: '#', icon: 'github' },
-      { name: 'LinkedIn', url: '#', icon: 'linkedin' },
+      { name: 'GitHub', url: 'https://github.com/mihajlovicn10', icon: 'github' },
+      { name: 'LinkedIn', url: 'https://www.linkedin.com/in/nikolamihajlovic9/', icon: 'linkedin' },
       { name: 'Instagram', url: '#', icon: 'instagram' },
       { name: 'X', url: '#', icon: 'x' },
     ],
@@ -52,9 +53,9 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-primary w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)]">
-      <div className="w-full">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pl-8 pr-8 py-6">
+    <footer className="bg-primary w-screen relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] mt-auto">
+      <div className="container mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-8 py-6">
           {/* Brand Section */}
           <div className="space-y-2">
             <Link to="/" className="block">
@@ -111,7 +112,7 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-secondary/20 mt-2 pt-2 pl-8 pr-8">
+        <div className="border-t border-secondary/20 mt-2 pt-2 px-8">
           <p className="text-muted text-sm text-center pb-2">
             © {currentYear} Half Half Man. All rights reserved.
           </p>

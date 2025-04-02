@@ -28,6 +28,22 @@ const Home = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Handle hash in URL for scrolling to sections
+  useEffect(() => {
+    // Check if there's a hash in the URL (e.g., /#about or /#services)
+    if (window.location.hash) {
+      const id = window.location.hash.substring(1); // Remove the # character
+      const element = document.getElementById(id);
+      
+      if (element) {
+        // Add a small delay to ensure the page is fully loaded
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, []);
+
   const toggle = (index) => {
     setExpanded(expanded === index ? null : index);
   };
@@ -85,9 +101,9 @@ const Home = () => {
             </h4>
             <Link to="/contact">
               <Button 
-                variant="secondary"
+                variant="primary"
                 size="large"
-                className="font-sans hover:transform hover:scale-105 transition-transform duration-300"
+                className="font-sans hover:transform hover:scale-105 active:scale-95 transition-all duration-300"
               >
                 Let's Work Together
               </Button>
@@ -97,20 +113,20 @@ const Home = () => {
       </div>
 
       {/* Features Grid Section */}
-      <div className="w-full h-[200px] bg-gradient-to-br from-[#1e2c3a] via-[#1e2c3a]/95 to-[#1e2c3a]/90 backdrop-blur-md border-t border-b border-tertiary/10">
-        <div className="grid grid-cols-4 h-full">
+      <div className="w-full min-h-[200px] bg-gradient-to-br from-[#1e2c3a] via-[#1e2c3a]/95 to-[#1e2c3a]/90 backdrop-blur-md border-t border-b border-tertiary/10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 py-4">
          
           {/* Feature 1 */}
-          <div className="flex flex-col items-center justify-center p-6 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:bg-tertiary/5">
+          <div className="flex flex-col items-center justify-center p-6 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:bg-tertiary/5 active:bg-tertiary/10 active:transform active:scale-95 touch-manipulation">
             <svg className="h-8 w-8 text-tertiary mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
             <p className="text-tertiary text-center mb-4 font-serif">Curious about my stack?</p>
             <Link to="/tech-stack">
               <Button 
-                variant="secondary" 
+                variant="primary" 
                 size="small"
-                className="hover:bg-primary-dark hover:scale-105 transition-all duration-300"
+                className="hover:scale-105 active:scale-95 transition-all duration-300"
               >
                 Explore Tech Stack
               </Button>
@@ -118,48 +134,48 @@ const Home = () => {
           </div>
 
           {/* Feature 2 */}
-          <div className="flex flex-col items-center justify-center p-6 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:bg-tertiary/5">
+          <div className="flex flex-col items-center justify-center p-6 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:bg-tertiary/5 active:bg-tertiary/10 active:transform active:scale-95 touch-manipulation">
             <svg className="h-8 w-8 text-tertiary mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
             </svg>
             <p className="text-tertiary text-center mb-4 font-serif">Wondering what others say?</p>
             <Button 
-              variant="secondary" 
+              variant="primary" 
               size="small"
               onClick={() => window.scrollTo({ top: document.getElementById('testimonials')?.offsetTop, behavior: 'smooth' })}
-              className="hover:bg-primary-dark hover:scale-105 transition-all duration-300"
+              className="hover:scale-105 active:scale-95 transition-all duration-300"
             >
               Read Testimonials
             </Button>
           </div>
 
           {/* Feature 3 */}
-          <div className="flex flex-col items-center justify-center p-6 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:bg-tertiary/5">
+          <div className="flex flex-col items-center justify-center p-6 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:bg-tertiary/5 active:bg-tertiary/10 active:transform active:scale-95 touch-manipulation">
             <svg className="h-8 w-8 text-tertiary mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
             <p className="text-tertiary text-center mb-4 font-serif">What can Half Half Man do for you?</p>
             <Button 
-              variant="secondary" 
+              variant="primary" 
               size="small"
               onClick={() => window.scrollTo({ top: document.getElementById('services')?.offsetTop, behavior: 'smooth' })}
-              className="hover:bg-primary-dark hover:scale-105 transition-all duration-300"
+              className="hover:scale-105 active:scale-95 transition-all duration-300"
             >
               Let's Find Out
             </Button>
           </div>
 
           {/* Feature 4 */}
-          <div className="flex flex-col items-center justify-center p-6 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:bg-tertiary/5">
+          <div className="flex flex-col items-center justify-center p-6 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:bg-tertiary/5 active:bg-tertiary/10 active:transform active:scale-95 touch-manipulation">
             <svg className="h-8 w-8 text-tertiary mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
             </svg>
             <p className="text-tertiary text-center mb-4 font-serif">Let's transform your vision into code</p>
             <Link to="/contact">
               <Button 
-                variant="secondary" 
+                variant="primary" 
                 size="small"
-                className="hover:bg-primary-dark hover:scale-105 transition-all duration-300"
+                className="hover:scale-105 active:scale-95 transition-all duration-300"
               >
                 Get in Touch
               </Button>

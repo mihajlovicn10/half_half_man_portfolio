@@ -15,7 +15,8 @@ const Button = ({
   
   const variants = {
     primary: 'bg-primary text-tertiary hover:bg-primary/90 focus:ring-primary/50',
-    secondary: 'bg-secondary text-tertiary hover:bg-secondary/90 focus:ring-secondary/50',
+    secondary: 'bg-secondary text-primary hover:bg-secondary/90 focus:ring-secondary/50',
+    feature: 'bg-tertiary/20 text-tertiary border border-tertiary/30 hover:bg-tertiary/30 focus:ring-tertiary/50',
     outline: 'border-2 border-primary text-primary hover:bg-primary/10 focus:ring-primary/50',
     ghost: 'text-primary hover:bg-primary/10 focus:ring-primary/50',
   };
@@ -49,7 +50,7 @@ const Button = ({
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
-  variant: PropTypes.oneOf(['primary', 'secondary', 'outline', 'ghost']),
+  variant: PropTypes.oneOf(['primary', 'secondary', 'feature', 'outline', 'ghost']),
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   disabled: PropTypes.bool,
   fullWidth: PropTypes.bool,

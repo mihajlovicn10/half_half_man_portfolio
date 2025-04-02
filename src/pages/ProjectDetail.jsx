@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const ProjectDetail = () => {
   const { slug } = useParams();
@@ -41,7 +41,7 @@ const ProjectDetail = () => {
   };
 
   useEffect(() => {
-    // Simulate API call
+    // Since projectsData is an object, we access it directly using the slug
     const projectData = projectsData[slug];
     if (projectData) {
       setProject(projectData);
@@ -68,28 +68,24 @@ const ProjectDetail = () => {
     );
   };
 
-  const handleKeyDown = (e) => {
-    if (selectedImageIndex === null) return;
-    
-    switch (e.key) {
-      case 'ArrowLeft':
-        handlePrevImage();
-        break;
-      case 'ArrowRight':
-        handleNextImage();
-        break;
-      case 'Escape':
-        handleCloseModal();
-        break;
-      default:
-        break;
+  const handleKeyDown = useCallback((e) => {
+    if (e.key === 'Escape') {
+      setSelectedImageIndex(null);
+    } else if (e.key === 'ArrowLeft') {
+      setSelectedImageIndex((prev) => 
+        prev !== null ? Math.max(0, prev - 1) : null
+      );
+    } else if (e.key === 'ArrowRight') {
+      setSelectedImageIndex((prev) => 
+        prev !== null ? Math.min(project.images.length - 1, prev + 1) : null
+      );
     }
-  };
+  }, [project?.images?.length]);
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedImageIndex]);
+  }, [handleKeyDown]);
 
   if (!project) {
     return (

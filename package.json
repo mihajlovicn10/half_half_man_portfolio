@@ -10,7 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@portabletext/react": "^3.2.1",
+    "@sanity/client": "^6.28.3",
+    "@sanity/image-url": "^1.1.0",
     "react": "^18.2.0",
+    "react-calendly": "^4.3.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.3.0"
   },

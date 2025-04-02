@@ -24,11 +24,23 @@ const Navbar = () => {
   const handleNavClick = (item, e) => {
     if (item.scroll) {
       e.preventDefault();
-      const element = document.getElementById(item.scroll);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-        setIsMenuOpen(false);
+      
+      // Check if we're already on the homepage
+      const isHomePage = window.location.pathname === '/' || window.location.pathname === '';
+      
+      if (isHomePage) {
+        // If already on homepage, just scroll
+        const element = document.getElementById(item.scroll);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        // If not on homepage, navigate to homepage with section in hash
+        window.location.href = `/#${item.scroll}`;
       }
+      
+      // Close mobile menu if open
+      setIsMenuOpen(false);
     }
   };
 
@@ -85,19 +97,23 @@ const Navbar = () => {
               
               {/* Dropdown Menu */}
               {isDropdownOpen && (
-                <div className="absolute right-0 mt-1 w-48 rounded-md shadow-lg bg-white transform opacity-100 scale-100 transition-all duration-200 origin-top-right">
-                  <div className="py-1 rounded-md overflow-hidden">
-                    {dropdownItems.map((item) => (
-                      <Link
-                        key={item.name}
-                        to={item.path}
-                        className="block px-4 py-2 text-sm text-textDark hover:bg-tertiary/20 transition-colors duration-200"
-                        onClick={() => setIsDropdownOpen(false)}
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
+                <div className="absolute right-0 top-full mt-2 w-48 bg-primary rounded-lg shadow-lg py-2 z-50 border-t border-tertiary/20">
+                  <Link
+                    to="/faq"
+                    className="block px-4 py-2 text-muted hover:text-tertiary transition-all duration-200 hover:bg-secondary/10 relative group"
+                    onClick={() => setIsDropdownOpen(false)}
+                  >
+                    FAQ
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-tertiary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
+                  </Link>
+                  <Link
+                    to="/privacy-policy"
+                    className="block px-4 py-2 text-muted hover:text-tertiary transition-all duration-200 hover:bg-secondary/10 relative group"
+                    onClick={() => setIsDropdownOpen(false)}
+                  >
+                    Privacy Policy
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-tertiary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
+                  </Link>
                 </div>
               )}
             </div>
