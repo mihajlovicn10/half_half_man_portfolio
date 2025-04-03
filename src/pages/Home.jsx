@@ -4,6 +4,7 @@ import heroVideo from '../assets/videos/hero_video.mp4';
 import elenaPhoto from '../assets/images/testimonials/elena.webp';
 import thomasPhoto from '../assets/images/testimonials/thomas.webp';
 import mariaPhoto from '../assets/images/testimonials/maria.webp';
+import servicesBackground from '../assets/images/services_background.jpg';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
 
@@ -233,7 +234,7 @@ const Home = () => {
       <section
         id="services"
         className="relative w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/src/assets/images/services_background.jpg')" }}
+        style={{ backgroundImage: `url(${servicesBackground})` }}
       >
         {/* Overlay + Blur */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60 backdrop-blur-sm z-0"></div>
