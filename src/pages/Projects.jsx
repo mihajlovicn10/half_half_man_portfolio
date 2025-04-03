@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ecommerceThumb from '../assets/images/Projects/List/ecommerce.webp';
-import scannerThumb from '../assets/images/projects/scanner-thumb.webp';
-import chatThumb from '../assets/images/projects/chat-thumb.webp';
-import portfolioThumb from '../assets/images/projects/portfolio-thumb.webp';
 
 const Projects = () => {
   const [expanded, setExpanded] = useState(null);
@@ -14,24 +11,6 @@ const Projects = () => {
       slug: "secure-ecommerce",
       summary: "A full-stack e-commerce solution with advanced security features. Built with Django REST Framework and React, featuring real-time inventory management and secure payment processing.",
       thumbnail: ecommerceThumb
-    },
-    {
-      title: "Network Security Scanner",
-      slug: "network-scanner",
-      summary: "An automated network vulnerability assessment tool developed in Python. Integrates with Kali Linux tools for comprehensive security auditing and reporting.",
-      thumbnail: scannerThumb
-    },
-    {
-      title: "Real-time Chat Application",
-      slug: "realtime-chat",
-      summary: "End-to-end encrypted chat platform with WebSocket integration. Features include file sharing, group conversations, and message persistence.",
-      thumbnail: chatThumb
-    },
-    {
-      title: "Portfolio Website",
-      slug: "portfolio",
-      summary: "A modern, responsive portfolio website built with React and Tailwind CSS. Showcases my projects and skills with smooth animations and intuitive navigation.",
-      thumbnail: portfolioThumb
     }
   ];
 
