@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import logo from '../../assets/logo/LOGO.JPG';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -60,10 +61,10 @@ const Footer = () => {
           <div className="space-y-2">
             <Link to="/" className="block">
               <div className="flex flex-col items-center text-center space-y-2">
-                <img 
-                  src="/src/assets/logo/LOGO.JPG" 
-                  alt="Half Half Man Logo" 
-                  className="h-20 w-20 object-contain hover:opacity-80 transition-opacity duration-200"
+                <img
+                  className="w-20 h-20 object-cover rounded-full"
+                  src={logo}
+                  alt="Half Half Man Logo"
                 />
                 <span className="text-tertiary font-serif text-2xl font-bold">
                   Half Half Man
