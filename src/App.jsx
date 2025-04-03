@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
@@ -9,9 +10,18 @@ import BlogPost from './pages/BlogPost';
 import Contact from './pages/Contact';
 import Faq from './pages/Faq';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import { initGA, trackPageView } from './utils/analytics';
 import './App.css'
 
-function App() {
+// Initialize GA4
+initGA();
+
+const App = () => {
+  useEffect(() => {
+    // Track initial page view
+    trackPageView(window.location.pathname + window.location.search);
+  }, []);
+
   return (
     <Router>
       <Layout>
@@ -29,6 +39,6 @@ function App() {
       </Layout>
     </Router>
   );
-}
+};
 
 export default App;

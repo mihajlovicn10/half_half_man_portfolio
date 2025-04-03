@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { InlineWidget } from 'react-calendly';
+import { trackEvent } from '../utils/analytics';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -8,7 +9,8 @@ const Contact = () => {
     subject: '',
     message: ''
   });
-  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,11 +18,15 @@ const Contact = () => {
       ...prevState,
       [name]: value
     }));
+    trackEvent('Contact Form', 'Input', name);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitStatus({ type: 'loading', message: 'Sending message...' });
+    setIsSubmitting(true);
+    
+    // Track form submission attempt
+    trackEvent('Contact Form', 'Submit', 'Attempt');
 
     try {
       const response = await fetch('https://formspree.io/f/mrbpanaa', {
@@ -32,19 +38,20 @@ const Contact = () => {
       });
 
       if (response.ok) {
-        setSubmitStatus({
-          type: 'success',
-          message: 'Message sent successfully! I will get back to you soon.'
-        });
+        setSubmitStatus('success');
+        // Track successful submission
+        trackEvent('Contact Form', 'Submit', 'Success');
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
-        throw new Error('Failed to send message');
+        setSubmitStatus('error');
+        // Track failed submission
+        trackEvent('Contact Form', 'Submit', 'Error');
       }
     } catch (error) {
-      setSubmitStatus({
-        type: 'error',
-        message: 'Failed to send message. Please try again.'
-      });
+      setSubmitStatus('error');
+      trackEvent('Contact Form', 'Submit', 'Error');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -136,25 +143,25 @@ const Contact = () => {
                 />
               </div>
 
-              {submitStatus.message && (
+              {submitStatus && (
                 <div 
                   className={`p-4 rounded-lg ${
-                    submitStatus.type === 'success' ? 'bg-green-50 text-green-800' :
-                    submitStatus.type === 'error' ? 'bg-red-50 text-red-800' :
+                    submitStatus === 'success' ? 'bg-green-50 text-green-800' :
+                    submitStatus === 'error' ? 'bg-red-50 text-red-800' :
                     'bg-blue-50 text-blue-800'
                   }`}
                   role="alert"
                 >
-                  {submitStatus.message}
+                  {submitStatus === 'success' ? 'Message sent successfully! I will get back to you soon.' : 'Failed to send message. Please try again.'}
                 </div>
               )}
 
               <button
                 type="submit"
-                disabled={submitStatus.type === 'loading'}
+                disabled={isSubmitting}
                 className="w-full px-6 py-3 bg-primary text-white rounded-full hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {submitStatus.type === 'loading' ? (
+                {isSubmitting ? (
                   <span className="flex items-center justify-center">
                     <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
