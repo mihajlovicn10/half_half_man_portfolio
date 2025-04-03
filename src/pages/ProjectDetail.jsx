@@ -1,5 +1,8 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect, useCallback } from 'react';
+import ecommerceImage1 from '../assets/images/Projects/Detail/ecommerce_1.webp';
+import ecommerceImage2 from '../assets/images/Projects/Detail/ecommerce_2.webp';
+import ecommerceImage3 from '../assets/images/Projects/Detail/ecommerce_3.webp';
 
 const ProjectDetail = () => {
   const { slug } = useParams();
@@ -31,9 +34,9 @@ const ProjectDetail = () => {
         "Developed custom caching solutions"
       ],
       images: [
-        "/src/assets/images/Projects/Detail/ecommerce_1.webp",
-        "/src/assets/images/Projects/Detail/ecommerce_2.webp",
-        "/src/assets/images/Projects/Detail/ecommerce_3.webp"
+        ecommerceImage1,
+        ecommerceImage2,
+        ecommerceImage3
       ],
       githubLink: "https://github.com/yourusername/secure-ecommerce",
       liveDemo: "https://secure-ecommerce-demo.com"

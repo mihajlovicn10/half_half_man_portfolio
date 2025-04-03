@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import heroVideo from '../assets/videos/hero_video.mp4';
+import elenaPhoto from '../assets/images/testimonials/elena.webp';
+import thomasPhoto from '../assets/images/testimonials/thomas.webp';
+import mariaPhoto from '../assets/images/testimonials/maria.webp';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
 
@@ -53,19 +56,19 @@ const Home = () => {
       name: "Elena Papadopoulou",
       company: "CEO @ Helix Digital.",
       feedback: "Working with Half Half Man was a refreshing experience. The quality of code, clarity of communication, and proactive problem-solving exceeded our expectations.",
-      photo: "/src/assets/images/testimonials/elena.webp"
+      photo: elenaPhoto
     },
     {
       name: "Thomas Schneider",
       company: "CTO @ NovaTech Systems",
       feedback: "Exceptional attention to detail and a true professional mindset. He understood our technical needs and delivered far beyond what we asked for.",
-      photo: "/src/assets/images/testimonials/thomas.webp"
+      photo: thomasPhoto
     },
     {
       name: "Maria Georgiou",
       company: "Operations Lead @ Bluewave",
       feedback: "Creative, organized, and highly efficient. His dedication is rare and his execution flawless. Would work with him again in a heartbeat.",
-      photo: "/src/assets/images/testimonials/maria.webp"
+      photo: mariaPhoto
     }
   ];
 
