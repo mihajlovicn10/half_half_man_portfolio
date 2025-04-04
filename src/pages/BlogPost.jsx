@@ -77,12 +77,15 @@ const BlogPost = () => {
 
   return (
     <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
-      <article className="max-w-4xl mx-auto px-4 pt-24 pb-12">
+      <article className="max-w-4xl mx-auto px-4 pt-48 pb-12">
         <Link 
           to="/blog"
-          className="inline-block mb-8 text-primary hover:text-primary-dark transition-colors"
+          className="inline-block mb-16 text-primary hover:text-primary-dark transition-colors flex items-center"
         >
-          ← Back to Blog
+          <svg className="w-5 h-5 mr-2 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+          Back to Blog
         </Link>
         
         <header className="mb-8">

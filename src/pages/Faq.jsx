@@ -48,8 +48,8 @@ const Faq = () => {
 
   return (
     <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
-      <div className="max-w-4xl mx-auto px-4 pt-24 pb-12">
-        <h1 className="text-4xl font-serif font-bold text-center text-primary mb-12">
+      <div className="max-w-4xl mx-auto px-4 pt-48 pb-12">
+        <h1 className="text-4xl font-serif font-bold text-center text-primary mb-20">
           Frequently Asked Questions
         </h1>
 
