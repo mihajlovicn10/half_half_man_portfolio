@@ -84,8 +84,8 @@ const TechStack = () => {
   return (
     <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
       <section className="w-full pb-12">
-        <div className="max-w-7xl mx-auto px-4 pt-32">
-          <h2 className="text-4xl font-serif font-bold text-center text-primary mb-16">
+        <div className="max-w-7xl mx-auto px-4 pt-48">
+          <h2 className="text-4xl font-serif font-bold text-center text-primary mb-20">
             My Tech Stack — A collection of technologies I've mastered and use to build robust, secure, and scalable solutions.
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
