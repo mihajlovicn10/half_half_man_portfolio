@@ -92,7 +92,7 @@ const Home = () => {
         
         {/* Content */}
         <div className="relative z-10 h-full flex items-center justify-center">
-          <div className="text-center text-white px-4">
+          <div className="text-center text-white px-4 pt-16">
             <h1 
               className={`text-5xl font-bold font-serif mb-4 min-h-[120px] transition-opacity duration-1200 ease-in-out drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] ${
                 isTransitioning ? 'opacity-0' : 'opacity-100'
@@ -104,12 +104,8 @@ const Home = () => {
               Custom web development & cybersecurity — tailored with precision and passion.
             </h4>
             <Link to="/contact">
-              <Button 
-                variant="primary"
-                size="large"
-                className="font-sans hover:transform hover:scale-105 active:scale-95 transition-all duration-300"
-              >
-                Let's Work Together
+              <Button variant="primary" size="lg">
+                Get in Touch
               </Button>
             </Link>
           </div>
