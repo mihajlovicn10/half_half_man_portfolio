@@ -22,6 +22,9 @@ const Navbar = () => {
   ];
 
   const handleNavClick = (item, e) => {
+    // Close mobile menu
+    setIsMenuOpen(false);
+    
     if (item.scroll) {
       e.preventDefault();
       
@@ -38,9 +41,6 @@ const Navbar = () => {
         // If not on homepage, navigate to homepage with section in hash
         window.location.href = `/#${item.scroll}`;
       }
-      
-      // Close mobile menu if open
-      setIsMenuOpen(false);
     }
   };
 
@@ -48,7 +48,11 @@ const Navbar = () => {
     <nav className="bg-primary w-full fixed top-0 left-0 z-50 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.15)]">
       <div className="flex justify-between items-center h-16">
         {/* Logo */}
-        <Link to="/" className="flex items-center pl-6 hover:opacity-80 transition-opacity duration-200">
+        <Link 
+          to="/" 
+          className="flex items-center pl-6 hover:opacity-80 transition-opacity duration-200"
+          onClick={() => setIsMenuOpen(false)}
+        >
           <img
             className="h-10 w-auto"
             src={logo}
