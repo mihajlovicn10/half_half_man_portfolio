@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { client, postsQuery } from '../utils/sanityClient';
 
 const Blog = () => {
@@ -86,56 +87,62 @@ const Blog = () => {
   }
 
   return (
-    <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
-      <section className="w-full pb-12">
-        <div className="max-w-6xl mx-auto px-4 pt-48">
-          <h2 className="text-4xl font-serif font-bold text-center text-primary mb-20">
-            Blog — Insights & Technical Deep Dives
-          </h2>
-          <div className="space-y-6">
-            {posts.length > 0 ? (
-              posts.map((post) => (
-                <Link 
-                  key={post._id}
-                  to={`/blog/${post.slug.current}`}
-                  className="block"
-                >
-                  <div className="bg-white shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:bg-tertiary/5 border border-primary/10">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h3 className="text-2xl font-semibold text-primary">{post.title}</h3>
-                        {post.publishedAt && (
-                          <p className="mt-2 text-sm text-primary/60">
-                            {new Date(post.publishedAt).toLocaleDateString()}
-                          </p>
-                        )}
-                        {post.excerpt && (
-                          <p className="mt-4 text-gray-600">{post.excerpt}</p>
+    <>
+      <Helmet>
+        <title>Blog | Half Half Man - Technical Insights & Development Stories</title>
+        <meta name="description" content="Dive into technical articles about web development, cybersecurity, and software engineering. Learn from real-world experiences and best practices." />
+      </Helmet>
+      <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
+        <section className="w-full pb-12">
+          <div className="max-w-6xl mx-auto px-4 pt-48">
+            <h1 className="text-4xl font-serif font-bold text-center text-primary mb-20">
+              Blog — Insights & Technical Deep Dives
+            </h1>
+            <div className="space-y-6">
+              {posts.length > 0 ? (
+                posts.map((post) => (
+                  <Link 
+                    key={post._id}
+                    to={`/blog/${post.slug.current}`}
+                    className="block"
+                  >
+                    <div className="bg-white shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:bg-tertiary/5 border border-primary/10">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="text-2xl font-semibold text-primary">{post.title}</h3>
+                          {post.publishedAt && (
+                            <p className="mt-2 text-sm text-primary/60">
+                              {new Date(post.publishedAt).toLocaleDateString()}
+                            </p>
+                          )}
+                          {post.excerpt && (
+                            <p className="mt-4 text-gray-600">{post.excerpt}</p>
+                          )}
+                        </div>
+                        {post.mainImage && (
+                          <div className="ml-6 flex-shrink-0">
+                            <img 
+                              src={post.mainImage}
+                              alt={`Featured image for blog post: ${post.title}`}
+                              className="w-32 h-32 object-cover rounded-xl"
+                            />
+                          </div>
                         )}
                       </div>
-                      {post.mainImage && (
-                        <div className="ml-6 flex-shrink-0">
-                          <img 
-                            src={post.mainImage}
-                            alt={post.title}
-                            className="w-32 h-32 object-cover rounded-xl"
-                          />
-                        </div>
-                      )}
                     </div>
-                  </div>
-                </Link>
-              ))
-            ) : (
-              <div className="text-center text-primary/60">
-                <p>No blog posts found.</p>
-                <p className="mt-2 text-sm">Check back soon for new content!</p>
-              </div>
-            )}
+                  </Link>
+                ))
+              ) : (
+                <div className="text-center text-primary/60">
+                  <p>No blog posts found.</p>
+                  <p className="mt-2 text-sm">Check back soon for new content!</p>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </>
   );
 };
 

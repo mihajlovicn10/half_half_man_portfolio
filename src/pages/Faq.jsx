@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 const Faq = () => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -47,52 +48,58 @@ const Faq = () => {
   };
 
   return (
-    <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
-      <div className="max-w-4xl mx-auto px-4 pt-48 pb-12">
-        <h1 className="text-4xl font-serif font-bold text-center text-primary mb-20">
-          Frequently Asked Questions
-        </h1>
+    <>
+      <Helmet>
+        <title>FAQ | Half Half Man - Common Questions Answered</title>
+        <meta name="description" content="Find answers to frequently asked questions about our web development and cybersecurity services, project process, and collaboration methods." />
+      </Helmet>
+      <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
+        <div className="max-w-4xl mx-auto px-4 pt-48 pb-12">
+          <h1 className="text-4xl font-serif font-bold text-center text-primary mb-20">
+            Frequently Asked Questions
+          </h1>
 
-        <div className="space-y-4">
-          {faqItems.map((item, index) => (
-            <div 
-              key={index}
-              className="bg-white shadow-xl rounded-2xl overflow-hidden border border-primary/10"
-            >
-              <button
-                onClick={() => toggleQuestion(index)}
-                className="w-full px-6 py-4 text-left flex justify-between items-center bg-white hover:bg-tertiary/5 transition-colors"
+          <div className="space-y-4">
+            {faqItems.map((item, index) => (
+              <div 
+                key={index}
+                className="bg-white shadow-xl rounded-2xl overflow-hidden border border-primary/10"
               >
-                <span className="text-lg font-semibold text-primary">{item.question}</span>
-                <svg
-                  className={`w-6 h-6 text-primary transition-transform ${
-                    openIndex === index ? 'transform rotate-180' : ''
-                  }`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                <button
+                  onClick={() => toggleQuestion(index)}
+                  className="w-full px-6 py-4 text-left flex justify-between items-center bg-white hover:bg-tertiary/5 transition-colors"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-              
-              <div
-                className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${
-                  openIndex === index ? 'max-h-96 py-4' : 'max-h-0'
-                }`}
-              >
-                <p className="text-gray-600">{item.answer}</p>
+                  <span className="text-lg font-semibold text-primary">{item.question}</span>
+                  <svg
+                    className={`w-6 h-6 text-primary transition-transform ${
+                      openIndex === index ? 'transform rotate-180' : ''
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+                
+                <div
+                  className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${
+                    openIndex === index ? 'max-h-96 py-4' : 'max-h-0'
+                  }`}
+                >
+                  <p className="text-gray-600">{item.answer}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

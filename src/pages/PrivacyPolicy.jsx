@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 const PrivacyPolicy = () => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -47,63 +48,69 @@ const PrivacyPolicy = () => {
   };
 
   return (
-    <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
-      <div className="max-w-4xl mx-auto px-4 pt-48 pb-12">
-        <h1 className="text-4xl font-serif font-bold text-center text-primary mb-6">
-          Privacy Policy
-        </h1>
-        <p className="text-center text-gray-600 mb-20">
-          Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-        </p>
-
-        <div className="space-y-4">
-          {policySections.map((section, index) => (
-            <div 
-              key={index}
-              className="bg-white shadow-xl rounded-2xl overflow-hidden border border-primary/10"
-            >
-              <button
-                onClick={() => toggleSection(index)}
-                className="w-full px-6 py-4 text-left flex justify-between items-center bg-white hover:bg-tertiary/5 transition-colors"
-              >
-                <span className="text-lg font-semibold text-primary">{section.title}</span>
-                <svg
-                  className={`w-6 h-6 text-primary transition-transform ${
-                    openIndex === index ? 'transform rotate-180' : ''
-                  }`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-              
-              <div
-                className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${
-                  openIndex === index ? 'max-h-96 py-4' : 'max-h-0'
-                }`}
-              >
-                <p className="text-gray-600 leading-relaxed">{section.content}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-12 text-center text-gray-600">
-          <p className="text-sm">
-            This privacy policy is provided as a transparent overview of my data practices.
-            <br />
-            For any questions or concerns, please use the contact form.
+    <>
+      <Helmet>
+        <title>Privacy Policy | Half Half Man - Data Protection & Security</title>
+        <meta name="description" content="Learn about how we protect your data and maintain privacy. Our comprehensive privacy policy outlines our commitment to security and transparency." />
+      </Helmet>
+      <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
+        <div className="max-w-4xl mx-auto px-4 pt-48 pb-12">
+          <h1 className="text-4xl font-serif font-bold text-center text-primary mb-6">
+            Privacy Policy
+          </h1>
+          <p className="text-center text-gray-600 mb-20">
+            Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
           </p>
+
+          <div className="space-y-4">
+            {policySections.map((section, index) => (
+              <div 
+                key={index}
+                className="bg-white shadow-xl rounded-2xl overflow-hidden border border-primary/10"
+              >
+                <button
+                  onClick={() => toggleSection(index)}
+                  className="w-full px-6 py-4 text-left flex justify-between items-center bg-white hover:bg-tertiary/5 transition-colors"
+                >
+                  <span className="text-lg font-semibold text-primary">{section.title}</span>
+                  <svg
+                    className={`w-6 h-6 text-primary transition-transform ${
+                      openIndex === index ? 'transform rotate-180' : ''
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+                
+                <div
+                  className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${
+                    openIndex === index ? 'max-h-96 py-4' : 'max-h-0'
+                  }`}
+                >
+                  <p className="text-gray-600 leading-relaxed">{section.content}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center text-gray-600">
+            <p className="text-sm">
+              This privacy policy is provided as a transparent overview of my data practices.
+              <br />
+              For any questions or concerns, please use the contact form.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

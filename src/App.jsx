@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import TechStack from './pages/TechStack';
@@ -16,6 +17,17 @@ import './App.css'
 // Initialize GA4
 initGA();
 
+// ScrollToTop component to handle scroll behavior
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
 const App = () => {
   useEffect(() => {
     // Track initial page view
@@ -23,21 +35,26 @@ const App = () => {
   }, []);
 
   return (
-    <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/tech-stack" element={<TechStack />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/projects/:slug" element={<ProjectDetail />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/faq" element={<Faq />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        </Routes>
-      </Layout>
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <ScrollToTop />
+        <div className="relative min-h-screen">
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/tech-stack" element={<TechStack />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/projects/:slug" element={<ProjectDetail />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/faq" element={<Faq />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            </Routes>
+          </Layout>
+        </div>
+      </Router>
+    </HelmetProvider>
   );
 };
 
