@@ -12,6 +12,7 @@ import Contact from './pages/Contact';
 import Faq from './pages/Faq';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import { initGA, trackPageView } from './utils/analytics';
+import TechStackDetail from './pages/TechStackDetail';
 import './App.css'
 
 // Initialize GA4
@@ -43,6 +44,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/tech-stack" element={<TechStack />} />
+              <Route path="/tech-stack/:category" element={<TechStackDetail />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/projects/:slug" element={<ProjectDetail />} />
               <Route path="/blog" element={<Blog />} />

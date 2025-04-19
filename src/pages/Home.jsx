@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import heroVideo from '../assets/videos/hero_video.mp4';
 import elenaPhoto from '../assets/images/testimonials/elena.webp';
@@ -7,16 +7,39 @@ import mariaPhoto from '../assets/images/testimonials/maria.webp';
 import servicesBackground from '../assets/images/services_background.jpg';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import logo from '../assets/logo/LOGO.jpg'; 
 
 const Home = () => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [expanded, setExpanded] = useState(null);
+  const heroRef = useRef(null); 
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
   const heroTexts = [
     "Half-human. Half-machine. Fully dedicated to perfection.",
     "Where technology meets discipline — Code. Swim. Rise.",
     "Building secure and elegant web ecosystems — by code and by heart."
   ];
+
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlideIndex((prevIndex) => 
+        prevIndex === sliderData.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -73,9 +96,54 @@ const Home = () => {
     }
   ];
 
+  const sliderData = [
+    {
+      title: "Need a secure and modern web solution?",
+      subtitle: "Hire a full-stack developer who understands both code and cybersecurity.",
+      buttonText: "Hire Me →",
+      link: "/contact"
+    },
+    {
+      title: "Explore insights from the field.",
+      subtitle: "Security, coding patterns, freelance strategy & more.",
+      buttonText: "Visit Blog →",
+      link: "/blog"
+    },
+    {
+      title: "See how ideas become code.",
+      subtitle: "Browse showcase apps and real-world implementations.",
+      buttonText: "View Projects →",
+      link: "/projects"
+    },
+    {
+      title: "Tools of the Trade.",
+      subtitle: "From Python and React to Nmap and Burp Suite — I build with purpose.",
+      buttonText: "See Tech Stack →",
+      link: "/tech-stack"
+    },
+    {
+      title: "Who's the Half Half Man?",
+      subtitle: "A swimmer. A developer. A creator who lives what he builds.",
+      buttonText: "Read My Story →",
+      link: "#about"
+    }
+  ];
+
+  const heroContent = {
+    title: "Who's the Half Half Man?",
+    subtitle: "A swimmer. A developer. A creator who lives what he builds.",
+    buttonText: "Read My Story →",
+    link: "#about"
+  };
+
   return (
     <div className="min-h-screen bg-tertiary w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-16">
-      <div className="relative w-full h-[600px] overflow-hidden">
+      {/* Hero Section */}
+      <motion.div 
+        ref={heroRef}
+        style={{ y, opacity }}
+        className="relative w-full h-screen overflow-hidden"
+      >
         <video
           className="absolute top-0 left-0 w-full h-full object-cover"
           autoPlay
@@ -87,144 +155,212 @@ const Home = () => {
           Your browser does not support the video tag.
         </video>
         
-        {/* Custom overlay */}
-        <div className="hero-overlay absolute inset-0 bg-black/50 z-[1]"></div>
+        {/* Animated Code Background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/50 z-[1]">
+          <div className="absolute inset-0 overflow-hidden">
+            {[...Array(20)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute text-white/10 font-mono text-sm"
+                initial={{ 
+                  x: Math.random() * window.innerWidth,
+                  y: Math.random() * window.innerHeight,
+                  opacity: 0
+                }}
+                animate={{ 
+                  y: [null, -window.innerHeight],
+                  opacity: [0, 1, 0]
+                }}
+                transition={{
+                  duration: Math.random() * 10 + 10,
+                  repeat: Infinity,
+                  delay: Math.random() * 5
+                }}
+              >
+                {`<code>${Math.random().toString(36).substring(2, 8)}</code>`}
+              </motion.div>
+            ))}
+          </div>
+        </div>
         
         {/* Content */}
         <div className="relative z-10 h-full flex items-center justify-center">
-          <div className="text-center text-white px-4 pt-16">
-            <h1 
-              className={`text-5xl font-bold font-serif mb-4 min-h-[120px] transition-opacity duration-1200 ease-in-out drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] ${
-                isTransitioning ? 'opacity-0' : 'opacity-100'
-              }`}
-            >
-              {heroTexts[currentTextIndex]}
-            </h1>
-            <h4 className="text-xl font-sans text-tertiary/90 drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)] mb-8">
-              Custom web development & cybersecurity — tailored with precision and passion.
-            </h4>
-            <Link to="/contact">
-              <Button variant="primary" size="lg">
-                Get in Touch
-              </Button>
-            </Link>
+          <div className="text-center text-white px-4 pt-16 max-w-4xl mx-auto">
+            <AnimatePresence mode="wait">
+              {sliderData.map((slide, index) => (
+                index === currentSlideIndex && (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                    className="relative"
+                  >
+                    <motion.h1 
+                      className="text-6xl font-bold font-mono mb-4 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]"
+                      layout
+                    >
+                      {slide.title}
+                    </motion.h1>
+                    <motion.p
+                      className="text-xl mb-6"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                    >
+                      {slide.subtitle}
+                    </motion.p>
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.4 }}
+                    >
+                      <Button 
+                        variant="primary" 
+                        size="large"
+                        onClick={() => window.location.href = slide.link}
+                        className="group relative overflow-hidden"
+                      >
+                        <span className="relative z-10">{slide.buttonText}</span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-primary-dark to-primary transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
+                      </Button>
+                    </motion.div>
+                  </motion.div>
+                )
+              ))}
+            </AnimatePresence>
           </div>
         </div>
-      </div>
 
-      {/* Features Grid Section */}
-      <div className="w-full min-h-[200px] bg-gradient-to-br from-[#1e2c3a] via-[#1e2c3a]/95 to-[#1e2c3a]/90 backdrop-blur-md border-t border-b border-tertiary/10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 py-4">
-         
-          {/* Feature 1 */}
-          <div className="flex flex-col items-center justify-center p-6 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:bg-tertiary/5 active:bg-tertiary/10 active:transform active:scale-95 touch-manipulation">
-            <svg className="h-8 w-8 text-tertiary mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <p className="text-tertiary text-center mb-4 font-serif">Curious about my stack?</p>
-            <Link to="/tech-stack">
-              <Button 
-                variant="primary" 
-                size="small"
-                className="hover:scale-105 active:scale-95 transition-all duration-300"
-              >
-                Explore Tech Stack
-              </Button>
-            </Link>
-          </div>
-
-          {/* Feature 2 */}
-          <div className="flex flex-col items-center justify-center p-6 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:bg-tertiary/5 active:bg-tertiary/10 active:transform active:scale-95 touch-manipulation">
-            <svg className="h-8 w-8 text-tertiary mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-            </svg>
-            <p className="text-tertiary text-center mb-4 font-serif">Wondering what others say?</p>
-            <Button 
-              variant="primary" 
-              size="small"
-              onClick={() => window.scrollTo({ top: document.getElementById('testimonials')?.offsetTop, behavior: 'smooth' })}
-              className="hover:scale-105 active:scale-95 transition-all duration-300"
+        {/* Scroll Indicator */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
+        >
+          <div className="flex flex-col items-center">
+            <span className="text-white/70 text-sm mb-2">Scroll to explore</span>
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
             >
-              Read Testimonials
-            </Button>
+              <svg className="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </motion.div>
           </div>
-
-          {/* Feature 3 */}
-          <div className="flex flex-col items-center justify-center p-6 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:bg-tertiary/5 active:bg-tertiary/10 active:transform active:scale-95 touch-manipulation">
-            <svg className="h-8 w-8 text-tertiary mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            <p className="text-tertiary text-center mb-4 font-serif">What can Half Half Man do for you?</p>
-            <Button 
-              variant="primary" 
-              size="small"
-              onClick={() => window.scrollTo({ top: document.getElementById('services')?.offsetTop, behavior: 'smooth' })}
-              className="hover:scale-105 active:scale-95 transition-all duration-300"
-            >
-              Let's Find Out
-            </Button>
-          </div>
-
-          {/* Feature 4 */}
-          <div className="flex flex-col items-center justify-center p-6 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:bg-tertiary/5 active:bg-tertiary/10 active:transform active:scale-95 touch-manipulation">
-            <svg className="h-8 w-8 text-tertiary mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-            </svg>
-            <p className="text-tertiary text-center mb-4 font-serif">Let's transform your vision into code</p>
-            <Link to="/contact">
-              <Button 
-                variant="primary" 
-                size="small"
-                className="hover:scale-105 active:scale-95 transition-all duration-300"
-              >
-                Get in Touch
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* About Section */}
-      <div id="about" className="w-full bg-gradient-to-br from-[#235d74] to-[#1e2c3a] py-20">
-        <div className="container mx-auto max-w-5xl flex flex-col items-center justify-center px-4">
-          <Card 
-            variant="primary"
-            padding="large"
-            className="backdrop-blur-md bg-white/10 w-full"
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        id="about" 
+        className="w-full bg-gradient-to-br from-[#235d74] to-[#1e2c3a] py-24"
+      >
+        <div className="container mx-auto max-w-5xl px-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex flex-col items-center mb-16"
           >
-            <div className="text-center">
-              <h2 className="text-4xl font-serif font-bold text-tertiary mb-6">
-                About Half Half Man
-              </h2>
-              <div className="space-y-6 text-tertiary/90 font-sans">
-                <p className="text-lg">
-                Technology is often seen as something cold and mechanical — but in the right hands, it becomes a canvas for creativity and a tool for building meaningful solutions. I don't just write code; I shape ideas into experiences. Each line of code I write carries a sense of purpose, strategy, and attention to detail. It's not about chasing trends — it's about crafting systems that stand the test of time.
+            <motion.img 
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              src={logo}
+              alt="Half Half Man Logo" 
+              className="w-24 h-24 mb-6 rounded-full shadow-lg ring-2 ring-teal-300/20" 
+            />
+            <h2 className="text-4xl font-bold text-white mb-4 text-center">
+              About Half Half Man
+            </h2>
+            <p className="text-xl text-teal-300/80 text-center max-w-2xl">
+              Half Half Man is not just a brand — it's a mindset.
+            </p>
+          </motion.div>
 
-                </p>
-                <p className="text-lg">
-                My dual identity — part developer, part swimmer — has shaped the way I approach challenges. In water, there is no room for shortcuts. Every stroke must be calculated, every breath timed, every movement efficient. This mindset translates directly into how I write code: clean, efficient, maintainable, and elegant. Discipline in sport has taught me discipline in logic.
-
-                </p>
-                <p className="text-lg">
-                Over the years, I've developed a strong sense of balance between design and functionality. A product can't succeed if it's only beautiful or only functional — it must be both. That's why I don't separate aesthetics from logic. I design systems with the end user in mind while building architectures that developers will appreciate.
-                </p>
-                <p className="text-lg">
-                Security isn't an afterthought in my workflow — it's a foundation. As someone who deeply understands the vulnerabilities of modern systems, I integrate cybersecurity into every phase of development. Prevention is more powerful than repair. Whether it's implementing secure authentication flows, protecting APIs, or minimizing surface area for attacks, I make sure that safety and privacy are embedded at the core.
-                </p>
-                <p className="text-lg">
-                Communication is another cornerstone of my work. I believe that great digital products are built on a clear understanding between creator and client. I don't hide behind technical jargon. I explain, I collaborate, and I listen — because the best solutions come from mutual trust and shared vision.
-                </p>
-                <p className="text-lg">
-                Throughout my journey, I've learned that technology is not just about tools — it's about intent. You can build a website, or you can build a story. You can build software, or you can build a relationship between a user and a purpose. My goal has always been the latter. I want to create digital spaces that resonate with people and help them achieve something meaningful.
-                </p>
-                <p className="text-lg">
-                Half Half Man is more than a personal brand. It's a statement — a blend of logic and emotion, discipline and flow, structure and freedom. It reflects not just what I do, but how I live. With every new project, I don't just offer code — I offer presence, intention, and dedication to excellence.
-                </p>
-              </div>
-            </div>
-          </Card>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {[
+              {
+                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />,
+                title: "Code with Purpose",
+                description: "Technology is more than syntax — it's a medium to build meaning. Every project I touch carries intention, clarity, and a deep sense of responsibility."
+              },
+              {
+                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />,
+                title: "Athlete's Discipline",
+                description: "Swimming taught me consistency, efficiency, and the power of repetition. That same mindset powers how I write code — elegant, optimized, and built to endure."
+              },
+              {
+                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />,
+                title: "Design Meets Function",
+                description: "No system is complete without beauty and usability. I bridge aesthetics with logic to deliver experiences users love and developers respect."
+              },
+              {
+                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />,
+                title: "Cybersecurity First",
+                description: "Security isn't an extra — it's embedded from the start. From secure login flows to API protection, I code with defense in mind."
+              },
+              {
+                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />,
+                title: "Communication that Connects",
+                description: "I collaborate openly, speak clearly, and explain without jargon. It's not just about delivering — it's about understanding and building trust."
+              },
+              {
+                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />,
+                title: "A Brand. A Philosophy.",
+                description: "Half Half Man is a union of reason and emotion. It's not just my brand — it's my personal principle. Every line of code I write is backed by intent."
+              }
+            ].map((block, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 * index }}
+                className="flex flex-col items-center text-center"
+              >
+                <motion.div 
+                  whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  className="w-12 h-12 rounded-lg bg-teal-300/10 flex items-center justify-center group-hover:bg-teal-300/20 transition-colors duration-300 mb-4"
+                >
+                  <svg 
+                    className="w-6 h-6 text-teal-300 group-hover:text-teal-200 transition-colors duration-300" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    {block.icon}
+                  </svg>
+                </motion.div>
+                <div className="relative">
+                  <motion.div
+                    whileHover={{ x: 5 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className="text-center"
+                  >
+                    <h3 className="text-2xl font-semibold text-teal-300 mb-2">{block.title}</h3>
+                    <p className="text-white/90">{block.description}</p>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileHover={{ opacity: 1, scale: 1 }}
+                    className="absolute -inset-4 rounded-xl border border-teal-300/10 pointer-events-none"
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Services Section */}
       <section
@@ -237,107 +373,137 @@ const Home = () => {
 
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-24">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold font-serif mb-4 text-tertiary">What I Can Do for You</h2>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold mb-4 text-tertiary">What I Can Do for You</h2>
             <p className="text-lg text-tertiary/80 max-w-2xl mx-auto">
               Explore a range of services crafted to elevate your digital presence — secure, scalable, and designed with purpose.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Card 1 */}
-            <div className="bg-tertiary/10 backdrop-blur-md rounded-2xl p-6 shadow-md hover:scale-105 transition-transform duration-300 border border-tertiary/10">
-              <div className="text-4xl mb-4">💻</div>
-              <h3 className="text-xl font-semibold mb-2 text-tertiary">Web Development</h3>
-              <p className="text-sm text-tertiary/80">
-                Custom-built websites that are fast, responsive and tailored to your needs.
-              </p>
-            </div>
-
-            {/* Card 2 */}
-            <div className="bg-tertiary/10 backdrop-blur-md rounded-2xl p-6 shadow-md hover:scale-105 transition-transform duration-300 border border-tertiary/10">
-              <div className="text-4xl mb-4">🔐</div>
-              <h3 className="text-xl font-semibold mb-2 text-tertiary">Cybersecurity</h3>
-              <p className="text-sm text-tertiary/80">
-                Secure coding, audits, threat mitigation and performance-hardening solutions.
-              </p>
-            </div>
-
-            {/* Card 3 */}
-            <div className="bg-tertiary/10 backdrop-blur-md rounded-2xl p-6 shadow-md hover:scale-105 transition-transform duration-300 border border-tertiary/10">
-              <div className="text-4xl mb-4">🛠</div>
-              <h3 className="text-xl font-semibold mb-2 text-tertiary">Custom Tools</h3>
-              <p className="text-sm text-tertiary/80">
-                Internal dashboards and business automation tools, crafted to save time.
-              </p>
-            </div>
-
-            {/* Card 4 */}
-            <div className="bg-tertiary/10 backdrop-blur-md rounded-2xl p-6 shadow-md hover:scale-105 transition-transform duration-300 border border-tertiary/10">
-              <div className="text-4xl mb-4">⚙️</div>
-              <h3 className="text-xl font-semibold mb-2 text-tertiary">Maintenance</h3>
-              <p className="text-sm text-tertiary/80">
-                Regular updates, backups and security patches to keep everything running smoothly.
-              </p>
-            </div>
-
-            {/* Card 5 */}
-            <div className="bg-tertiary/10 backdrop-blur-md rounded-2xl p-6 shadow-md hover:scale-105 transition-transform duration-300 border border-tertiary/10">
-              <div className="text-4xl mb-4">🚀</div>
-              <h3 className="text-xl font-semibold mb-2 text-tertiary">Performance Optimization</h3>
-              <p className="text-sm text-tertiary/80">
-                Page speed audits, load-time improvements and fine-tuning of UX flow.
-              </p>
-            </div>
-
-            {/* Card 6 */}
-            <div className="bg-tertiary/10 backdrop-blur-md rounded-2xl p-6 shadow-md hover:scale-105 transition-transform duration-300 border border-tertiary/10">
-              <div className="text-4xl mb-4">🧠</div>
-              <h3 className="text-xl font-semibold mb-2 text-tertiary">Tech Consulting</h3>
-              <p className="text-sm text-tertiary/80">
-                Choosing the right tools, strategy, and architecture from the start.
-              </p>
-            </div>
+            {[
+              {
+                title: "Web Development",
+                description: "Custom-built websites that are fast, responsive and tailored to your needs.",
+                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              },
+              {
+                title: "Cybersecurity",
+                description: "Secure coding, audits, threat mitigation and performance-hardening solutions.",
+                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              },
+              {
+                title: "Custom Tools",
+                description: "Internal dashboards and business automation tools, crafted to save time.",
+                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
+              },
+              {
+                title: "Maintenance",
+                description: "Regular updates, backups and security patches to keep everything running smoothly.",
+                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+              },
+              {
+                title: "Performance Optimization",
+                description: "Page speed audits, load-time improvements and fine-tuning of UX flow.",
+                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              },
+              {
+                title: "Tech Consulting",
+                description: "Choosing the right tools, strategy, and architecture from the start.",
+                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5" />
+              }
+            ].map((service, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ 
+                  duration: 0.5,
+                  delay: 0.2 + index * 0.1,
+                  ease: "easeOut"
+                }}
+                className="bg-white/10 backdrop-blur-md rounded-2xl p-6 sm:p-8 hover:scale-[1.02] transition-all duration-300 ease-in-out border border-white/10 text-center mx-auto"
+              >
+                <div className="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center mb-4 mx-auto">
+                  <svg className="w-6 h-6 text-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    {service.icon}
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-2">{service.title}</h3>
+                <p className="text-sm text-gray-300 leading-relaxed">
+                  {service.description}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="w-full py-16 bg-gradient-to-b from-white to-[#e2f0fa]">
+      <section id="testimonials" className="w-full py-16 bg-gradient-to-b from-white to-[#e2f0fa] font-['Poppins']">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-4xl font-serif font-bold text-center text-primary mb-12">
-          Here's what industry professionals say about partnering with Half Half Man — reliable, dedicated, and always a step ahead.
-          </h2>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl font-bold text-center text-primary mb-12"
+          >
+            Trusted by Industry Professionals - Real People. Real Feedback. 
+          </motion.h2>
           <div className="space-y-6">
             {testimonials.map((item, index) => (
-              <div 
-                key={index} 
-                className="bg-white shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:bg-tertiary/5 border border-primary/10"
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-[#f8fafc]/80 backdrop-blur-sm shadow-xl rounded-2xl p-8 transition-all duration-300 hover:bg-[#f1f5f9]/90 border border-[#e2e8f0] cursor-pointer"
                 onClick={() => toggle(index)}
+                layout
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-6">
-                    <img 
-                      src={item.photo} 
-                      alt={item.name}
-                      className="w-16 h-16 rounded-full object-cover shadow-md"
-                    />
-                    <div>
-                      <div className="flex items-center space-x-3">
-                        <h3 className="text-2xl font-semibold text-primary">{item.name}</h3>
-                        <span className="text-primary/40">•</span>
-                        <p className="text-base text-primary/80">{item.company}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <span className="text-primary/60 text-3xl font-light">{expanded === index ? '−' : '+'}</span>
-                </div>
-                {expanded === index && (
-                  <div className="mt-6 text-lg text-primary/80 leading-relaxed text-center">
-                    "{item.feedback}"
-                  </div>
-                )}
-              </div>
+                <motion.div layout className="flex flex-col items-center text-center">
+                  <img 
+                    src={item.photo} 
+                    alt={item.name}
+                    className="w-16 h-16 rounded-full object-cover shadow-md ring-2 ring-primary/20 mb-4"
+                  />
+                  <h3 className="text-2xl font-semibold text-primary mb-2">{item.name}</h3>
+                  <p className="text-base text-primary/80 italic">{item.company}</p>
+                </motion.div>
+                <AnimatePresence>
+                  {expanded === index && (
+                    <motion.div 
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <motion.div 
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{ duration: 0.3, delay: 0.1 }}
+                        className="mt-6 relative lg:max-w-3xl mx-auto bg-gradient-to-br from-[#f8fafc]/50 to-white/30 backdrop-blur-sm rounded-xl p-8"
+                      >
+                        <span className="absolute -left-4 -top-4 text-6xl text-primary/10 font-serif">"</span>
+                        <p className="text-[17px] text-primary/80 leading-relaxed relative z-10">
+                          {item.feedback}
+                        </p>
+                        <span className="absolute -bottom-8 right-0 text-6xl text-primary/10 font-serif">"</span>
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             ))}
           </div>
         </div>

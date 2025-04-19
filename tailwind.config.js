@@ -15,6 +15,9 @@ export default {
         secondary: '#e2f0fa',
         tertiary: '#f5f5f5',
       },
+      fontFamily: {
+        sans: ['Poppins', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+      },
     },
   },
   plugins: [],

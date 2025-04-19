@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { InlineWidget } from 'react-calendly';
 import { trackEvent } from '../utils/analytics';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -64,28 +65,73 @@ const Contact = () => {
       </Helmet>
       <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
         <div className="max-w-7xl mx-auto px-4 pt-48 pb-12">
-          <h1 className="text-4xl font-serif font-bold text-center text-primary mb-20">
+          <motion.h1 
+            className="text-4xl font-['Poppins'] font-bold text-center text-primary mb-20"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
             Let's Connect
-          </h1>
+          </motion.h1>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Calendly Integration */}
-            <div className="bg-white shadow-xl rounded-2xl p-6 pb-8 h-auto">
-              <h2 className="text-2xl font-semibold text-primary mb-4">Schedule a Meeting</h2>
-              <InlineWidget
-                url="https://calendly.com/nikola-mihajlovic1/30min"
-                styles={{
-                  height: '650px',
-                  width: '100%',
-                }}
-              />
-            </div>
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-white shadow-xl rounded-2xl p-6 pb-8 h-auto"
+            >
+              <motion.h2 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4, delay: 0.4 }}
+                className="text-2xl font-semibold text-primary mb-4"
+              >
+                Schedule a Meeting
+              </motion.h2>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
+                <InlineWidget
+                  url="https://calendly.com/nikola-mihajlovic1/30min"
+                  styles={{
+                    height: '650px',
+                    width: '100%',
+                  }}
+                />
+              </motion.div>
+            </motion.div>
 
             {/* Contact Form */}
-            <div className="bg-white shadow-xl rounded-2xl p-8">
-              <h2 className="text-2xl font-semibold text-primary mb-6">Send a Message</h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-white shadow-xl rounded-2xl p-8"
+            >
+              <motion.h2 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4, delay: 0.4 }}
+                className="text-2xl font-semibold text-primary mb-6"
+              >
+                Send a Message
+              </motion.h2>
+              <motion.form 
+                onSubmit={handleSubmit} 
+                className="space-y-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.7 }}
+                >
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                     Name
                   </label>
@@ -99,9 +145,13 @@ const Contact = () => {
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors"
                     placeholder="Your name"
                   />
-                </div>
+                </motion.div>
 
-                <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.8 }}
+                >
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                     Email
                   </label>
@@ -115,9 +165,13 @@ const Contact = () => {
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors"
                     placeholder="your.email@example.com"
                   />
-                </div>
+                </motion.div>
 
-                <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.9 }}
+                >
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
                     Subject
                   </label>
@@ -131,9 +185,13 @@ const Contact = () => {
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors"
                     placeholder="What's this about?"
                   />
-                </div>
+                </motion.div>
 
-                <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 1.0 }}
+                >
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
                     Message
                   </label>
@@ -147,25 +205,34 @@ const Contact = () => {
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors resize-none"
                     placeholder="Your message here..."
                   />
-                </div>
+                </motion.div>
 
-                {submitStatus && (
-                  <div 
-                    className={`p-4 rounded-lg ${
-                      submitStatus === 'success' ? 'bg-green-50 text-green-800' :
-                      submitStatus === 'error' ? 'bg-red-50 text-red-800' :
-                      'bg-blue-50 text-blue-800'
-                    }`}
-                    role="alert"
-                  >
-                    {submitStatus === 'success' ? 'Message sent successfully! I will get back to you soon.' : 'Failed to send message. Please try again.'}
-                  </div>
-                )}
+                <AnimatePresence mode="wait">
+                  {submitStatus && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.3 }}
+                      className={`p-4 rounded-lg ${
+                        submitStatus === 'success' ? 'bg-green-50 text-green-800' :
+                        submitStatus === 'error' ? 'bg-red-50 text-red-800' :
+                        'bg-blue-50 text-blue-800'
+                      }`}
+                      role="alert"
+                    >
+                      {submitStatus === 'success' ? 'Message sent successfully! I will get back to you soon.' : 'Failed to send message. Please try again.'}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-                <button
+                <motion.button
                   type="submit"
                   disabled={isSubmitting}
                   className="w-full px-6 py-3 bg-primary text-white rounded-full hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 400 }}
                 >
                   {isSubmitting ? (
                     <span className="flex items-center justify-center">
@@ -176,9 +243,9 @@ const Contact = () => {
                       Sending...
                     </span>
                   ) : 'Send Message'}
-                </button>
-              </form>
-            </div>
+                </motion.button>
+              </motion.form>
+            </motion.div>
           </div>
         </div>
       </div>

@@ -1,85 +1,74 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { FaArrowRight } from 'react-icons/fa';
 import { Helmet } from 'react-helmet-async';
-import pythonIcon from '../assets/icons/python.svg';
-import javascriptIcon from '../assets/icons/javascript.svg';
-import kaliIcon from '../assets/icons/kalilinux.svg';
-import reactIcon from '../assets/icons/react.svg';
-import djangoIcon from '../assets/icons/django.svg';
+import Button from '../components/common/Button';
+import Card from '../components/common/Card';
+
+const categories = [
+  {
+    id: 1,
+    title: 'Backend Development',
+    icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />,
+    description: 'Robust server-side solutions with Python, Node.js, and modern frameworks',
+    color: 'from-primary/20 to-primary-dark/20',
+    tools: ['Python', 'Django', 'FastAPI', 'Node.js', 'Express', 'PostgreSQL', 'MongoDB'],
+    slug: 'backend-development'
+  },
+  {
+    id: 2,
+    title: 'Frontend Development',
+    icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />,
+    description: 'Modern, responsive interfaces built with React and cutting-edge tools',
+    color: 'from-primary/20 to-primary-dark/20',
+    tools: ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'Three.js', 'TypeScript'],
+    slug: 'frontend-development'
+  },
+  {
+    id: 3,
+    title: 'Cybersecurity',
+    icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />,
+    description: 'Comprehensive security solutions and penetration testing',
+    color: 'from-primary/20 to-primary-dark/20',
+    tools: ['Burp Suite', 'Metasploit', 'Nmap', 'Wireshark', 'Kali Linux', 'OWASP'],
+    slug: 'cybersecurity'
+  },
+  {
+    id: 4,
+    title: 'Maintenance and Optimization',
+    icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />,
+    description: 'Performance optimization, monitoring, and continuous improvement',
+    color: 'from-primary/20 to-primary-dark/20',
+    tools: ['Docker', 'Kubernetes', 'Git', 'Jenkins', 'AWS', 'Prometheus', 'Grafana'],
+    slug: 'maintenance-and-optimization'
+  }
+];
 
 const TechStack = () => {
-  const [expanded, setExpanded] = useState(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const navigate = useNavigate();
 
-  const technologies = [
-    {
-      name: "Python",
-      icon: pythonIcon,
-      description: "A versatile programming language known for its simplicity and readability.",
-      experience: "Python is my core language — I use it for backend development, scripting, automation, and building cybersecurity tools. Its readability and development speed make it ideal for most projects.",
-      bgColor: "bg-[#3776AB]",
-      iconColor: "brightness-0 invert"
-    },
-    {
-      name: "JavaScript",
-      icon: javascriptIcon,
-      description: "The language of the web, enabling dynamic and interactive web applications.",
-      experience: "JavaScript powers the interactivity of my frontend applications. It's the glue between logic and user experience in the browser.",
-      bgColor: "bg-[#F7DF1E]",
-      iconColor: "brightness-0"
-    },
-    {
-      name: "Kali Linux",
-      icon: kaliIcon,
-      description: "A Debian-based Linux distribution designed for digital forensics and penetration testing.",
-      experience: "Kali Linux is my go-to environment for ethical hacking, penetration testing, and network analysis. It's a key tool in my security workflow.",
-      bgColor: "bg-[#557C94]",
-      iconColor: "brightness-0 invert"
-    },
-    {
-      name: "React",
-      icon: reactIcon,
-      description: "A JavaScript library for building user interfaces.",
-      experience: "React allows me to build fast, modular, and scalable web applications. Paired with Tailwind CSS, it enables clean and highly responsive UI design.",
-      bgColor: "bg-[#61DAFB]",
-      iconColor: "brightness-0"
-    },
-    {
-      name: "Django",
-      icon: djangoIcon,
-      description: "A high-level Python web framework that enables rapid development of secure and maintainable websites.",
-      experience: "I use Django as my main backend framework — it's secure, fast, and ideal for building RESTful APIs that connect seamlessly with frontend interfaces.",
-      bgColor: "bg-[#092E20]",
-      iconColor: "brightness-0 invert"
-    }
-  ];
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isAnimating) {
+        setCurrentSlide((prev) => (prev + 1) % categories.length);
+      }
+    }, 5000);
 
-  const getExpansionClasses = (index) => {
-    const totalColumns = window.innerWidth >= 1024 ? 3 : 2;
-    const row = Math.floor(index / totalColumns);
-    const col = index % totalColumns;
-    
-    if (totalColumns === 3) {
-      // 3 columns layout
-      if (row === 0) {
-        if (col === 0) return "origin-top-left";
-        if (col === 1) return "origin-top";
-        return "origin-top-right";
-      } else {
-        if (col === 0) return "origin-bottom-left";
-        if (col === 1) return "origin-bottom";
-        return "origin-bottom-right";
-      }
-    } else {
-      // 2 columns layout
-      if (row === 0) {
-        return col === 0 ? "origin-top-left" : "origin-top-right";
-      } else {
-        return col === 0 ? "origin-bottom-left" : "origin-bottom-right";
-      }
-    }
+    return () => clearInterval(interval);
+  }, [isAnimating]);
+
+  const handleSlideChange = (index) => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentSlide(index);
+    setTimeout(() => setIsAnimating(false), 1000);
   };
 
-  const toggle = (index) => {
-    setExpanded(expanded === index ? null : index);
+  const handleCategoryClick = (category) => {
+    navigate(`/tech-stack/${category.slug}`);
   };
 
   return (
@@ -89,51 +78,99 @@ const TechStack = () => {
         <meta name="description" content="Explore the technology stack I use to build secure, scalable web applications. From Python and JavaScript to React, Django, and Kali Linux for cybersecurity." />
       </Helmet>
       <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
-        <section className="w-full pb-12">
-          <div className="max-w-7xl mx-auto px-4 pt-48">
-            <h1 className="text-4xl font-serif font-bold text-center text-primary mb-20">
-              My Tech Stack — A collection of technologies I've mastered and use to build robust, secure, and scalable solutions.
+        <div className="max-w-7xl mx-auto px-4 pt-48">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-20"
+          >
+            <h1 className="text-4xl font-bold text-primary mb-4">
+              Tech Stack
             </h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {technologies.map((tech, index) => (
-                <div 
-                  key={index}
-                  className={`relative ${expanded === index ? 'z-20' : 'z-10'}`}
+            <p className="text-xl text-primary/70">
+            A collection of technologies I've mastered and use to build robust, secure, and scalable solutions.
+          </p>
+          </motion.div>
+
+          <div className="relative h-[500px] overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSlide}
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 0.5 }}
+                className="absolute inset-0 flex items-center justify-center"
+            >
+              <Card
+                variant="primary"
+                padding="large"
+                  className="w-full max-w-2xl bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
                 >
-                  <div 
-                    className={`
-                      bg-white shadow-xl rounded-2xl aspect-square p-6 
-                      transition-all duration-300 hover:shadow-2xl 
-                      hover:bg-tertiary/5 border border-primary/10 cursor-pointer
-                      flex flex-col items-center justify-center relative
-                      ${expanded === index ? 'scale-110' : ''}
-                      ${getExpansionClasses(index)}
-                    `}
-                    onClick={() => toggle(index)}
+                  <motion.div 
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className="w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center mb-6 mx-auto"
                   >
-                    <div className={`w-20 h-20 flex items-center justify-center rounded-full shadow-md ${tech.bgColor} p-4 mb-4 transition-transform duration-300 hover:scale-110`}>
-                      <img 
-                        src={tech.icon} 
-                        alt={`${tech.name} programming language icon - A key technology in my development stack`}
-                        className={`w-full h-full object-contain ${tech.iconColor}`}
-                      />
-                    </div>
-                    <h3 className="text-2xl font-semibold text-primary text-center mb-2">{tech.name}</h3>
-                    <p className="text-sm text-primary/70 text-center">{tech.description}</p>
-                    
-                    {expanded === index && (
-                      <div className="absolute top-full left-0 right-0 mt-4 bg-white shadow-2xl rounded-2xl p-6 border border-primary/10 z-30">
-                        <p className="text-lg text-primary/80 leading-relaxed">
-                          "{tech.experience}"
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
+                    <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      {categories[currentSlide].icon}
+                    </svg>
+                  </motion.div>
+                  <motion.h2 
+                    className="text-3xl font-bold text-primary mb-4 text-center"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                  >
+                    {categories[currentSlide].title}
+                  </motion.h2>
+                  <motion.p 
+                    className="text-xl text-primary/70 mb-8 text-center"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                  >
+                    {categories[currentSlide].description}
+                  </motion.p>
+                  <motion.div 
+                    className="flex justify-center"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                  >
+                    <Button
+                      variant="primary"
+                      size="large"
+                      onClick={() => handleCategoryClick(categories[currentSlide])}
+                      className="group"
+                    >
+                      See full stack
+                      <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </motion.div>
+                </Card>
+              </motion.div>
+            </AnimatePresence>
           </div>
-        </section>
+
+          <motion.div 
+            className="flex justify-center gap-2 mt-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            {categories.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => handleSlideChange(index)}
+                className={`h-3 rounded-full transition-all duration-300 ${
+                  currentSlide === index ? 'bg-primary w-8' : 'bg-primary/30 w-3'
+                }`}
+              />
+            ))}
+          </motion.div>
+        </div>
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const PrivacyPolicy = () => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -55,59 +56,125 @@ const PrivacyPolicy = () => {
       </Helmet>
       <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
         <div className="max-w-4xl mx-auto px-4 pt-48 pb-12">
-          <h1 className="text-4xl font-serif font-bold text-center text-primary mb-6">
+          <motion.h1 
+            className="text-4xl font-['Poppins'] font-bold text-center text-primary mb-20"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
             Privacy Policy
-          </h1>
-          <p className="text-center text-gray-600 mb-20">
+          </motion.h1>
+          <motion.p 
+            className="text-center text-gray-600 mb-20"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
             Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-          </p>
+          </motion.p>
 
-          <div className="space-y-4">
+          <motion.div 
+            className="space-y-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
             {policySections.map((section, index) => (
-              <div 
+              <motion.div 
                 key={index}
-                className="bg-white shadow-xl rounded-2xl overflow-hidden border border-primary/10"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: index * 0.1,
+                  ease: [0.22, 1, 0.36, 1]
+                }}
+                className="bg-white shadow-lg rounded-2xl overflow-hidden"
               >
-                <button
+                <motion.button
                   onClick={() => toggleSection(index)}
-                  className="w-full px-6 py-4 text-left flex justify-between items-center bg-white hover:bg-tertiary/5 transition-colors"
+                  className="w-full px-8 py-6 text-left flex justify-between items-center bg-white hover:bg-tertiary/5 transition-colors focus:outline-none"
+                  whileHover={{ scale: 1.01 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                  style={{ borderBottom: 'none', outline: 'none' }}
                 >
                   <span className="text-lg font-semibold text-primary">{section.title}</span>
-                  <svg
-                    className={`w-6 h-6 text-primary transition-transform ${
-                      openIndex === index ? 'transform rotate-180' : ''
-                    }`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                  <motion.div
+                    initial={false}
+                    animate={{ rotate: openIndex === index ? 180 : 0 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
+                    <svg
+                      className="w-5 h-5 text-primary"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </motion.div>
+                </motion.button>
                 
-                <div
-                  className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${
-                    openIndex === index ? 'max-h-96 py-4' : 'max-h-0'
-                  }`}
-                >
-                  <p className="text-gray-600 leading-relaxed">{section.content}</p>
-                </div>
-              </div>
+                <AnimatePresence mode="wait">
+                  {openIndex === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ 
+                        height: "auto", 
+                        opacity: 1,
+                        transition: {
+                          height: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+                          opacity: { duration: 0.25, ease: "linear" }
+                        }
+                      }}
+                      exit={{ 
+                        height: 0, 
+                        opacity: 0,
+                        transition: {
+                          height: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
+                          opacity: { duration: 0.15, ease: "linear" }
+                        }
+                      }}
+                      className="overflow-hidden"
+                      style={{ borderTop: 'none' }}
+                    >
+                      <motion.div 
+                        className="px-8 pb-6"
+                        initial={{ y: -10, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: -10, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        <div className="p-6">
+                          <p className="text-[17px] font-['Poppins'] text-primary/80 leading-relaxed">{section.content}</p>
+                        </div>
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          <div className="mt-12 text-center text-gray-600">
+          <motion.div 
+            className="mt-12 text-center text-gray-600"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
             <p className="text-sm">
               This privacy policy is provided as a transparent overview of my data practices.
               <br />
               For any questions or concerns, please use the contact form.
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
     </>
