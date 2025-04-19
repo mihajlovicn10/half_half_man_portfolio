@@ -12,8 +12,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "start": "serve dist -s -n -L -p $PORT",
-    "heroku-postbuild": "npm run build",
-    "postbuild": "react-snap"
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "@portabletext/react": "^3.2.1",
