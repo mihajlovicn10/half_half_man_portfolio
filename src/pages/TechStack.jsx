@@ -3,49 +3,43 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa';
 import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
 
 const categories = [
   {
     id: 1,
-    title: 'Backend Development',
+    key: 'backend',
     icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />,
-    description: 'Robust server-side solutions with Python, Node.js, and modern frameworks',
     color: 'from-primary/20 to-primary-dark/20',
-    tools: ['Python', 'Django', 'FastAPI', 'Node.js', 'Express', 'PostgreSQL', 'MongoDB'],
     slug: 'backend-development'
   },
   {
     id: 2,
-    title: 'Frontend Development',
+    key: 'frontend',
     icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />,
-    description: 'Modern, responsive interfaces built with React and cutting-edge tools',
     color: 'from-primary/20 to-primary-dark/20',
-    tools: ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'Three.js', 'TypeScript'],
     slug: 'frontend-development'
   },
   {
     id: 3,
-    title: 'Cybersecurity',
+    key: 'security',
     icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />,
-    description: 'Comprehensive security solutions and penetration testing',
     color: 'from-primary/20 to-primary-dark/20',
-    tools: ['Burp Suite', 'Metasploit', 'Nmap', 'Wireshark', 'Kali Linux', 'OWASP'],
     slug: 'cybersecurity'
   },
   {
     id: 4,
-    title: 'Maintenance and Optimization',
+    key: 'maintenance',
     icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />,
-    description: 'Performance optimization, monitoring, and continuous improvement',
     color: 'from-primary/20 to-primary-dark/20',
-    tools: ['Docker', 'Kubernetes', 'Git', 'Jenkins', 'AWS', 'Prometheus', 'Grafana'],
     slug: 'maintenance-and-optimization'
   }
 ];
 
 const TechStack = () => {
+  const { t } = useTranslation();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const navigate = useNavigate();
@@ -74,8 +68,8 @@ const TechStack = () => {
   return (
     <>
       <Helmet>
-        <title>Tech Stack | Half Half Man - Web Development & Cybersecurity</title>
-        <meta name="description" content="Explore the technology stack I use to build secure, scalable web applications. From Python and JavaScript to React, Django, and Kali Linux for cybersecurity." />
+        <title>{t('techStack.meta.title')}</title>
+        <meta name="description" content={t('techStack.meta.description')} />
       </Helmet>
       <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
         <div className="max-w-7xl mx-auto px-4 pt-48">
@@ -86,11 +80,11 @@ const TechStack = () => {
             className="text-center mb-20"
           >
             <h1 className="text-4xl font-bold text-primary mb-4">
-              Tech Stack
+              {t('techStack.title')}
             </h1>
             <p className="text-xl text-primary/70">
-            A collection of technologies I've mastered and use to build robust, secure, and scalable solutions.
-          </p>
+              {t('techStack.subtitle')}
+            </p>
           </motion.div>
 
           <div className="relative h-[500px] overflow-hidden">
@@ -102,10 +96,10 @@ const TechStack = () => {
                 exit={{ opacity: 0, x: -100 }}
                 transition={{ duration: 0.5 }}
                 className="absolute inset-0 flex items-center justify-center"
-            >
-              <Card
-                variant="primary"
-                padding="large"
+              >
+                <Card
+                  variant="primary"
+                  padding="large"
                   className="w-full max-w-2xl bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
                 >
                   <motion.div 
@@ -123,7 +117,7 @@ const TechStack = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 }}
                   >
-                    {categories[currentSlide].title}
+                    {t(`techStack.categories.${categories[currentSlide].key}.title`)}
                   </motion.h2>
                   <motion.p 
                     className="text-xl text-primary/70 mb-8 text-center"
@@ -131,7 +125,7 @@ const TechStack = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
                   >
-                    {categories[currentSlide].description}
+                    {t(`techStack.categories.${categories[currentSlide].key}.description`)}
                   </motion.p>
                   <motion.div 
                     className="flex justify-center"
@@ -145,7 +139,7 @@ const TechStack = () => {
                       onClick={() => handleCategoryClick(categories[currentSlide])}
                       className="group"
                     >
-                      See full stack
+                      {t('techStack.seeFullStack')}
                       <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </motion.div>

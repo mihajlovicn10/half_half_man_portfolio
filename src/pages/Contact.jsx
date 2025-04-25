@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { InlineWidget } from 'react-calendly';
 import { trackEvent } from '../utils/analytics';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const { t } = useTranslation();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -60,8 +62,8 @@ const Contact = () => {
   return (
     <>
       <Helmet>
-        <title>Contact | Half Half Man - Let's Discuss Your Project</title>
-        <meta name="description" content="Get in touch to discuss your web development or cybersecurity needs. Schedule a meeting or send a message to start our collaboration." />
+        <title>{t('contact.meta.title')}</title>
+        <meta name="description" content={t('contact.meta.description')} />
       </Helmet>
       <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
         <div className="max-w-7xl mx-auto px-4 pt-48 pb-12">
@@ -71,7 +73,7 @@ const Contact = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            Let's Connect
+            {t('contact.title')}
           </motion.h1>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -88,7 +90,7 @@ const Contact = () => {
                 transition={{ duration: 0.4, delay: 0.4 }}
                 className="text-2xl font-semibold text-primary mb-4"
               >
-                Schedule a Meeting
+                {t('contact.calendly.title')}
               </motion.h2>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -118,7 +120,7 @@ const Contact = () => {
                 transition={{ duration: 0.4, delay: 0.4 }}
                 className="text-2xl font-semibold text-primary mb-6"
               >
-                Send a Message
+                {t('contact.form.title')}
               </motion.h2>
               <motion.form 
                 onSubmit={handleSubmit} 
@@ -133,7 +135,7 @@ const Contact = () => {
                   transition={{ duration: 0.4, delay: 0.7 }}
                 >
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                    Name
+                    {t('contact.form.name.label')}
                   </label>
                   <input
                     type="text"
@@ -143,7 +145,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors"
-                    placeholder="Your name"
+                    placeholder={t('contact.form.name.placeholder')}
                   />
                 </motion.div>
 
@@ -153,7 +155,7 @@ const Contact = () => {
                   transition={{ duration: 0.4, delay: 0.8 }}
                 >
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                    Email
+                    {t('contact.form.email.label')}
                   </label>
                   <input
                     type="email"
@@ -163,7 +165,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors"
-                    placeholder="your.email@example.com"
+                    placeholder={t('contact.form.email.placeholder')}
                   />
                 </motion.div>
 
@@ -173,7 +175,7 @@ const Contact = () => {
                   transition={{ duration: 0.4, delay: 0.9 }}
                 >
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
-                    Subject
+                    {t('contact.form.subject.label')}
                   </label>
                   <input
                     type="text"
@@ -183,7 +185,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors"
-                    placeholder="What's this about?"
+                    placeholder={t('contact.form.subject.placeholder')}
                   />
                 </motion.div>
 
@@ -193,7 +195,7 @@ const Contact = () => {
                   transition={{ duration: 0.4, delay: 1.0 }}
                 >
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                    Message
+                    {t('contact.form.message.label')}
                   </label>
                   <textarea
                     id="message"
@@ -203,7 +205,7 @@ const Contact = () => {
                     required
                     rows={6}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors resize-none"
-                    placeholder="Your message here..."
+                    placeholder={t('contact.form.message.placeholder')}
                   />
                 </motion.div>
 
@@ -221,7 +223,7 @@ const Contact = () => {
                       }`}
                       role="alert"
                     >
-                      {submitStatus === 'success' ? 'Message sent successfully! I will get back to you soon.' : 'Failed to send message. Please try again.'}
+                      {submitStatus === 'success' ? t('contact.form.success') : t('contact.form.error')}
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -240,9 +242,9 @@ const Contact = () => {
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
-                      Sending...
+                      {t('contact.form.sending')}
                     </span>
-                  ) : 'Send Message'}
+                  ) : t('contact.form.submit')}
                 </motion.button>
               </motion.form>
             </motion.div>

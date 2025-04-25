@@ -41,13 +41,13 @@ const testConnection = async () => {
 // Run the test immediately
 testConnection();
 
-// Simplified query for debugging
-export const postsQuery = `*[_type == "post"] | order(publishedAt desc) {
+// Updated query with language support
+export const postsQuery = (lang = 'en') => `*[_type == "post"] | order(publishedAt desc) {
     _id,
-    title,
-    slug,
+    "title": title.${lang},
+    "slug": slug.current,
     publishedAt,
-    excerpt,
+    "excerpt": excerpt.${lang},
     "mainImage": mainImage.asset->url,
-    body
+    "body": body.${lang}
 }`;

@@ -1,48 +1,11 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 const Faq = () => {
   const [openIndex, setOpenIndex] = useState(null);
-
-  const faqItems = [
-    {
-      question: "What services do you offer?",
-      answer: "I provide web development, UI/UX design, and cybersecurity solutions tailored to your business needs."
-    },
-    {
-      question: "Can you work with international clients?",
-      answer: "Absolutely. I collaborate remotely with clients from all over the world."
-    },
-    {
-      question: "What is your development process?",
-      answer: "My development process follows an agile methodology: 1) Initial consultation and requirements gathering, 2) Design and planning phase, 3) Development with regular updates, 4) Testing and quality assurance, 5) Deployment and maintenance. I maintain clear communication throughout the entire process."
-    },
-    {
-      question: "Do you offer support after the project is completed?",
-      answer: "Yes, I offer ongoing support and maintenance services to ensure your website runs smoothly and adapts to your business needs."
-    },
-    {
-      question: "How do you handle project communication?",
-      answer: "I maintain regular communication through scheduled video calls, email updates, and project management tools. You'll receive weekly progress reports and have access to a dedicated channel for questions or concerns."
-    },
-    {
-      question: "What technologies do you work with?",
-      answer: "I work with modern web technologies including React, Node.js, Python, Django, and various database systems. For cybersecurity, I'm proficient with penetration testing tools, security frameworks, and implementing secure coding practices."
-    },
-    {
-      question: "How do you ensure project security?",
-      answer: "Security is built into every stage of development. I implement industry-standard security practices, regular security audits, secure coding standards, and follow OWASP guidelines. All projects include SSL/TLS encryption and secure data handling."
-    },
-    {
-      question: "What is your typical project timeline?",
-      answer: "Project timelines vary based on complexity and requirements. Small projects typically take 2-4 weeks, while larger projects may take 2-3 months. I provide detailed timelines during the initial consultation and keep you updated on progress throughout."
-    },
-    {
-      question: "What makes you different from other freelancers?",
-      answer: "I combine technical expertise with athletic discipline – delivering efficient, focused, and scalable solutions."
-    },
-  ];
+  const { t } = useTranslation();
 
   const toggleQuestion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -51,8 +14,8 @@ const Faq = () => {
   return (
     <>
       <Helmet>
-        <title>FAQ | Half Half Man - Common Questions Answered</title>
-        <meta name="description" content="Find answers to frequently asked questions about our web development and cybersecurity services, project process, and collaboration methods." />
+        <title>{t('faq.meta.title')}</title>
+        <meta name="description" content={t('faq.meta.description')} />
       </Helmet>
       <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
         <div className="max-w-4xl mx-auto px-4 pt-48 pb-12">
@@ -62,7 +25,7 @@ const Faq = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            Frequently Asked Questions
+            {t('faq.title')}
           </motion.h1>
 
           <motion.div 
@@ -71,9 +34,9 @@ const Faq = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            {faqItems.map((item, index) => (
+            {t('faq.items', { returnObjects: true }).map((item, index) => (
               <motion.div 
-                key={index}
+                key={item.id || index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -90,6 +53,10 @@ const Faq = () => {
                   whileHover={{ scale: 1.01 }}
                   transition={{ type: "spring", stiffness: 400 }}
                   style={{ borderBottom: 'none', outline: 'none' }}
+                  aria-expanded={openIndex === index}
+                  aria-controls={`faq-answer-${item.id || index}`}
+                  id={`faq-question-${item.id || index}`}
+                  aria-label={item.question}
                 >
                   <span className="text-lg font-['Poppins'] font-semibold text-primary">{item.question}</span>
                   <motion.div
@@ -103,6 +70,7 @@ const Faq = () => {
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
+                      aria-hidden="true"
                     >
                       <path
                         strokeLinecap="round"
@@ -136,6 +104,9 @@ const Faq = () => {
                       }}
                       className="overflow-hidden"
                       style={{ borderTop: 'none' }}
+                      id={`faq-answer-${item.id || index}`}
+                      role="region"
+                      aria-labelledby={`faq-question-${item.id || index}`}
                     >
                       <motion.div 
                         className="px-8 pb-6"

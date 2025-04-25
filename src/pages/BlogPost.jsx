@@ -5,18 +5,24 @@ import { client } from '../utils/sanityClient';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import LoadingSpinner from '../components/common/LoadingSpinner';
+import { toast } from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 const BlogPost = () => {
   const { slug } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
   const [likes, setLikes] = useState(0);
   const [hasLiked, setHasLiked] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [commentUsername, setCommentUsername] = useState('');
+  const [commentName, setCommentName] = useState('');
+  const [commentMessage, setCommentMessage] = useState('');
+  const [liked, setLiked] = useState(false);
+  const { t } = useTranslation();
 
   // Get the absolute URL for sharing
   const getAbsoluteUrl = () => {
@@ -36,52 +42,52 @@ const BlogPost = () => {
         const query = `*[_type == "post" && slug.current == $slug][0]{
           _id,
           title,
+          slug,
+          author->{name, image},
+          mainImage,
           publishedAt,
           body,
-          excerpt,
-          "mainImage": mainImage.asset->url,
-          "author": author->{
+          likes,
+          "comments": *[_type == "comment" && post._ref == ^._id] | order(createdAt desc) {
+            _id,
             name,
-            "image": image.asset->url,
-            bio
-          },
-          "likes": coalesce(likes, 0),
-          "comments": comments[]->
+            message,
+            createdAt
+          }
         }`;
-
-        const data = await client.fetch(query, { slug });
         
-        if (!data || !data.title) {
-          throw new Error('Invalid or missing post data');
+        const result = await client.fetch(query, { slug });
+        
+        if (!result) {
+          setError('Post not found');
+          return;
         }
 
-        // Ensure mainImage is an absolute URL with correct dimensions
-        if (data.mainImage) {
-          data.mainImage = getAbsoluteImageUrl(data.mainImage);
-        }
-
-        setPost(data);
-        setLikes(data.likes || 0);
-        setComments(data.comments || []);
+        setPost(result);
+        // Check if the post is liked in localStorage
+        const isLiked = localStorage.getItem(`post_${result._id}_liked`) === 'true';
+        setHasLiked(isLiked);
+        setLikes(result.likes || 0);
+        setComments(result.comments || []);
 
         // Update meta tags for prerendering
         if (typeof window !== 'undefined') {
           const metaTags = document.getElementsByTagName('meta');
           for (let i = 0; i < metaTags.length; i++) {
             if (metaTags[i].getAttribute('property') === 'og:title') {
-              metaTags[i].setAttribute('content', data.title);
+              metaTags[i].setAttribute('content', result.title);
             }
             if (metaTags[i].getAttribute('property') === 'og:description') {
-              metaTags[i].setAttribute('content', data.excerpt || `Read ${data.title} on Half Half Man Blog`);
+              metaTags[i].setAttribute('content', result.excerpt || `Read ${result.title} on Half Half Man Blog`);
             }
             if (metaTags[i].getAttribute('property') === 'og:image') {
-              metaTags[i].setAttribute('content', data.mainImage);
+              metaTags[i].setAttribute('content', result.mainImage);
             }
           }
         }
       } catch (err) {
         console.error('Error fetching post:', err);
-        setError(true);
+        setError(err.message);
       } finally {
         setLoading(false);
       }
@@ -91,93 +97,67 @@ const BlogPost = () => {
   }, [slug]);
 
   const handleLike = async () => {
-    if (hasLiked || !post._id) return;
+    if (!post || hasLiked) return;
     
     try {
-      console.log('Attempting to update post with ID:', post._id);
-      
-      // First, ensure the likes field exists with a default value if not present
-      const result = await client
+      const newLikes = (post.likes || 0) + 1;
+      await client
         .patch(post._id)
-        .setIfMissing({ likes: 0 })
-        .set({
-          likes: (likes || 0) + 1
-        })
-        .commit({
-          returnDocuments: true
-        });
-
-      console.log('Update result:', result);
-
-      if (result?.likes !== undefined) {
-        setLikes(result.likes);
-        setHasLiked(true);
-        localStorage.setItem(`post_${post._id}_liked`, 'true');
-      }
+        .set({ likes: newLikes })
+        .commit();
+      
+      setPost({ ...post, likes: newLikes });
+      setHasLiked(true);
+      // Store like state in localStorage
+      localStorage.setItem(`post_${post._id}_liked`, 'true');
     } catch (err) {
-      console.error('Detailed error:', err);
-      alert('Failed to update like count. Please try again.');
+      console.error('Error updating likes:', err);
+      toast.error(t('blog.post.like.error'));
     }
   };
 
-  const handleComment = async (e) => {
+  const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    if (!newComment.trim() || !commentUsername.trim() || !post._id) return;
+    if (!commentName.trim() || !commentMessage.trim()) return;
 
     try {
-      // First create the comment document
+      // Create the comment document in Sanity
       const commentDoc = {
         _type: 'comment',
-        content: newComment.trim(),
-        author: {
-          name: commentUsername.trim(),
-          email: `${commentUsername.trim().toLowerCase()}@example.com` // placeholder email
-        },
-        createdAt: new Date().toISOString(),
         post: {
           _type: 'reference',
           _ref: post._id
-        }
+        },
+        name: commentName.trim(),
+        message: commentMessage.trim(),
+        createdAt: new Date().toISOString()
       };
 
-      // Create the comment in Sanity
       const createdComment = await client.create(commentDoc);
-
-      // Update the post with the comment reference
-      await client
-        .patch(post._id)
-        .setIfMissing({ comments: [] })
-        .append('comments', [{
-          _type: 'reference',
-          _ref: createdComment._id
-        }])
-        .commit();
-
+      
       // Update local state
-      setComments(prev => [...prev, { ...commentDoc, _id: createdComment._id }]);
-      setNewComment('');
-      setCommentUsername('');
+      setPost({
+        ...post,
+        comments: [
+          {
+            _id: createdComment._id,
+            name: commentName,
+            message: commentMessage,
+            createdAt: new Date().toISOString()
+          },
+          ...(post.comments || [])
+        ]
+      });
 
-      // Refresh the post data to get the updated comments
-      const updatedPost = await client.fetch(
-        `*[_type == "post" && _id == $postId][0]{ "comments": comments[]-> }`,
-        { postId: post._id }
-      );
-      setComments(updatedPost.comments || []);
-
+      // Reset form
+      setCommentName('');
+      setCommentMessage('');
+      toast.success(t('blog.post.comments.success'));
     } catch (err) {
-      console.error('Error adding comment:', err);
-      alert('Failed to add comment. Please try again.');
+      console.error('Error submitting comment:', err);
+      toast.error(t('blog.post.comments.error'));
     }
   };
-
-  // Check if user has already liked the post
-  useEffect(() => {
-    if (post?._id) {
-      const hasLikedPost = localStorage.getItem(`post_${post._id}_liked`) === 'true';
-      setHasLiked(hasLikedPost);
-    }
-  }, [post?._id]);
 
   const handleShare = (platform) => {
     const currentUrl = window.location.href;
@@ -591,12 +571,12 @@ const BlogPost = () => {
                 exit={{ opacity: 0, height: 0 }}
                 className="mt-8"
               >
-                <form onSubmit={handleComment} className="mb-6 space-y-4">
+                <form onSubmit={handleCommentSubmit} className="mb-6 space-y-4">
                   <div className="flex flex-col gap-4">
                     <input
                       type="text"
-                      value={commentUsername}
-                      onChange={(e) => setCommentUsername(e.target.value)}
+                      value={commentName}
+                      onChange={(e) => setCommentName(e.target.value)}
                       placeholder="Your name..."
                       className="px-4 py-2 rounded-full bg-primary/5 focus:bg-primary/10 focus:outline-none transition-colors duration-300"
                       required
@@ -604,8 +584,8 @@ const BlogPost = () => {
                     <div className="flex gap-2">
                       <input
                         type="text"
-                        value={newComment}
-                        onChange={(e) => setNewComment(e.target.value)}
+                        value={commentMessage}
+                        onChange={(e) => setCommentMessage(e.target.value)}
                         placeholder="Add a comment..."
                         className="flex-1 px-4 py-2 rounded-full bg-primary/5 focus:bg-primary/10 focus:outline-none transition-colors duration-300"
                         required
@@ -613,7 +593,7 @@ const BlogPost = () => {
                       <button
                         type="submit"
                         className="px-6 py-2 rounded-full bg-primary text-white hover:bg-primary-dark transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                        disabled={!newComment.trim() || !commentUsername.trim()}
+                        disabled={!commentName.trim() || !commentMessage.trim()}
                       >
                         Post
                       </button>
@@ -629,9 +609,9 @@ const BlogPost = () => {
                       animate={{ opacity: 1, y: 0 }}
                       className="bg-primary/5 rounded-lg p-4"
                     >
-                      <p className="text-primary">{comment.content}</p>
+                      <p className="text-primary">{comment.message}</p>
                       <p className="text-primary/60 text-sm mt-2">
-                        <span className="font-medium">{comment.author?.name}</span>
+                        <span className="font-medium">{comment.name}</span>
                         <span className="mx-2">•</span>
                         {new Date(comment.createdAt).toLocaleDateString()}
                       </p>

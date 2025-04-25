@@ -1,24 +1,27 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import logo from '../../assets/logo/LOGO.jpg';
+import LanguageSwitcher from '../common/LanguageSwitcher';
 
 const Navbar = () => {
+  const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/', scroll: 'about' },
-    { name: 'Services', path: '/', scroll: 'services' },
-    { name: 'Tech Stack', path: '/tech-stack' },
-    { name: 'Projects', path: '/projects' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'Contact', path: '/contact' },
+    { name: t('nav.home'), path: '/' },
+    { name: t('nav.about'), path: '/', scroll: 'about' },
+    { name: t('nav.services'), path: '/', scroll: 'services' },
+    { name: t('nav.techStack'), path: '/tech-stack' },
+    { name: t('nav.projects'), path: '/projects' },
+    { name: t('nav.blog'), path: '/blog' },
+    { name: t('nav.contact'), path: '/contact' },
   ];
 
   const dropdownItems = [
-    { name: 'FAQ', path: '/faq' },
-    { name: 'Privacy Policy', path: '/privacy-policy' },
+    { name: t('nav.dropdown.faq'), path: '/faq' },
+    { name: t('nav.dropdown.privacy'), path: '/privacy-policy' },
   ];
 
   const handleNavClick = (item, e) => {
@@ -56,7 +59,7 @@ const Navbar = () => {
           <img
             className="h-10 w-auto"
             src={logo}
-            alt="HALF_HALF_MAN"
+            alt={t('common.logoAlt')}
           />
         </Link>
 
@@ -81,7 +84,7 @@ const Navbar = () => {
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className="text-muted hover:text-tertiary px-4 py-2 text-sm font-medium transition-all duration-200 hover:bg-secondary/10 rounded-md inline-flex items-center"
               >
-                More
+                {t('nav.more')}
                 <svg
                   className={`ml-1.5 h-4 w-4 transition-transform duration-200 ${
                     isDropdownOpen ? 'transform rotate-180' : ''
@@ -102,24 +105,24 @@ const Navbar = () => {
               {/* Dropdown Menu */}
               {isDropdownOpen && (
                 <div className="absolute right-0 top-full mt-2 w-48 bg-primary rounded-lg shadow-lg py-2 z-50 border-t border-tertiary/20">
-                  <Link
-                    to="/faq"
-                    className="block px-4 py-2 text-muted hover:text-tertiary transition-all duration-200 hover:bg-secondary/10 relative group"
-                    onClick={() => setIsDropdownOpen(false)}
-                  >
-                    FAQ
-                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-tertiary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
-                  </Link>
-                  <Link
-                    to="/privacy-policy"
-                    className="block px-4 py-2 text-muted hover:text-tertiary transition-all duration-200 hover:bg-secondary/10 relative group"
-                    onClick={() => setIsDropdownOpen(false)}
-                  >
-                    Privacy Policy
-                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-tertiary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
-                  </Link>
+                  {dropdownItems.map((item) => (
+                    <Link
+                      key={item.name}
+                      to={item.path}
+                      className="block px-4 py-2 text-muted hover:text-tertiary transition-all duration-200 hover:bg-secondary/10 relative group"
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
+                      {item.name}
+                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-tertiary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
+                    </Link>
+                  ))}
                 </div>
               )}
+            </div>
+
+            {/* Language Switcher */}
+            <div className="ml-2 pl-2 border-l border-tertiary/20">
+              <LanguageSwitcher />
             </div>
           </div>
         </div>
@@ -129,8 +132,9 @@ const Navbar = () => {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="inline-flex items-center justify-center p-2 rounded-md text-muted hover:text-tertiary hover:bg-secondary/10 transition-colors duration-200 focus:outline-none"
+            aria-label={t('nav.toggleMenu')}
           >
-            <span className="sr-only">Open main menu</span>
+            <span className="sr-only">{t('nav.toggleMenu')}</span>
             {/* Hamburger icon */}
             <svg
               className={`h-6 w-6 transition-opacity duration-200 ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}
@@ -193,6 +197,10 @@ const Navbar = () => {
               {item.name}
             </Link>
           ))}
+          {/* Mobile Language Switcher */}
+          <div className="px-4 py-2 border-t border-tertiary/20">
+            <LanguageSwitcher />
+          </div>
         </div>
       </div>
     </nav>

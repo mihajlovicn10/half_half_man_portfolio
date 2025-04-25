@@ -8,14 +8,51 @@ export default defineType({
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'object',
+      fields: [
+        {
+          name: 'en',
+          title: 'English',
+          type: 'string',
+        },
+        {
+          name: 'es',
+          title: 'Spanish',
+          type: 'string',
+        },
+        {
+          name: 'fr',
+          title: 'French',
+          type: 'string',
+        },
+        {
+          name: 'de',
+          title: 'German',
+          type: 'string',
+        },
+        {
+          name: 'it',
+          title: 'Italian',
+          type: 'string',
+        },
+        {
+          name: 'el',
+          title: 'Greek',
+          type: 'string',
+        },
+        {
+          name: 'rs',
+          title: 'Serbian',
+          type: 'string',
+        }
+      ]
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
       options: {
-        source: 'title',
+        source: 'title.en',
         maxLength: 96,
       },
     }),
@@ -47,13 +84,62 @@ export default defineType({
     defineField({
       name: 'body',
       title: 'Body',
-      type: 'blockContent',
+      type: 'object',
+      fields: [
+        {
+          name: 'en',
+          title: 'English',
+          type: 'blockContent',
+        },
+        {
+          name: 'es',
+          title: 'Spanish',
+          type: 'blockContent',
+        },
+        {
+          name: 'fr',
+          title: 'French',
+          type: 'blockContent',
+        },
+        {
+          name: 'de',
+          title: 'German',
+          type: 'blockContent',
+        },
+        {
+          name: 'it',
+          title: 'Italian',
+          type: 'blockContent',
+        },
+        {
+          name: 'el',
+          title: 'Greek',
+          type: 'blockContent',
+        },
+        {
+          name: 'rs',
+          title: 'Serbian',
+          type: 'blockContent',
+        }
+      ]
+    }),
+    defineField({
+      name: 'likes',
+      title: 'Likes',
+      type: 'number',
+      initialValue: 0,
+    }),
+    defineField({
+      name: 'comments',
+      title: 'Comments',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'comment' }] }],
     }),
   ],
 
   preview: {
     select: {
-      title: 'title',
+      title: 'title.en',
       author: 'author.name',
       media: 'mainImage',
     },

@@ -2,11 +2,13 @@ import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
 import ecommerceImage1 from '../assets/images/Projects/Detail/ecommerce_1.webp';
 import ecommerceImage2 from '../assets/images/Projects/Detail/ecommerce_2.webp';
 import ecommerceImage3 from '../assets/images/Projects/Detail/ecommerce_3.webp';
 
 const ProjectDetail = () => {
+  const { t } = useTranslation();
   const { slug } = useParams();
   const [project, setProject] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
@@ -15,26 +17,12 @@ const ProjectDetail = () => {
   // For now, we'll use static data
   const projectsData = {
     'secure-ecommerce': {
-      title: "Secure E-commerce Platform",
-      description: "A comprehensive e-commerce solution built with security at its core. This platform demonstrates the implementation of industry-standard security practices while maintaining excellent user experience.",
+      title: t('projects.items.ecommerce.title'),
+      description: t('projects.items.ecommerce.description'),
       technologies: ["Django", "React", "PostgreSQL", "Redis", "Docker"],
-      features: [
-        "Real-time inventory management",
-        "Secure payment processing",
-        "Advanced user authentication",
-        "Automated security testing",
-        "Performance optimization"
-      ],
-      challenges: [
-        "Implementing real-time inventory updates across multiple servers",
-        "Ensuring PCI compliance for payment processing",
-        "Optimizing database queries for large-scale operations"
-      ],
-      solutions: [
-        "Utilized WebSocket for real-time communication",
-        "Implemented tokenization for sensitive data",
-        "Developed custom caching solutions"
-      ],
+      features: t('projects.items.ecommerce.features', { returnObjects: true }),
+      challenges: t('projects.items.ecommerce.challenges', { returnObjects: true }),
+      solutions: t('projects.items.ecommerce.solutions', { returnObjects: true }),
       images: [
         ecommerceImage1,
         ecommerceImage2,
@@ -97,9 +85,9 @@ const ProjectDetail = () => {
       <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
         <div className="max-w-6xl mx-auto px-4 pt-24">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-primary">Project not found</h2>
+            <h2 className="text-2xl font-bold text-primary">{t('projects.projectNotFound')}</h2>
             <Link to="/projects" className="text-primary hover:text-primary-dark underline mt-4 inline-block">
-              Back to Projects
+              {t('projects.backToProjects')}
             </Link>
           </div>
         </div>
@@ -109,6 +97,10 @@ const ProjectDetail = () => {
 
   return (
     <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
+      <Helmet>
+        <title>{`${project.title} | ${t('projects.meta.title')}`}</title>
+        <meta name="description" content={project.description} />
+      </Helmet>
       <div className="max-w-6xl mx-auto px-4 pt-48 pb-12">
         {/* Navigation */}
         <motion.div
@@ -123,7 +115,7 @@ const ProjectDetail = () => {
             <svg className="w-5 h-5 mr-2 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
-            Back to Projects
+            {t('projects.backToProjects')}
           </Link>
         </motion.div>
 
@@ -145,7 +137,7 @@ const ProjectDetail = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="bg-[#f8fafc]/80 backdrop-blur-sm shadow-xl rounded-2xl p-8 mb-8 border border-[#e2e8f0]"
         >
-          <h2 className="text-2xl font-semibold text-primary mb-4">Technologies Used</h2>
+          <h2 className="text-2xl font-semibold text-primary mb-4">{t('projects.detail.technologiesUsed')}</h2>
           <div className="flex flex-wrap gap-3">
             {project.technologies.map((tech, index) => (
               <motion.span 
@@ -168,7 +160,7 @@ const ProjectDetail = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="bg-[#f8fafc]/80 backdrop-blur-sm shadow-xl rounded-2xl p-8 mb-8 border border-[#e2e8f0]"
         >
-          <h2 className="text-2xl font-semibold text-primary mb-4">Key Features</h2>
+          <h2 className="text-2xl font-semibold text-primary mb-4">{t('projects.detail.keyFeatures')}</h2>
           <ul className="space-y-2 text-[17px] text-primary/80">
             {project.features.map((feature, index) => (
               <motion.li 
@@ -193,7 +185,7 @@ const ProjectDetail = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="bg-[#f8fafc]/80 backdrop-blur-sm shadow-xl rounded-2xl p-8 border border-[#e2e8f0]"
           >
-            <h2 className="text-2xl font-semibold text-primary mb-4">Challenges</h2>
+            <h2 className="text-2xl font-semibold text-primary mb-4">{t('projects.detail.challenges')}</h2>
             <ul className="space-y-2 text-[17px] text-primary/80">
               {project.challenges.map((challenge, index) => (
                 <motion.li 
@@ -215,7 +207,7 @@ const ProjectDetail = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="bg-[#f8fafc]/80 backdrop-blur-sm shadow-xl rounded-2xl p-8 border border-[#e2e8f0]"
           >
-            <h2 className="text-2xl font-semibold text-primary mb-4">Solutions</h2>
+            <h2 className="text-2xl font-semibold text-primary mb-4">{t('projects.detail.solutions')}</h2>
             <ul className="space-y-2 text-[17px] text-primary/80">
               {project.solutions.map((solution, index) => (
                 <motion.li 
@@ -240,7 +232,7 @@ const ProjectDetail = () => {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="bg-[#f8fafc]/80 backdrop-blur-sm shadow-xl rounded-2xl p-8 mb-8 border border-[#e2e8f0]"
         >
-          <h2 className="text-2xl font-semibold text-primary mb-4">Project Gallery</h2>
+          <h2 className="text-2xl font-semibold text-primary mb-4">{t('projects.detail.projectGallery')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {project.images.map((image, index) => (
               <motion.div 
@@ -248,15 +240,17 @@ const ProjectDetail = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
-                whileHover={{ scale: 1.02 }}
-                className="rounded-xl overflow-hidden shadow-md cursor-pointer border border-[#e2e8f0]"
                 onClick={() => handleImageClick(index)}
+                className="relative group cursor-pointer overflow-hidden rounded-lg"
+                role="button"
+                aria-label={t('projects.detail.viewImage')}
               >
                 <img 
                   src={image} 
-                  alt={`${project.title} screenshot ${index + 1}`}
-                  className="w-full h-48 object-cover"
+                  alt={`${project.title} - ${index + 1}`}
+                  className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-colors duration-300"></div>
               </motion.div>
             ))}
           </div>
@@ -267,7 +261,7 @@ const ProjectDetail = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="flex justify-center space-x-6"
+          className="flex flex-wrap gap-4 justify-center"
         >
           <a 
             href={project.githubLink}
@@ -275,10 +269,7 @@ const ProjectDetail = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-full font-semibold hover:bg-primary-dark transition-colors duration-300"
           >
-            View on GitHub
-            <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12" />
-            </svg>
+            {t('projects.detail.visitGithub')}
           </a>
           <a 
             href={project.liveDemo}
@@ -286,10 +277,7 @@ const ProjectDetail = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-full font-semibold hover:bg-primary-dark transition-colors duration-300"
           >
-            View Live Demo
-            <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
+            {t('projects.detail.visitDemo')}
           </a>
         </motion.div>
 
@@ -300,61 +288,41 @@ const ProjectDetail = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={handleCloseModal}
               className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+              onClick={handleCloseModal}
             >
-              <div className="relative max-w-7xl w-full">
-                {/* Navigation arrows */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handlePrevImage();
-                  }}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors"
-                >
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleNextImage();
-                  }}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors"
-                >
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-
-                {/* Close button */}
-                <button
-                  onClick={handleCloseModal}
-                  className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-
-                {/* Image */}
-                <motion.img
-                  initial={{ scale: 0.9, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.9, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  src={project.images[selectedImageIndex]}
-                  alt={`${project.title} screenshot ${selectedImageIndex + 1}`}
-                  className="max-h-[90vh] mx-auto object-contain"
-                  onClick={(e) => e.stopPropagation()}
-                />
-
-                {/* Image counter */}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/80">
-                  {selectedImageIndex + 1} / {project.images.length}
-                </div>
-              </div>
+              <button
+                onClick={handleCloseModal}
+                className="absolute top-4 right-4 text-white/70 hover:text-white"
+                aria-label={t('projects.detail.closeImage')}
+              >
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              <button
+                onClick={handlePrevImage}
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white"
+                aria-label={t('projects.detail.previousImage')}
+              >
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button
+                onClick={handleNextImage}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white"
+                aria-label={t('projects.detail.nextImage')}
+              >
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+              <img
+                src={project.images[selectedImageIndex]}
+                alt={`${project.title} - ${selectedImageIndex + 1}`}
+                className="max-w-full max-h-[90vh] object-contain"
+              />
             </motion.div>
           )}
         </AnimatePresence>

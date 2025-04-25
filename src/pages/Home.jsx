@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import heroVideo from '../assets/videos/hero_video.mp4';
 import elenaPhoto from '../assets/images/testimonials/elena.webp';
 import thomasPhoto from '../assets/images/testimonials/thomas.webp';
@@ -11,6 +12,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import logo from '../assets/logo/LOGO.jpg'; 
 
 const Home = () => {
+  const { t } = useTranslation();
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [expanded, setExpanded] = useState(null);
@@ -24,9 +26,8 @@ const Home = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   const heroTexts = [
-    "Half-human. Half-machine. Fully dedicated to perfection.",
-    "Where technology meets discipline — Code. Swim. Rise.",
-    "Building secure and elegant web ecosystems — by code and by heart."
+    t('hero.title'),
+    t('hero.subtitle')
   ];
 
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -77,55 +78,49 @@ const Home = () => {
 
   const testimonials = [
     {
-      name: "Elena Papadopoulou",
-      company: "CEO @ Helix Digital.",
-      feedback: "Working with Half Half Man was a refreshing experience. The quality of code, clarity of communication, and proactive problem-solving exceeded our expectations.",
+      key: 'elena',
       photo: elenaPhoto
     },
     {
-      name: "Thomas Schneider",
-      company: "CTO @ NovaTech Systems",
-      feedback: "Exceptional attention to detail and a true professional mindset. He understood our technical needs and delivered far beyond what we asked for.",
+      key: 'thomas',
       photo: thomasPhoto
     },
     {
-      name: "Maria Georgiou",
-      company: "Operations Lead @ Bluewave",
-      feedback: "Creative, organized, and highly efficient. His dedication is rare and his execution flawless. Would work with him again in a heartbeat.",
+      key: 'maria',
       photo: mariaPhoto
     }
   ];
 
   const sliderData = [
     {
-      title: "Need a secure and modern web solution?",
-      subtitle: "Hire a full-stack developer who understands both code and cybersecurity.",
-      buttonText: "Hire Me →",
+      title: t('slider.ideas.title'),
+      subtitle: t('slider.ideas.subtitle'),
+      buttonText: t('slider.ideas.button'),
       link: "/contact"
     },
     {
-      title: "Explore insights from the field.",
-      subtitle: "Security, coding patterns, freelance strategy & more.",
-      buttonText: "Visit Blog →",
+      title: t('slider.blog.title'),
+      subtitle: t('slider.blog.subtitle'),
+      buttonText: t('slider.blog.button'),
       link: "/blog"
     },
     {
-      title: "See how ideas become code.",
-      subtitle: "Browse showcase apps and real-world implementations.",
-      buttonText: "View Projects →",
+      title: t('slider.projects.title'),
+      subtitle: t('slider.projects.subtitle'),
+      buttonText: t('slider.projects.button'),
       link: "/projects"
     },
     {
-      title: "Tools of the Trade.",
-      subtitle: "From Python and React to Nmap and Burp Suite — I build with purpose.",
-      buttonText: "See Tech Stack →",
+      title: t('slider.stack.title'),
+      subtitle: t('slider.stack.subtitle'),
+      buttonText: t('slider.stack.button'),
       link: "/tech-stack"
     },
     {
-      title: "Who's the Half Half Man?",
-      subtitle: "A swimmer. A developer. A creator who lives what he builds.",
-      buttonText: "Read My Story →",
-      link: "#about"
+      title: t('slider.services.title'),
+      subtitle: t('slider.services.subtitle'),
+      buttonText: t('slider.services.button'),
+      link: "#services"
     }
   ];
 
@@ -138,7 +133,6 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-tertiary w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-16">
-      {/* Hero Section */}
       <motion.div 
         ref={heroRef}
         style={{ y, opacity }}
@@ -155,8 +149,8 @@ const Home = () => {
           Your browser does not support the video tag.
         </video>
         
-        {/* Animated Code Background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/50 z-[1]">
+        {/* Single overlay with matrix effect */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/50">
           <div className="absolute inset-0 overflow-hidden">
             {[...Array(20)].map((_, i) => (
               <motion.div
@@ -183,7 +177,6 @@ const Home = () => {
           </div>
         </div>
         
-        {/* Content */}
         <div className="relative z-10 h-full flex items-center justify-center">
           <div className="text-center text-white px-4 pt-16 max-w-4xl mx-auto">
             <AnimatePresence mode="wait">
@@ -222,7 +215,22 @@ const Home = () => {
                         onClick={() => window.location.href = slide.link}
                         className="group relative overflow-hidden"
                       >
-                        <span className="relative z-10">{slide.buttonText}</span>
+                        <span className="relative z-10 flex items-center gap-2">
+                          {slide.buttonText}
+                          <svg 
+                            className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            viewBox="0 0 24 24"
+                          >
+                            <path 
+                              strokeLinecap="round" 
+                              strokeLinejoin="round" 
+                              strokeWidth={2} 
+                              d="M14 5l7 7m0 0l-7 7m7-7H3" 
+                            />
+                          </svg>
+                        </span>
                         <div className="absolute inset-0 bg-gradient-to-r from-primary-dark to-primary transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
                       </Button>
                     </motion.div>
@@ -233,7 +241,6 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -241,7 +248,7 @@ const Home = () => {
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
         >
           <div className="flex flex-col items-center">
-            <span className="text-white/70 text-sm mb-2">Scroll to explore</span>
+            <span className="text-white/70 text-sm mb-2">{t('common.scrollToExplore')}</span>
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
@@ -254,7 +261,7 @@ const Home = () => {
         </motion.div>
       </motion.div>
 
-      {/* About Section */}
+     
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -275,48 +282,42 @@ const Home = () => {
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
               src={logo}
-              alt="Half Half Man Logo" 
+              alt={t('common.logoAlt')}
               className="w-24 h-24 mb-6 rounded-full shadow-lg ring-2 ring-teal-300/20" 
             />
             <h2 className="text-4xl font-bold text-white mb-4 text-center">
-              About Half Half Man
+              {t('about.title')}
             </h2>
             <p className="text-xl text-teal-300/80 text-center max-w-2xl">
-              Half Half Man is not just a brand — it's a mindset.
+              {t('about.subtitle')}
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {[
               {
-                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />,
-                title: "Code with Purpose",
-                description: "Technology is more than syntax — it's a medium to build meaning. Every project I touch carries intention, clarity, and a deep sense of responsibility."
+                key: 'code',
+                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
               },
               {
-                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />,
-                title: "Athlete's Discipline",
-                description: "Swimming taught me consistency, efficiency, and the power of repetition. That same mindset powers how I write code — elegant, optimized, and built to endure."
+                key: 'athlete',
+                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               },
               {
-                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />,
-                title: "Design Meets Function",
-                description: "No system is complete without beauty and usability. I bridge aesthetics with logic to deliver experiences users love and developers respect."
+                key: 'design',
+                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
               },
               {
-                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />,
-                title: "Cybersecurity First",
-                description: "Security isn't an extra — it's embedded from the start. From secure login flows to API protection, I code with defense in mind."
+                key: 'security',
+                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               },
               {
-                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />,
-                title: "Communication that Connects",
-                description: "I collaborate openly, speak clearly, and explain without jargon. It's not just about delivering — it's about understanding and building trust."
+                key: 'communication',
+                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
               },
               {
-                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />,
-                title: "A Brand. A Philosophy.",
-                description: "Half Half Man is a union of reason and emotion. It's not just my brand — it's my personal principle. Every line of code I write is backed by intent."
+                key: 'brand',
+                icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               }
             ].map((block, index) => (
               <motion.div
@@ -347,8 +348,12 @@ const Home = () => {
                     transition={{ type: "spring", stiffness: 300 }}
                     className="text-center"
                   >
-                    <h3 className="text-2xl font-semibold text-teal-300 mb-2">{block.title}</h3>
-                    <p className="text-white/90">{block.description}</p>
+                    <h3 className="text-2xl font-semibold text-teal-300 mb-2">
+                      {t(`about.blocks.${block.key}.title`)}
+                    </h3>
+                    <p className="text-white/90">
+                      {t(`about.blocks.${block.key}.description`)}
+                    </p>
                   </motion.div>
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
@@ -362,16 +367,16 @@ const Home = () => {
         </div>
       </motion.div>
 
-      {/* Services Section */}
+      
       <section
         id="services"
         className="relative w-full bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${servicesBackground})` }}
       >
-        {/* Overlay + Blur */}
+        
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60 backdrop-blur-sm z-0"></div>
 
-        {/* Content */}
+       
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-24">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -380,42 +385,36 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4 text-tertiary">What I Can Do for You</h2>
+            <h2 className="text-4xl font-bold mb-4 text-tertiary">{t('services.title')}</h2>
             <p className="text-lg text-tertiary/80 max-w-2xl mx-auto">
-              Explore a range of services crafted to elevate your digital presence — secure, scalable, and designed with purpose.
+              {t('services.subtitle')}
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                title: "Web Development",
-                description: "Custom-built websites that are fast, responsive and tailored to your needs.",
+                key: 'webDev',
                 icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
               },
               {
-                title: "Cybersecurity",
-                description: "Secure coding, audits, threat mitigation and performance-hardening solutions.",
+                key: 'security',
                 icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               },
               {
-                title: "Custom Tools",
-                description: "Internal dashboards and business automation tools, crafted to save time.",
+                key: 'tools',
                 icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
               },
               {
-                title: "Maintenance",
-                description: "Regular updates, backups and security patches to keep everything running smoothly.",
+                key: 'maintenance',
                 icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
               },
               {
-                title: "Performance Optimization",
-                description: "Page speed audits, load-time improvements and fine-tuning of UX flow.",
+                key: 'performance',
                 icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               },
               {
-                title: "Tech Consulting",
-                description: "Choosing the right tools, strategy, and architecture from the start.",
+                key: 'consulting',
                 icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5" />
               }
             ].map((service, index) => (
@@ -436,9 +435,11 @@ const Home = () => {
                     {service.icon}
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">{service.title}</h3>
+                <h3 className="text-lg font-semibold text-white mb-2">
+                  {t(`services.${service.key}.title`)}
+                </h3>
                 <p className="text-sm text-gray-300 leading-relaxed">
-                  {service.description}
+                  {t(`services.${service.key}.description`)}
                 </p>
               </motion.div>
             ))}
@@ -446,7 +447,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+  
       <section id="testimonials" className="w-full py-16 bg-gradient-to-b from-white to-[#e2f0fa] font-['Poppins']">
         <div className="max-w-6xl mx-auto px-4">
           <motion.h2 
@@ -455,7 +456,7 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-4xl font-bold text-center text-primary mb-12"
           >
-            Trusted by Industry Professionals - Real People. Real Feedback. 
+            {t('testimonials.title')}
           </motion.h2>
           <div className="space-y-6">
             {testimonials.map((item, index) => (
@@ -472,11 +473,15 @@ const Home = () => {
                 <motion.div layout className="flex flex-col items-center text-center">
                   <img 
                     src={item.photo} 
-                    alt={item.name}
+                    alt={t(`testimonials.items.${item.key}.name`)}
                     className="w-16 h-16 rounded-full object-cover shadow-md ring-2 ring-primary/20 mb-4"
                   />
-                  <h3 className="text-2xl font-semibold text-primary mb-2">{item.name}</h3>
-                  <p className="text-base text-primary/80 italic">{item.company}</p>
+                  <h3 className="text-2xl font-semibold text-primary mb-2">
+                    {t(`testimonials.items.${item.key}.name`)}
+                  </h3>
+                  <p className="text-base text-primary/80 italic">
+                    {t(`testimonials.items.${item.key}.company`)}
+                  </p>
                 </motion.div>
                 <AnimatePresence>
                   {expanded === index && (
@@ -496,7 +501,7 @@ const Home = () => {
                       >
                         <span className="absolute -left-4 -top-4 text-6xl text-primary/10 font-serif">"</span>
                         <p className="text-[17px] text-primary/80 leading-relaxed relative z-10">
-                          {item.feedback}
+                          {t(`testimonials.items.${item.key}.feedback`)}
                         </p>
                         <span className="absolute -bottom-8 right-0 text-6xl text-primary/10 font-serif">"</span>
                       </motion.div>
@@ -513,3 +518,4 @@ const Home = () => {
 };
 
 export default Home; 
+

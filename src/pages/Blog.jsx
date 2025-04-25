@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { client, postsQuery } from '../utils/sanityClient';
 
 const Blog = () => {
+  const { t, i18n } = useTranslation();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,21 +16,21 @@ const Blog = () => {
       try {
         setLoading(true);
         setError(null);
-        const data = await client.fetch(postsQuery);
+        const data = await client.fetch(postsQuery(i18n.language));
         if (!data) {
           throw new Error('No data received from Sanity');
         }
         setPosts(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error('Error fetching blog posts:', err);
-        setError('Failed to load blog posts. Please try again later.');
+        setError(t('blog.error.fetchError'));
       } finally {
         setLoading(false);
       }
     };
 
     fetchPosts();
-  }, []);
+  }, [t, i18n.language]);
 
   if (loading) {
     return (
@@ -40,7 +42,7 @@ const Blog = () => {
             className="text-center"
           >
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-            <p className="mt-4 text-primary">Loading blog posts...</p>
+            <p className="mt-4 text-primary">{t('blog.loading')}</p>
           </motion.div>
         </div>
       </div>
@@ -56,13 +58,13 @@ const Blog = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-center"
           >
-            <h2 className="text-2xl font-bold text-red-600">Error</h2>
+            <h2 className="text-2xl font-bold text-red-600">{t('blog.error.title')}</h2>
             <p className="mt-2 text-[17px] text-primary/80">{error}</p>
             <button 
               onClick={() => window.location.reload()}
               className="mt-4 px-6 py-3 bg-primary text-white rounded-full font-semibold hover:bg-primary-dark transition-colors duration-300"
             >
-              Try Again
+              {t('blog.error.tryAgain')}
             </button>
           </motion.div>
         </div>
@@ -73,8 +75,8 @@ const Blog = () => {
   return (
     <>
       <Helmet>
-        <title>Blog | Half Half Man - Technical Insights & Development Stories</title>
-        <meta name="description" content="Dive into technical articles about web development, cybersecurity, and software engineering. Learn from real-world experiences and best practices." />
+        <title>{t('blog.meta.title')}</title>
+        <meta name="description" content={t('blog.meta.description')} />
       </Helmet>
       <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
         <section className="w-full py-16">
@@ -85,7 +87,7 @@ const Blog = () => {
               viewport={{ once: true }}
               className="text-4xl font-bold text-center text-primary mb-12"
             >
-              Blog — Insights & Technical Deep Dives
+              {t('blog.title')}
             </motion.h1>
             <div className="space-y-6">
               {posts.length > 0 ? (
@@ -97,7 +99,7 @@ const Blog = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                   >
-                    <Link to={`/blog/${post.slug.current}`}>
+                    <Link to={`/blog/${post.slug}`}>
                       <motion.div 
                         whileHover={{ scale: 1.02 }}
                         transition={{ type: "spring", stiffness: 300 }}
@@ -108,7 +110,11 @@ const Blog = () => {
                             <h3 className="text-2xl font-semibold text-primary">{post.title}</h3>
                             {post.publishedAt && (
                               <p className="mt-2 text-sm text-primary/60">
-                                {new Date(post.publishedAt).toLocaleDateString()}
+                                {new Date(post.publishedAt).toLocaleDateString(i18n.language, {
+                                  year: 'numeric',
+                                  month: 'long',
+                                  day: 'numeric'
+                                })}
                               </p>
                             )}
                             {post.excerpt && (
@@ -123,7 +129,7 @@ const Blog = () => {
                             >
                               <img 
                                 src={post.mainImage}
-                                alt={`Featured image for blog post: ${post.title}`}
+                                alt={`${t('blog.featuredImageAlt')} ${post.title}`}
                                 className="w-32 h-32 object-cover rounded-xl shadow-md"
                               />
                             </motion.div>
@@ -139,8 +145,8 @@ const Blog = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className="text-center"
                 >
-                  <p className="text-[17px] text-primary/80">No blog posts found.</p>
-                  <p className="mt-2 text-sm text-primary/60">Check back soon for new content!</p>
+                  <p className="text-[17px] text-primary/80">{t('blog.noPosts.message')}</p>
+                  <p className="mt-2 text-sm text-primary/60">{t('blog.noPosts.checkBack')}</p>
                 </motion.div>
               )}
             </div>

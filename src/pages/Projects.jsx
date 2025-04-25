@@ -2,16 +2,18 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import ecommerceThumb from '../assets/images/Projects/List/ecommerce.webp';
 
 const Projects = () => {
+  const { t } = useTranslation();
   const [expanded, setExpanded] = useState(null);
 
   const projects = [
     {
-      title: "Secure E-commerce Platform",
+      title: t('projects.items.ecommerce.title'),
       slug: "secure-ecommerce",
-      summary: "A full-stack e-commerce solution with advanced security features. Built with Django REST Framework and React, featuring real-time inventory management and secure payment processing.",
+      summary: t('projects.items.ecommerce.summary'),
       thumbnail: ecommerceThumb
     }
   ];
@@ -23,8 +25,8 @@ const Projects = () => {
   return (
     <>
       <Helmet>
-        <title>Projects | Half Half Man - Portfolio of Web Development & Security Solutions</title>
-        <meta name="description" content="Explore my portfolio of web development and cybersecurity projects. From secure e-commerce platforms to custom business solutions." />
+        <title>{t('projects.meta.title')}</title>
+        <meta name="description" content={t('projects.meta.description')} />
       </Helmet>
       <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
         <section className="w-full py-16">
@@ -35,7 +37,7 @@ const Projects = () => {
               viewport={{ once: true }}
               className="text-4xl font-bold text-center text-primary mb-12"
             >
-              Featured Projects — Where Code Meets Purpose
+              {t('projects.title')}
             </motion.h1>
             <div className="space-y-6">
               {projects.map((project, index) => (
@@ -57,13 +59,13 @@ const Projects = () => {
                     >
                       <img 
                         src={project.thumbnail} 
-                        alt={`${project.title} - Project thumbnail`}
+                        alt={t('projects.items.ecommerce.thumbnail.alt')}
                         className="w-full h-full object-cover"
                       />
                     </motion.div>
                     <h3 className="text-2xl font-semibold text-primary mb-2">{project.title}</h3>
                     <p className="text-[17px] text-primary/80">{project.summary}</p>
-                    <div className="text-sm text-primary/60 mt-2">Featured Project</div>
+                    <div className="text-sm text-primary/60 mt-2">{t('projects.featured')}</div>
                   </motion.div>
                   <AnimatePresence>
                     {expanded === index && (
@@ -87,7 +89,7 @@ const Projects = () => {
                               to={`/projects/${project.slug}`}
                               className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-full font-semibold hover:bg-primary-dark transition-colors duration-300 group"
                             >
-                              View Project Details
+                              {t('projects.viewDetails')}
                               <svg 
                                 className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" 
                                 fill="none" 

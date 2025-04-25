@@ -1,18 +1,20 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import logo from '../../assets/logo/LOGO.jpg';
 
 const Footer = () => {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   const footerLinks = {
     navigation: [
-      { name: 'Home', path: '/' },
-      { name: 'Tech Stack', path: '/tech-stack' },
-      { name: 'Projects', path: '/projects' },
-      { name: 'Blog', path: '/blog' },
-      { name: 'Contact', path: '/contact' },
-      { name: 'FAQ', path: '/faq' },
-      { name: 'Privacy Policy', path: '/privacy-policy' },
+      { name: 'home', path: '/' },
+      { name: 'techstack', path: '/tech-stack' },
+      { name: 'projects', path: '/projects' },
+      { name: 'blog', path: '/blog' },
+      { name: 'contact', path: '/contact' },
+      { name: 'faq', path: '/faq' },
+      { name: 'privacypolicy', path: '/privacy-policy' },
     ],
     social: [
       { name: 'GitHub', url: 'https://github.com/mihajlovicn10', icon: 'github' },
@@ -70,7 +72,7 @@ const Footer = () => {
                   Half Half Man
                 </span>
                 <span className="text-muted text-base italic">
-                  Synthesis of Code and Water
+                  {t('footer.slogan')}
                 </span>
               </div>
             </Link>
@@ -78,7 +80,7 @@ const Footer = () => {
 
           {/* Navigation Links */}
           <div>
-            <h3 className="text-tertiary font-medium mb-2">Navigation</h3>
+            <h3 className="text-tertiary font-medium mb-2">{t('footer.navigationTitle')}</h3>
             <ul className="space-y-1">
               {footerLinks.navigation.map((link) => (
                 <li key={link.name}>
@@ -86,7 +88,7 @@ const Footer = () => {
                     to={link.path}
                     className="text-muted hover:text-tertiary text-sm transition-all duration-200 hover:translate-x-1 inline-block"
                   >
-                    {link.name}
+                    {t(`footer.links.${link.name}`)}
                   </Link>
                 </li>
               ))}
@@ -95,7 +97,7 @@ const Footer = () => {
 
           {/* Social Links */}
           <div>
-            <h3 className="text-tertiary font-medium mb-2 text-center">Connect</h3>
+            <h3 className="text-tertiary font-medium mb-2 text-center">{t('footer.connectTitle')}</h3>
             <div className="flex justify-center space-x-4">
               {footerLinks.social.map((social) => (
                 <a
@@ -115,7 +117,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="border-t border-secondary/20 mt-2 pt-2 px-8">
           <p className="text-muted text-sm text-center pb-2">
-            © {currentYear} Half Half Man. All rights reserved.
+            © {currentYear} Half Half Man. {t('footer.copyright')}
           </p>
         </div>
       </div>
