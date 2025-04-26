@@ -13,6 +13,7 @@ import Faq from './pages/Faq';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import { initGA, trackPageView } from './utils/analytics';
 import TechStackDetail from './pages/TechStackDetail';
+import Chatbot from './components/Chatbot';
 import './App.css'
 
 // Initialize GA4
@@ -54,6 +55,7 @@ const App = () => {
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             </Routes>
           </Layout>
+          <Chatbot />
         </div>
       </Router>
     </HelmetProvider>

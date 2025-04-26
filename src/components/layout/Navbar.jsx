@@ -172,10 +172,10 @@ const Navbar = () => {
       {/* Mobile Navigation */}
       <div 
         className={`md:hidden transition-all duration-300 ease-in-out ${
-          isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          isMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
         } overflow-hidden`}
       >
-        <div className="bg-primary shadow-lg">
+        <div className="bg-primary shadow-lg flex flex-col max-h-screen overflow-y-auto">
           {navItems.map((item) => (
             <Link
               key={item.name}
@@ -197,8 +197,8 @@ const Navbar = () => {
               {item.name}
             </Link>
           ))}
-          {/* Mobile Language Switcher */}
-          <div className="px-4 py-2 border-t border-tertiary/20">
+          {/* Mobile Language Switcher - visually separated and centered */}
+          <div className="w-full flex justify-center items-center border-t border-tertiary/20 mt-2 pt-4 pb-4 bg-primary">
             <LanguageSwitcher />
           </div>
         </div>

@@ -470,6 +470,21 @@ const translation = {
       faq: "FAQ",
       privacypolicy: "Politique de Confidentialité"
     }
+  },
+  chatbot: {
+    title: 'Assistant Virtuel',
+    welcome: 'Bonjour ! Je suis votre assistant virtuel. Comment puis-je vous aider à explorer le site web aujourd\'hui ?',
+    about: 'Half Half Man est un développeur full-stack et spécialiste en cybersécurité qui combine expertise technique et discipline athlétique. Souhaitez-vous en savoir plus sur des services spécifiques ?',
+    services: 'Nous proposons une gamme de services incluant le développement web, la cybersécurité et le conseil technique. Chaque service est adapté à vos besoins spécifiques.',
+    projects: 'Nos projets mettent en valeur notre expertise dans la création d\'applications web sécurisées et efficaces. Souhaitez-vous voir des exemples ou nous contacter pour votre projet ?',
+    options: {
+      about: 'Parlez-moi de Half Half Man',
+      services: 'Quels services proposez-vous ?',
+      projects: 'Montrez-moi vos projets',
+      continue: 'Continuer',
+      contact: 'Vous contacter',
+      restart: 'Recommencer'
+    }
   }
 };
 

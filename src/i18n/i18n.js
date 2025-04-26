@@ -46,7 +46,7 @@ i18n
       nsMode: 'default'
     }
   });
-  missingKeyHandler: (lng, ns, key, fallbackValue) => {
+    missingKeyHandler: (lng, ns, key, fallbackValue) => {
     console.warn('[MISSING TRANSLATION] ${key} in ${lng}');
   }
 

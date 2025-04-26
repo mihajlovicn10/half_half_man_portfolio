@@ -199,7 +199,7 @@ const translation = {
   },
   services: {
     title: 'Services',
-    subtitle: 'Comprehensive Solutions for Modern Challenges',
+    subtitle: 'Solutions Complètes pour les Défis Modernes',
     webDev: {
       title: 'Web Development',
       description: 'Custom web applications built with modern technologies and best practices.'
@@ -469,6 +469,21 @@ const translation = {
       contact: "Contact",
       faq: "FAQ",
       privacypolicy: "Privacy Policy"
+    }
+  },
+  chatbot: {
+    title: 'Virtual Assistant',
+    welcome: 'Hello! I\'m your virtual assistant. How can I help you explore the website today?',
+    about: 'Half Half Man is a full-stack developer and cybersecurity specialist who combines technical expertise with athletic discipline. Would you like to learn more about specific services?',
+    services: 'We offer a range of services including web development, cybersecurity, and technical consulting. Each service is tailored to meet your specific needs.',
+    projects: 'Our projects showcase our expertise in building secure and efficient web applications. Would you like to see some examples or get in touch for your project?',
+    options: {
+      about: 'Tell me about Half Half Man',
+      services: 'What services do you offer?',
+      projects: 'Show me your projects',
+      continue: 'Continue',
+      contact: 'Contact you',
+      restart: 'Start over'
     }
   }
 };
