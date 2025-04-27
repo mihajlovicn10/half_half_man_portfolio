@@ -223,7 +223,13 @@ const translation = {
     consulting: {
       title: 'Conseil Technique',
       description: 'Conseils d\'experts sur les décisions concernant la pile technologique et l\'architecture.'
-    }
+    },
+    services: [
+      "Half Half Man propose une gamme de services conçus pour dynamiser votre parcours digital.",
+      "Du développement web sur mesure à la cybersécurité robuste, chaque solution est adaptée à vos besoins uniques.",
+      "Notre approche allie excellence technique et compréhension approfondie de vos objectifs business.",
+      "Découvrez comment nos services peuvent vous aider à obtenir des résultats durables."
+    ]
   },
   projects: {
     title: 'Projets',
@@ -297,7 +303,12 @@ const translation = {
           alt: 'Capture d\'écran de l\'outil d\'évaluation de la sécurité'
         }
       }
-    }
+    },
+    projects: [
+      "Découvrez une sélection de projets qui mettent en avant compétence technique et résolution créative de problèmes.",
+      "Chaque projet est réalisé avec soin, expertise et un accent sur l'impact concret.",
+      "Voyez comment les idées deviennent réalité grâce à un design réfléchi et un développement robuste."
+    ]
   },
   blog: {
     title: 'Blog',
@@ -325,7 +336,13 @@ const translation = {
     meta: {
       title: 'Blog - Half Half Man',
       description: 'Perspectives sur le développement web, la sécurité et la technologie.'
-    }
+    },
+    blog: [
+      "Chaque ligne écrite a son sens.",
+      "Le blog est l'endroit où Half Half Man partage ses réflexions, leçons et histoires issues de son parcours de créateur.",
+      "Si vous voulez comprendre la pensée de Half Half Man, c'est l'endroit idéal pour commencer.",
+      "Plongez et découvrez des perspectives sur la technologie, la créativité et la croissance."
+    ]
   },
   contact: {
     meta: {
@@ -358,7 +375,10 @@ const translation = {
       sending: "Envoi en cours...",
       success: "Message envoyé avec succès !",
       error: "Quelque chose s'est mal passé. Veuillez réessayer."
-    }
+    },
+    contact: [
+      "Half Half Man est toujours ravi d'échanger. Si vous souhaitez entrer en contact, vous pouvez envoyer un message ou planifier un appel avec Half Half Man !"
+    ]
   },
   common: {
     loading: 'Chargement...',
@@ -472,11 +492,16 @@ const translation = {
     }
   },
   chatbot: {
-    title: 'Assistant Virtuel',
-    welcome: 'Bonjour ! Je suis votre assistant virtuel. Comment puis-je vous aider à explorer le site web aujourd\'hui ?',
-    about: 'Half Half Man est un développeur full-stack et spécialiste en cybersécurité qui combine expertise technique et discipline athlétique. Souhaitez-vous en savoir plus sur des services spécifiques ?',
-    services: 'Nous proposons une gamme de services incluant le développement web, la cybersécurité et le conseil technique. Chaque service est adapté à vos besoins spécifiques.',
-    projects: 'Nos projets mettent en valeur notre expertise dans la création d\'applications web sécurisées et efficaces. Souhaitez-vous voir des exemples ou nous contacter pour votre projet ?',
+    title: 'Theo',
+    welcome: "Bonjour ! Je m'appelle Theo. Je suis votre guide virtuel sur ce site. Si vous avez des questions sur les projets, les services et la façon de travailler de Half Half Man - je suis là pour vous aider. Sans précipitation. Sans bruit. Juste l'essentiel.",
+    about: [
+      "Half Half Man est une philosophie de l'équilibre – entre technologie et humanité, logique et créativité.",
+      "Notre mission est de créer des solutions numériques qui non seulement fonctionnent parfaitement, mais qui inspirent et relient les gens.",
+      "Nous croyons que la véritable innovation naît lorsque la passion rencontre le sens, et que chaque projet est une opportunité d'avoir un impact significatif.",
+      "La vision ne consiste pas seulement à voir l'avenir, mais à le façonner – une ligne de code réfléchie à la fois."
+    ],
+    services: 'Nos services sont conçus avec précision et intention. Du développement web à la cybersécurité, chaque solution est pensée pour servir une vision plus grande tout en maintenant l\'excellence technique.',
+    projects: 'Nos projets démontrent comment l\'expertise technique peut créer un impact significatif. Chaque réalisation allie excellence fonctionnelle et considération réfléchie de son but plus large.',
     options: {
       about: 'Parlez-moi de Half Half Man',
       services: 'Quels services proposez-vous ?',

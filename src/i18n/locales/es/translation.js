@@ -223,7 +223,13 @@ const translation = {
     consulting: {
       title: 'Consultoría Técnica',
       description: 'Orientación experta en decisiones de stack tecnológico y arquitectura.'
-    }
+    },
+    services: [
+      "Half Half Man ofrece una gama de servicios diseñados para potenciar tu viaje digital.",
+      "Desde desarrollo web a medida hasta ciberseguridad robusta, cada solución se adapta a tus necesidades únicas.",
+      "Nuestro enfoque combina excelencia técnica con una profunda comprensión de tus objetivos empresariales.",
+      "Descubre cómo nuestros servicios pueden ayudarte a lograr resultados duraderos."
+    ]
   },
   projects: {
     title: 'Proyectos',
@@ -297,7 +303,12 @@ const translation = {
           alt: 'Captura de pantalla de la herramienta de evaluación de seguridad'
         }
       }
-    }
+    },
+    projects: [
+      "Explora una selección de proyectos que muestran habilidad técnica y creatividad en la resolución de problemas.",
+      "Cada proyecto está construido con cuidado, experiencia y un enfoque en el impacto real.",
+      "Mira cómo las ideas se convierten en realidad a través de un diseño reflexivo y un desarrollo robusto."
+    ]
   },
   blog: {
     title: 'Blog',
@@ -325,7 +336,13 @@ const translation = {
     meta: {
       title: 'Blog - Half Half Man',
       description: 'Perspectivas sobre desarrollo web, seguridad y tecnología.'
-    }
+    },
+    blog: [
+      "Cada línea escrita tiene su significado.",
+      "El blog es donde Half Half Man comparte pensamientos, lecciones e historias del camino de crear y construir.",
+      "Si quieres entender cómo piensa Half Half Man, este es el lugar ideal para empezar.",
+      "Sumérgete y descubre perspectivas sobre tecnología, creatividad y crecimiento."
+    ]
   },
   contact: {
     meta: {
@@ -358,7 +375,10 @@ const translation = {
       sending: "Enviando...",
       success: "¡Mensaje enviado con éxito!",
       error: "Algo salió mal. Por favor, inténtalo de nuevo."
-    }
+    },
+    contact: [
+      "Half Half Man está muy dispuesto a conversar. Si quieres ponerte en contacto, puedes enviar un mensaje o programar una llamada con Half Half Man!"
+    ]
   },
   common: {
     loading: 'Cargando...',
@@ -469,6 +489,26 @@ const translation = {
       contact: "Contacto",
       faq: "Preguntas Frecuentes",
       privacypolicy: "Política de Privacidad"
+    }
+  },
+  chatbot: {
+    title: 'Theo',
+    welcome: "¡Hola! Mi nombre es Theo. Soy tu guía virtual en este sitio web. Si tienes preguntas sobre proyectos, servicios y la forma de trabajar de Half Half Man - estoy aquí para ayudar. Sin prisa. Sin ruido. Solo lo esencial.",
+    about: [
+      "Half Half Man es una filosofía de equilibrio: entre tecnología y humanidad, lógica y creatividad.",
+      "Nuestra misión es crear soluciones digitales que no solo funcionen perfectamente, sino que también inspiren y conecten a las personas.",
+      "Creemos que la verdadera innovación surge cuando el propósito se encuentra con la pasión, y cada proyecto es una oportunidad para generar un impacto significativo.",
+      "La visión no es solo ver el futuro, sino darle forma: una línea de código reflexiva a la vez."
+    ],
+    services: 'Nuestros servicios están diseñados con precisión y propósito. Desde desarrollo web hasta ciberseguridad, cada solución está pensada para servir a una visión más grande mientras mantiene la excelencia técnica.',
+    projects: 'Nuestros proyectos demuestran cómo la experiencia técnica puede crear un impacto significativo. Cada implementación combina excelencia funcional y consideración reflexiva de su propósito más amplio.',
+    options: {
+      about: 'Háblame de Half Half Man',
+      services: '¿Qué servicios ofrecen?',
+      projects: 'Muéstrame tus proyectos',
+      continue: 'Continuar',
+      contact: 'Contactarte',
+      restart: 'Empezar de nuevo'
     }
   }
 };

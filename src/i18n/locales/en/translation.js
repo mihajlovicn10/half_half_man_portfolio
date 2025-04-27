@@ -223,7 +223,13 @@ const translation = {
     consulting: {
       title: 'Technical Consulting',
       description: 'Expert guidance on technology stack and architecture decisions.'
-    }
+    },
+    services: [
+      "Half Half Man offers a suite of services designed to empower your digital journey.",
+      "From custom web development to robust cybersecurity, every solution is tailored to your unique needs.",
+      "Our approach combines technical excellence with a deep understanding of your business goals.",
+      "Discover how our services can help you achieve lasting results."
+    ]
   },
   projects: {
     title: 'Projects',
@@ -297,7 +303,12 @@ const translation = {
           alt: 'Screenshot of the security assessment tool'
         }
       }
-    }
+    },
+    projects: [
+      "Explore a curated selection of projects that showcase technical skill and creative problem-solving.",
+      "Each project is built with care, expertise, and a focus on real-world impact.",
+      "See how ideas become reality through thoughtful design and robust development."
+    ]
   },
   blog: {
     title: 'Blog',
@@ -325,7 +336,13 @@ const translation = {
     meta: {
       title: 'Blog - Half Half Man',
       description: 'Insights on web development, security, and technology.'
-    }
+    },
+    blog: [
+      "Every row that's written has its meaning.",
+      "The Blog is where Half Half Man shares thoughts, lessons, and stories from the journey of building and creating.",
+      "If you want to understand how Half Half Man thinks, this is the ideal place to start.",
+      "Dive in and discover perspectives on technology, creativity, and growth."
+    ]
   },
   contact: {
     meta: {
@@ -358,7 +375,10 @@ const translation = {
       sending: "Sending...",
       success: "Message sent successfully!",
       error: "Something went wrong. Please try again."
-    }
+    },
+    contact: [
+      "Half Half Man is quite eager to talk. If you want to get in touch, you can send a message or schedule a call with Half Half Man!"
+    ]
   },
   common: {
     loading: 'Loading...',
@@ -472,11 +492,16 @@ const translation = {
     }
   },
   chatbot: {
-    title: 'Virtual Assistant',
-    welcome: 'Hello! I\'m your virtual assistant. How can I help you explore the website today?',
-    about: 'Half Half Man is a full-stack developer and cybersecurity specialist who combines technical expertise with athletic discipline. Would you like to learn more about specific services?',
-    services: 'We offer a range of services including web development, cybersecurity, and technical consulting. Each service is tailored to meet your specific needs.',
-    projects: 'Our projects showcase our expertise in building secure and efficient web applications. Would you like to see some examples or get in touch for your project?',
+    title: 'Theo',
+    welcome: "Hello! My name is Theo. I am your virtual guide on this website. If you have questions on projects, services and Half Half Man's way of work - I am here to help. No rush. No noise. Only the answers you need.",
+    about: [
+      "Half Half Man is a philosophy of balance—between technology and humanity, logic and creativity.",
+      "Our mission is to craft digital solutions that not only function flawlessly, but also inspire and connect people.",
+      "We believe true innovation emerges when purpose meets passion, and every project is an opportunity to make a meaningful impact.",
+      "Vision is not just about seeing the future, but shaping it—one thoughtful line of code at a time."
+    ],
+    services: 'Our services are crafted with precision and purpose. From web development to cybersecurity, each solution is designed to serve a greater vision while maintaining technical excellence.',
+    projects: 'Our projects demonstrate how technical expertise can create meaningful impact. Each implementation carries both functional excellence and thoughtful consideration of its broader purpose.',
     options: {
       about: 'Tell me about Half Half Man',
       services: 'What services do you offer?',
