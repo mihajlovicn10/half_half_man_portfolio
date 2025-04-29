@@ -1,10 +1,15 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import logo from '../../assets/logo/LOGO.jpg';
+import DOMPurify from 'dompurify';
 
 const Footer = () => {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
+
+  const sanitizeUrl = (url) => {
+    return DOMPurify.sanitize(url, { ALLOWED_URI_REGEXP: /^(https?|mailto|tel):/ });
+  };
 
   const footerLinks = {
     navigation: [
@@ -56,17 +61,21 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-primary w-screen relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] mt-auto">
+    <footer className="bg-primary w-screen relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] mt-auto" role="contentinfo">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-8 py-6">
           {/* Brand Section */}
           <div className="space-y-2">
-            <Link to="/" className="block">
+            <Link to="/" className="block" aria-label="Home">
               <div className="flex flex-col items-center text-center space-y-2">
                 <img
                   className="w-20 h-20 object-cover rounded-full"
                   src={logo}
                   alt="Half Half Man Logo"
+                  loading="lazy"
+                  width="80"
+                  height="80"
+                  decoding="async"
                 />
                 <span className="text-tertiary font-serif text-2xl font-bold">
                   Half Half Man
@@ -87,6 +96,7 @@ const Footer = () => {
                   <Link
                     to={link.path}
                     className="text-muted hover:text-tertiary text-sm transition-all duration-200 hover:translate-x-1 inline-block"
+                    aria-label={t(`footer.links.${link.name}`)}
                   >
                     {t(`footer.links.${link.name}`)}
                   </Link>
@@ -102,10 +112,11 @@ const Footer = () => {
               {footerLinks.social.map((social) => (
                 <a
                   key={social.name}
-                  href={social.url}
+                  href={sanitizeUrl(social.url)}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer nofollow"
                   className="text-muted hover:text-tertiary transition-all duration-200 hover:scale-110"
+                  aria-label={`Visit ${social.name} profile`}
                 >
                   {renderSocialIcon(social.icon)}
                 </a>

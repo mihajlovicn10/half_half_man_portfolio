@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import logo from '../../assets/logo/LOGO.jpg';
@@ -8,6 +8,33 @@ const Navbar = () => {
   const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const menuButtonRef = useRef(null);
+
+  // Handle click outside dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setIsMenuOpen(false);
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const navItems = [
     { name: t('nav.home'), path: '/' },
@@ -48,18 +75,25 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-primary w-full fixed top-0 left-0 z-50 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.15)]">
+    <nav 
+      className="bg-primary w-full fixed top-0 left-0 z-50 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.15)]"
+      role="navigation"
+      aria-label="Main navigation"
+    >
       <div className="flex justify-between items-center h-16">
         {/* Logo */}
         <Link 
           to="/" 
           className="flex items-center pl-6 hover:opacity-80 transition-opacity duration-200"
           onClick={() => setIsMenuOpen(false)}
+          aria-label="Home"
         >
           <img
             className="h-10 w-auto"
             src={logo}
             alt={t('common.logoAlt')}
+            loading="lazy"
+            decoding="async"
           />
         </Link>
 
@@ -72,17 +106,24 @@ const Navbar = () => {
                 to={item.path}
                 onClick={(e) => handleNavClick(item, e)}
                 className="text-muted hover:text-tertiary px-4 py-2 text-sm font-medium transition-all duration-200 hover:bg-secondary/10 rounded-md relative group"
+                aria-current={window.location.pathname === item.path ? 'page' : undefined}
               >
                 {item.name}
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-tertiary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
+                <span 
+                  className="absolute bottom-0 left-0 w-full h-0.5 bg-tertiary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"
+                  aria-hidden="true"
+                ></span>
               </Link>
             ))}
             
             {/* More Dropdown */}
-            <div className="relative">
+            <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className="text-muted hover:text-tertiary px-4 py-2 text-sm font-medium transition-all duration-200 hover:bg-secondary/10 rounded-md inline-flex items-center"
+                aria-expanded={isDropdownOpen}
+                aria-haspopup="true"
+                aria-controls="more-menu"
               >
                 {t('nav.more')}
                 <svg
@@ -92,6 +133,7 @@ const Navbar = () => {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  aria-hidden="true"
                 >
                   <path
                     strokeLinecap="round"
@@ -104,16 +146,26 @@ const Navbar = () => {
               
               {/* Dropdown Menu */}
               {isDropdownOpen && (
-                <div className="absolute right-0 top-full mt-2 w-48 bg-primary rounded-lg shadow-lg py-2 z-50 border-t border-tertiary/20">
+                <div 
+                  id="more-menu"
+                  className="absolute right-0 top-full mt-2 w-48 bg-primary rounded-lg shadow-lg py-2 z-50 border-t border-tertiary/20"
+                  role="menu"
+                  aria-orientation="vertical"
+                >
                   {dropdownItems.map((item) => (
                     <Link
                       key={item.name}
                       to={item.path}
                       className="block px-4 py-2 text-muted hover:text-tertiary transition-all duration-200 hover:bg-secondary/10 relative group"
                       onClick={() => setIsDropdownOpen(false)}
+                      role="menuitem"
+                      aria-current={window.location.pathname === item.path ? 'page' : undefined}
                     >
                       {item.name}
-                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-tertiary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
+                      <span 
+                        className="absolute bottom-0 left-0 w-full h-0.5 bg-tertiary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"
+                        aria-hidden="true"
+                      ></span>
                     </Link>
                   ))}
                 </div>
@@ -130,9 +182,12 @@ const Navbar = () => {
         {/* Mobile menu button */}
         <div className="md:hidden pr-4">
           <button
+            ref={menuButtonRef}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="inline-flex items-center justify-center p-2 rounded-md text-muted hover:text-tertiary hover:bg-secondary/10 transition-colors duration-200 focus:outline-none"
             aria-label={t('nav.toggleMenu')}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
           >
             <span className="sr-only">{t('nav.toggleMenu')}</span>
             {/* Hamburger icon */}
@@ -142,6 +197,7 @@ const Navbar = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -157,6 +213,7 @@ const Navbar = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -171,9 +228,12 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       <div 
+        id="mobile-menu"
         className={`md:hidden transition-all duration-300 ease-in-out ${
           isMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
         } overflow-hidden`}
+        role="menu"
+        aria-labelledby="mobile-menu-button"
       >
         <div className="bg-primary shadow-lg flex flex-col max-h-screen overflow-y-auto">
           {navItems.map((item) => (
@@ -182,6 +242,8 @@ const Navbar = () => {
               to={item.path}
               onClick={(e) => handleNavClick(item, e)}
               className="text-muted hover:text-tertiary hover:bg-secondary/10 block px-4 py-2 text-base font-medium transition-colors duration-200"
+              role="menuitem"
+              aria-current={window.location.pathname === item.path ? 'page' : undefined}
             >
               {item.name}
             </Link>
@@ -193,6 +255,8 @@ const Navbar = () => {
               to={item.path}
               className="text-muted hover:text-tertiary hover:bg-secondary/10 block px-4 py-2 text-base font-medium transition-colors duration-200"
               onClick={() => setIsMenuOpen(false)}
+              role="menuitem"
+              aria-current={window.location.pathname === item.path ? 'page' : undefined}
             >
               {item.name}
             </Link>
