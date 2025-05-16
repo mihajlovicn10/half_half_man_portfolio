@@ -5,6 +5,7 @@ import heroVideo from '../assets/videos/hero_video.mp4';
 import elenaPhoto from '../assets/images/testimonials/elena.webp';
 import thomasPhoto from '../assets/images/testimonials/thomas.webp';
 import mariaPhoto from '../assets/images/testimonials/maria.webp';
+import giotaPhoto from '../assets/images/testimonials/giota_gatsi.jpeg';
 import servicesBackground from '../assets/images/services_background.jpg';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
@@ -88,6 +89,10 @@ const Home = () => {
     {
       key: 'maria',
       photo: mariaPhoto
+    }, 
+    {
+      key: 'giota',
+      photo: giotaPhoto
     }
   ];
 

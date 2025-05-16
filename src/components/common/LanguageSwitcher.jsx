@@ -14,6 +14,10 @@ const LanguageSwitcher = () => {
     es: 'Español',
     de: 'Deutsch',
     fr: 'Français', 
+    el: 'Ελληνικά',
+    sr: 'Srpski',
+
+    
   };
 
   // Set default language based on browser preference or fallback to English

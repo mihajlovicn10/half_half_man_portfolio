@@ -3,9 +3,24 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import ecommerceImage1 from '../assets/images/Projects/Detail/ecommerce_1.webp';
-import ecommerceImage2 from '../assets/images/Projects/Detail/ecommerce_2.webp';
-import ecommerceImage3 from '../assets/images/Projects/Detail/ecommerce_3.webp';
+import { FaGithub } from 'react-icons/fa';
+import portfolioImage1 from '../assets/images/Projects/List/portfolio_screenshot.png';
+import portfolioAbout from '../assets/images/Projects/Detail/portfolio_about.png';
+import portfolioStack from '../assets/images/Projects/Detail/portfolio_stack.png';
+import portfolioVirtualAssistant from '../assets/images/Projects/Detail/portfolio_virtual_assistant.png';
+import welearngreekImage1 from '../assets/images/Projects/Detail/wlg_conjugator.png';
+import welearngreekLessons from '../assets/images/Projects/Detail/wlg_declinator.png';
+import welearngreekProgress from '../assets/images/Projects/Detail/wlg_dictionary.png';
+import welearngreekDashboard from '../assets/images/Projects/Detail/wlg_transparent.png';
+import secureAccessImage1 from '../assets/images/Projects/Detail/saf_home.png';
+import bughuntersImage1 from '../assets/images/Projects/Detail/bht_home.png';
+import bughuntersImage2 from '../assets/images/Projects/Detail/bht_nmap.png';
+import bughuntersImage3 from '../assets/images/Projects/Detail/bht_http.png';
+import bughuntersImage4 from '../assets/images/Projects/Detail/bht_bruteforce.png';
+import webflowImage1 from '../assets/images/Projects/List/webflow_home.png';
+import webflowImage2 from '../assets/images/Projects/Detail/webflow_about.png';
+import webflowImage3 from '../assets/images/Projects/Detail/webflow_services.png';
+import webflowImage4 from '../assets/images/Projects/Detail/webflow_internship.png';
 
 const ProjectDetail = () => {
   const { t } = useTranslation();
@@ -13,28 +28,89 @@ const ProjectDetail = () => {
   const [project, setProject] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 
-  // This would typically come from an API or database
-  // For now, we'll use static data
   const projectsData = {
-    'secure-ecommerce': {
-      title: t('projects.items.ecommerce.title'),
-      description: t('projects.items.ecommerce.description'),
-      technologies: ["Django", "React", "PostgreSQL", "Redis", "Docker"],
-      features: t('projects.items.ecommerce.features', { returnObjects: true }),
-      challenges: t('projects.items.ecommerce.challenges', { returnObjects: true }),
-      solutions: t('projects.items.ecommerce.solutions', { returnObjects: true }),
+    'portfolio': {
+      title: t('projects.items.portfolio.title'),
+      description: t('projects.items.portfolio.description'),
+      technologies: ["ReactJS", "Vite", "TailwindCSS", "Framer Motion", "React Router", "react-helmet-async", "i18next", "Formspree", "Calendly(InlineWidget)", "Google Analytics", "Adjusted Virtual Assistant", "Google Analytics", "DOMPurify", "CSP Headers", "Rate limiting", "Heroku", "GitHub", "Sanity CMS"],
+      features: t('projects.items.portfolio.features', { returnObjects: true }),
+      challenges: t('projects.items.portfolio.challenges', { returnObjects: true }),
+      solutions: t('projects.items.portfolio.solutions', { returnObjects: true }),
       images: [
-        ecommerceImage1,
-        ecommerceImage2,
-        ecommerceImage3
+        portfolioImage1,
+        portfolioAbout,
+        portfolioStack,
+        portfolioVirtualAssistant
       ],
-      githubLink: "https://github.com/yourusername/secure-ecommerce",
-      liveDemo: "https://secure-ecommerce-demo.com"
+      githubLink: "https://github.com/mihajlovicn10/half_half_man_portfolio/tree/master",
+      liveDemo: "https://half-half-man.com"
+    },
+    'welearngreek': {
+      title: t('projects.items.welearngreek.title'),
+      description: t('projects.items.welearngreek.description'),
+      technologies: ["React", "Vite" , "Tailwind CSS" , "Framer Motion" , "React Router DOM" , "Axios HTTP client " , "React icons" , "Formspree" , "ESLint" , "PostCSS Autoprefixer" , "Django", "Django REST Framework" , "django-cors-headers" , "djangorestframework-simplejwt" , "PostgreSQL", "guinicorn" , "django-heroku" , "python-dotenv"],
+      features: t('projects.items.welearngreek.features', { returnObjects: true }),
+      challenges: t('projects.items.welearngreek.challenges', { returnObjects: true }),
+      solutions: t('projects.items.welearngreek.solutions', { returnObjects: true }),
+      images: [
+        welearngreekImage1,
+        welearngreekLessons,
+        welearngreekProgress,
+        welearngreekDashboard
+      ],
+      githubLink: "https://github.com/mihajlovicn10/we_learn_greek_backend",
+      liveDemo: "https://welearngreek-frontend-0fe4f172e34f.herokuapp.com"
+    },
+    'secureaccess': {
+      title: t('projects.items.secureaccess.title'),
+      description: t('projects.items.secureaccess.description'),
+      technologies: ["Django 5.2", "Python 3.11", "social-auth-app-django", "Google OAuth 2.0", "Classic Django Templating(HTML/CSS) , Railway" , "WhiteNoise", "Git + Github" ], 
+      features: t('projects.items.secureaccess.features', { returnObjects: true }),
+      challenges: t('projects.items.secureaccess.challenges', { returnObjects: true }),
+      solutions: t('projects.items.secureaccess.solutions', { returnObjects: true }),
+      images: [
+        secureAccessImage1
+      ],
+      githubLink: "https://github.com/mihajlovicn10/secure_access_flow",
+      liveDemo: "https://secureaccessflow-production.up.railway.app"
+    }, 
+    'bughunters': {
+      title: t('projects.items.bughunters.title'),
+      description: t('projects.items.bughunters.description'),
+      technologies: ["Python 3.13", "Django", "HTML/CSS", "Gunicorn", "Railway", "Requests", "python-nmap"],
+      features: t('projects.items.bughunters.features', { returnObjects: true }),
+      challenges: t('projects.items.bughunters.challenges', { returnObjects: true }),
+      solutions: t('projects.items.bughunters.solutions', { returnObjects: true }),
+      images: [
+        bughuntersImage1, 
+        bughuntersImage2, 
+        bughuntersImage3, 
+        bughuntersImage4, 
+      ],
+      githubLink: "https://github.com/mihajlovicn10/bughunters_toolkit",
+      liveDemo: "https://bughunterstoolkit-production.up.railway.app"
+    }, 
+    'webflow': {
+      title: t('projects.items.webflow.title'),
+      description: t('projects.items.webflow.description'),
+      technologies: ["Webflow", "Google Fonts", "SVG/PNG/JPG Images" , "Cursor IDE", "Python", "Git", "Netlify"],
+      features: t('projects.items.webflow.features', { returnObjects: true }),
+      challenges: t('projects.items.webflow.challenges', { returnObjects: true }),
+      solutions: t('projects.items.webflow.solutions', { returnObjects: true }),
+      images: [
+        webflowImage1,
+        webflowImage2,
+        webflowImage3,
+        webflowImage4
+      ],
+      githubLink: "https://github.com/mihajlovicn10/webflow_refactored",
+      liveDemo: "https://webflowenhanced.netlify.app"
+      
     }
   };
 
+
   useEffect(() => {
-    // Since projectsData is an object, we access it directly using the slug
     const projectData = projectsData[slug];
     if (projectData) {
       setProject(projectData);
@@ -112,9 +188,6 @@ const ProjectDetail = () => {
             to="/projects"
             className="inline-flex items-center text-primary hover:text-primary-dark mb-16 transition-colors duration-300"
           >
-            <svg className="w-5 h-5 mr-2 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
             {t('projects.backToProjects')}
           </Link>
         </motion.div>
@@ -139,7 +212,7 @@ const ProjectDetail = () => {
         >
           <h2 className="text-2xl font-semibold text-primary mb-4">{t('projects.detail.technologiesUsed')}</h2>
           <div className="flex flex-wrap gap-3">
-            {project.technologies.map((tech, index) => (
+            {Array.isArray(project.technologies) && project.technologies.map((tech, index) => (
               <motion.span 
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -162,7 +235,7 @@ const ProjectDetail = () => {
         >
           <h2 className="text-2xl font-semibold text-primary mb-4">{t('projects.detail.keyFeatures')}</h2>
           <ul className="space-y-2 text-[17px] text-primary/80">
-            {project.features.map((feature, index) => (
+            {Array.isArray(project.features) && project.features.map((feature, index) => (
               <motion.li 
                 key={index}
                 initial={{ opacity: 0, x: -20 }}
@@ -187,7 +260,7 @@ const ProjectDetail = () => {
           >
             <h2 className="text-2xl font-semibold text-primary mb-4">{t('projects.detail.challenges')}</h2>
             <ul className="space-y-2 text-[17px] text-primary/80">
-              {project.challenges.map((challenge, index) => (
+              {Array.isArray(project.challenges) && project.challenges.map((challenge, index) => (
                 <motion.li 
                   key={index}
                   initial={{ opacity: 0, x: -20 }}
@@ -209,7 +282,7 @@ const ProjectDetail = () => {
           >
             <h2 className="text-2xl font-semibold text-primary mb-4">{t('projects.detail.solutions')}</h2>
             <ul className="space-y-2 text-[17px] text-primary/80">
-              {project.solutions.map((solution, index) => (
+              {Array.isArray(project.solutions) && project.solutions.map((solution, index) => (
                 <motion.li 
                   key={index}
                   initial={{ opacity: 0, x: -20 }}
@@ -234,7 +307,7 @@ const ProjectDetail = () => {
         >
           <h2 className="text-2xl font-semibold text-primary mb-4">{t('projects.detail.projectGallery')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {project.images.map((image, index) => (
+            {Array.isArray(project.images) && project.images.map((image, index) => (
               <motion.div 
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -267,9 +340,10 @@ const ProjectDetail = () => {
             href={project.githubLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-full font-semibold hover:bg-primary-dark transition-colors duration-300"
+            className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-full font-semibold hover:bg-primary-dark transition-colors duration-300 group"
           >
             {t('projects.detail.visitGithub')}
+            <FaGithub className="ml-2 w-5 h-5 transform group-hover:scale-110 transition-transform" />
           </a>
           <a 
             href={project.liveDemo}

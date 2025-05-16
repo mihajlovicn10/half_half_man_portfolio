@@ -89,6 +89,14 @@ const Blog = () => {
             >
               {t('blog.title')}
             </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-[17px] text-center text-primary/80 mb-12"
+            >
+              {t('blog.meta.description')}
+            </motion.p>
             <div className="space-y-6">
               {posts.length > 0 ? (
                 posts.map((post, index) => (

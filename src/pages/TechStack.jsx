@@ -10,31 +10,31 @@ import Card from '../components/common/Card';
 const categories = [
   {
     id: 1,
-    key: 'backend',
-    icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />,
+    key: 'code',
+    icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />,
     color: 'from-primary/20 to-primary-dark/20',
-    slug: 'backend-development'
+    slug: 'code-engineering'
   },
   {
     id: 2,
-    key: 'frontend',
-    icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />,
+    key: 'nocode',
+    icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />,
     color: 'from-primary/20 to-primary-dark/20',
-    slug: 'frontend-development'
+    slug: 'nocode-solutions'
   },
   {
     id: 3,
     key: 'security',
     icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />,
     color: 'from-primary/20 to-primary-dark/20',
-    slug: 'cybersecurity'
+    slug: 'cybersecurity-practices'
   },
   {
     id: 4,
-    key: 'maintenance',
+    key: 'optimization',
     icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />,
     color: 'from-primary/20 to-primary-dark/20',
-    slug: 'maintenance-and-optimization'
+    slug: 'optimization-maintenance'
   }
 ];
 

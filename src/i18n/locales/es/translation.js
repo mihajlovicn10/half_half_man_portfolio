@@ -30,7 +30,47 @@ const translation = {
     seeFullStack: "Ver Stack Completo",
     backToTechStack: "Volver al Stack Técnico",
     categoryNotFound: "Categoría no encontrada.",
+    penetrationTesting: {
+      name: "Pruebas de Penetración",
+      description: "Simulación de ataques antes de que ocurran — identificando vulnerabilidades que los escáneres no detectan, mediante pruebas manuales y automatizadas basadas en experiencia."
+    },
+    securityConsulting: {
+      name: "Consultoría de Seguridad",
+      description: "La seguridad no es un producto — es un proceso. Desde la evaluación de riesgos hasta el cumplimiento, recibirás asistencia para tomar decisiones informadas y resilientes."
+    },
+    secureCodingAudits: {
+      name: "Codificación Segura y Auditorías",
+      description: "Cada línea de código se revisa bajo el lente de la seguridad, usando análisis estático, buenas prácticas y auditorías para eliminar puntos ciegos antes de que se conviertan en amenazas."
+    },
+    performanceOptimization: {
+      name: "Optimización de Rendimiento",
+      description: "Desde el renderizado frontend hasta los tiempos de respuesta del servidor, cada milisegundo se ajusta para experiencias fluidas e ininterrumpidas."
+    },
+    uptimeStability: {
+      name: "Disponibilidad y Estabilidad",
+      description: "Monitorizamos, parcheamos y mantenemos sistemas para asegurar que tu plataforma permanezca en línea y resiliente—día tras día."
+    },
+    technicalLongevity: {
+      name: "Longevidad Técnica",
+      description: "Con mantenimiento proactivo y una arquitectura escalable, tu solución evoluciona con tu negocio—sin interrupciones."
+    },
     categories: {
+      code: {
+        title: "Ingeniería de Código",
+        description: "Código creado con precisión. Arquitectura reflexiva. Construido para crecer."
+      },
+      nocode: {
+        title: "Soluciones No-Code/Low-Code",
+        description: "Rendimiento con propósito. Cada herramienta, elegida con precisión — cada resultado, intencional."
+      },
+      security: {
+        title: "Ciberseguridad",
+        description: "Herramientas y prácticas para asegurar sistemas digitales."
+      },
+      optimization: {
+        title: "Optimización y Mantenimiento",
+        description: "El rendimiento se espera, no se solicita. Cada sistema está diseñado para ofrecerlo desde el principio."
+      },
       backend: {
         title: "Desarrollo Backend",
         description: "Tecnologías utilizadas para el lado del servidor de las aplicaciones."
@@ -39,14 +79,46 @@ const translation = {
         title: "Desarrollo Frontend",
         description: "Tecnologías utilizadas para la interfaz de usuario de las aplicaciones."
       },
-      security: {
-        title: "Ciberseguridad",
-        description: "Herramientas y prácticas para asegurar sistemas digitales."
-      },
       maintenance: {
         title: "Mantenimiento y Optimización",
         description: "Herramientas utilizadas para mantener y mejorar el rendimiento y la disponibilidad."
+      },
+      penetrationTesting: {
+        name: "Pruebas de Penetración",
+        description: "Simulación de ataques antes de que ocurran — identificando vulnerabilidades que los escáneres no detectan, mediante pruebas manuales y automatizadas basadas en experiencia."
+      },
+      securityConsulting: {
+        name: "Consultoría de Seguridad",
+        description: "La seguridad no es un producto — es un proceso. Desde la evaluación de riesgos hasta el cumplimiento, recibirás asistencia para tomar decisiones informadas y resilientes."
+      },
+      secureCodingAudits: {
+        name: "Codificación Segura y Auditorías",
+        description: "Cada línea de código se revisa bajo el lente de la seguridad, usando análisis estático, buenas prácticas y auditorías para eliminar puntos ciegos antes de que se conviertan en amenazas."
       }
+    },
+    backendSystems: {
+      name: "Sistemas Backend",
+      description: "Lógica limpia, alto rendimiento: la columna vertebral de aplicaciones seguras y escalables. Tech: Python, Node.js, Express."
+    },
+    frontendEngineering: {
+      name: "Ingeniería Frontend",
+      description: "Desarrollo de interfaces interactivas e intuitivas con arquitectura de componentes escalable. Tech: JavaScript, React, Tailwind, Vite"
+    },
+    apiIntegration: {
+      name: "API e Integración",
+      description: "Comunicación fiable entre sistemas mediante endpoints RESTful limpios. Tech: REST API, Axios, Postman"
+    },
+    databasesPersistence: {
+      name: "Bases de Datos y Persistencia",
+      description: "Datos estructurados, consultas optimizadas y almacenamiento fiable para sistemas en crecimiento. Tech: PostgreSQL, MySQL, SQLite, Django ORM"
+    },
+    deploymentArchitecture: {
+      name: "Despliegue y Arquitectura",
+      description: "Desde entornos locales hasta sistemas listos para la nube: despliega, monitoriza y escala. Tech: Heroku, Netlify, Vercel, GitHub Actions"
+    },
+    architectureSystemsThinking: {
+      name: "Arquitectura y Pensamiento Sistémico",
+      description: "Desde la estructura fundamental hasta los principios de código limpio: las soluciones están diseñadas para ser escalables, mantenibles y duraderas."
     },
     tools: {
       python: {
@@ -109,6 +181,18 @@ const translation = {
         name: "Git",
         description: "Un sistema de control de versiones distribuido para rastrear cambios en el código."
       }
+    },
+    webflowMastery: {
+      name: "Dominio de Webflow",
+      description: "Interfaces perfectas, diseño responsivo y animaciones fluidas — todo construido visualmente, listo para producción a escala."
+    },
+    xanoBackend: {
+      name: "Backend Xano",
+      description: "Un potente backend no-code que se integra perfectamente con Webflow. APIs seguras, autenticación de usuarios y lógica de base de datos — sin escribir código del lado del servidor."
+    },
+    wizedIntegrations: {
+      name: "Integraciones Wized",
+      description: "Conecta Webflow a datos dinámicos con Wized. Crea aplicaciones reales con lógica condicional, flujos de usuario e interactividad en vivo — todo sin un framework frontend tradicional."
     }
   },
   slider: {
@@ -160,6 +244,14 @@ const translation = {
         name: 'Maria Georgiou',
         company: 'Operations Lead @ Bluewave',
         feedback: 'Servicio excepcional y resultados sobresalientes. Half Half Man no solo cumplió con nuestras expectativas sino que las superó en todos los aspectos posibles.'
+      },
+      giota: {
+        name: 'dr.Giota Gatsi',
+        company: 'Catedrática @ Universidad Aristóteles de Tesalónica',
+        feedback: `Tuve el placer de colaborar con el equipo de Half Half Man en el diseño y desarrollo del sitio web oficial para nuestra conferencia — y el resultado superó realmente todas las expectativas.
+Abordaron el proyecto con un profesionalismo, creatividad y comprensión profunda de las necesidades específicas de un evento académico excepcionales. El sitio web capturó perfectamente el espíritu y el alcance de la conferencia, ofreciendo a los participantes una experiencia de usuario fluida, intuitiva y atractiva.
+Desde la publicación del programa hasta la gestión de envíos de resúmenes y registros, la plataforma fue robusta, segura y sorprendentemente fácil de usar.
+Aprecio sinceramente su dedicación, capacidad de respuesta y experiencia técnica, y recomiendo de todo corazón a Half Half Man a cualquier institución u organización que busque una presencia digital de primer nivel.`
       }
     }
   },
@@ -302,6 +394,120 @@ const translation = {
         thumbnail: {
           alt: 'Captura de pantalla de la herramienta de evaluación de seguridad'
         }
+      },
+      welearngreek: {
+        title: "Gramática, Ingenierizada",
+        summary: "Una aplicación web personalizada para dominar la gramática griega a través de herramientas intuitivas y aprendizaje informal.",
+        description: "Una herramienta de aprendizaje no formal diseñada para apoyar a estudiantes y entusiastas de los idiomas en la adquisición natural de la gramática griega. La plataforma incluye utilidades como un declinador de sustantivos, conjugador de verbos, registro inteligente de vocabulario y un analizador etimológico único para palabras de origen griego en otros idiomas. Actualmente en desarrollo activo. Se espera que evolucione a una aplicación completamente funcional que apoye a estudiantes y educadores en griego y posiblemente otros idiomas.",
+        features: [
+          "Declinador de sustantivos – genera formas de sustantivos en griego según el caso.",
+          "Conjugador de verbos – presenta conjugaciones según tiempo y persona.",
+          "Herramienta de vocabulario personalizado – registra nuevas palabras griegas tal como se pronuncian, con idioma nativo.",
+          "Motor de palabras transparentes – muestra y explica palabras de origen griego en diferentes idiomas.",
+          "Enfoque en la aplicación real – diseñado para apoyar el aprendizaje y la retención a través de la interacción, no solo la lectura pasiva."
+        ],
+        challenges: [
+          "Diseñar una herramienta pedagógicamente sólida pero informal y amigable.",
+          "Gestionar reglas lingüísticas complejas (declinaciones, tiempos) mediante una interfaz dinámica.",
+          "Asegurar la adaptabilidad multilingüe (escalable a otros idiomas en el futuro).",
+          "Integrar el módulo de Palabras Transparentes (sensibilidad de propiedad intelectual)."
+        ],
+        solutions: [
+          "Backend modular en Django gestionando cada herramienta como un servicio API independiente.",
+          "Frontend en React para interacción responsiva y renderizado dinámico de gramática.",
+          "PostgreSQL para gestionar vocabulario de usuario y reglas.",
+          "Almacenamiento y recuperación de datos seguros.",
+          "Regex avanzado y modelos de datos para morfología verbal y nominal.",
+          "Patrones UX limpios para simplificar interacciones complejas."
+        ],
+        thumbnail: {
+          alt: "Captura de pantalla de la app Gramática, Ingenierizada"
+        }
+      },
+      secureaccess: {
+        title: "Descifrando el Flujo OAuth",
+        summary: "Una demo mínima que simplifica el proceso de autorización OAuth 2.0.",
+        description: "Una simulación completa de los flujos modernos de autenticación usando el protocolo OAuth 2.0. Este proyecto demuestra cómo se concede acceso seguro mediante intercambio de tokens, redirección y autorización de usuario — sin depender de proveedores externos. Introduce control de acceso basado en roles (RBAC) y muestra cómo se estructura y aplica la lógica de permisos en una aplicación. Diseñado para claridad y adaptabilidad, este ejemplo sirve como modelo para construir sistemas de inicio de sesión seguros y escalables que priorizan la protección de datos y la integridad del sistema.",
+        features: [
+          "Autenticación segura con Google OAuth 2.0",
+          "Cliente/secreto almacenado como variables de entorno",
+          "Configuraciones separadas para desarrollo y producción",
+          "Pantalla de inicio de sesión limpia y minimalista",
+          "Endpoint de producción completamente funcional",
+          "URIs de redirección autorizadas y probadas",
+          "Uso de SECURE_SSL_REDIRECT, ALLOWED_HOSTS y protección CSRF adecuada"
+        ],
+        challenges: [
+          "Errores OAuth 401 / 400 por: ID eliminado o no coincidente, URI de redirección incorrecta o faltante, diccionario citado en .env, variables de entorno desincronizadas entre .env y Railway",
+          "Railway inyectando comillas automáticamente en variables",
+          "Trazas de error incompletas en producción",
+          "Mensajes de error poco claros de social-auth"
+        ],
+        solutions: [
+          "Coincidencia cuidadosa de GOOGLE_OAUTH2_CLIENT_ID y secreto entre GCP y .env",
+          "Corrección de todas las URIs de redirección en Google Cloud Console",
+          "Uso de json.loads() con cadena JSON correctamente formateada (solo comillas dobles)",
+          "Verificación manual de variables de entorno en Railway usando el Editor Raw",
+          "Despliegue fresco tras cada edición en lugar de confiar en actualizaciones implícitas",
+          "Separación de Tailwind para mayor claridad y control (HTML/CSS clásico)"
+        ],
+        thumbnail: {
+          alt: "Captura de pantalla de la demo Descifrando OAuth"
+        }
+      },
+      bughunters: {
+        title: "Simulando la Caza",
+        summary: "Un entorno controlado que replica escenarios reales de seguridad — diseñado para mostrar lógica de pruebas de penetración, flujos de divulgación responsable y prácticas éticas de bug hunting.",
+        description: "Un entorno controlado que replica escenarios reales de seguridad — diseñado para mostrar lógica de pruebas de penetración, flujos de divulgación responsable y prácticas éticas de bug hunting.",
+        features: [
+          "Simulación de escaneo de puertos Nmap - Emula la salida CLI de Nmap para demostrar los fundamentos del reconocimiento de red en un entorno seguro.",
+          "Inspector de cabeceras HTTP - Obtiene y muestra cabeceras de respuesta de sitios reales, ofreciendo información sobre el comportamiento y configuración del servidor.",
+          "Simulación de fuerza bruta - Demuestra un ataque de diccionario sobre un objetivo ficticio con respuestas simuladas — solo con fines educativos.",
+          "Informes exportables - Todas las simulaciones pueden exportarse como archivos .txt para documentación o referencia educativa.",
+          "Aviso ético incluido - Mensajes claros en toda la app enfatizan su naturaleza educativa, con enlaces a buenas prácticas y directrices de hacking ético."
+        ],
+        challenges: [
+          "La plataforma de despliegue (Nixpacks) no detectó Django automáticamente, requiriendo provisión manual con Procfile, requirements.txt y runtime.txt personalizados.",
+          "Restricciones del ORM de Django requirieron configuraciones de base de datos simuladas, aunque la app no es persistente.",
+          "Se tomaron precauciones adicionales para asegurar que el proyecto no pudiera ser malinterpretado o mal utilizado como herramienta de ataque real."
+        ],
+        solutions: [
+          "Pipeline de build personalizado para despliegue en Railway, incluyendo requerimientos mínimos de Django.",
+          "Migraciones satisfechas usando esquemas simulados para cumplir con Django sin almacenar datos reales.",
+          "Consideraciones éticas implementadas mediante avisos estáticos y referencias a buenas prácticas — reforzando que la herramienta es una simulación controlada, no una plataforma de explotación."
+        ],
+        thumbnail: {
+          alt: "Captura de pantalla de la app Simulando la Caza"
+        }
+      },
+      webflow: {
+        title: "De Webflow a Workflow",
+        summary: "Un proyecto no-code basado en Webflow, completamente refactorizado con IA para producir código limpio y semántico, versionado en GitHub y desplegado vía Netlify.",
+        description: "Un concepto visual construido en Webflow, luego refinado a código de producción. Usando refactorización con IA en Cursor IDE, el layout exportado fue transformado en una base de código limpia, escalable y accesible — uniendo la velocidad del no-code con la calidad del código completo.",
+        features: [
+          "Refactorización de código impulsada por IA - Transforma el HTML/CSS exportado de Webflow en código limpio, semántico y listo para producción usando GPT en Cursor IDE",
+          "Estructura HTML5 semántica - Reemplaza el layout basado en divs genéricos por etiquetas semánticas (section, main, article, etc.) para accesibilidad y SEO.",
+          "CSS optimizado y limpio - Hojas de estilo refactorizadas para mejor legibilidad, mantenibilidad y consistencia en tokens de diseño y espaciado.",
+          "Copy optimizado para conversión - Se reescribieron secciones principales, CTAs y microcopy para mejorar claridad, tono y engagement.",
+          "Vista previa local con Python - Vista previa local impulsada por Python",
+          "Control de versiones vía GitHub - Todos los cambios de código rastreados con historial de commits, ramas y configuración lista para colaboración.",
+          "Despliegue rápido vía Netlify - Build final alojado en Netlify con despliegue instantáneo desde GitHub, soportando flujos CI."
+        ],
+        challenges: [
+          "Webflow exporta código con anidamiento de <div> no semántico y clases desordenadas.",
+          "Activos estáticos (imágenes, fuentes) a veces se desalinean en vistas previas locales",
+          "La falta de soporte de importación directa de HTML de vuelta a Webflow limita la retroalimentación."
+        ],
+        solutions: [
+          "Estructura HTML refactorizada usando GPT para aplicar etiquetas semánticas (section, main, article)",
+          "CSS agrupado y limpiado para mejor mantenibilidad y legibilidad",
+          "Encabezados y CTAs reescritos para mensajes más persuasivos y orientados a UX.",
+          "Uso de Python para servir archivos estáticos localmente y asegurar el mapeo correcto de activos",
+          "Versionado de todos los cambios vía GitHub para trazabilidad y despliegue sin fricciones con Netlify"
+        ],
+        thumbnail: {
+          alt: "Captura de pantalla del proyecto De Webflow a Workflow"
+        }
       }
     },
     projects: [
@@ -311,7 +517,8 @@ const translation = {
     ]
   },
   blog: {
-    title: 'Blog',
+    title: 'Perspectivas y Reflexiones',
+    description: 'Actualizaciones tecnológicas, ideas atemporales y reflexiones profundas — del código al contexto.',
     readMore: 'Leer Más',
     backToBlog: 'Volver al Blog',
     publishedOn: 'Publicado el',
@@ -334,8 +541,8 @@ const translation = {
       copied: '¡Enlace copiado!'
     },
     meta: {
-      title: 'Blog - Half Half Man',
-      description: 'Perspectivas sobre desarrollo web, seguridad y tecnología.'
+      title: 'Perspectivas y Reflexiones',
+      description: 'Actualizaciones tecnológicas, ideas atemporales y reflexiones profundas — del código al contexto.'
     },
     blog: [
       "Cada línea escrita tiene su significado.",
@@ -493,7 +700,7 @@ const translation = {
   },
   chatbot: {
     title: 'Theo',
-    welcome: "¡Hola! Mi nombre es Theo. Soy tu guía virtual en este sitio web. Si tienes preguntas sobre proyectos, servicios y la forma de trabajar de Half Half Man - estoy aquí para ayudar. Sin prisa. Sin ruido. Solo lo esencial.",
+    welcome: "¡Hola! Mi nombre es Theo. Soy tu guía virtual en este sitio web. Si tienes preguntas sobre proyectos, servicios o la forma de trabajar de Half Half Man, estoy aquí para ayudarte. Sin prisa. Sin ruido. Solo las respuestas que necesitas.",
     about: [
       "Half Half Man es una filosofía de equilibrio: entre tecnología y humanidad, lógica y creatividad.",
       "Nuestra misión es crear soluciones digitales que no solo funcionen perfectamente, sino que también inspiren y conecten a las personas.",
@@ -504,11 +711,40 @@ const translation = {
     projects: 'Nuestros proyectos demuestran cómo la experiencia técnica puede crear un impacto significativo. Cada implementación combina excelencia funcional y consideración reflexiva de su propósito más amplio.',
     options: {
       about: 'Háblame de Half Half Man',
-      services: '¿Qué servicios ofrecen?',
-      projects: 'Muéstrame tus proyectos',
+      services: '¿Qué servicios ofrece Half Half Man?',
+      blog: "¿Puedo leer algunos pensamientos y reflexiones de Half Half Man?",
+      projects: "¿Puedes mostrarme ejemplos del trabajo de Half Half Man?",
+      contact: "Me gustaría ponerme en contacto - ¿Cómo puedo contactar a Half Half Man?",
       continue: 'Continuar',
-      contact: 'Contactarte',
       restart: 'Empezar de nuevo'
+    },
+    flow: {
+      about: {
+        0: 'Half Half Man es una filosofía de equilibrio: entre tecnología y humanidad, lógica y creatividad.',
+        1: 'Nuestra misión es crear soluciones digitales que no solo funcionen perfectamente, sino que también inspiren y conecten a las personas.',
+        2: 'Creemos que la verdadera innovación surge cuando el propósito se encuentra con la pasión, y cada proyecto es una oportunidad para generar un impacto significativo.',
+        3: 'La visión no es solo ver el futuro, sino darle forma: una línea de código reflexiva a la vez.'
+      },
+      services: {
+        0: 'Half Half Man ofrece una gama de servicios diseñados para potenciar tu viaje digital.',
+        1: 'Desde desarrollo web a medida hasta ciberseguridad robusta, cada solución se adapta a tus necesidades únicas.',
+        2: 'Nuestro enfoque combina excelencia técnica con una profunda comprensión de tus objetivos empresariales.',
+        3: 'Descubre cómo nuestros servicios pueden ayudarte a lograr resultados duraderos.'
+      },
+      blog: {
+        0: "Cada línea escrita tiene su significado.",
+        1: 'El blog es donde Half Half Man comparte pensamientos, lecciones e historias del camino de crear y construir.',
+        2: 'Si quieres entender cómo piensa Half Half Man, este es el lugar ideal para empezar.',
+        3: 'Sumérgete y descubre perspectivas sobre tecnología, creatividad y crecimiento.'
+      },
+      projects: {
+        0: 'Explora una selección de proyectos que muestran habilidad técnica y creatividad en la resolución de problemas.',
+        1: 'Cada proyecto está construido con cuidado, experiencia y un enfoque en el impacto real.',
+        2: 'Mira cómo las ideas se convierten en realidad a través de un diseño reflexivo y un desarrollo robusto.'
+      },
+      contact: {
+        0: 'Half Half Man está muy dispuesto a conversar. Si quieres ponerte en contacto, puedes enviar un mensaje o programar una llamada con Half Half Man!'
+      }
     }
   }
 };

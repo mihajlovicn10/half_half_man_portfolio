@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import ecommerceThumb from '../assets/images/Projects/List/ecommerce.webp';
+import portfolioThumb from '../assets/images/Projects/List/portfolio_screenshot.png';
+import welearngreekThumb from '../assets/images/Projects/List/wlg_home.png';
+import secureAccessThumb from '../assets/images/Projects/List/saf_login.png';
+import bughuntersThumb from '../assets/images/Projects/List/bht_home.png';
+import webflowThumb from '../assets/images/Projects/List/webflow_home.png';
 
 const Projects = () => {
   const { t } = useTranslation();
@@ -11,10 +15,34 @@ const Projects = () => {
 
   const projects = [
     {
-      title: t('projects.items.ecommerce.title'),
-      slug: "secure-ecommerce",
-      summary: t('projects.items.ecommerce.summary'),
-      thumbnail: ecommerceThumb
+      title: t('projects.items.portfolio.title'),
+      slug: "portfolio",
+      summary: t('projects.items.portfolio.summary'),
+      thumbnail: portfolioThumb
+    },
+    {
+      title: t('projects.items.welearngreek.title'),
+      slug: "welearngreek",
+      summary: t('projects.items.welearngreek.summary'),
+      thumbnail: welearngreekThumb
+    },
+    {
+      title: t('projects.items.secureaccess.title'),
+      slug: "secureaccess",
+      summary: t('projects.items.secureaccess.summary'),
+      thumbnail: secureAccessThumb
+    }, 
+    {
+      title: t('projects.items.bughunters.title'),
+      slug: "bughunters",
+      summary: t('projects.items.bughunters.summary'),
+      thumbnail: bughuntersThumb
+    }, 
+    {
+      title: t('projects.items.webflow.title'),
+      slug: "webflow",
+      summary: t('projects.items.webflow.summary'),
+      thumbnail: webflowThumb
     }
   ];
 
@@ -35,10 +63,19 @@ const Projects = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl font-bold text-center text-primary mb-12"
+              className="text-4xl font-bold text-center text-primary mb-4"
             >
               {t('projects.title')}
             </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-xl text-center text-primary/70 mb-12"
+            >
+              {t('projects.subtitle')}
+            </motion.p>
             <div className="space-y-6">
               {projects.map((project, index) => (
                 <motion.div 

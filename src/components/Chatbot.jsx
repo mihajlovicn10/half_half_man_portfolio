@@ -7,12 +7,12 @@ import avatarImage from '../assets/logo/logo_cropped.png';
 const INTENTIONS = [
   {
     key: 'about',
-    label: 'Tell me more about Half Half Man',
+    label: 'chatbot.options.about',
     flow: [
-      'Half Half Man is a philosophy of balance—between technology and humanity, logic and creativity.',
-      'Our mission is to craft digital solutions that not only function flawlessly, but also inspire and connect people.',
-      'We believe true innovation emerges when purpose meets passion, and every project is an opportunity to make a meaningful impact.',
-      'Vision is not just about seeing the future, but shaping it—one thoughtful line of code at a time.'
+      'chatbot.flow.about.0',
+      'chatbot.flow.about.1',
+      'chatbot.flow.about.2',
+      'chatbot.flow.about.3'
     ],
     onComplete: (navigate, setScreen) => {
       navigate('/');
@@ -24,12 +24,12 @@ const INTENTIONS = [
   },
   {
     key: 'services',
-    label: 'What services does Half Half Man offer?',
+    label: 'chatbot.options.services',
     flow: [
-      'Half Half Man offers a suite of services designed to empower your digital journey.',
-      'From custom web development to robust cybersecurity, every solution is tailored to your unique needs.',
-      'Our approach combines technical excellence with a deep understanding of your business goals.',
-      'Discover how our services can help you achieve lasting results.'
+      'chatbot.flow.services.0',
+      'chatbot.flow.services.1',
+      'chatbot.flow.services.2',
+      'chatbot.flow.services.3'
     ],
     onComplete: (navigate, setScreen) => {
       navigate('/');
@@ -41,12 +41,12 @@ const INTENTIONS = [
   },
   {
     key: 'blog',
-    label: "Can I read some of Half Half Man's thoughts and insights?",
+    label: 'chatbot.options.blog',
     flow: [
-      "Every row that's written has its meaning.",
-      "The Blog is where Half Half Man shares thoughts, lessons, and stories from the journey of building and creating.",
-      "If you want to understand how Half Half Man thinks, this is the ideal place to start.",
-      "Dive in and discover perspectives on technology, creativity, and growth."
+      'chatbot.flow.blog.0',
+      'chatbot.flow.blog.1',
+      'chatbot.flow.blog.2',
+      'chatbot.flow.blog.3'
     ],
     onComplete: (navigate, setScreen) => {
       navigate('/blog');
@@ -57,11 +57,11 @@ const INTENTIONS = [
   },
   {
     key: 'projects',
-    label: "Can you show me examples of Half Half Man's work?",
+    label: 'chatbot.options.projects',
     flow: [
-      "Explore a curated selection of projects that showcase technical skill and creative problem-solving.",
-      "Each project is built with care, expertise, and a focus on real-world impact.",
-      "See how ideas become reality through thoughtful design and robust development."
+      'chatbot.flow.projects.0',
+      'chatbot.flow.projects.1',
+      'chatbot.flow.projects.2'
     ],
     onComplete: (navigate, setScreen) => {
       navigate('/projects');
@@ -72,9 +72,9 @@ const INTENTIONS = [
   },
   {
     key: 'contact',
-    label: "I'd like to reach out - How can I contact Half Half Man?",
+    label: 'chatbot.options.contact',
     flow: [
-      "Half Half Man is quite eager to talk. If you want to get in touch, you can send a message or schedule a call with Half Half Man!"
+      'chatbot.flow.contact.0'
     ],
     onComplete: (navigate, setScreen) => {
       navigate('/contact');
@@ -108,7 +108,8 @@ const Chatbot = () => {
     if (screen !== 'main') {
       const intention = INTENTIONS.find(i => i.key === screen);
       if (!intention) return;
-      const sentence = intention.flow[currentSentence];
+      const sentenceKey = intention.flow[currentSentence];
+      const sentence = t(sentenceKey);
       if (!sentence) return;
       setIsTyping(true);
       let index = 0;
@@ -129,7 +130,7 @@ const Chatbot = () => {
       setDisplayedMessage('');
       typeChar();
     }
-  }, [screen, currentSentence]);
+  }, [screen, currentSentence, t]);
 
   const handleIntentionClick = (key) => {
     setScreen(key);
@@ -236,7 +237,7 @@ const Chatbot = () => {
                       onClick={() => handleIntentionClick(intent.key)}
                       className="w-full bg-primary/10 text-primary px-4 py-3 rounded-lg text-base font-medium hover:bg-primary/20 transition-colors duration-200 transform hover:scale-105"
                     >
-                      {intent.label}
+                      {t(intent.label)}
                     </button>
                   ))}
                 </div>
@@ -244,7 +245,7 @@ const Chatbot = () => {
                 <div className="w-full flex flex-col items-center">
                   <div className="bg-white rounded-lg p-4 shadow-sm border border-tertiary/20 w-full mb-4 min-h-[80px] flex items-center justify-center">
                     <p className="text-gray-700 text-center text-base min-h-[40px]">
-                      {isTyping ? displayedMessage : INTENTIONS.find(i => i.key === screen).flow[currentSentence]}
+                      {isTyping ? displayedMessage : t(INTENTIONS.find(i => i.key === screen).flow[currentSentence])}
                     </p>
                   </div>
                   <div className="flex w-full justify-between items-center mt-2">

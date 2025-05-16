@@ -8,6 +8,8 @@ import it from './locales/it/translation.js';
 import es from './locales/es/translation.js';
 import de from './locales/de/translation.js';
 import fr from './locales/fr/translation.js';
+import el from './locales/el/translation.js';
+import sr from './locales/sr/translation.js';
 
 
 i18n
@@ -28,7 +30,7 @@ i18n
       escapeValue: false,
     },
     
-    supportedLngs: ['en', 'it', 'es', 'de', 'fr'],
+    supportedLngs: ['en', 'it', 'es', 'de', 'fr', 'el', 'sr'],
     
     resources: {
       en,
@@ -36,7 +38,8 @@ i18n
       es,
       de,
       fr, 
-      
+      el, 
+      sr, 
     },
 
     react: {
