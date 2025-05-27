@@ -22,7 +22,14 @@ const BlogPost = () => {
   const [commentName, setCommentName] = useState('');
   const [commentMessage, setCommentMessage] = useState('');
   const [liked, setLiked] = useState(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [, setLang] = useState(i18n.language);
+
+  useEffect(() => {
+    const onLangChange = () => setLang(i18n.language);
+    i18n.on('languageChanged', onLangChange);
+    return () => i18n.off('languageChanged', onLangChange);
+  }, [i18n]);
 
   // Get the absolute URL for sharing
   const getAbsoluteUrl = () => {
@@ -41,12 +48,14 @@ const BlogPost = () => {
       try {
         const query = `*[_type == "post" && slug.current == $slug][0]{
           _id,
-          title,
+          "title": coalesce(title.${i18n.language}, title.rs, title.sr, title.en),
           slug,
-          author->{name, image},
-          mainImage,
+          author->{name, image{asset->{url}}},
+          mainImage{asset->{url}},
           publishedAt,
-          body,
+          "excerpt": coalesce(excerpt.${i18n.language}, excerpt.rs, excerpt.sr, excerpt.en),
+          "abstract": coalesce(abstract.${i18n.language}, abstract.rs, abstract.sr, abstract.en),
+          "body": coalesce(body.${i18n.language}, body.rs, body.sr, body.en),
           likes,
           "comments": *[_type == "comment" && post._ref == ^._id] | order(createdAt desc) {
             _id,
@@ -240,18 +249,20 @@ const BlogPost = () => {
     );
   }
 
+  console.log('i18n.language:', i18n.language, 'post.title:', post?.title);
+
   return (
     <>
       <Helmet>
-        <title>{post?.title} | Half Half Man Blog</title>
+        <title>{typeof post?.title === 'object' ? post.title[i18n.language] || post.title.en : post?.title} | Half Half Man Blog</title>
         
         {/* Basic meta tags */}
-        <meta name="description" content={post?.excerpt || `Read ${post?.title} on Half Half Man Blog`} />
+        <meta name="description" content={post?.excerpt || `Read ${typeof post?.title === 'object' ? post.title[i18n.language] || post.title.en : post?.title} on Half Half Man Blog`} />
         <meta name="author" content={post?.author?.name || 'Half Half Man'} />
         
         {/* Open Graph tags */}
-        <meta property="og:title" content={post?.title} />
-        <meta property="og:description" content={post?.excerpt || `Read ${post?.title} on Half Half Man Blog`} />
+        <meta property="og:title" content={typeof post?.title === 'object' ? post.title[i18n.language] || post.title.en : post?.title} />
+        <meta property="og:description" content={post?.excerpt || `Read ${typeof post?.title === 'object' ? post.title[i18n.language] || post.title.en : post?.title} on Half Half Man Blog`} />
         <meta property="og:type" content="article" />
         <meta property="og:url" content={getAbsoluteUrl()} />
         {post?.mainImage && (
@@ -318,7 +329,7 @@ const BlogPost = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
-                {post.title}
+                {typeof post.title === 'object' ? post.title[i18n.language] || post.title.en : post.title}
               </motion.h1>
 
               {post.publishedAt && (
@@ -344,9 +355,9 @@ const BlogPost = () => {
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.4 }}
                 >
-                  {post.author.image && (
+                  {post.author?.image?.asset?.url && (
                     <img
-                      src={post.author.image}
+                      src={post.author.image.asset.url}
                       alt={post.author.name}
                       className="w-6 h-6 rounded-full object-cover"
                     />
@@ -357,7 +368,7 @@ const BlogPost = () => {
                 </motion.div>
               )}
               
-              {post.mainImage && (
+              {post.mainImage && post.mainImage.asset && (
                 <motion.div 
                   className="mb-8 mt-12"
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -365,13 +376,13 @@ const BlogPost = () => {
                   transition={{ delay: 0.3 }}
                 >
                   <img
-                    src={post.mainImage}
+                    src={post.mainImage.asset.url}
                     alt={post.title}
                     className="w-full h-[400px] object-cover rounded-2xl shadow-xl"
                   />
                 </motion.div>
               )}
-            </header>
+            </header>  
 
             <motion.div 
               className="prose prose-lg max-w-none text-left [&>h1]:text-center [&>h2]:text-center [&>h3]:text-center [&>h4]:text-center [&>h5]:text-center [&>h6]:text-center"
@@ -379,9 +390,17 @@ const BlogPost = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              {Array.isArray(post.body) ? (
+              {Array.isArray(
+                typeof post.body === 'object' && !Array.isArray(post.body)
+                  ? post.body[i18n.language] || post.body.en
+                  : post.body
+              ) ? (
                 <PortableText
-                  value={post.body}
+                  value={
+                    typeof post.body === 'object' && !Array.isArray(post.body)
+                      ? post.body[i18n.language] || post.body.en
+                      : post.body
+                  }
                   components={{
                     block: {
                       normal: ({children}) => <p className="mb-4 text-gray-700 text-left">{children}</p>,

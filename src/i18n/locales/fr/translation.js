@@ -25,8 +25,8 @@ const translation = {
       description: "Découvrez les technologies et outils que nous utilisons pour créer des applications hautes performances.",
       categoryDescription: "Découvrez les outils et technologies liés à {{category}}."
     },
-    title: "Notre Stack Technologique",
-    subtitle: "Les technologies derrière notre processus de développement",
+    title: "Ingénierie du Stack",
+    subtitle: "Des outils ciblés. Une exécution précise. Des systèmes prêts pour l’avenir.",
     seeFullStack: "Voir le Stack Complet",
     backToTechStack: "Retour au Stack Technologique",
     categoryNotFound: "Catégorie non trouvée.",
@@ -206,28 +206,18 @@ const translation = {
   testimonials: {
     title: 'Expériences réelles. Solutions tangibles. Résultats fiables',
     items: {
-      elena: {
-        name: 'Elena Papadopoulou',
-        company: 'CEO @ Helix Digital',
-        feedback: 'Travailler avec Half Half Man a été une expérience transformatrice pour notre entreprise. Leur attention aux détails et leur approche axée sur la sécurité nous ont donné une confiance totale dans notre application web.'
-      },
-      thomas: {
-        name: 'Thomas Schneider',
-        company: 'CTO @ NovaTech Systems',
-        feedback: 'La combinaison d\'expertise technique et de résolution créative de problèmes a fait ressortir Half Half Man. Ils ont livré exactement ce dont nous avions besoin, quand nous en avions besoin.'
-      },
-      maria: {
-        name: 'Maria Georgiou',
-        company: 'Operations Lead @ Bluewave',
-        feedback: 'Service exceptionnel et résultats remarquables. Half Half Man a non seulement répondu à nos attentes mais les a dépassées de toutes les manières possibles.'
-      },
       giota: {
         name: 'dr.Giota Gatsi',
-        company: 'Full Professor @ Aristotle University of Thessaloniki',
-        feedback: `J'ai eu le plaisir de collaborer avec l'équipe Half Half Man sur la conception et le développement du site web officiel de notre conférence — et le résultat a vraiment dépassé toutes les attentes.
-                  Ils ont abordé le projet avec un professionnalisme exceptionnel, de la créativité et une compréhension approfondie des besoins spécifiques d'un événement académique. Le site web a capturé l'esprit et la portée de la conférence de manière magnifique, offrant aux participants une expérience utilisateur fluide, intuitive et engageante.
-                  De la publication du programme à la gestion des soumissions d'abstracts et des inscriptions, la plateforme était robuste, sécurisée et remarquablement conviviale.
-                  J'apprécie sincèrement leur dévouement, leur réactivité et leur expertise technique, et je recommande vivement Half Half Man à toute institution ou organisation cherchant une présence numérique de premier ordre.`
+        company: "Enseignante @ École de Langue Grecque Moderne à l'Université Aristote de Thessalonique ; SEP @ Université Ouverte Hellénique",
+        feedback: `J'ai eu le plaisir de collaborer avec Half Half Man sur la conception et le développement du site officiel de notre conférence — et le résultat a vraiment dépassé toutes les attentes.
+Il a abordé le projet avec un professionnalisme exceptionnel, de la créativité et une compréhension approfondie des besoins spécifiques d'un événement académique. Le site a parfaitement capturé l'esprit et la portée de la conférence, offrant aux participants une expérience utilisateur fluide, intuitive et engageante.
+De la publication du programme à la gestion des soumissions d'abstracts et des inscriptions, la plateforme était robuste, sécurisée et remarquablement conviviale.
+J'apprécie sincèrement son dévouement, sa réactivité et son expertise technique, et je recommande vivement Half Half Man à toute institution ou organisation cherchant une présence numérique de premier ordre.`
+      },
+      rastko: {
+        name: 'Rastko Vićić',
+        company: 'Freelance Framer Developer & Digital Marketing Specialist',
+        feedback: `J'ai pu constater personnellement la profondeur de l'expertise derrière Half Half Man — du développement full-stack et de la conception de systèmes à son souci méticuleux de la performance et de la sécurité. Sa capacité à traduire des exigences complexes en solutions simples et évolutives est rare. Il n'est pas seulement un développeur — c'est un ingénieur avec l'œil d'un designer et l'esprit d'un stratège.`
       }
     }
   },

@@ -195,15 +195,19 @@ const Chatbot = () => {
             animate={{ opacity: 1, scale: 1, rotateY: 0 }}
             exit={{ opacity: 0, scale: 0.8, rotateY: 90 }}
             transition={{ type: "spring", duration: 0.8 }}
-            className="fixed bottom-8 right-8 w-96 bg-white rounded-xl shadow-2xl z-50 overflow-hidden border border-tertiary/20 font-poppins"
+            className="fixed z-50 bg-white rounded-t-xl md:rounded-xl shadow-2xl overflow-hidden border border-tertiary/20 font-poppins
+              w-full max-w-[98vw] max-w-xs sm:max-w-sm md:max-w-md lg:w-96
+              left-0 right-0 mx-auto bottom-0
+              md:bottom-8 md:right-8 md:left-auto md:mx-0
+              max-h-[90vh] overflow-y-auto"
             style={{ transformOrigin: "right center", perspective: "1000px" }}
           >
-            <div className="bg-primary text-tertiary p-4 rounded-t-xl flex justify-between items-center">
+            <div className="bg-primary text-tertiary p-4 rounded-t-xl flex justify-between items-center w-full box-border">
               <div className="flex items-center space-x-3">
                 <motion.img 
                   src={avatarImage} 
                   alt="Virtual Assistant" 
-                  className="w-14 h-14"
+                  className="w-12 h-12 sm:w-14 sm:h-14"
                   style={{ background: 'none' }}
                   initial={{ scale: 2, y: 100 }}
                   animate={{ scale: 1, y: 0 }}
@@ -225,7 +229,7 @@ const Chatbot = () => {
               </button>
             </div>
 
-            <div className="p-4 bg-gray-50 flex flex-col justify-center items-center overflow-y-auto" style={{ maxHeight: '70vh', minHeight: '24rem' }}>
+            <div className="p-2 sm:p-4 bg-gray-50 flex flex-col justify-center items-center w-full">
               {screen === 'main' ? (
                 <div className="space-y-4 w-full">
                   <div className="bg-white rounded-lg p-4 shadow-sm border border-tertiary/20 w-full mb-4 min-h-[120px] flex items-center justify-center transition-all duration-200">

@@ -44,10 +44,11 @@ testConnection();
 // Updated query with language support
 export const postsQuery = (lang = 'en') => `*[_type == "post"] | order(publishedAt desc) {
     _id,
-    "title": title.${lang},
+    "title": coalesce(title.${lang}, title.rs, title.sr, title.en),
     "slug": slug.current,
     publishedAt,
-    "excerpt": excerpt.${lang},
+    "excerpt": coalesce(excerpt.${lang}, excerpt.rs, excerpt.sr, excerpt.en),
+    "abstract": coalesce(abstract.${lang}, abstract.rs, abstract.sr, abstract.en),
     "mainImage": mainImage.asset->url,
-    "body": body.${lang}
+    "body": coalesce(body.${lang}, body.rs, body.sr, body.en)
 }`;

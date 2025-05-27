@@ -25,8 +25,8 @@ const translation = {
       description: "Entdecken Sie die Technologien und Tools, die wir für die Entwicklung hochleistungsfähiger Anwendungen verwenden.",
       categoryDescription: "Entdecken Sie Tools und Technologien im Zusammenhang mit {{category}}."
     },
-    title: "Unser Tech Stack",
-    subtitle: "Technologien hinter unserem Entwicklungsprozess",
+    title: "Stack-Engineering",
+    subtitle: "Zielgerichtete Tools. Präzise Umsetzung. Zukunftssichere Systeme.",
     seeFullStack: "Vollständigen Stack ansehen",
     backToTechStack: "Zurück zum Tech Stack",
     categoryNotFound: "Kategorie nicht gefunden.",
@@ -173,38 +173,38 @@ const translation = {
   },
   slider: {
     ideas: {
-      title: 'Benötigen Sie eine moderne und sichere Web-Lösung?',
-      subtitle: 'Engagieren Sie einen Full-Stack-Entwickler, der sowohl Code als auch Cybersicherheit versteht',
-      button: 'Mich engagieren'
+      title: 'Du brauchst eine moderne und sichere Web-Lösung?',
+      subtitle: 'Ich bin Full-Stack-Entwickler mit Know-how in Code und Cybersicherheit',
+      button: 'Kontaktiere mich'
     },
     blog: {
-      title: 'Entdecken Sie die neuesten Erkenntnisse aus der Technologiewelt',
-      subtitle: 'Sicherheit, Codierungsmuster, Freelance-Strategie & mehr',
-      button: 'Mehr lesen'
+      title: 'Gedanken und Einblicke aus der Tech-Welt',
+      subtitle: 'Sicherheit, Code-Patterns, Freelance-Strategien und mehr',
+      button: 'Mehr erfahren'
     },
     projects: {
-      title: 'Sehen Sie, wie Ideen zu Code werden',
-      subtitle: 'Durchsuchen Sie Beispiel-Apps mit realer Implementierung',
+      title: 'So werden Ideen zu Code',
+      subtitle: 'Schau dir Apps mit echter Umsetzung an',
       button: 'Projekte ansehen'
     },
     stack: {
-      title: 'Werkzeuge des Handwerks',
-      subtitle: 'Vom Backend zum Frontend - ich verwende die besten Tools für den Job',
-      button: 'Tech Stack ansehen'
+      title: 'Meine Werkzeuge',
+      subtitle: 'Vom Backend bis zum Frontend – ich nutze, was wirklich funktioniert',
+      button: 'Zum Tech Stack'
     },
     services: {
-      title: 'Maßgeschneiderte digitale Dienstleistungen',
-      subtitle: 'Von sicherem Code bis hin zu beeindruckender UI - ich baue Lösungen, die Bestand haben',
-      button: 'Dienstleistungen entdecken'
+      title: 'Digitale Services nach Maß',
+      subtitle: 'Von sicherem Code bis zur durchdachten UI – ich baue Lösungen, die Bestand haben',
+      button: 'Services entdecken'
     },
     about: {
       title: 'Wer ist Half Half Man?',
-      subtitle: 'Ein Entwickler. Ein Schwimmer. Schöpfer, der lebt, was er codiert',
-      button: 'Meine Geschichte lesen'
+      subtitle: 'Entwickler. Schwimmer. Ein Macher, der lebt, was er codet.',
+      button: 'Mehr über mich'
     }
   },
   testimonials: {
-    title: 'Was unsere Kunden sagen',
+    title: 'Echte Erfahrungen. Konkrete Lösungen. Verlässliche Ergebnisse.',
     items: {
       elena: {
         name: 'Elena Papadopoulou',
@@ -220,107 +220,120 @@ const translation = {
         name: 'Maria Georgiou',
         company: 'Operations Lead @ Bluewave',
         feedback: 'Außergewöhnlicher Service und herausragende Ergebnisse. Half Half Man hat nicht nur unsere Erwartungen erfüllt, sondern sie in jeder Hinsicht übertroffen.'
+      },
+      giota: {
+        name: 'dr.Giota Gatsi',
+        company: 'Lehrerin @ Schule für Neugriechische Sprache an der Aristoteles-Universität Thessaloniki ; SEP @ Hellenische Offene Universität',
+        feedback: `Ich hatte das Vergnügen, mit Half Half Man an der Gestaltung und Entwicklung der offiziellen Website für unsere Konferenz zusammenzuarbeiten – und das Ergebnis hat wirklich alle Erwartungen übertroffen.
+Er hat das Projekt mit außergewöhnlicher Professionalität, Kreativität und einem tiefen Verständnis für die spezifischen Anforderungen einer akademischen Veranstaltung angegangen. Die Website hat den Geist und den Umfang der Konferenz perfekt eingefangen und den Teilnehmern ein reibungsloses, intuitives und ansprechendes Benutzererlebnis geboten.
+Von der Veröffentlichung des Programms bis zur Verwaltung von Abstract-Einreichungen und Anmeldungen war die Plattform robust, sicher und bemerkenswert benutzerfreundlich.
+Ich schätze seine Hingabe, Reaktionsfähigkeit und technische Kompetenz sehr und empfehle Half Half Man von ganzem Herzen jeder Institution oder Organisation, die eine erstklassige digitale Präsenz sucht.`
+      },
+      rastko: {
+        name: 'Rastko Vićić',
+        company: 'Freelance Framer Developer & Digital Marketing Specialist',
+        feedback: `Ich habe aus erster Hand die Tiefe der Expertise hinter Half Half Man erlebt – von Full-Stack-Entwicklung und Systemdesign bis hin zu seinem akribischen Fokus auf Leistung und Sicherheit. Seine Fähigkeit, komplexe Anforderungen in einfache, skalierbare Lösungen zu übersetzen, ist selten. Er ist nicht nur ein Entwickler – er ist ein Ingenieur mit dem Auge eines Designers und der Denkweise eines Strategen.`
       }
     }
   },
   about: {
     title: 'Über Half Half Man',
-    subtitle: 'Half Half Man ist nicht nur eine Marke — es ist eine Denkweise.',
+    subtitle: 'Half Half Man ist nicht nur ein Name – es ist eine Haltung.',
     blocks: {
       code: {
-        title: 'Zweck im Programmieren',
-        description: 'Jede geschriebene Codezeile hat einen Zweck. Wir glauben an die Schaffung von Lösungen, die nicht nur funktionieren, sondern auch einen bedeutenden Einfluss haben.'
+        title: 'Zweck im Code',
+        description: 'Jede Zeile, die ich schreibe, verfolgt einen klaren Zweck. Ich entwickle Lösungen, die nicht nur funktionieren, sondern etwas bewirken.'
       },
       athlete: {
-        title: 'Athletische Disziplin',
-        description: 'Die durch den Sport erlernte Disziplin überträgt sich direkt auf die Programmierpraxis. Präzision, Hingabe und kontinuierliche Verbesserung sind unsere Kernwerte.'
+        title: 'Disziplin eines Athleten',
+        description: 'Was ich durch den Leistungssport gelernt habe – Ausdauer, Präzision und ständiges Verbessern – bringe ich direkt in meine Arbeit als Entwickler ein.'
       },
       design: {
-        title: 'Design-Funktionalität',
-        description: 'Wir erstellen Designs, die sowohl ästhetisch ansprechend als auch hochfunktional sind und so die bestmögliche Benutzererfahrung gewährleisten.'
+        title: 'Design mit Funktion',
+        description: 'Ich gestalte Oberflächen, die nicht nur gut aussehen, sondern sich auch klar und intuitiv bedienen lassen.'
       },
       security: {
-        title: 'Fokus auf Cybersicherheit',
-        description: 'Sicherheit ist kein nachträglicher Gedanke, sondern ein grundlegender Aspekt jedes Projekts, das wir durchführen.'
+        title: 'Sicherheit von Anfang an',
+        description: 'Cybersicherheit ist kein Zusatz, sondern fester Bestandteil jedes Projekts, das ich umsetze.'
       },
       communication: {
         title: 'Klare Kommunikation',
-        description: 'Wir glauben an transparente und effektive Kommunikation während des gesamten Entwicklungsprozesses.'
+        description: 'Ich lege Wert auf Offenheit, Verständlichkeit und regelmäßigen Austausch während des gesamten Prozesses.'
       },
       brand: {
-        title: 'Markenphilosophie',
-        description: 'Half Half Man repräsentiert das Gleichgewicht zwischen technischer Expertise und kreativer Innovation.'
+        title: 'Meine Philosophie',
+        description: 'Half Half Man steht für das Gleichgewicht zwischen technischer Präzision und kreativer Umsetzung.'
       }
     },
     meta: {
-      title: 'Über uns - Half Half Man',
-      description: 'Erfahren Sie mehr über den Ansatz von Half Half Man in Bezug auf Entwicklung, Sicherheit und Innovation.'
+      title: 'Über mich – Half Half Man',
+      description: 'Mein Ansatz für Entwicklung, Sicherheit und Innovation – klar, fokussiert und nachhaltig.'
     }
   },
   services: {
     title: 'Dienstleistungen',
-    subtitle: 'Umfassende Lösungen für moderne Herausforderungen',
+    subtitle: 'Zielgerichtete Lösungen für moderne Herausforderungen',
     webDev: {
       title: 'Webentwicklung',
-      description: 'Maßgeschneiderte Webanwendungen mit modernen Technologien und Best Practices.'
+      description: 'Ich entwickle individuelle Webanwendungen mit modernen Technologien und bewährten Methoden.'
     },
     security: {
       title: 'Cybersicherheit',
-      description: 'Robuste Sicherheitslösungen und Penetrationstest-Dienstleistungen.'
+      description: 'Ich biete durchdachte Sicherheitslösungen und führe Penetrationstests durch, um Systeme abzusichern.'
     },
     tools: {
       title: 'Tools & Automatisierung',
-      description: 'Maßgeschneiderte Tools zur Optimierung von Arbeitsabläufen und Steigerung der Produktivität.'
+      description: 'Ich entwickle maßgeschneiderte Werkzeuge, die Arbeitsabläufe vereinfachen und die Effizienz steigern.'
     },
     maintenance: {
       title: 'Wartung',
-      description: 'Laufende Unterstützung und Updates zur Gewährleistung von Leistung und Stabilität.'
+      description: 'Ich betreue deine Anwendung langfristig – mit Updates, Support und Monitoring.'
     },
     performance: {
-      title: 'Leistungsoptimierung',
-      description: 'Beschleunigen Sie Ihre Apps und verbessern Sie die Benutzererfahrung durch Audits und Korrekturen.'
+      title: 'Performance-Optimierung',
+      description: 'Ich analysiere und verbessere die Ladezeiten und Nutzererfahrung deiner Anwendung gezielt.'
     },
     consulting: {
       title: 'Technische Beratung',
-      description: 'Expertenberatung bei Entscheidungen zu Technologie-Stack und Architektur.'
+      description: 'Ich unterstütze dich bei Technologieentscheidungen und Architekturfragen – pragmatisch und lösungsorientiert.'
     },
     services: [
-      "Half Half Man bietet eine Reihe von Dienstleistungen, die Ihre digitale Reise stärken sollen.",
-      "Von individueller Webentwicklung bis hin zu robuster Cybersicherheit – jede Lösung ist auf Ihre individuellen Bedürfnisse zugeschnitten.",
-      "Unser Ansatz verbindet technische Exzellenz mit einem tiefen Verständnis Ihrer Geschäftsziele.",
-      "Entdecken Sie, wie unsere Services Ihnen nachhaltige Ergebnisse bringen können."
+      "Ich biete individuelle digitale Services, die auf deine Anforderungen zugeschnitten sind.",
+      "Jede Lösung basiert auf fundierter Erfahrung und technischer Klarheit.",
+      "Mein Fokus liegt auf Sicherheit, Skalierbarkeit und langfristiger Wartbarkeit.",
+      "Wenn du jemanden suchst, der nicht nur umsetzt, sondern mitdenkt – bin ich für dich da."
     ]
   },
   projects: {
-    title: 'Projekte',
-    subtitle: 'Ausgewählte Arbeiten',
-    viewAll: 'Alle Projekte ansehen',
-    viewProject: 'Projekt ansehen',
-    viewDetails: 'Details ansehen',
-    featured: 'Ausgewähltes Projekt',
+    title: 'Digitale Lösungen im Einsatz',
+    subtitle: 'Projekte, die Vision, Präzision und technisches Tiefenverständnis zeigen.', 
+    viewAll: 'Alle Projekte anzeigen',
+    viewProject: 'Projekt öffnen',
+    viewDetails: 'Details zeigen',
+    featured: 'Hervorgehobenes Projekt',
     projectNotFound: 'Projekt nicht gefunden.',
-    backToProjects: '← Zurück zu Projekten',
+    backToProjects: '← Zurück zu meinen Projekten',
     categories: {
       all: 'Alle',
       web: 'Webentwicklung',
       security: 'Sicherheit',
-      mobile: 'Mobil'
+      mobile: 'Mobile Apps'
     },
     meta: {
-      title: 'Projekte - Half Half Man',
-      description: 'Entdecken Sie ausgewählte Softwareprojekte und Fallstudien.'
+      title: 'Projekte – Half Half Man',
+      description: 'Hier zeige ich dir, woran ich gearbeitet habe – echte Softwarelösungen mit Fokus auf Funktion und Sicherheit.'
     },
     detail: {
-      technologiesUsed: 'Verwendete Technologien',
-      keyFeatures: 'Hauptmerkmale',
-      challenges: 'Herausforderungen',
-      solutions: 'Lösungen',
+      technologiesUsed: 'Technologien, die ich verwendet habe',
+      keyFeatures: 'Was dieses Projekt besonders macht',
+      challenges: 'Was dabei schwierig war',
+      solutions: 'Wie ich es gelöst habe',
       projectGallery: 'Projektgalerie',
-      viewImage: 'Bild ansehen',
+      viewImage: 'Bild öffnen',
       closeImage: 'Bild schließen',
       previousImage: 'Vorheriges Bild',
       nextImage: 'Nächstes Bild',
-      visitGithub: 'Auf GitHub ansehen',
+      visitGithub: 'Code auf GitHub',
       visitDemo: 'Live-Demo'
     },
     items: {
@@ -350,158 +363,158 @@ const translation = {
         ]
       },
       portfolio: {
-        title: "Im Portfolio von Half Half Man",
-        summary: "Eine sichere Full-Stack-Portfolio-Website, gebaut mit React, Tailwind und Sanity – optimiert für Klarheit, Geschwindigkeit und Kundenbindung.",
-        description: "Eine umfassende Portfolio-Website, gebaut mit React und Tailwind CSS, mit flüssigen Animationen, Internationalisierung und einem virtuellen Assistenten.",
+        title: 'Mein Portfolio',
+        summary: 'Diese Seite ist mein digitales Zuhause – gebaut mit React, Tailwind und Sanity. Schnell, sicher, klar strukturiert.',
+        description: 'Ich habe mein Portfolio als Full-Stack-Projekt umgesetzt: mit Internationalisierung, Animationen und einem persönlichen virtuellen Assistenten. Alles, was dich durch meine Arbeit führt – minimalistisch, direkt, funktional.',
         features: [
-          "Responsives Design mit modernem UI/UX",
-          "Internationalisierungsunterstützung (i18n)",
-          "Interaktive Animationen mit Framer Motion",
-          "Virtueller Assistent integriert",
-          "SEO-Optimierung",
-          "Kontaktformular mit Formspree",
-          "Calendly-Integration für Terminvereinbarungen"
+          'Responsives UI mit durchdachtem UX',
+          'i18n – ich spreche deine Sprache',
+          'Framer Motion für flüssige Übergänge',
+          'Virtueller Assistent (Theo) integriert',
+          'SEO-ready und schnell geladen',
+          'Kontaktformular (Formspree)',
+          'Terminbuchung direkt über Calendly'
         ],
         challenges: [
-          "Implementierung flüssiger Seitenübergänge",
-          "Verwaltung mehrerer Sprachübersetzungen",
-          "Performance-Optimierung für verschiedene Geräte",
-          "Integration mehrerer Drittanbieter-Services"
+          'Seitenübergänge performant und sauber machen',
+          'Sprachversionen wartbar halten',
+          'Services Dritter elegant integrieren',
+          'Performance auf allen Geräten optimieren'
         ],
         solutions: [
-          "Framer Motion für flüssige Animationen verwendet",
-          "i18next für Übersetzungsmanagement implementiert",
-          "Bilder und Code-Splitting optimiert",
-          "Modulares Service-Integrationssystem erstellt"
+          'Framer Motion für Animationen eingesetzt',
+          'i18next zur Übersetzungsverwaltung',
+          'Optimierte Assets und Code Splitting',
+          'Alle externen Services modular eingebunden'
         ]
       },
       welearngreek: {
-        title: "Grammatik, Ingenieurkunst",
-        summary: "Eine personalisierte Web-App zum Erlernen der griechischen Grammatik mit intuitiven Tools und informellem Lernen.",
-        description: "Ein informelles Lernwerkzeug, das Schüler und Sprachbegeisterte beim natürlichen Erwerb der griechischen Grammatik unterstützt. Die Plattform umfasst Tools wie einen Nomen-Dekliniator, einen Verb-Konjugator, eine smarte Vokabelaufzeichnung und einen einzigartigen etymologischen Analysator für griechischstämmige Wörter in Fremdsprachen. Aktuell in aktiver Entwicklung. Ziel ist eine voll nutzbare App zur Unterstützung von Schülern und Lehrern im Griechisch- und ggf. weiteren Sprachunterricht.",
+        title: 'Griechisch verstehen, spielerisch',
+        summary: 'Ich entwickle eine Web-App, die griechische Grammatik verständlich macht – durch intuitive Tools und echtes Lernen.',
+        description: 'Diese App ist für alle, die Griechisch nicht büffeln, sondern erleben wollen. Ich habe Tools gebaut wie einen Nomen-Dekliniator, Verbkonjugator, Vokabeltrainer und ein Modul, das griechischstämmige Wörter in anderen Sprachen erklärt. Die Plattform wächst noch – aber das Ziel ist klar: nachhaltiges, freies Lernen für Schüler und Lehrer.',
         features: [
-          "Nomen-Dekliniator – generiert fallbasierte Nomenformen auf Griechisch.",
-          "Verb-Konjugator – zeigt Konjugationen nach Zeit und Person.",
-          "Individuelles Vokabel-Tool – speichert neue griechische Wörter wie ausgesprochen, mit Übersetzung in die Muttersprache",
-          "Transparente Wörter-Engine – zeigt und erklärt griechischstämmige Wörter in verschiedenen Sprachen.",
-          "Praxisorientiert – entwickelt, um echtes Lernen und Behalten durch Nutzerinteraktion zu fördern, nicht nur passives Lesen."
+          'Nomen-Dekliniator – alle Fälle automatisch generiert',
+          'Verb-Konjugator – übersichtlich nach Zeit und Person',
+          'Vokabeltool – speichert neue Wörter mit Aussprache und Übersetzung',
+          'Transparente Wörter – zeigt dir, wo Griechisch überall steckt',
+          'Interaktiv und praxisnah – für echtes Verstehen statt passives Lesen'
         ],
         challenges: [
-          "Entwicklung eines pädagogisch fundierten, aber informellen und benutzerfreundlichen Tools.",
-          "Umsetzung komplexer Sprachregeln (Deklinationen, Zeiten) über eine dynamische UI.",
-          "Sicherstellung der Mehrsprachigkeit (zukünftig auf andere Sprachen skalierbar).",
-          "Integration des Moduls Transparente Wörter (Schutz geistigen Eigentums)."
+          'Komplexe Sprachregeln intuitiv umsetzen',
+          'Lernplattform ohne Frontalunterrichtsgefühl',
+          'Mehrsprachigkeit vorbereiten (zukünftige Skalierung)',
+          'Eigene Engine schützen und korrekt lizenzieren'
         ],
         solutions: [
-          "Modularer Django-Backend, der jedes Tool als eigenen API-Service behandelt.",
-          "React-Frontend für reaktive Interaktion und dynamische Grammatikdarstellung.",
-          "PostgreSQL zur Verwaltung von Nutzerwortschatz und Regelwerken.",
-          "Sichere Datenspeicherung und -abfrage implementiert",
-          "Fortgeschrittene Regex und Datenmodelle für Verb-/Nomenmorphologie.",
-          "Klares UX-Design für einfache Interaktion trotz grammatikalischer Komplexität."
+          'Modulares Django-Backend mit separaten API-Services',
+          'React für dynamisches Frontend und reaktive Grammatikdarstellung',
+          'PostgreSQL für Vokabelverwaltung und Regelwerke',
+          'Sichere Datenspeicherung mit sauberem Zugriff',
+          'Regex und Datenmodelle für Morphologie',
+          'UX bewusst minimal – Fokus aufs Wesentliche'
         ]
-      },
+      } ,
       secureaccess: {
-        title: "OAuth-Flow entschlüsseln",
-        summary: "Eine minimalistische Demo, die den OAuth 2.0-Authentifizierungsprozess vereinfacht.",
-        description: "Eine umfassende Frontend-Simulation moderner Authentifizierungsabläufe mit dem OAuth 2.0-Protokoll. Das Projekt zeigt, wie sicherer Zugriff durch Token-Austausch, Weiterleitung und Benutzerautorisierung gewährt wird – ohne Drittanbieter. Es führt rollenbasierte Zugriffskontrolle (RBAC) ein und zeigt, wie Berechtigungslogik in einer Anwendung strukturiert und durchgesetzt wird. Klar und anpassbar gestaltet, dient dieses Showcase als Blaupause für sichere und skalierbare Login-Systeme, die Datenschutz und Systemintegrität priorisieren.",
+        title: 'OAuth entschlüsseln',
+        summary: 'Ich habe den OAuth-Flow so gebaut, dass ihn jeder versteht – clean, sicher, ohne Third-Party.',
+        description: 'Dieses Projekt zeigt den vollständigen Ablauf von OAuth 2.0 – vom Token bis zur Weiterleitung. Ich habe RBAC integriert und dafür gesorgt, dass alles DSGVO-konform und verständlich ist. Ideal als Blueprint für eigene Authentifizierungssysteme.',
         features: [
-          "Sichere Google OAuth 2.0-Authentifizierung",
-          "Client/Secret als Umgebungsvariablen gespeichert",
-          "Getrennte Entwicklungs- und Produktionseinstellungen",
-          "Sauberer, minimalistischer Login-Erfolg-Bildschirm",
-          "Vollständig bereitgestellter und funktionaler Produktion-Endpunkt",
-          "Vollständig autorisierte und getestete Redirect-URIs",
-          "Verwendet SECURE_SSL_REDIRECT, ALLOWED_HOSTS und korrekten CSRF-Schutz"
+          'Sichere Auth mit Google OAuth 2.0',
+          'Client/Secret als Umgebungsvariablen gespeichert',
+          'Trennung zwischen Dev- und Prod-Modus',
+          'Minimalistischer Login-Success-Bildschirm',
+          'Vollständig getesteter Production-Endpunkt',
+          'Alle Redirects korrekt eingerichtet',
+          'CSRF, SSL-Redirects und ALLOWED_HOSTS korrekt implementiert'
         ],
         challenges: [
-          "OAuth 401/400-Fehler durch: gelöschte oder nicht übereinstimmende ID, falsche oder fehlende Redirect-URIs, falsch formatierte .env, Umgebungsvariablen zwischen .env und Railway nicht synchronisiert",
-          "Railway fügt automatisch Anführungszeichen in Variablen ein",
-          "Fehlermeldungen zeigen im Produktivbetrieb nicht den vollen Kontext",
-          "Vage AuthCanceled-Fehler von social-auth"
+          'Fehler durch falsche Redirects oder gelöschte Client-IDs',
+          'Railway speichert Variablen manchmal fehlerhaft',
+          'Unklare Fehlermeldungen im Produktivbetrieb',
+          '„AuthCanceled“ von social-auth schwer zu debuggen'
         ],
         solutions: [
-          "GOOGLE_OAUTH2_CLIENT_ID und Secret sorgfältig zwischen GCP und .env abgeglichen",
-          "Alle Redirect-URIs in der Google Cloud Console korrigiert",
-          "json.loads() mit korrekt formatiertem JSON-String (nur doppelte Anführungszeichen) verwendet",
-          "Umgebungsvariablen in Railway manuell im Raw Editor geprüft",
-          "Nach Änderungen immer neuen Deploy ausgelöst statt auf implizite Updates zu vertrauen",
-          "Tailwind für Klarheit und Kontrolle außen vor gelassen (klassisches HTML/CSS-Templating)",
-          "Alle Antwortpfade über Railway-Logs für das finale Debugging geprüft"
+          'Alle Tokens exakt zwischen GCP, .env und Railway abgeglichen',
+          'Redirects in GCP sauber hinterlegt',
+          'JSON-Parsing mit korrektem Format sichergestellt',
+          'Manual Check im Railway Raw Editor',
+          'Erzwinge immer neuen Deploy nach Änderungen',
+          'Verzicht auf Tailwind – klassisches HTML/CSS zur vollen Kontrolle',
+          'Railway-Logs systematisch zur Fehlerdiagnose genutzt'
         ]
       },
       bughunters: {
-        title: "Die Jagd simulieren",
-        summary: "Eine kontrollierte Umgebung, die reale Sicherheitsszenarien nachbildet – entwickelt, um Penetrationstests, Responsible Disclosure und ethisches Bug-Hunting zu demonstrieren.",
-        description: "Eine kontrollierte Umgebung, die reale Sicherheitsszenarien nachbildet – entwickelt, um Penetrationstests, Responsible Disclosure und ethisches Bug-Hunting zu demonstrieren.",
+        title: 'Ich simuliere den Angriff',
+        summary: 'Ich habe eine sichere Umgebung geschaffen, um echte Hacking-Szenarien nachzubilden – lehrreich, ethisch, kontrolliert.',
+        description: 'In dieser App zeige ich, wie Penetrationstests in der Praxis aussehen – mit simulierten Scans, Header-Analysen, Brute-Force-Abläufen und mehr. Alles ist dokumentierbar, exportierbar und klar als Lernwerkzeug gekennzeichnet.',
         features: [
-          "Simuliertes Nmap-Port-Scanning – emuliert Nmap-CLI-Ausgaben, um die Grundlagen der Netzwerkerkundung sicher zu demonstrieren.",
-          "HTTP-Header-Inspektor – holt und zeigt Response-Header realer Websites, um Serververhalten und -konfiguration zu analysieren.",
-          "Brute-Force-Simulation – demonstriert einen Wörterbuchangriff auf ein fiktives Ziel mit simulierten Anmeldeantworten – rein zu Lernzwecken.",
-          "Exportierbare Berichte – alle Simulationen können als .txt-Dateien für Dokumentation oder Lernzwecke exportiert werden.",
-          "Ethischer Hinweis enthalten – klare Hinweise im gesamten Tool betonen den Lerncharakter, mit Links zu Best Practices und ethischen Hacking-Richtlinien."
+          'Nmap-Port-Scan-Simulation mit echten CLI-Ausgaben',
+          'Header-Inspector für Response-Analyse',
+          'Brute-Force-Demo auf fiktivem Zielsystem',
+          'Export aller Tests als .txt-Datei',
+          'Ethik-Disclaimer und Verweise auf Best Practices'
         ],
         challenges: [
-          "Deployment-Plattform (Nixpacks) hat Django nicht automatisch erkannt, daher manuelle Bereitstellung mit eigenem Procfile, requirements.txt und runtime.txt.",
-          "Django ORM erforderte Mock-Datenbankkonfigurationen, obwohl die App nicht persistent ist.",
-          "Besondere Vorsicht, damit das Projekt nicht als echtes Angriffstool missverstanden oder missbraucht werden kann."
+          'Railway/Nixpacks erkennt Django nicht automatisch',
+          'ORM verlangt Schemas, obwohl keine persistente DB',
+          'App darf nicht als echtes Hacking-Tool missverstanden werden'
         ],
         solutions: [
-          "Eigene Build-Pipeline für Railway-Deployment inkl. minimaler Django-Anforderungen hinzugefügt.",
-          "Migrationen mit Mock-Schemas erfüllt, um Djangos Erwartungen zu erfüllen, ohne echte Daten zu speichern.",
-          "Ethische Hinweise und Best-Practice-Links implementiert – das Toolkit ist eine kontrollierte Simulation, keine Exploit-Plattform."
+          'Custom Deployment mit Procfile, requirements.txt und runtime.txt',
+          'Migrationen mit Mock-Schema gelöst',
+          'Ethik-Hinweise sichtbar integriert – Tool dient dem Lernen, nicht dem Exploit'
         ]
       },
       webflow: {
-        title: "Von Webflow zu Workflow",
-        summary: "Ein No-Code-Projekt auf Webflow-Basis, komplett mit KI refaktoriert, um sauberen, semantischen Code zu erzeugen, versioniert auf GitHub und bereitgestellt via Netlify.",
-        description: "Ein visuelles Konzept, gebaut in Webflow, dann zu produktionsreifem Code verfeinert. Mit KI-Refaktorierung via Cursor IDE wurde das exportierte Layout in eine saubere, skalierbare und zugängliche Codebasis verwandelt – verbindet No-Code-Speed mit Full-Code-Qualität.",
+        title: 'Von Webflow zu echtem Code',
+        summary: 'Ich habe ein visuelles Layout in sauberen Code verwandelt – mit Hilfe von KI, klaren Strukturen und semantischem HTML.',
+        description: 'Dieses Projekt war ein No-Code-Entwurf, den ich in Produktionscode umgewandelt habe. Mit GPT (Cursor IDE) habe ich die Struktur bereinigt, Styles refaktoriert und die Seite auf Netlify deployt. Schnell, sauber, nachvollziehbar.',
         features: [
-          "KI-gestützte Code-Refaktorierung – wandelt Webflows exportiertes HTML/CSS in sauberen, semantischen, produktionsreifen Code um (GPT in Cursor IDE)",
-          "Semantische HTML5-Struktur – ersetzt generisches div-basiertes Layout durch semantische Tags (section, main, article etc.) für Barrierefreiheit und SEO.",
-          "Bereinigtes und optimiertes CSS – Stylesheets für bessere Lesbarkeit, Wartbarkeit und Konsistenz in Design-Tokens und Abständen refaktoriert.",
-          "Conversion-optimierter Text – Hero-Abschnitte, CTAs und Microcopy neu formuliert für mehr Klarheit, Tonalität und Nutzerbindung",
-          "Lokale Vorschau mit Python – lokale Vorschau mit Python",
-          "Versionskontrolle via GitHub – alle Codeänderungen mit Commit-Historie, Branches und kollaborationsbereiter Einrichtung nachverfolgt.",
-          "Schnelles Deployment via Netlify – finaler Build gehostet auf Netlify mit sofortigem Deployment von GitHub, CI-Workflows unterstützt."
+          'Refaktorierung via GPT in Cursor IDE',
+          'Semantisches HTML5 statt div-Nesting',
+          'CSS optimiert für Lesbarkeit und Struktur',
+          'Texte für Conversion überarbeitet',
+          'Lokale Vorschau via Python',
+          'Code versioniert via GitHub',
+          'Deployment über Netlify mit CI-Workflow'
         ],
         challenges: [
-          "Webflow exportiert Code mit nicht-semantischem <div>-Nesting und Klassenballast.",
-          "Statische Assets (Bilder, Fonts) sind bei lokaler Vorschau manchmal falsch zugeordnet",
-          "Kein direkter HTML-Import zurück in Webflow möglich, daher kein Round-Tripping"
+          'Webflow exportiert unsauberen Code',
+          'Assets lokal nicht immer korrekt zugeordnet',
+          'Kein HTML-Reimport zurück in Webflow möglich'
         ],
         solutions: [
-          "HTML-Struktur mit GPT refaktoriert, um semantische Tags (section, main, article) zu verwenden",
-          "CSS bereinigt und gruppiert für bessere Wartbarkeit und Lesbarkeit",
-          "Headings und CTAs für überzeugendere, UX-getriebene Ansprache neu formuliert.",
-          "Python genutzt, um statische Dateien lokal korrekt zuzuordnen",
-          "Alle Änderungen via GitHub versioniert und nahtlos mit Netlify bereitgestellt"
+          'HTML mit GPT refaktoriert (section, main, article usw.)',
+          'CSS bereinigt und gruppiert',
+          'Headings und Texte neu geschrieben für UX und Klarheit',
+          'Python genutzt für korrekte Asset-Zuordnung',
+          'Versionskontrolle und Deployment automatisiert via GitHub & Netlify'
         ]
       }
     },
     projects: [
-      "Entdecken Sie eine kuratierte Auswahl an Projekten, die technisches Können und kreative Problemlösung zeigen.",
-      "Jedes Projekt wird mit Sorgfalt, Fachwissen und Fokus auf reale Wirkung umgesetzt.",
-      "Sehen Sie, wie aus Ideen durch durchdachtes Design und robuste Entwicklung Realität wird."
+      'Hier findest du eine Auswahl meiner Projekte – alles von mir konzipiert, entwickelt und umgesetzt.',
+      'Ich verbinde technisches Können mit klarem Design und praktischer Funktion.',
+      'Jedes Projekt hat seine eigene Geschichte – und ich teile sie hier mit dir.'
     ]
   },
   blog: {
-    title: 'Blog',
-    readMore: 'Weiterlesen',
-    backToBlog: 'Zurück zum Blog',
+    title: 'Einblicke & Reflexionen',
+    readMore: 'Mehr lesen',
+    backToBlog: '← Zurück zum Blog',
     publishedOn: 'Veröffentlicht am',
     by: 'von',
     comments: {
       title: 'Kommentare',
-      leave: 'Kommentar hinterlassen',
-      name: 'Name',
-      message: 'Nachricht',
+      leave: 'Schreib einen Kommentar',
+      name: 'Dein Name',
+      message: 'Deine Nachricht',
       submit: 'Absenden',
-      success: 'Kommentar erfolgreich gesendet',
-      error: 'Fehler beim Senden des Kommentars'
+      success: 'Dein Kommentar wurde erfolgreich gesendet.',
+      error: 'Beim Senden ist ein Fehler aufgetreten.'
     },
     share: {
-      title: 'Diesen Beitrag teilen',
+      title: 'Teile diesen Beitrag',
       twitter: 'Auf X (Twitter) teilen',
       facebook: 'Auf Facebook teilen',
       linkedin: 'Auf LinkedIn teilen',
@@ -509,65 +522,54 @@ const translation = {
       copied: 'Link kopiert!'
     },
     meta: {
-      title: 'Blog - Half Half Man',
-      description: 'Einblicke in Webentwicklung, Sicherheit und Technologie.'
+      title: 'Blog – Half Half Man',
+      description: 'Technik-Updates, zeitlose Ideen und durchdachte Perspektiven – vom Code bis zum Kontext.'
     },
     blog: [
-      "Jede geschriebene Zeile hat ihre Bedeutung.",
-      "Im Blog teilt Half Half Man Gedanken, Lektionen und Geschichten aus dem Alltag des Entwickelns und Schaffens.",
-      "Wenn Sie verstehen möchten, wie Half Half Man denkt, ist dies der ideale Ausgangspunkt.",
-      "Tauchen Sie ein und entdecken Sie Perspektiven zu Technologie, Kreativität und Wachstum."
-    ],
-  },
+      'Jede Zeile, die ich schreibe, hat ein Ziel.',
+      'Im Blog teile ich meine Gedanken, Erfahrungen und Lehren aus meinem Alltag als Entwickler und Gestalter.',
+      'Wenn du wissen willst, wie ich denke – hier ist der richtige Ort, um zu beginnen.',
+      'Tauche ein in meine Sicht auf Technologie, Kreativität und persönliches Wachstum.'
+    ]
+  }, 
+  
   contact: {
     meta: {
-      title: "Kontakt - Half Half Man",
-      description: "Kontaktieren Sie uns oder vereinbaren Sie einen Anruf."
+      title: 'Kontakt – Half Half Man',
+      description: 'Schreib mir oder buche direkt ein Gespräch.'
     },
-    title: "Lassen Sie uns sprechen",
+    title: 'Buche einen Anruf oder schick mir eine Nachricht – ich melde mich schnellstmöglich zurück.',
     calendly: {
-      title: "30-Minuten-Gespräch vereinbaren"
+      title: '30 Minuten – dein Termin mit mir'
     },
     form: {
-      title: "Nachricht senden",
+      title: 'Schick mir eine Nachricht',
       name: {
-        label: "Ihr Name",
-        placeholder: "Geben Sie Ihren vollständigen Namen ein"
+        label: 'Dein Name',
+        placeholder: 'Wie heißt du?'
       },
       email: {
-        label: "E-Mail-Adresse",
-        placeholder: "sie@beispiel.de"
+        label: 'Deine E-Mail',
+        placeholder: 'du@beispiel.de'
       },
       subject: {
-        label: "Betreff",
-        placeholder: "Thema oder Frage"
+        label: 'Betreff',
+        placeholder: 'Worum geht\'s?'
       },
       message: {
-        label: "Nachricht",
-        placeholder: "Schreiben Sie hier Ihre Nachricht..."
+        label: 'Nachricht',
+        placeholder: 'Was möchtest du sagen?'
       },
-      submit: "Nachricht senden",
-      sending: "Wird gesendet...",
-      success: "Nachricht erfolgreich gesendet!",
-      error: "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+      submit: 'Absenden',
+      sending: 'Wird gesendet...',
+      success: 'Deine Nachricht wurde erfolgreich gesendet!',
+      error: 'Etwas ist schiefgelaufen. Versuch\'s bitte nochmal.'
     },
     contact: [
-      "Half Half Man freut sich auf ein Gespräch. Wenn Sie Kontakt aufnehmen möchten, können Sie eine Nachricht senden oder einen Anruf mit Half Half Man vereinbaren!"
+      'Ich freue mich auf dein Feedback. Schreib mir oder buche direkt ein Gespräch – ich melde mich persönlich bei dir.'
     ]
-  },
-  common: {
-    loading: 'Wird geladen...',
-    error: 'Ein Fehler ist aufgetreten',
-    notFound: 'Seite nicht gefunden',
-    backHome: 'Zurück zur Startseite',
-    viewLive: 'Live ansehen',
-    viewCode: 'Code ansehen',
-    next: 'Weiter',
-    prev: 'Zurück',
-    close: 'Schließen',
-    scrollToExplore: 'Scrollen Sie zum Erkunden',
-    logoAlt: 'Half Half Man Logo'
-  },
+  }, 
+
   faq: {
     meta: {
       title: "FAQ - Half Half Man",

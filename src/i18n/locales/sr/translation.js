@@ -13,7 +13,7 @@ const translation = {
         more: 'Više',
         toggleMenu: 'Prikaži meni',
         dropdown: {
-            faq: 'Česta pitanja',
+            faq: 'Često postavljana pitanja',
             privacy: 'Politika privatnosti'
         }
     },
@@ -25,11 +25,11 @@ const translation = {
     techStack: {
         meta: {
             title: 'Tehnološki Stack - Half Half Man',
-            description: 'Istražite tehnologije i alate koje koristimo za izradu visokoperformansnih aplikacija.',
+            description: 'Istražite tehnologije i alate koje koristimo za izradu aplikacija visokih performansi.',
             categoryDescription: 'Istražite alate i tehnologije povezane sa {{category}}.'
         },
         title: 'Inženjering Stack-a',
-        subtitle: 'Svrhoviti alati. Precizna realizacija. Sistemi spremni za budućnost.',
+        subtitle: 'Alati koji služe svrsi. Precizna realizacija. Sistemi spremni za budućnost.',
         seeFullStack: 'Pogledaj ceo stack',
         backToTechStack: 'Nazad na tehnološki stack',
         categoryNotFound: 'Kategorija nije pronađena.',
@@ -175,26 +175,22 @@ const translation = {
     testimonials: {
         title: 'Prava iskustva. Opipljiva rešenja. Pouzdani rezultati',
         items: {
-            elena: {
-                name: 'Elena Papadopoulou',
-                company: 'CEO @ Helix Digital',
-                feedback: 'Rad sa Half Half Man-om je bila iskustvo koje je promenilo igru za našu kompaniju. Njihova pažnja prema detaljima i pristup koji stavlja bezbednost na prvo mesto dali su nam potpuno poverenje u našu web aplikaciju.'
-            },
-            thomas: {
-                name: 'Thomas Schneider',
-                company: 'CTO @ NovaTech Systems',
-                feedback: 'Kombinacija tehničke stručnosti i kreativnog rešavanja problema učinila je Half Half Man-a izuzetnim. Dostavili su tačno ono što nam je trebalo, kada nam je trebalo.'
-            },
-            maria: {
-                name: 'Maria Georgiou',
-                company: 'Operations Lead @ Bluewave',
-                feedback: 'Izuzetna usluga i izvanredni rezultati. Half Half Man nije samo ispunio naša očekivanja već ih je nadmašio na svaki mogući način.'
-            },
+
             giota: {
                 name: 'dr.Giota Gatsi',
-                company: 'Full Professor @ Aristotle University of Thessaloniki',
-                feedback: 'Imala sam zadovoljstvo da sarađujem sa Half Half Man timom na dizajnu i razvoju zvaničnog sajta za našu konferenciju — i rezultat je zaista prevazišao sva očekivanja. Pristupili su projektu sa izuzetnom profesionalnošću, kreativnošću i dubokim razumevanjem specifičnih potreba akademskog događaja. Sajt je lepo uhvatio duh i obim konferencije, nudeći učesnicima glatko, intuitivno i angažovano korisničko iskustvo. Od objavljivanja programa do rukovanja sažetaka i upravljanja registracijama, platforma je bila robusna, sigurna i izuzetno jednostavna za korišćenje. Iskreno cenim njihovu posvećenost, odzivnost i tehničku stručnost, i od srca preporučujem Half Half Man svakoj instituciji ili organizaciji koja traži vrhunsko digitalno prisustvo.'
-            }
+                company: 'Edukator @ Škola modernog grčkog jezika na Aristotelovom univerzitetu u Solunu ; SEP @ Helenski otvoreni univerzitet',
+                feedback: `Imala sam zadovoljstvo da sarađujem sa Half Half Man-om na dizajnu i razvoju zvaničnog sajta za našu konferenciju — i rezultat je zaista prevazišao sva očekivanja.
+                          Pristupio je projektu sa izuzetnom profesionalnošću, kreativnošću i dubokim razumevanjem specifičnih potreba akademskog događaja. Sajt je lepo uhvatio duh i obim konferencije, nudeći učesnicima glatko, intuitivno i angažujuće korisničko iskustvo.
+                          Od objavljivanja programa do rukovanja sažecima i upravljanja registracijama, platforma je bila robusna, sigurna i izuzetno laka za korišćenje.
+                        Iskreno cenim njegovu posvećenost, odzivnost i tehničku stručnost, i od srca preporučujem Half Half Man-a svakoj instituciji ili organizaciji koja traži vrhunsko digitalno prisustvo.`
+            },
+            rastko: {
+                name: 'Rastko Vićić',
+                company: 'Freelance Framer Developer & Digital Marketing Specialist',
+                feedback: `Iz prve ruke sam video dubinu stručnosti iza Half Half Man-a — od full-stack razvoja i dizajna sistema 
+do njegove metične pažnje na performanse i bezbednost. Njegova sposobnost da prevede složene zahteve u jednostavna, skalabilna rešenja
+je retka. On nije samo developer — on je inženjer sa okom dizajnera i umom stratega.`
+            },
         }
     },
     about: {
@@ -202,19 +198,19 @@ const translation = {
         subtitle: 'Half Half Man nije samo brend — to je način razmišljanja.',
         blocks: {
             code: {
-                title: 'Svrha u kodiranju',
+                title: 'Kodiranje sa svrhom',
                 description: 'Svaka linija napisanog koda ima svrhu. Verujemo u kreiranje rešenja koja ne samo da rade već ostavljaju značajan uticaj.'
             },
             athlete: {
-                title: 'Atletska disciplina',
-                description: 'Disciplina naučena kroz atletiku se direktno prenosi u prakse kodiranja. Preciznost, posvećenost i kontinuirano poboljšanje su naše osnovne vrednosti.'
+                title: 'Disciplina Sportiste',
+                description: 'Disciplina naučena kroz sport se direktno prenosi u prakse kodiranja. Preciznost, posvećenost i kontinuirano poboljšanje su naše osnovne vrednosti.'
             },
             design: {
-                title: 'Funkcionalnost dizajna',
-                description: 'Kreiramo dizajne koji su i estetski prijatni i visoko funkcionalni, osiguravajući najbolje moguće korisničko iskustvo.'
+                title: 'Funkcionalan dizajn',
+                description: 'Kreiram dizajne koji su i estetski prijatni i visoko funkcionalni, osiguravajući najbolje moguće korisničko iskustvo.'
             },
             security: {
-                title: 'Fokus na kibernetičku bezbednost',
+                title: 'Fokus na sajber bezbednost',
                 description: 'Bezbednost je ugrađena u svaki aspekt našeg rada, od dizajna do implementacije.'
             },
             communication: {
@@ -230,7 +226,7 @@ const translation = {
     slider: {
         ideas: {
             title: 'Potrebno vam je moderno i sigurno web rešenje?',
-            subtitle: 'Zaposlite full-stack programera koji razume i kod i kibernetičku bezbednost',
+            subtitle: 'Zaposlite full-stack programera koji razume i kod i sajber bezbednost',
             button: 'Zaposlite me'
         },
         blog: {
@@ -238,8 +234,13 @@ const translation = {
             subtitle: 'Bezbednost, obrasci kodiranja, freelance strategija i više',
             button: 'Pročitajte više'
         },
+        projects: {
+            title: 'Pogledajte kako ideje postaju kod',
+            subtitle: 'Pogledajte demonstracione aplikacije sa realnim implementacijama',
+            button: 'Pogledajte projekte'
+          },
         stack: {
-            title: 'Alati zanata',
+            title: 'Alati koji vrše posao',
             subtitle: 'Od backend-a do frontend-a, koristim najbolje alate za posao',
             button: 'Pogledajte Tech Stack'
         },
@@ -304,12 +305,12 @@ const translation = {
         title: 'Usluge',
         subtitle: 'Kompletna rešenja za savremene izazove',
         webDev: {
-            title: 'Web razvoj',
-            description: 'Prilagođene web aplikacije izgrađene savremenim tehnologijama i najboljim praksama.'
+            title: 'Razvoj Web Aplikacija',
+            description: 'Prilagođene web aplikacije bazirane na savremenim tehnologijama i najboljim praksama.'
         },
         security: {
             title: 'Sajber bezbednost',
-            description: 'Robusna bezbednosna rešenja i usluge penetracionog testiranja.'
+            description: 'Robusna bezbednosna rešenja i usluge testiranja probojnosti (penetration testing).'
         },
         tools: {
             title: 'Alati i automatizacija',
@@ -652,6 +653,21 @@ const translation = {
             contact: {
                 0: 'Half Half Man je uvek spreman za razgovor. Ako želite da stupite u kontakt, možete poslati poruku ili zakazati poziv sa Half Half Man-om!'
             }
+        }
+    },
+    footer: {
+        slogan: "Sinteza koda i vode",
+        navigationTitle: "Navigacija",
+        connectTitle: "Povežite se",
+        copyright: "Sva prava zadržana.",
+        links: {
+            home: "Početna",
+            techstack: "Tehnološki stack",
+            projects: "Projekti",
+            blog: "Blog",
+            contact: "Kontakt",
+            faq: "Često Postavljana Pitanja",
+            privacypolicy: "Politika Privatnosti"
         }
     },
 };

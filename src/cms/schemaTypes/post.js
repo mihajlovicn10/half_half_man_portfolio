@@ -57,6 +57,20 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'abstract',
+      title: 'Abstract',
+      type: 'object',
+      fields: [
+        { name: 'en', type: 'text', title: 'English' },
+        { name: 'es', type: 'text', title: 'Spanish' },
+        { name: 'fr', type: 'text', title: 'French' },
+        { name: 'de', type: 'text', title: 'German' },
+        { name: 'it', type: 'text', title: 'Italian' },
+        { name: 'el', type: 'text', title: 'Greek' },
+        { name: 'rs', type: 'text', title: 'Serbian' },
+      ],
+    }),
+    defineField({
       name: 'author',
       title: 'Author',
       type: 'reference',

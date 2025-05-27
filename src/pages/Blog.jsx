@@ -75,8 +75,8 @@ const Blog = () => {
   return (
     <>
       <Helmet>
-        <title>{t('blog.meta.title')}</title>
-        <meta name="description" content={t('blog.meta.description')} />
+        <title>{typeof t('blog.meta.title') === 'object' ? t('blog.meta.title')[i18n.language] || t('blog.meta.title').en : t('blog.meta.title')}</title>
+        <meta name="description" content={typeof t('blog.meta.description') === 'object' ? t('blog.meta.description')[i18n.language] || t('blog.meta.description').en : t('blog.meta.description')} />
       </Helmet>
       <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
         <section className="w-full py-16">
@@ -116,6 +116,12 @@ const Blog = () => {
                         <div className="flex items-center justify-between">
                           <div className="flex-grow">
                             <h3 className="text-2xl font-semibold text-primary">{post.title}</h3>
+                            {post.abstract && (
+                              <p className="mt-2 text-primary/90 text-base italic">{post.abstract}</p>
+                            )}
+                            {post.excerpt && (
+                              <p className="mt-2 text-primary/80 text-base">{post.excerpt}</p>
+                            )}
                             {post.publishedAt && (
                               <p className="mt-2 text-sm text-primary/60">
                                 {new Date(post.publishedAt).toLocaleDateString(i18n.language, {
@@ -124,9 +130,6 @@ const Blog = () => {
                                   day: 'numeric'
                                 })}
                               </p>
-                            )}
-                            {post.excerpt && (
-                              <p className="mt-4 text-[17px] text-primary/80">{post.excerpt}</p>
                             )}
                           </div>
                           {post.mainImage && (

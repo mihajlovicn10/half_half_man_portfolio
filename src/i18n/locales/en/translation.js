@@ -48,68 +48,6 @@ const translation = {
         description: "Performance is expected — not requested. Every system is designed to deliver it from the start."
       }
     },
-    tools: {
-      python: {
-        name: "Python",
-        description: "A powerful and versatile programming language."
-      },
-      django: {
-        name: "Django",
-        description: "A high-level Python web framework for rapid development."
-      },
-      restApi: {
-        name: "REST API",
-        description: "An architectural style for building scalable web services."
-      },
-      nodejs: {
-        name: "Node.js",
-        description: "A JavaScript runtime built on Chrome's V8 engine."
-      },
-      express: {
-        name: "Express",
-        description: "A minimal and flexible Node.js web application framework."
-      },
-      postgresql: {
-        name: "PostgreSQL",
-        description: "A powerful, open source object-relational database system."
-      },
-      react: {
-        name: "React",
-        description: "A JavaScript library for building user interfaces."
-      },
-      nextjs: {
-        name: "Next.js",
-        description: "A React framework with hybrid static & server rendering."
-      },
-      tailwind: {
-        name: "Tailwind CSS",
-        description: "A utility-first CSS framework for rapid UI development."
-      },
-      burpSuite: {
-        name: "Burp Suite",
-        description: "A powerful toolkit for web application security testing."
-      },
-      metasploit: {
-        name: "Metasploit",
-        description: "A penetration testing framework for exploiting vulnerabilities."
-      },
-      nmap: {
-        name: "Nmap",
-        description: "A network scanner used for network discovery and security auditing."
-      },
-      docker: {
-        name: "Docker",
-        description: "A platform to develop, ship, and run applications in containers."
-      },
-      kubernetes: {
-        name: "Kubernetes",
-        description: "An open-source system for automating deployment and management of containerized apps."
-      },
-      git: {
-        name: "Git",
-        description: "A distributed version control system for tracking code changes."
-      }
-    },
     backendSystems: {
       name: "Backend Systems",
       description: "Clean logic, fast performance – the backbone of secure, scalable applications.\nTech: Python, Node.js, Express."
@@ -164,7 +102,7 @@ const translation = {
     },
     uptimeStability: {
       name: "Uptime & Stability",
-      description: "We monitor, patch, and maintain systems to ensure your platform stays online and resilient—day after day."
+      description: "I monitor, patch, and maintain systems to ensure your platform stays online and resilient—day after day."
     },
     technicalLongevity: {
       name: "Technical Longevity",
@@ -194,7 +132,7 @@ const translation = {
     }, 
     services: {
       title: 'Tailored Digital Services',
-      subtitle: 'From Secure code to stunning UI - I build solutions that last.',
+      subtitle: 'From secure code to stunning UI - I build solutions that last.',
       button: 'Discover Services'
     },
     about: {
@@ -206,64 +144,56 @@ const translation = {
   testimonials: {
     title: 'True experiences. Tangible solutions. Trusted outcomes',
     items: {
-      elena: {
-        name: 'Elena Papadopoulou',
-        company: 'CEO @ Helix Digital',
-        feedback: 'Working with Half Half Man was a game-changing experience for our company. Their attention to detail and security-first approach gave us complete confidence in our web application.'
-      },
-      thomas: {
-        name: 'Thomas Schneider',
-        company: 'CTO @ NovaTech Systems',
-        feedback: 'The combination of technical expertise and creative problem-solving made Half Half Man stand out. They delivered exactly what we needed, when we needed it.'
-      },
-      maria: {
-        name: 'Maria Georgiou',
-        company: 'Operations Lead @ Bluewave',
-        feedback: 'Exceptional service and outstanding results. Half Half Man not only met our expectations but exceeded them in every way possible.'
-      },
       giota: {
         name: 'dr.Giota Gatsi',
-        company: 'Full Professor @ Aristotle University of Thessaloniki',
-        feedback: `I had the pleasure of collaborating with the Half Half Man team on the design and development of the official website for our conference — and the outcome truly exceeded all expectations.
-                  They approached the project with outstanding professionalism, creativity, and a deep understanding of the specific needs of an academic event. The website captured the spirit and scope of the conference beautifully, offering participants a smooth, intuitive, and engaging user experience.
+        company: 'Educator @ School of Modern Greek Language at Aristotle University of Thessaloniki ; SEP @ Hellenic Open University',
+        feedback: `I had the pleasure of collaborating with the Half Half Man on the design and development of the official website for our conference — and the outcome truly exceeded all expectations.
+                  He approached the project with outstanding professionalism, creativity, and a deep understanding of the specific needs of an academic event. The website captured the spirit and scope of the conference beautifully, offering participants a smooth, intuitive, and engaging user experience.
                   From publishing the program to handling abstract submissions and managing registrations, the platform was robust, secure, and remarkably user-friendly.
-                I sincerely appreciate their dedication, responsiveness, and technical expertise, and I wholeheartedly recommend Half Half Man to any institution or organization seeking a top-tier digital presence.`
-      }
-    },
-    about: {
-      title: 'About Half Half Man',
-      subtitle: 'Half Half Man is not just a brand — it\'s a mindset.',
-      blocks: {
-        code: {
-          title: 'Purpose in Coding',
-          description: 'Every line of code written serves a purpose. We believe in creating solutions that not only work but make a meaningful impact.'
-        },
-        athlete: {
-          title: 'Athletic Discipline',
-          description: 'The discipline learned through athletics translates directly into coding practices. Precision, dedication, and continuous improvement are our core values.'
-        },
-        design: {
-          title: 'Design Functionality',
-          description: 'We create designs that are both aesthetically pleasing and highly functional, ensuring the best user experience possible.'
-        },
-        security: {
-          title: 'Cybersecurity Focus',
-          description: 'Security is not an afterthought but a fundamental aspect of every project we undertake.'
-        },
-        communication: {
-          title: 'Clear Communication',
-          description: 'We believe in transparent and effective communication throughout the development process.'
-        },
-        brand: {
-          title: 'Brand Philosophy',
-          description: 'Half Half Man represents the balance between technical expertise and creative innovation.'
-        }
+                I sincerely appreciate his dedication, responsiveness, and technical expertise, and I wholeheartedly recommend Half Half Man to any institution or organization seeking a top-tier digital presence.`
+      }, 
+      rastko: {
+        name: 'Rastko Vićić',
+        company: 'Freelance Framer Developer & Digital Marketing Specialist',
+        feedback: `I've seen firsthand the depth of expertise behind Half Half Man — from full-stack development and system design 
+to his meticulous focus on performance and security. His ability to translate complex requirements into simple, scalable solutions
+is rare. He's not just a developer — he's an engineer with a designer's eye and a strategist's mindset.`
+      }, 
+    }
+  },
+  about: {
+    title: 'About Half Half Man',
+    subtitle: 'Half Half Man is not just a brand — it\'s a mindset.',
+    blocks: {
+      code: {
+        title: 'Purpose in Coding',
+        description: 'Every line of code written serves a purpose. I believe in creating solutions that not only work but make a meaningful impact.'
       },
-      meta: {
-        title: 'About - Half Half Man',
-        description: 'Learn about Half Half Man\'s approach to development, security, and innovation.'
+      athlete: {
+        title: 'Discipline of an Athlete',
+        description: 'The discipline learned through competitive swimming translates directly into coding practices. Precision, dedication, and continuous improvement are my core values.'
+      },
+      design: {
+        title: 'Design Functionality',
+        description: 'I create designs that are both aesthetically pleasing and highly functional, ensuring the best user experience possible.'
+      },
+      security: {
+        title: 'Cybersecurity Focus',
+        description: 'Security is not an afterthought but a fundamental aspect of every project I undertake.'
+      },
+      communication: {
+        title: 'Clear Communication',
+        description: 'I believe in transparent and effective communication throughout the development process.'
+      },
+      brand: {
+        title: 'Brand Philosophy',
+        description: 'Half Half Man represents the balance between technical expertise and creative innovation.'
       }
     },
+    meta: {
+      title: 'About - Half Half Man',
+      description: 'Learn about Half Half Man\'s approach to development, security, and innovation.'
+    }
   },
   services: {
     title: 'Services',
@@ -301,7 +231,7 @@ const translation = {
   projects: {
     meta: {
       title: "Projects - Half Half Man",
-      description: "Explore our portfolio of innovative web applications and solutions."
+      description: "Explore my portfolio of innovative web applications and solutions."
     },
     title: "Digital Solutions in Action",
     subtitle: "Projects that reflect vision, precision, and technical depth.",

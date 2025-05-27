@@ -2,10 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import heroVideo from '../assets/videos/hero_video.mp4';
-import elenaPhoto from '../assets/images/testimonials/elena.webp';
-import thomasPhoto from '../assets/images/testimonials/thomas.webp';
-import mariaPhoto from '../assets/images/testimonials/maria.webp';
 import giotaPhoto from '../assets/images/testimonials/giota_gatsi.jpeg';
+import rastkoPhoto from '../assets/images/testimonials/rastko_vicic.jpeg';
 import servicesBackground from '../assets/images/services_background.jpg';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
@@ -78,21 +76,14 @@ const Home = () => {
   };
 
   const testimonials = [
-    {
-      key: 'elena',
-      photo: elenaPhoto
-    },
-    {
-      key: 'thomas',
-      photo: thomasPhoto
-    },
-    {
-      key: 'maria',
-      photo: mariaPhoto
-    }, 
+
     {
       key: 'giota',
       photo: giotaPhoto
+    }, 
+    {
+      key: 'rastko',
+      photo: rastkoPhoto
     }
   ];
 
