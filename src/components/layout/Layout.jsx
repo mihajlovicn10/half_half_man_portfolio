@@ -1,6 +1,18 @@
 import { Helmet } from 'react-helmet-async';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { useEffect } from 'react';
+
+useEffect(() => {
+  const userAgent = navigator.userAgent;
+  const isEdge = userAgent.includes('Edg');
+  const isChrome = userAgent.includes('Chrome');
+  const isFirefox = userAgent.includes('Firefox'); 
+  
+  if(isOpera || isChrome || isFirefox) {
+    document.body.style.zoom = "90%";
+  }
+}, []);
 
 const Layout = ({ children }) => {
   return (
