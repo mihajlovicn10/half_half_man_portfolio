@@ -3,19 +3,19 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { useEffect } from 'react';
 
-
-
 const Layout = ({ children }) => {
   useEffect(() => {
     const userAgent = navigator.userAgent;
+    const isOpera = userAgent.includes('Opera') || userAgent.includes('OPR');
     const isEdge = userAgent.includes('Edg');
     const isChrome = userAgent.includes('Chrome');
-    const isFirefox = userAgent.includes('Firefox'); 
-    
-    if(isOpera || isChrome || isFirefox) {
+    const isFirefox = userAgent.includes('Firefox');
+
+    if (isOpera || isChrome || isFirefox) {
       document.body.style.zoom = "90%";
     }
   }, []);
+
   return (
     <>
       <Helmet>
