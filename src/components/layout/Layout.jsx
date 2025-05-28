@@ -4,17 +4,6 @@ import Footer from './Footer';
 import { useEffect } from 'react';
 
 const Layout = ({ children }) => {
-  useEffect(() => {
-    const userAgent = navigator.userAgent;
-    const isOpera = userAgent.includes('Opera') || userAgent.includes('OPR');
-    const isEdge = userAgent.includes('Edg');
-    const isChrome = userAgent.includes('Chrome');
-    const isFirefox = userAgent.includes('Firefox');
-
-    if (isOpera || isChrome || isFirefox) {
-      document.body.style.zoom = "90%";
-    }
-  }, []);
 
   return (
     <>
@@ -105,14 +94,16 @@ const Layout = ({ children }) => {
       </Helmet>
       
       <div 
-        className="flex flex-col min-h-screen h-screen"
+        className="flex flex-col min-h-screen h-screen w-full"
         role="application"
         aria-label="Main application"
+        style={{ margin: 0, padding: 0 }}
       >
         <Navbar />
         <main 
-          className="flex-1"
+          className="flex-1 w-full"
           role="main"
+          style={{ margin: 0, padding: 0 }}
         >
           {children}
         </main>
