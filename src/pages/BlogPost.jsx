@@ -73,10 +73,11 @@ const BlogPost = () => {
         }
 
         setPost(result);
+        // Initialize likes state
+        setLikes(result.likes || 0);
         // Check if the post is liked in localStorage
         const isLiked = localStorage.getItem(`post_${result._id}_liked`) === 'true';
         setHasLiked(isLiked);
-        setLikes(result.likes || 0);
         setComments(result.comments || []);
 
         // Update meta tags for prerendering
@@ -103,24 +104,43 @@ const BlogPost = () => {
     };
 
     if (slug) fetchPost();
-  }, [slug]);
+  }, [slug, i18n.language]);
 
   const handleLike = async () => {
     if (!post || hasLiked) return;
     
     try {
+      console.log('Attempting to like post:', post._id);
+      console.log('Current likes:', post.likes);
+      console.log('Sanity token exists:', !!client.config().token);
+      
       const newLikes = (post.likes || 0) + 1;
-      await client
+      
+      // Update the post in Sanity
+      const result = await client
         .patch(post._id)
         .set({ likes: newLikes })
         .commit();
       
-      setPost({ ...post, likes: newLikes });
+      console.log('Like update result:', result);
+      
+      // Update local state
+      setPost(prevPost => ({ ...prevPost, likes: newLikes }));
+      setLikes(newLikes);
       setHasLiked(true);
+      
       // Store like state in localStorage
       localStorage.setItem(`post_${post._id}_liked`, 'true');
+      
+      // Show success message
+      toast.success(t('blog.post.like.success'));
     } catch (err) {
       console.error('Error updating likes:', err);
+      console.error('Error details:', {
+        message: err.message,
+        statusCode: err.statusCode,
+        details: err.details
+      });
       toast.error(t('blog.post.like.error'));
     }
   };

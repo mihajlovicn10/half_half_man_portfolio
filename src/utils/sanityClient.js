@@ -50,5 +50,12 @@ export const postsQuery = (lang = 'en') => `*[_type == "post"] | order(published
     "excerpt": coalesce(excerpt.${lang}, excerpt.rs, excerpt.sr, excerpt.en),
     "abstract": coalesce(abstract.${lang}, abstract.rs, abstract.sr, abstract.en),
     "mainImage": mainImage.asset->url,
-    "body": coalesce(body.${lang}, body.rs, body.sr, body.en)
+    "body": coalesce(body.${lang}, body.rs, body.sr, body.en),
+    likes,
+    "comments": *[_type == "comment" && post._ref == ^._id] | order(createdAt desc) {
+        _id,
+        name,
+        message,
+        createdAt
+    }
 }`;
