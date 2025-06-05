@@ -92,10 +92,9 @@ fix: Corrected padding issue on Navbar
 
 ---
 
-## ☕ Contact
+💬 Author
+Developed by Half-Half Man,
+Synthesis of Code and Water.
 
-If you'd like to collaborate or have questions –  
-📩 Email me: nikola.mihajlovic1@protonmail.com  
-🌐 Stay tuned: [Website Coming Soon]
-
----
+🔗 Portfolio Website - TBA
+📧 nmihajlovic.dev@gmail.com
