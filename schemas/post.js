@@ -51,13 +51,7 @@ export default {
       title: 'Body',
       type: 'blockContent'
     },
-    {
-      name: 'likes',
-      title: 'Likes',
-      type: 'number',
-      initialValue: 0,
-      validation: Rule => Rule.min(0)
-    },
+
     {
       name: 'comments',
       title: 'Comments',

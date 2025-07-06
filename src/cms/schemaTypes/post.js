@@ -137,12 +137,7 @@ export default defineType({
         }
       ]
     }),
-    defineField({
-      name: 'likes',
-      title: 'Likes',
-      type: 'number',
-      initialValue: 0,
-    }),
+
     defineField({
       name: 'comments',
       title: 'Comments',
