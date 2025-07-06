@@ -13,7 +13,7 @@ const BlogPost = () => {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const [, setLang] = useState(i18n.language);
 
   useEffect(() => {
