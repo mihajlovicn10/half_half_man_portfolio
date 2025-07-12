@@ -91,6 +91,19 @@ const Layout = ({ children }) => {
         {/* Additional Security Headers */}
         <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains" />
         <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+
+        {/* OG Tags */}
+        <meta property="og:title" content = "Half-Half Man - The Synthesis of Code and Water" />
+        <meta property="og:description" content = "More than just a freelance, less than the corporation. Half-Half Man is a state of mind." />
+        <meta property="og:image" content = "https://halfhalfman.com/images/halfhalfman-og-image.png" />
+        <meta property="og:url" content = "https://halfhalfman.com" />
+        <meta property="og:type" content = "website" />
+        <meta property="og:locale" content = "en_US" />
+        <meta property="og:site_name" content = "Half-Half Man" />
+        <meta property="og:image:width" content = "1200" />
+        <meta property="og:image:height" content = "630" />
+        <meta property="og:image:alt" content = "Half-Half Man - The Synthesis of Code and Water" />
+        <meta property="og:image:type" content = "image/png" />
       </Helmet>
       
       <div 
