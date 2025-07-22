@@ -20,27 +20,38 @@ const Blog = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [retryCount, setRetryCount] = useState(0);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         setLoading(true);
         setError(null);
-        const data = await client.fetch(postsQuery(i18n.language));
+        
+        // Add timeout to prevent hanging requests
+        const timeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Request timeout')), 10000)
+        );
+        
+        const fetchPromise = client.fetch(postsQuery(i18n.language));
+        const data = await Promise.race([fetchPromise, timeoutPromise]);
+        
         if (!data) {
           throw new Error('No data received from Sanity');
         }
         setPosts(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error('Error fetching blog posts:', err);
-        setError(t('blog.error.fetchError'));
+        setError(err.message === 'Request timeout' ? 
+          'Blog posts are taking longer than expected to load. Please try again.' : 
+          t('blog.error.fetchError'));
       } finally {
         setLoading(false);
       }
     };
 
     fetchPosts();
-  }, [t, i18n.language]);
+  }, [t, i18n.language, retryCount]);
 
   if (loading) {
     return (
@@ -71,7 +82,7 @@ const Blog = () => {
             <h2 className="text-2xl font-bold text-red-600">{t('blog.error.title')}</h2>
             <p className="mt-2 text-[17px] text-primary/80">{error}</p>
             <button 
-              onClick={() => window.location.reload()}
+              onClick={() => setRetryCount(prev => prev + 1)}
               className="mt-4 px-6 py-3 bg-primary text-white rounded-full font-semibold hover:bg-primary-dark transition-colors duration-300"
             >
               {t('blog.error.tryAgain')}

@@ -14,6 +14,7 @@ const BlogPost = () => {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [retryCount, setRetryCount] = useState(0);
   const { i18n } = useTranslation();
   const [, setLang] = useState(i18n.language);
 
@@ -58,7 +59,13 @@ const BlogPost = () => {
           "body": coalesce(body.${i18n.language}, body.rs, body.sr, body.en)
         }`;
         
-        const result = await client.fetch(query, { slug });
+        // Add timeout to prevent hanging requests
+        const timeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Request timeout')), 10000)
+        );
+        
+        const fetchPromise = client.fetch(query, { slug });
+        const result = await Promise.race([fetchPromise, timeoutPromise]);
         
         if (!result) {
           setError('Post not found');
@@ -68,14 +75,16 @@ const BlogPost = () => {
         setPost(result);
       } catch (err) {
         console.error('Error fetching post:', err);
-        setError(err.message);
+        setError(err.message === 'Request timeout' ? 
+          'Blog post is taking longer than expected to load. Please try again.' : 
+          err.message);
       } finally {
         setLoading(false);
       }
     };
 
     if (slug) fetchPost();
-  }, [slug, i18n.language]);
+  }, [slug, i18n.language, retryCount]);
 
   const handleShare = (platform) => {
     const currentUrl = window.location.href;
@@ -144,7 +153,14 @@ const BlogPost = () => {
             animate={{ opacity: 1 }}
             className="text-center"
           >
-            <p className="text-red-500">{error}</p>
+            <h2 className="text-2xl font-bold text-red-600 mb-4">Error Loading Blog Post</h2>
+            <p className="text-red-500 mb-6">{error}</p>
+            <button 
+              onClick={() => setRetryCount(prev => prev + 1)}
+              className="px-6 py-3 bg-primary text-white rounded-full font-semibold hover:bg-primary-dark transition-colors duration-300"
+            >
+              Try Again
+            </button>
           </motion.div>
         </div>
       </div>

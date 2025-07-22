@@ -5,6 +5,7 @@ import { trackEvent } from '../utils/analytics';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import DOMPurify from 'dompurify';
+import { useSEO } from '../hooks/useSEO';
 // Temporarily commenting out reCAPTCHA for Formspree free plan
 // import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
@@ -18,6 +19,7 @@ const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
   const [validationErrors, setValidationErrors] = useState({});
+  const [calendlyError, setCalendlyError] = useState(false);
   const lastSubmitTime = useRef(0);
   const { t } = useTranslation();
   // Temporarily commenting out reCAPTCHA for Formspree free plan
@@ -366,13 +368,53 @@ const ContactForm = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
               >
-                <InlineWidget
-                  url="https://calendly.com/nikola-mihajlovic1/30min"
-                  styles={{
-                    height: '650px',
-                    width: '100%',
-                  }}
-                />
+                {!calendlyError ? (
+                  <InlineWidget
+                    url="https://calendly.com/nikola-mihajlovic1/30min"
+                    styles={{
+                      height: '650px',
+                      width: '100%',
+                    }}
+                    prefill={{
+                      email: '',
+                      name: '',
+                      firstName: '',
+                      lastName: ''
+                    }}
+                    pageSettings={{
+                      backgroundColor: 'ffffff',
+                      hideEventTypeDetails: false,
+                      hideLandingPageDetails: false,
+                      primaryColor: '2563eb',
+                      textColor: '1f2937'
+                    }}
+                    onLoad={() => setCalendlyError(false)}
+                    onError={() => setCalendlyError(true)}
+                  />
+                ) : (
+                  <div className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+                    <div className="text-gray-500 mb-4">
+                      <svg className="mx-auto h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">
+                      {t('contact.calendly.error.title') || 'Schedule a Call'}
+                    </h3>
+                    <p className="text-gray-600 mb-4">
+                      {t('contact.calendly.error.description') || 'Unable to load the scheduling widget. Please use the contact form below or schedule directly.'}
+                    </p>
+                    <a
+                      href="https://calendly.com/nikola-mihajlovic1/30min"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
+                      onClick={() => trackEvent('Contact', 'Calendly Direct Link', 'Contact Page')}
+                    >
+                      {t('contact.calendly.error.button') || 'Schedule on Calendly'}
+                    </a>
+                  </div>
+                )}
               </motion.div>
             </motion.div>
 
@@ -590,6 +632,15 @@ const ContactForm = () => {
 };
 
 const Contact = () => {
+  // SEO meta tags for Contact page
+  useSEO({
+    title: 'Contact | Half Half Man - Freelance Programmer & Developer',
+    description: 'Get in touch with Half Half Man for freelance programming and web development services. Schedule a call or send a message for expert developer consultation.',
+    keywords: 'contact Half Half Man, freelance programmer contact, developer consultation, web development services, schedule call, hire developer',
+    image: 'https://half-half-man.com/public/images/og-image.jpg',
+    type: 'website'
+  });
+
   return (
     // Temporarily commenting out reCAPTCHA provider for Formspree free plan
     /*

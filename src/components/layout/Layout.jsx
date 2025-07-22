@@ -26,6 +26,7 @@ const Layout = ({ children }) => {
             https://assets.calendly.com
             https://calendly.com
             https://*.calendly.com
+            https://calendly-assets.s3.amazonaws.com
             https://www.googletagmanager.com
             https://www.google-analytics.com
             https://pagead2.googlesyndication.com
@@ -39,6 +40,7 @@ const Layout = ({ children }) => {
             https://assets.calendly.com
             https://calendly.com
             https://*.calendly.com
+            https://calendly-assets.s3.amazonaws.com
             https://www.googletagmanager.com
             https://www.google-analytics.com
             https://pagead2.googlesyndication.com
@@ -50,16 +52,24 @@ const Layout = ({ children }) => {
             https://assets.calendly.com
             https://calendly.com
             https://*.calendly.com
+            https://calendly-assets.s3.amazonaws.com
             https://fonts.googleapis.com;
           style-src-elem 'self' 'unsafe-inline'
             https://assets.calendly.com
             https://calendly.com
             https://*.calendly.com
+            https://calendly-assets.s3.amazonaws.com
             https://fonts.googleapis.com;
           img-src 'self' data: https:
             https://www.google-analytics.com
             https://www.googletagmanager.com
             https://*.sanity.io
+            https://cdn.sanity.io
+            https://api.sanity.io
+            https://assets.calendly.com
+            https://calendly.com
+            https://*.calendly.com
+            https://calendly-assets.s3.amazonaws.com
             https://pagead2.googlesyndication.com
             https://googleads.g.doubleclick.net
             https://tpc.googlesyndication.com
@@ -71,12 +81,16 @@ const Layout = ({ children }) => {
             https://calendly.com
             https://*.calendly.com
             https://assets.calendly.com
+            https://calendly-assets.s3.amazonaws.com
+            https://api.calendly.com
             https://www.google.com
             https://www.googleapis.com
             https://www.googletagmanager.com
             https://www.google-analytics.com
             https://region1.google-analytics.com
             https://*.sanity.io
+            https://api.sanity.io
+            https://cdn.sanity.io
             https://pagead2.googlesyndication.com
             https://googleads.g.doubleclick.net
             https://tpc.googlesyndication.com
@@ -85,12 +99,17 @@ const Layout = ({ children }) => {
           frame-src
             https://calendly.com
             https://*.calendly.com
+            https://assets.calendly.com
+            https://calendly-assets.s3.amazonaws.com
             https://www.google.com
             https://pagead2.googlesyndication.com
             https://googleads.g.doubleclick.net
             https://tpc.googlesyndication.com
             https://adservice.google.com
             https://www.googletagservices.com;
+          object-src 'none';
+          base-uri 'self';
+          form-action 'self' https://formspree.io;
         " />
         <meta http-equiv="X-Content-Type-Options" content="nosniff" />
         <meta http-equiv="X-Frame-Options" content="DENY" />
