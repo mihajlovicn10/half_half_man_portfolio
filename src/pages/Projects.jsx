@@ -8,9 +8,18 @@ import welearngreekThumb from '../assets/images/Projects/List/wlg_home.png';
 import secureAccessThumb from '../assets/images/Projects/List/saf_login.png';
 import bughuntersThumb from '../assets/images/Projects/List/bht_home.png';
 import webflowThumb from '../assets/images/Projects/List/webflow_home.png';
+import { useSEO } from '../hooks/useSEO';
 
 const Projects = () => {
   const { t } = useTranslation();
+  
+  // SEO meta tags for Projects page
+  useSEO({
+    title: 'Projects | Half Half Man - Web Development Portfolio',
+    description: 'Explore my portfolio of web development and security projects. From modern web applications to cybersecurity solutions.',
+    image: 'https://half-half-man.com/public/images/og-image.jpg',
+    type: 'website'
+  });
   const [expanded, setExpanded] = useState(null);
 
   const projects = [

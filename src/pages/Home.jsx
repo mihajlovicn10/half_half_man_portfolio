@@ -9,9 +9,18 @@ import Button from '../components/common/Button';
 import Card from '../components/common/Card';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import logo from '../assets/logo/LOGO.jpg'; 
+import { useSEO } from '../hooks/useSEO';
 
 const Home = () => {
   const { t } = useTranslation();
+  
+  // SEO meta tags for Home page
+  useSEO({
+    title: 'Half Half Man | Web Development & Security Portfolio',
+    description: 'Synthesis of Code and Water – Freelance development, cybersecurity, and digital craft. Explore my portfolio of web development and security projects.',
+    image: 'https://half-half-man.com/public/images/og-image.jpg',
+    type: 'website'
+  });
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [expanded, setExpanded] = useState(null);

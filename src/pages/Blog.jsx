@@ -4,9 +4,18 @@ import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { client, postsQuery } from '../utils/sanityClient';
+import { useSEO } from '../hooks/useSEO';
 
 const Blog = () => {
   const { t, i18n } = useTranslation();
+  
+  // SEO meta tags for Blog page
+  useSEO({
+    title: 'Blog | Half Half Man - Web Development & Security Insights',
+    description: 'Read insights about web development, cybersecurity, and digital innovation. Expert articles on modern web technologies and security best practices.',
+    image: 'https://half-half-man.com/public/images/og-image.jpg',
+    type: 'website'
+  });
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

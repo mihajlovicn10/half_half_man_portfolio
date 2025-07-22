@@ -2,8 +2,16 @@ import { Helmet } from 'react-helmet-async';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { useEffect } from 'react';
+import { useSEO } from '../../hooks/useSEO';
 
 const Layout = ({ children }) => {
+  // Initialize SEO with default meta tags
+  useSEO({
+    title: 'Half Half Man | Web Development & Security',
+    description: 'Synthesis of Code and Water – Freelance development, cybersecurity, and digital craft.',
+    image: 'https://half-half-man.com/public/images/og-image.jpg',
+    type: 'website'
+  });
 
   return (
     <>
@@ -91,6 +99,17 @@ const Layout = ({ children }) => {
         {/* Additional Security Headers */}
         <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains" />
         <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+        
+        {/* SEO Meta Tags - These will be dynamically updated by useSEO hook */}
+        <link rel="canonical" href="https://half-half-man.com" />
+        <link rel="alternate" hreflang="en" href="https://half-half-man.com" />
+        <link rel="alternate" hreflang="it" href="https://half-half-man.com" />
+        <link rel="alternate" hreflang="es" href="https://half-half-man.com" />
+        <link rel="alternate" hreflang="de" href="https://half-half-man.com" />
+        <link rel="alternate" hreflang="fr" href="https://half-half-man.com" />
+        <link rel="alternate" hreflang="el" href="https://half-half-man.com" />
+        <link rel="alternate" hreflang="sr" href="https://half-half-man.com" />
+        <link rel="alternate" hreflang="x-default" href="https://half-half-man.com" />
       </Helmet>
       
       <div 

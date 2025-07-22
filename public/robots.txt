@@ -5,7 +5,7 @@ Allow: /
 Disallow: /admin/
 Disallow: /private/
 Disallow: /dev/ 
-Dissalow: /404 
+Disallow: /404 
 
 # Sitemap location
 Sitemap: https://half-half-man.com/sitemap.xml 

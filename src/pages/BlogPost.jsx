@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import { toast } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
+import { useSEO } from '../hooks/useSEO';
 
 const BlogPost = () => {
   const { slug } = useParams();
@@ -15,6 +16,14 @@ const BlogPost = () => {
   const [error, setError] = useState(null);
   const { i18n } = useTranslation();
   const [, setLang] = useState(i18n.language);
+
+  // SEO meta tags for Blog Post page - will be updated when post is loaded
+  useSEO({
+    title: post ? `${post.title} | Half Half Man Blog` : 'Blog Post | Half Half Man',
+    description: post ? (post.excerpt || `Read ${post.title} on Half Half Man Blog`) : 'Blog post on Half Half Man',
+    image: post?.mainImage || 'https://half-half-man.com/public/images/og-image.jpg',
+    type: 'article'
+  });
 
   useEffect(() => {
     const onLangChange = () => setLang(i18n.language);
@@ -57,22 +66,6 @@ const BlogPost = () => {
         }
 
         setPost(result);
-
-        // Update meta tags for prerendering
-        if (typeof window !== 'undefined') {
-          const metaTags = document.getElementsByTagName('meta');
-          for (let i = 0; i < metaTags.length; i++) {
-            if (metaTags[i].getAttribute('property') === 'og:title') {
-              metaTags[i].setAttribute('content', result.title);
-            }
-            if (metaTags[i].getAttribute('property') === 'og:description') {
-              metaTags[i].setAttribute('content', result.excerpt || `Read ${result.title} on Half Half Man Blog`);
-            }
-            if (metaTags[i].getAttribute('property') === 'og:image') {
-              metaTags[i].setAttribute('content', result.mainImage);
-            }
-          }
-        }
       } catch (err) {
         console.error('Error fetching post:', err);
         setError(err.message);
