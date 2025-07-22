@@ -103,6 +103,17 @@ export const useSEO = (customMeta = {}) => {
       if (title) updateTwitterTag('title', title);
       if (description) updateTwitterTag('description', description);
       if (image) updateTwitterTag('image', image);
+
+      // Update Keywords meta tag
+      if (keywords) {
+        let keywordsTag = document.querySelector('meta[name="keywords"]');
+        if (!keywordsTag) {
+          keywordsTag = document.createElement('meta');
+          keywordsTag.name = 'keywords';
+          document.head.appendChild(keywordsTag);
+        }
+        keywordsTag.content = keywords;
+      }
     };
 
     updateMetaTags();

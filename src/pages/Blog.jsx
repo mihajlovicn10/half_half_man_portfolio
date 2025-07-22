@@ -11,8 +11,9 @@ const Blog = () => {
   
   // SEO meta tags for Blog page
   useSEO({
-    title: 'Blog | Half Half Man - Web Development & Security Insights',
-    description: 'Read insights about web development, cybersecurity, and digital innovation. Expert articles on modern web technologies and security best practices.',
+    title: 'Blog | Half Half Man - Freelance Programmer & Developer Insights',
+    description: 'Developer blog with insights on web development, React, cybersecurity, and programming. Expert articles from Half Half Man - freelance programmer and developer.',
+    keywords: 'Half Half Man blog, developer blog, programmer blog, web development blog, React blog, cybersecurity blog, coding blog, programming insights, developer articles, freelance developer blog',
     image: 'https://half-half-man.com/public/images/og-image.jpg',
     type: 'website'
   });

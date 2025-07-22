@@ -9,6 +9,7 @@ const Layout = ({ children }) => {
   useSEO({
     title: 'Half Half Man | Web Development & Security',
     description: 'Synthesis of Code and Water – Freelance development, cybersecurity, and digital craft.',
+    keywords: 'Half Half Man, freelance programmer, developer, web development, cybersecurity, React developer, security consultant, freelance developer, programmer, blog, coding, software development',
     image: 'https://half-half-man.com/public/images/og-image.jpg',
     type: 'website'
   });

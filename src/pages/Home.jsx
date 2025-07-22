@@ -16,8 +16,9 @@ const Home = () => {
   
   // SEO meta tags for Home page
   useSEO({
-    title: 'Half Half Man | Web Development & Security Portfolio',
-    description: 'Synthesis of Code and Water – Freelance development, cybersecurity, and digital craft. Explore my portfolio of web development and security projects.',
+    title: 'Half Half Man | Freelance Programmer & Developer - Web Development & Security',
+    description: 'Professional freelance programmer and developer specializing in web development, React, and cybersecurity. Expert developer services and portfolio. Half Half Man - your trusted developer partner.',
+    keywords: 'Half Half Man, freelance programmer, developer, web development, React developer, cybersecurity, freelance developer, programmer, coding, software development, web developer, frontend developer, backend developer, security consultant',
     image: 'https://half-half-man.com/public/images/og-image.jpg',
     type: 'website'
   });
