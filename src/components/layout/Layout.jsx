@@ -3,7 +3,6 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { useEffect } from 'react';
 import { useSEO } from '../../hooks/useSEO';
-import GoogleAnalytics from '../analytics/GoogleAnalytics';
 
 const Layout = ({ children }) => {
   // Initialize SEO with default meta tags
