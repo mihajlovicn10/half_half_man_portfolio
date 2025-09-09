@@ -1,0 +1,27 @@
+# Netlify redirects file for SEO
+# This file handles protocol and subdomain redirects
+
+# Force HTTPS and non-www
+http://www.half-half-man.com/* https://half-half-man.com/:splat 301!
+http://half-half-man.com/* https://half-half-man.com/:splat 301!
+https://www.half-half-man.com/* https://half-half-man.com/:splat 301!
+
+# Remove trailing slashes (except for root)
+/*/ /:splat 301!
+
+# Handle case sensitivity
+/Projects /projects 301!
+/Blog /blog 301!
+/Contact /contact 301!
+/Tech-Stack /tech-stack 301!
+/Faq /faq 301!
+/Privacy-Policy /privacy-policy 301!
+
+# Handle old tech-stack URLs (redirect to correct ones)
+/tech-stack/security /tech-stack/cybersecurity-practices 301!
+/tech-stack/backend /tech-stack/code-engineering 301!
+/tech-stack/frontend /tech-stack/nocode-solutions 301!
+/tech-stack/tools /tech-stack/optimization-maintenance 301!
+
+# Handle React Router (SPA) - must be last
+/* /index.html 200
