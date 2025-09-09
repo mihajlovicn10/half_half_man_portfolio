@@ -48,7 +48,8 @@ const Layout = ({ children }) => {
             https://googleads.g.doubleclick.net
             https://tpc.googlesyndication.com
             https://adservice.google.com
-            https://www.googletagservices.com;
+            https://www.googletagservices.com
+            https://fundingchoicesmessages.google.com;
           style-src 'self' 'unsafe-inline'
             https://assets.calendly.com
             https://calendly.com
