@@ -91,6 +91,7 @@ const Layout = ({ children }) => {
             https://www.google-analytics.com
             https://region1.google-analytics.com
             https://ep1.adtrafficquality.google
+            https://fundingchoicesmessages.google.com
             https://*.sanity.io
             https://api.sanity.io
             https://cdn.sanity.io
