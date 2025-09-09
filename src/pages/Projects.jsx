@@ -20,6 +20,8 @@ const Projects = () => {
     image: 'https://half-half-man.com/public/images/og-image.jpg',
     type: 'website'
   });
+
+
   const [expanded, setExpanded] = useState(null);
 
   const projects = [

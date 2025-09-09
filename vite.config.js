@@ -18,4 +18,9 @@ export default defineConfig({
     minify: 'esbuild',
     cssMinify: true,
   },
+  // Add trailing slash handling for better SEO
+  preview: {
+    port: 4173,
+    strictPort: true,
+  },
 })

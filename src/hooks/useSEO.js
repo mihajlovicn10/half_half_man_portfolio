@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { generateCanonicalUrl, generateAlternateUrls } from '../utils/seo';
+import { generateCanonicalUrl, generateAlternateUrls, ensureConsistentCanonical } from '../utils/seo';
+import { normalizePath, shouldRedirect, normalizeFullUrl, shouldRedirectUrl, checkOldUrlRedirect } from '../utils/redirects';
 
 export const useSEO = (customMeta = {}) => {
   const location = useLocation();
@@ -18,42 +19,83 @@ export const useSEO = (customMeta = {}) => {
   } = customMeta;
 
   useEffect(() => {
-    // Generate canonical URL for current page
-    const canonicalUrl = generateCanonicalUrl(location.pathname);
-    const alternateUrls = generateAlternateUrls(location.pathname);
+    // Check for old URL redirects first (to prevent Soft 404s)
+    const oldUrlRedirect = checkOldUrlRedirect(location.pathname);
+    if (oldUrlRedirect) {
+      // Redirect to the correct URL
+      window.location.replace(oldUrlRedirect);
+      return;
+    }
+    
+    // Normalize the current full URL to prevent duplicates
+    const currentFullUrl = window.location.href;
+    const normalizedFullUrl = normalizeFullUrl(currentFullUrl);
+    
+    // Check if we need to redirect to the canonical URL
+    if (shouldRedirectUrl(currentFullUrl, normalizedFullUrl)) {
+      // Replace the current URL with the normalized version
+      window.history.replaceState(null, '', normalizedFullUrl);
+    }
+    
+    // Normalize the current path to prevent duplicates
+    const normalizedPath = normalizePath(location.pathname);
+    
+    // Check if we need to redirect to the canonical URL
+    if (shouldRedirect(location.pathname, normalizedPath)) {
+      // Replace the current URL with the normalized version
+      window.history.replaceState(null, '', normalizedPath);
+    }
+    
+    // Generate canonical URL for current page using normalized path
+    // Always use the normalized path to ensure consistency
+    const canonicalUrl = generateCanonicalUrl(normalizedPath);
+    const alternateUrls = generateAlternateUrls(normalizedPath);
+    
+    // Ensure canonical URL is always correct regardless of current URL variation
+    const expectedCanonical = generateCanonicalUrl(location.pathname);
+    if (canonicalUrl !== expectedCanonical) {
+      console.warn('Canonical URL mismatch, using expected:', expectedCanonical);
+    }
     
     // Update document head with SEO meta tags
     const updateMetaTags = () => {
-      // Canonical URL
-      let canonical = document.querySelector('link[rel="canonical"]');
-      if (!canonical) {
-        canonical = document.createElement('link');
-        canonical.rel = 'canonical';
-        document.head.appendChild(canonical);
-      }
+      // Remove any existing canonical tags to prevent duplicates
+      const existingCanonicals = document.querySelectorAll('link[rel="canonical"]');
+      existingCanonicals.forEach(canonical => canonical.remove());
+      
+      // Create new canonical tag
+      const canonical = document.createElement('link');
+      canonical.rel = 'canonical';
       canonical.href = canonicalUrl;
+      document.head.appendChild(canonical);
+      
+      // Debug logging (remove in production)
+      console.log('SEO: Setting canonical URL to:', canonicalUrl);
+      
+      // Ensure canonical consistency after a short delay
+      setTimeout(() => {
+        ensureConsistentCanonical();
+      }, 100);
 
+      // Remove existing alternate tags to prevent duplicates
+      const existingAlternates = document.querySelectorAll('link[rel="alternate"][hreflang]');
+      existingAlternates.forEach(alternate => alternate.remove());
+      
       // Alternate language URLs
       Object.entries(alternateUrls).forEach(([lang, url]) => {
-        let alternate = document.querySelector(`link[rel="alternate"][hreflang="${lang}"]`);
-        if (!alternate) {
-          alternate = document.createElement('link');
-          alternate.rel = 'alternate';
-          alternate.hreflang = lang;
-          document.head.appendChild(alternate);
-        }
+        const alternate = document.createElement('link');
+        alternate.rel = 'alternate';
+        alternate.hreflang = lang;
         alternate.href = url;
+        document.head.appendChild(alternate);
       });
 
       // Default alternate (x-default)
-      let defaultAlternate = document.querySelector('link[rel="alternate"][hreflang="x-default"]');
-      if (!defaultAlternate) {
-        defaultAlternate = document.createElement('link');
-        defaultAlternate.rel = 'alternate';
-        defaultAlternate.hreflang = 'x-default';
-        document.head.appendChild(defaultAlternate);
-      }
+      const defaultAlternate = document.createElement('link');
+      defaultAlternate.rel = 'alternate';
+      defaultAlternate.hreflang = 'x-default';
       defaultAlternate.href = canonicalUrl;
+      document.head.appendChild(defaultAlternate);
 
       // Robots meta tag
       let robots = document.querySelector('meta[name="robots"]');
@@ -120,7 +162,7 @@ export const useSEO = (customMeta = {}) => {
   }, [location.pathname, i18n.language, title, description, image, type, noindex, nofollow]);
 
   return {
-    canonicalUrl: generateCanonicalUrl(location.pathname),
-    alternateUrls: generateAlternateUrls(location.pathname)
+    canonicalUrl: generateCanonicalUrl(normalizePath(location.pathname)),
+    alternateUrls: generateAlternateUrls(normalizePath(location.pathname))
   };
 }; 

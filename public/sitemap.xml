@@ -87,30 +87,30 @@
     <priority>0.8</priority>
   </url>
   
-  <!-- Tech Stack Detail Pages (Static URLs for known categories) -->
+  <!-- Tech Stack Detail Pages (Correct URLs matching actual routes) -->
   <url>
-    <loc>https://half-half-man.com/tech-stack/frontend</loc>
+    <loc>https://half-half-man.com/tech-stack/code-engineering</loc>
     <lastmod>2025-07-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://half-half-man.com/tech-stack/backend</loc>
+    <loc>https://half-half-man.com/tech-stack/nocode-solutions</loc>
     <lastmod>2025-07-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://half-half-man.com/tech-stack/security</loc>
+    <loc>https://half-half-man.com/tech-stack/cybersecurity-practices</loc>
     <lastmod>2025-07-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://half-half-man.com/tech-stack/tools</loc>
+    <loc>https://half-half-man.com/tech-stack/optimization-maintenance</loc>
     <lastmod>2025-07-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

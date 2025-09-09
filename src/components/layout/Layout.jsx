@@ -41,6 +41,7 @@ const Layout = ({ children }) => {
             https://calendly.com
             https://*.calendly.com
             https://calendly-assets.s3.amazonaws.com
+            https://ep2.adtrafficquality.google
             https://www.googletagmanager.com
             https://www.google-analytics.com
             https://pagead2.googlesyndication.com
@@ -88,6 +89,7 @@ const Layout = ({ children }) => {
             https://www.googletagmanager.com
             https://www.google-analytics.com
             https://region1.google-analytics.com
+            https://ep1.adtrafficquality.google
             https://*.sanity.io
             https://api.sanity.io
             https://cdn.sanity.io
@@ -121,15 +123,7 @@ const Layout = ({ children }) => {
         <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
         
         {/* SEO Meta Tags - These will be dynamically updated by useSEO hook */}
-        <link rel="canonical" href="https://half-half-man.com" />
-        <link rel="alternate" hreflang="en" href="https://half-half-man.com" />
-        <link rel="alternate" hreflang="it" href="https://half-half-man.com" />
-        <link rel="alternate" hreflang="es" href="https://half-half-man.com" />
-        <link rel="alternate" hreflang="de" href="https://half-half-man.com" />
-        <link rel="alternate" hreflang="fr" href="https://half-half-man.com" />
-        <link rel="alternate" hreflang="el" href="https://half-half-man.com" />
-        <link rel="alternate" hreflang="sr" href="https://half-half-man.com" />
-        <link rel="alternate" hreflang="x-default" href="https://half-half-man.com" />
+        {/* Canonical and alternate URLs are handled by useSEO hook per page */}
       </Helmet>
       
       <div 

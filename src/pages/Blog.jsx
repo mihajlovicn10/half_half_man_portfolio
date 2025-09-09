@@ -17,6 +17,9 @@ const Blog = () => {
     image: 'https://half-half-man.com/public/images/og-image.jpg',
     type: 'website'
   });
+
+
+
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -177,8 +180,42 @@ const Blog = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className="text-center"
                 >
-                  <p className="text-[17px] text-primary/80">{t('blog.noPosts.message')}</p>
-                  <p className="mt-2 text-sm text-primary/60">{t('blog.noPosts.checkBack')}</p>
+                  <h2 className="text-2xl font-semibold text-primary mb-4">Coming Soon: Developer Blog</h2>
+                  <p className="text-[17px] text-primary/80 mb-6">
+                    We're preparing exciting content about web development, cybersecurity, and programming. 
+                    Check back soon for in-depth articles and tutorials.
+                  </p>
+                  
+                  {/* Fallback content for SEO */}
+                  <div className="text-left max-w-4xl mx-auto">
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="bg-white/50 p-6 rounded-lg border">
+                        <h3 className="text-xl font-semibold text-primary mb-3">Web Development</h3>
+                        <p className="text-primary/70 mb-3">
+                          Learn about modern web development practices, React best practices, and JavaScript frameworks.
+                        </p>
+                        <ul className="text-sm text-primary/60 space-y-1">
+                          <li>• React & Next.js Development</li>
+                          <li>• JavaScript ES6+ Features</li>
+                          <li>• CSS & Tailwind CSS</li>
+                          <li>• API Development & Integration</li>
+                        </ul>
+                      </div>
+                      
+                      <div className="bg-white/50 p-6 rounded-lg border">
+                        <h3 className="text-xl font-semibold text-primary mb-3">Cybersecurity</h3>
+                        <p className="text-primary/70 mb-3">
+                          Discover security best practices, vulnerability assessment, and penetration testing techniques.
+                        </p>
+                        <ul className="text-sm text-primary/60 space-y-1">
+                          <li>• Web Application Security</li>
+                          <li>• Penetration Testing</li>
+                          <li>• Security Auditing</li>
+                          <li>• Vulnerability Management</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                 </motion.div>
               )}
             </div>
