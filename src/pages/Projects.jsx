@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -59,6 +59,46 @@ const Projects = () => {
 
   const toggle = (index) => {
     setExpanded(expanded === index ? null : index);
+  };
+
+  // Restore scroll position and expanded project when navigating back from detail
+  useEffect(() => {
+    const storedState = sessionStorage.getItem('hhm_projects_state');
+    if (!storedState) return;
+
+    try {
+      const { scrollY, expandedIndex } = JSON.parse(storedState);
+
+      if (typeof expandedIndex === 'number') {
+        setExpanded(expandedIndex);
+      }
+
+      // Defer scroll until after paint to avoid layout thrash
+      requestAnimationFrame(() => {
+        window.scrollTo({
+          top: typeof scrollY === 'number' ? scrollY : 0,
+          behavior: 'instant',
+        });
+      });
+    } catch (e) {
+      console.error('Failed to restore projects state:', e);
+    } finally {
+      // Clear state so fresh visits to /projects don't use stale data
+      sessionStorage.removeItem('hhm_projects_state');
+    }
+  }, []);
+
+  const handleProjectNavigate = (index) => {
+    const state = {
+      scrollY: window.scrollY,
+      expandedIndex: index,
+      timestamp: Date.now(),
+    };
+    try {
+      sessionStorage.setItem('hhm_projects_state', JSON.stringify(state));
+    } catch (e) {
+      console.error('Failed to persist projects state:', e);
+    }
   };
 
   return (
@@ -135,6 +175,7 @@ const Projects = () => {
                           <div className="text-[17px] text-primary/80 leading-relaxed relative z-10">
                             <Link 
                               to={`/projects/${project.slug}`}
+                              onClick={() => handleProjectNavigate(index)}
                               className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-full font-semibold hover:bg-primary-dark transition-colors duration-300 group"
                             >
                               {t('projects.viewDetails')}

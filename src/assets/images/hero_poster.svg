@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Half Half Man hero poster">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#020617" />
+      <stop offset="45%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c1c3" />
+      <stop offset="100%" stop-color="#0ea5e9" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)" />
+
+  <!-- Abstract "code & water" waves -->
+  <path d="M0 650 C 200 600 400 700 600 660 C 800 620 1000 700 1200 660 C 1400 620 1500 640 1600 620 L1600 900 L0 900 Z"
+        fill="url(#accent)" fill-opacity="0.25" />
+  <path d="M0 700 C 220 670 420 740 640 710 C 860 680 1040 740 1260 710 C 1460 685 1540 690 1600 680 L1600 900 L0 900 Z"
+        fill="url(#accent)" fill-opacity="0.18" />
+
+  <!-- Matrix-like columns -->
+  <g fill="#22c1c3" fill-opacity="0.18" font-family="monospace" font-size="16">
+    <text x="180" y="180">&lt;code/&gt;</text>
+    <text x="260" y="240">0x01</text>
+    <text x="320" y="320">async</text>
+    <text x="380" y="220">secure()</text>
+    <text x="1260" y="260">hydrate()</text>
+    <text x="1180" y="340">LCP</text>
+    <text x="1320" y="190">CSR</text>
+  </g>
+
+  <!-- Title -->
+  <text x="120" y="280" fill="#e5f2ff" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Poppins', sans-serif"
+        font-weight="600" font-size="52">
+    Half Half Man
+  </text>
+  <text x="120" y="340" fill="#bae6fd" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Poppins', sans-serif"
+        font-weight="400" font-size="26">
+    Synthesis of Code and Water – Web Development & Security
+  </text>
+
+  <!-- Tagline -->
+  <rect x="120" y="380" rx="28" ry="28" width="420" height="56" fill="rgba(15,23,42,0.85)" />
+  <text x="150" y="416" fill="#7dd3fc" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Poppins', sans-serif"
+        font-weight="500" font-size="20">
+    Performance-focused. Security-aware. Story-driven.
+  </text>
+</svg>
+
+

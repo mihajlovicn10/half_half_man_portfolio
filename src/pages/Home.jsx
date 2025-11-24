@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import heroVideo from '../assets/videos/hero_video.mp4';
+import heroPoster from '../assets/images/hero_poster.svg';
 import giotaPhoto from '../assets/images/testimonials/giota_gatsi.jpeg';
 import rastkoPhoto from '../assets/images/testimonials/rastko_vicic.jpeg';
 import servicesBackground from '../assets/images/services_background.jpg';
@@ -25,6 +26,7 @@ const Home = () => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [expanded, setExpanded] = useState(null);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   const heroRef = useRef(null); 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -50,6 +52,31 @@ const Home = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  // Lazy-load hero video when hero section enters viewport
+  useEffect(() => {
+    if (!heroRef.current || shouldLoadVideo) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          setShouldLoadVideo(true);
+          observer.disconnect();
+        }
+      },
+      {
+        root: null,
+        threshold: 0.2,
+      }
+    );
+
+    observer.observe(heroRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [shouldLoadVideo]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -141,19 +168,29 @@ const Home = () => {
     <div className="min-h-screen bg-tertiary w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-16">
       <motion.div 
         ref={heroRef}
-        style={{ y, opacity }}
+        style={{ 
+          y, 
+          opacity,
+          backgroundImage: `url(${heroPoster})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
         className="relative w-full h-screen overflow-hidden"
       >
-        <video
-          className="absolute top-0 left-0 w-full h-full object-cover"
-          autoPlay
-          loop
-          muted
-          playsInline
-        >
-          <source src={heroVideo} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        {shouldLoadVideo && (
+          <video
+            className="absolute top-0 left-0 w-full h-full object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            poster={heroPoster}
+          >
+            <source src={heroVideo} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        )}
         
         {/* Single overlay with matrix effect */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/50">
