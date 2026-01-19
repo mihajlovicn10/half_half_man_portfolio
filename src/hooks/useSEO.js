@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { generateCanonicalUrl, generateAlternateUrls, ensureConsistentCanonical } from '../utils/seo';
-import { normalizePath, shouldRedirect, normalizeFullUrl, shouldRedirectUrl, checkOldUrlRedirect } from '../utils/redirects';
+import { normalizePath, checkOldUrlRedirect } from '../utils/redirects';
 
 export const useSEO = (customMeta = {}) => {
   const location = useLocation();
@@ -27,27 +27,10 @@ export const useSEO = (customMeta = {}) => {
       return;
     }
     
-    // Normalize the current full URL to prevent duplicates
-    const currentFullUrl = window.location.href;
-    const normalizedFullUrl = normalizeFullUrl(currentFullUrl);
-    
-    // Check if we need to redirect to the canonical URL
-    if (shouldRedirectUrl(currentFullUrl, normalizedFullUrl)) {
-      // Replace the current URL with the normalized version
-      window.history.replaceState(null, '', normalizedFullUrl);
-    }
-    
-    // Normalize the current path to prevent duplicates
+    // Generate canonical URL for current page using a normalized path.
+    // We no longer touch the browser History API here to avoid any
+    // cross‑origin issues – URL canonicalization is handled by the server/CDN.
     const normalizedPath = normalizePath(location.pathname);
-    
-    // Check if we need to redirect to the canonical URL
-    if (shouldRedirect(location.pathname, normalizedPath)) {
-      // Replace the current URL with the normalized version
-      window.history.replaceState(null, '', normalizedPath);
-    }
-    
-    // Generate canonical URL for current page using normalized path
-    // Always use the normalized path to ensure consistency
     const canonicalUrl = generateCanonicalUrl(normalizedPath);
     const alternateUrls = generateAlternateUrls(normalizedPath);
     
