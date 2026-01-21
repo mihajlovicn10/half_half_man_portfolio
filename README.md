@@ -96,5 +96,5 @@ fix: Corrected padding issue on Navbar
 Developed by Half-Half Man,
 Synthesis of Code and Water.
 
-🔗 Portfolio Website - TBA
+🔗 Portfolio Website - www.half-half-man.com
 📧 nmihajlovic.dev@gmail.com
