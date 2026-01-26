@@ -16,29 +16,29 @@ Legend:
 ## P0 — Correctness / Risk / Security
 
 ### SEO correctness
-- [ ] **Fix OG/Twitter image URL correctness**
-  - [ ] Fix `og:image` / `twitter:image` to point to real public URLs (avoid `/public/...` in production URLs).
-  - [ ] Validate with “View Source” + social debuggers after deploy (Facebook/LinkedIn/Twitter).
+- [x] **Fix OG/Twitter image URL correctness**
+  - [x] Fix `og:image` / `twitter:image` to point to real public URLs (avoid `/public/...` in production URLs).
+  - [ ] Validate with “View Source” + social debuggers after deploy (Facebook/LinkedIn/Twitter).  - facebook OK, X and Linkedin TBD after creation of social media 
 
 ### Security headers + sanitization
-- [ ] **Helmet meta correctness**
-  - [ ] Ensure Helmet uses `httpEquiv` (not `http-equiv`) so security meta tags actually render as intended.
-- [ ] **CSP hardening**
-  - [ ] Gradually remove `unsafe-inline` and `unsafe-eval` by:
-    - [ ] moving inline scripts into separate files,
-    - [ ] using nonces or hashes where needed.
-- [ ] **Sanitization**
-  - [ ] Continue using DOMPurify for all user-provided input and any rich content rendered from CMS where necessary.
+- [x] **Helmet meta correctness**
+  - [x] Ensure Helmet uses `httpEquiv` (not `http-equiv`) so security meta tags actually render as intended.
+- [x] **CSP hardening**
+  - [x] Gradually remove `unsafe-inline` and `unsafe-eval` by:
+    - [x] moving inline scripts into separate files,
+    - [x] using nonces or hashes where needed.
+- [x] **Sanitization**
+  - [x] Continue using DOMPurify for all user-provided input and any rich content rendered from CMS where necessary.
 
 ### App resilience (frontend-only)
-- [ ] **Error handling & routing**
-  - [ ] Add a React **Error Boundary** with a friendly fallback UI + “Reload” button.
-  - [ ] Add a proper **404 / Not Found** route with clear navigation back to key pages.
+- [x] **Error handling & routing**
+  - [x] Add a React **Error Boundary** with a friendly fallback UI + “Reload” button.
+  - [x] Add a proper **404 / Not Found** route with clear navigation back to key pages.
 
 ### Layout consistency (global)
-- [ ] **Root + page layout**
-  - [ ] Remove/avoid global `#root` max-width + “center everything” defaults (move spacing to page containers instead).
-  - [ ] Standardize a container pattern across pages/sections (e.g. `container + responsive padding`) so alignment is consistent.
+- [x] **Root + page layout**
+  - [x] Remove/avoid global `#root` max-width + “center everything” defaults (move spacing to page containers instead).
+  - [x] Standardize a container pattern across pages/sections (e.g. `container + responsive padding`) so alignment is consistent.
 
 ---
 
@@ -60,7 +60,7 @@ Legend:
     - [x] scroll position
     - [x] which project card was expanded.
 
-### Loading & error experience
+### Loading & error experience - excluded as the loader is not needed 
 - [ ] **Loader behavior**
   - [ ] Replace the fixed 5s first-visit loader with a shorter, content-aware loader (and/or add “Skip”).
 - [ ] **Skeletons & loading states**
@@ -73,38 +73,38 @@ Legend:
   - [ ] Friendly, branded empty/error screens (e.g. when Sanity is down or there are no posts yet), with suggested next actions.
 
 ### Accessibility (site-wide)
-- [ ] **Keyboard navigation**
-  - [ ] Ensure all interactive components (navbar dropdown, FAQ/Privacy accordions, chatbot, modals) are keyboard accessible.
-- [ ] **Clickable cards**
-  - [ ] Ensure clickable cards are fully keyboard operable (Enter/Space) and have clear focus styles.
-- [ ] **Modal improvements**
-  - [ ] close on `Esc`, focus trap, restore focus on close.
-- [ ] **Focus visibility**
-  - [ ] Standardize `:focus-visible` styles across the site (links/buttons/cards) so keyboard users always see where they are.
-- [ ] **Reduced motion**
-  - [ ] Respect `prefers-reduced-motion` by disabling/reducing non-essential animations (loader, chatbot, page transitions).
-- [ ] **ARIA & semantics**
-  - [ ] Verify all menus, buttons, dialogs, and accordions use:
-    - [ ] correct roles
-    - [ ] `aria-expanded`, `aria-controls`, `aria-labelledby` etc.
-- [ ] **Color contrast**
-  - [ ] Audit colors against WCAG AA, adjust if needed (especially light text on gradients).
+- [x] **Keyboard navigation**
+  - [x] Ensure all interactive components (navbar dropdown, FAQ/Privacy accordions, chatbot, modals) are keyboard accessible.
+- [x] **Clickable cards**
+  - [x] Ensure clickable cards are fully keyboard operable (Enter/Space) and have clear focus styles.
+- [x] **Modal improvements**
+  - [x] close on `Esc`, focus trap, restore focus on close.
+- [x] **Focus visibility**
+  - [x] Standardize `:focus-visible` styles across the site (links/buttons/cards) so keyboard users always see where they are.
+- [x] **Reduced motion**
+  - [x] Respect `prefers-reduced-motion` by disabling/reducing non-essential animations (loader, chatbot, page transitions).
+- [x] **ARIA & semantics**
+  - [x] Verify all menus, buttons, dialogs, and accordions use:
+    - [x] correct roles
+    - [x] `aria-expanded`, `aria-controls`, `aria-labelledby` etc.
+- [x] **Color contrast**
+  - [x] Audit colors against WCAG AA, adjust if needed (especially light text on gradients).
 
 ### Blog UX (readability)
-- [ ] **Typography + layout for articles**
-  - [ ] Constrain article width for readability (prose-like styles, better spacing).
-  - [ ] Ensure heading hierarchy is consistent (one `h1`, clean `h2/h3` structure).
+- [x] **Typography + layout for articles**
+  - [x] Constrain article width for readability (prose-like styles, better spacing).
+  - [x] Ensure heading hierarchy is consistent (one `h1`, clean `h2/h3` structure).
 
 ### Contact UX (conversion)
-- [ ] **Validation & success flow**
-  - [ ] Add real-time validation with clear inline errors and a proper success state.
-  - [ ] After successful submit: show “next steps” (Calendly / email / FAQ link) instead of leaving the user at a dead-end.
-- [ ] **Calendly UX**
-  - [ ] Show a short bullet list above the widget:
-    - [ ] what happens on the call
-    - [ ] who it is for / not for.
+- [x] **Validation & success flow**
+  - [x] Add real-time validation with clear inline errors and a proper success state.
+  - [x] After successful submit: show “next steps” (Calendly / email / FAQ link) instead of leaving the user at a dead-end.
+- [x] **Calendly UX**
+  - [x] Show a short bullet list above the widget:
+    - [x] what happens on the call
+    - [x] who it is for / not for.
 
-### Chatbot UX
+### Chatbot UX - To be done as the NLP is implemented on Chatbot.jsx 
 - [ ] **Non-intrusive behavior**
   - [ ] If user closes chatbot, remember “dismissed” for a while and don’t re-prompt aggressively.
   - [ ] Make the floating button smaller on mobile and ensure it doesn’t block important UI.
@@ -117,7 +117,7 @@ Legend:
 
 ## P2 — Performance + SEO Growth
 
-### Performance / Core Web Vitals
+### Performance / Core Web Vitals - TBD during maintenance 
 - [ ] **Asset optimization**
   - [ ] Optimize hero video (short loop, modern codec, multiple resolutions).
   - [ ] Ensure all non-critical images:
@@ -135,53 +135,52 @@ Legend:
   - [ ] Introduce simple caching / memoization on client where repeated queries happen.
 
 ### SEO enhancements
-- [ ] **Per-page OG & Twitter Cards**
-  - [ ] Ensure every page has:
-    - [ ] unique `og:title`, `og:description`, `og:image`, `og:url`.
-  - [ ] For Projects and Blog posts:
-    - [ ] generate or at least manually create dedicated OG images.
-- [ ] **Structured data**
-  - [ ] Add JSON-LD for:
-    - [ ] `Organization` / `Person` on Home.
-    - [ ] `Service` for key offerings (Web dev, Security, Courses).
-    - [ ] `Project` schema for portfolio items.
-    - [ ] `BreadcrumbList` on hierarchical pages (Projects, Blog, Tech Stack).
-- [ ] **Internal linking strategy**
-  - [ ] Inside blog posts:
-    - [ ] link to Projects, Services, Tech Stack and relevant FAQs.
-  - [ ] On Projects:
-    - [ ] link back to blog posts explaining decisions/tech behind them.
+- [x] **Per-page OG & Twitter Cards**
+  - [x] Ensure every page has:
+    - [x] unique `og:title`, `og:description`, `og:image`, `og:url`.
+  - [x] For Projects and Blog posts:
+    - [x] generate or at least manually create dedicated OG images.
+- [x] **Structured data**
+  - [x] Add JSON-LD for:
+    - [x] `Organization` / `Person` on Home.
+    - [x] `Service` for key offerings (Web dev, Security, Courses).
+    - [x] `Project` schema for portfolio items.
+    - [x] `BreadcrumbList` on hierarchical pages (Projects, Blog, Tech Stack).
+- [x] **Internal linking strategy**
+  - [x] Inside blog posts:
+    - [x] link to Projects, Services, Tech Stack and relevant FAQs.
+  - [x] On Projects:
+    - [x] link back to blog posts explaining decisions/tech behind them.
 
 ### Security & privacy (frontend-only)
-- [ ] **Contact form protections**
-  - [ ] Keep rate limiting and validation.
-  - [ ] Add:
-    - [ ] hidden honeypot field
-    - [ ] simple behavior-based checks (time on page, minimum time before submit).
-  - [ ] Later (with backend): server-side verification and logging.
-- [ ] **Consent management**
-  - [ ] Because of GA4 and AdSense:
-    - [ ] add cookie banner with categories (necessary / analytics / ads).
-    - [ ] wire GA and AdSense initialization to user consent preferences.
+  - [x] Keep rate limiting and validation.
+  - [x] Add:
+    - [x] hidden honeypot field
+    - [x] simple behavior-based checks (time on page, minimum time before submit).
+  - [x] Later (with backend): server-side verification and logging.
+- [x] **Consent management**
+  - [x] Because of GA4 and AdSense:
+    - [x] add cookie banner with categories (necessary / analytics / ads).
+    - [x] wire GA and AdSense initialization to user consent preferences.
 
 ### UI / visual modernization
-- [ ] **Dark mode support**
+- [ ] **Dark mode support** - rejected as it didn't pass implementation test 
   - [ ] Add theme toggle (light/dark) aligned with brand (code + water).
   - [ ] Respect system preference by default; persist choice in `localStorage`.
   - [ ] Ensure dark mode is actually wired end-to-end (some components already use `dark:*` classes).
-- [ ] **Micro-interactions**
-  - [ ] Use micro-animations instead of heavy motion:
-    - [ ] hover/focus rings,
-    - [ ] small parallax on hero/section backgrounds,
-    - [ ] spring transitions on primary CTAs.
-  - [ ] Define “motion tokens” (duration/easing) and reuse them for consistency across components/pages.
-- [ ] **Component-level polish**
-  - [ ] Buttons:
-    - [ ] clearer focus styles,
-    - [ ] loading states where needed.
-  - [ ] Cards:
-    - [ ] consistent hover elevation and scale,
-    - [ ] better use of icons and labels.
+- [x] **Micro-interactions**
+  - [x] Use micro-animations instead of heavy motion:
+    - [x] hover/focus rings,
+    - [x] small parallax on hero/section backgrounds,
+    - [x] spring transitions on primary CTAs.
+  - [x] Define “motion tokens” (duration/easing) and reuse them for consistency across components/pages.
+- [x] **Component-level polish**
+  - [x] Buttons:
+    - [x] clearer focus styles,
+    - [x] loading states where needed.
+  - [x] Cards:
+    - [x] consistent hover elevation and scale,
+    - [x] better use of icons and labels.
 
 ### Analytics & experimentation
 - [ ] **Analytics model**
@@ -189,7 +188,7 @@ Legend:
     - [ ] `view_section` (with section name)
     - [ ] `click_cta` (page, label)
     - [ ] `open_chatbot`, `start_contact_flow`
-    - [ ] `project_detail_view`, `blog_post_view`.
+    - [ ] `project_detail_view`, `blog_post_view`.  
 
 ---
 

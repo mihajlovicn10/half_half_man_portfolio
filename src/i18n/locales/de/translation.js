@@ -25,6 +25,44 @@ const translation = {
       description: "Entdecken Sie die Technologien und Tools, die wir für die Entwicklung hochleistungsfähiger Anwendungen verwenden.",
       categoryDescription: "Entdecken Sie Tools und Technologien im Zusammenhang mit {{category}}."
     },
+    systemMap: {
+      title: "Systemkarte",
+      subtitle: "So verbindet sich der Stack über Frontend, Backend, Security und Ops.",
+      groups: {
+        frontend: "Frontend",
+        backend: "Backend",
+        security: "Security",
+        ops: "Ops"
+      },
+      nodes: {
+        reactTailwindVite: "React, Tailwind, Vite",
+        webflow: "Webflow",
+        djangoNode: "Django / Node",
+        xano: "Xano",
+        penTesting: "Penetrationstests",
+        secureCoding: "Secure Coding",
+        deployment: "Deployment",
+        monitoring: "Monitoring"
+      }
+    },
+    bestForLabel: "Am besten für:",
+    bestFor: {
+      mvp: "MVP-Launch",
+      educational: "Lernplattform",
+      internalTools: "Interne Tools",
+      marketingSite: "Marketing-Website",
+      securityAudits: "Security Audits",
+      securityAutomation: "Security-Automatisierung",
+      performance: "Performance-Verbesserungen",
+      stability: "Stabilität & Uptime",
+      securityHardening: "Security Hardening"
+    },
+    related: {
+      projectsLabel: "Beispielprojekte",
+      postsLabel: "Relevante Blogposts",
+      seeAllPosts: "Alle Posts ansehen",
+      noneYet: "Kommt bald."
+    },
     title: "Stack-Engineering",
     subtitle: "Zielgerichtete Tools. Präzise Umsetzung. Zukunftssichere Systeme.",
     seeFullStack: "Vollständigen Stack ansehen",
@@ -313,6 +351,18 @@ Ich schätze seine Hingabe, Reaktionsfähigkeit und technische Kompetenz sehr un
     featured: 'Hervorgehobenes Projekt',
     projectNotFound: 'Projekt nicht gefunden.',
     backToProjects: '← Zurück zu meinen Projekten',
+    list: {
+      searchLabel: 'Projekte suchen',
+      searchPlaceholder: 'Projekte suchen…',
+      clearAll: 'Alles zurücksetzen',
+      filters: {
+        technology: 'Technologie',
+        projectType: 'Projekttyp'
+      },
+      pagination: {
+        pageOf: 'Seite {{page}} von {{total}}'
+      }
+    },
     categories: {
       all: 'Alle',
       web: 'Webentwicklung',

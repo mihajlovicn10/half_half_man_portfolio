@@ -6,19 +6,21 @@ const Button = ({
   variant = 'primary', 
   size = 'medium',
   disabled = false,
+  isLoading = false,
+  loadingText,
   fullWidth = false,
   type = 'button',
   onClick,
   className = '',
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
+  const baseStyles = 'inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/90';
   
   const variants = {
-    primary: 'bg-primary text-tertiary hover:bg-primary/90 focus:ring-primary/50',
-    secondary: 'bg-secondary text-primary hover:bg-secondary/90 focus:ring-secondary/50',
-    feature: 'bg-tertiary/20 text-tertiary border border-tertiary/30 hover:bg-tertiary/30 focus:ring-tertiary/50',
-    outline: 'border-2 border-primary text-primary hover:bg-primary/10 focus:ring-primary/50',
-    ghost: 'text-primary hover:bg-primary/10 focus:ring-primary/50',
+    primary: 'bg-primary text-tertiary hover:bg-primary/90',
+    secondary: 'bg-secondary text-primary hover:bg-secondary/90',
+    feature: 'bg-tertiary/20 text-tertiary border border-tertiary/30 hover:bg-tertiary/30',
+    outline: 'border-2 border-primary text-primary hover:bg-primary/10',
+    ghost: 'text-primary hover:bg-primary/10',
   };
 
   const sizes = {
@@ -32,7 +34,7 @@ const Button = ({
     variants[variant],
     sizes[size],
     fullWidth ? 'w-full' : '',
-    disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
+    (disabled || isLoading) ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer',
     className,
   ].join(' ');
 
@@ -41,9 +43,36 @@ const Button = ({
       type={type}
       className={classes}
       onClick={onClick}
-      disabled={disabled}
+      disabled={disabled || isLoading}
+      aria-busy={isLoading}
     >
-      {children}
+      {isLoading ? (
+        <span className="flex items-center gap-2">
+          <svg
+            className="h-4 w-4 animate-spin"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+              fill="none"
+            />
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v3a5 5 0 00-5 5H4z"
+            />
+          </svg>
+          <span>{loadingText || children}</span>
+        </span>
+      ) : (
+        children
+      )}
     </button>
   );
 };
@@ -53,6 +82,8 @@ Button.propTypes = {
   variant: PropTypes.oneOf(['primary', 'secondary', 'feature', 'outline', 'ghost']),
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   disabled: PropTypes.bool,
+  isLoading: PropTypes.bool,
+  loadingText: PropTypes.string,
   fullWidth: PropTypes.bool,
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
   onClick: PropTypes.func,

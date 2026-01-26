@@ -25,6 +25,44 @@ const translation = {
       description: "Esplora le tecnologie e gli strumenti che utilizziamo per creare applicazioni ad alte prestazioni.",
       categoryDescription: "Esplora strumenti e tecnologie relative a {{category}}."
     },
+    systemMap: {
+      title: "Mappa del sistema",
+      subtitle: "Come lo stack si collega tra frontend, backend, sicurezza e ops.",
+      groups: {
+        frontend: "Frontend",
+        backend: "Backend",
+        security: "Sicurezza",
+        ops: "Ops"
+      },
+      nodes: {
+        reactTailwindVite: "React, Tailwind, Vite",
+        webflow: "Webflow",
+        djangoNode: "Django / Node",
+        xano: "Xano",
+        penTesting: "Pen testing",
+        secureCoding: "Secure coding",
+        deployment: "Deployment",
+        monitoring: "Monitoraggio"
+      }
+    },
+    bestForLabel: "Ideale per:",
+    bestFor: {
+      mvp: "Lancio MVP",
+      educational: "Piattaforma educativa",
+      internalTools: "Strumenti interni",
+      marketingSite: "Sito marketing",
+      securityAudits: "Audit di sicurezza",
+      securityAutomation: "Automazione sicurezza",
+      performance: "Miglioramenti performance",
+      stability: "Stabilità e uptime",
+      securityHardening: "Hardening sicurezza"
+    },
+    related: {
+      projectsLabel: "Progetti di esempio",
+      postsLabel: "Post del blog rilevanti",
+      seeAllPosts: "Vedi tutti i post",
+      noneYet: "In arrivo."
+    },
     title: "Ingegneria dello Stack",
     subtitle: "Strumenti mirati. Esecuzione precisa. Sistemi pronti per il futuro.",
     seeFullStack: "Vedi Stack Completo",
@@ -263,6 +301,18 @@ Apprezzo sinceramente la sua dedizione, reattività e competenza tecnica, e racc
     featured: 'Progetto in evidenza',
     projectNotFound: 'Progetto non trovato.',
     backToProjects: '← Torna ai progetti',
+    list: {
+      searchLabel: 'Cerca progetti',
+      searchPlaceholder: 'Cerca progetti…',
+      clearAll: 'Cancella tutto',
+      filters: {
+        technology: 'Tecnologia',
+        projectType: 'Tipo di progetto'
+      },
+      pagination: {
+        pageOf: 'Pagina {{page}} di {{total}}'
+      }
+    },
     categories: {
       all: 'Tutti',
       web: 'Sviluppo web',

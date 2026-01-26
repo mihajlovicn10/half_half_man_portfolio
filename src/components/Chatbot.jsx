@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import avatarImage from '../assets/logo/logo_cropped.png';
+import { track } from '../utils/events';
 
 const INTENTIONS = [
   {
@@ -94,6 +95,11 @@ const Chatbot = () => {
   const [currentSentence, setCurrentSentence] = useState(0);
   const [isTyping, setIsTyping] = useState(false);
   const [displayedMessage, setDisplayedMessage] = useState('');
+
+  useEffect(() => {
+    if (!isOpen) return;
+    track('open_chatbot', {});
+  }, [isOpen]);
 
   // Show the chatbot button after 10 seconds
   useEffect(() => {

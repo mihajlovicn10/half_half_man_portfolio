@@ -25,6 +25,44 @@ const translation = {
       description: "Explora las tecnologías y herramientas que utilizamos para construir aplicaciones de alto rendimiento.",
       categoryDescription: "Explora herramientas y tecnologías relacionadas con {{category}}."
     },
+    systemMap: {
+      title: "Mapa del sistema",
+      subtitle: "Cómo se conecta el stack entre frontend, backend, seguridad y ops.",
+      groups: {
+        frontend: "Frontend",
+        backend: "Backend",
+        security: "Seguridad",
+        ops: "Ops"
+      },
+      nodes: {
+        reactTailwindVite: "React, Tailwind, Vite",
+        webflow: "Webflow",
+        djangoNode: "Django / Node",
+        xano: "Xano",
+        penTesting: "Pentesting",
+        secureCoding: "Código seguro",
+        deployment: "Despliegue",
+        monitoring: "Monitoreo"
+      }
+    },
+    bestForLabel: "Ideal para:",
+    bestFor: {
+      mvp: "Lanzamiento MVP",
+      educational: "Plataforma educativa",
+      internalTools: "Herramientas internas",
+      marketingSite: "Sitio de marketing",
+      securityAudits: "Auditorías de seguridad",
+      securityAutomation: "Automatización de seguridad",
+      performance: "Mejoras de rendimiento",
+      stability: "Estabilidad y uptime",
+      securityHardening: "Endurecimiento de seguridad"
+    },
+    related: {
+      projectsLabel: "Proyectos de ejemplo",
+      postsLabel: "Publicaciones relevantes",
+      seeAllPosts: "Ver todas las publicaciones",
+      noneYet: "Próximamente."
+    },
     title: "Ingeniería del Stack",
     subtitle: "Herramientas específicas. Ejecución precisa. Sistemas preparados para el futuro.",
     seeFullStack: "Ver Stack Completo",
@@ -325,6 +363,18 @@ Aprecio sinceramente su dedicación, capacidad de respuesta y experiencia técni
     viewDetails: "Ver Detalles",
     backToProjects: "← Volver a Proyectos",
     projectNotFound: "Proyecto no encontrado",
+    list: {
+      searchLabel: "Buscar proyectos",
+      searchPlaceholder: "Buscar proyectos…",
+      clearAll: "Borrar todo",
+      filters: {
+        technology: "Tecnología",
+        projectType: "Tipo de proyecto"
+      },
+      pagination: {
+        pageOf: "Página {{page}} de {{total}}"
+      }
+    },
     detail: {
       technologiesUsed: "Tecnologías Utilizadas",
       keyFeatures: "Características Principales",

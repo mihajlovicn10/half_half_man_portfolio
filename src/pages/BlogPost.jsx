@@ -1,5 +1,5 @@
 import { PortableText } from '@portabletext/react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { client } from '../utils/sanityClient';
 import { Helmet } from 'react-helmet-async';
@@ -8,6 +8,9 @@ import LoadingSpinner from '../components/common/LoadingSpinner';
 import { toast } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { useSEO } from '../hooks/useSEO';
+import { generateCanonicalUrl } from '../utils/seo';
+import { buildBlogPosting, buildBreadcrumbList } from '../utils/structuredData';
+import { track } from '../utils/events';
 
 const BlogPost = () => {
   const { slug } = useParams();
@@ -15,14 +18,21 @@ const BlogPost = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [retryCount, setRetryCount] = useState(0);
+  const hasTrackedViewRef = useRef(false);
   const { i18n } = useTranslation();
   const [, setLang] = useState(i18n.language);
+
+  const getOgImageUrl = (url) => {
+    if (!url) return null;
+    const hasQuery = url.includes('?');
+    return `${url}${hasQuery ? '&' : '?'}w=1200&h=630&fit=crop&auto=format`;
+  };
 
   // SEO meta tags for Blog Post page - will be updated when post is loaded
   useSEO({
     title: post ? `${post.title} | Half Half Man Blog` : 'Blog Post | Half Half Man',
     description: post ? (post.excerpt || `Read ${post.title} on Half Half Man Blog`) : 'Blog post on Half Half Man',
-    image: post?.mainImage || 'https://half-half-man.com/public/images/og-image.jpg',
+    image: getOgImageUrl(post?.mainImage?.asset?.url) || 'https://half-half-man.com/images/og-image.jpg',
     type: 'article'
   });
 
@@ -32,17 +42,9 @@ const BlogPost = () => {
     return () => i18n.off('languageChanged', onLangChange);
   }, [i18n]);
 
-  // Get the absolute URL for sharing
-  const getAbsoluteUrl = () => {
-    return window.location.href;
-  };
-
-  // Get absolute image URL with correct dimensions
-  const getAbsoluteImageUrl = (relativeUrl) => {
-    if (!relativeUrl) return null;
-    // Add Sanity image transformation parameters for LinkedIn (1920x1080)
-    return `${relativeUrl}?w=1920&h=1080&fit=crop&auto=format`;
-  };
+  const canonicalUrl = typeof window !== 'undefined'
+    ? generateCanonicalUrl(window.location.pathname)
+    : 'https://half-half-man.com/blog';
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -85,6 +87,14 @@ const BlogPost = () => {
 
     if (slug) fetchPost();
   }, [slug, i18n.language, retryCount]);
+
+  useEffect(() => {
+    if (!slug) return;
+    if (!post || loading || error) return;
+    if (hasTrackedViewRef.current) return;
+    hasTrackedViewRef.current = true;
+    track('blog_post_view', { slug });
+  }, [slug, post, loading, error]);
 
   const handleShare = (platform) => {
     const currentUrl = window.location.href;
@@ -175,68 +185,54 @@ const BlogPost = () => {
         {/* Basic meta tags */}
         <meta name="description" content={post?.excerpt || `Read ${typeof post?.title === 'object' ? post.title[i18n.language] || post.title.en : post?.title} on Half Half Man Blog`} />
         <meta name="author" content={post?.author?.name || 'Half Half Man'} />
-        
-        {/* Open Graph tags */}
-        <meta property="og:title" content={typeof post?.title === 'object' ? post.title[i18n.language] || post.title.en : post?.title} />
-        <meta property="og:description" content={post?.excerpt || `Read ${typeof post?.title === 'object' ? post.title[i18n.language] || post.title.en : post?.title} on Half Half Man Blog`} />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={getAbsoluteUrl()} />
-        {post?.mainImage && (
-          <>
-            <meta property="og:image" content={post.mainImage} />
-            <meta property="og:image:secure_url" content={post.mainImage} />
-          </>
-        )}
 
         {/* JSON-LD structured data */}
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            "headline": post?.title,
-            "description": post?.excerpt,
-            "image": post?.mainImage,
-            "datePublished": post?.publishedAt,
-            "author": {
-              "@type": "Person",
-              "name": post?.author?.name || "Half Half Man"
-            },
-            "publisher": {
-              "@type": "Organization",
-              "name": "Half Half Man Blog",
-              "logo": {
-                "@type": "ImageObject",
-                "url": "https://half-half-man.herokuapp.com/src/assets/logo/LOGO.jpg"
-              }
-            },
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "@id": getAbsoluteUrl()
-            }
-          })}
+          {JSON.stringify([
+            buildBlogPosting({
+              headline: typeof post?.title === 'object' ? post.title[i18n.language] || post.title.en : post?.title,
+              description: post?.excerpt || `Read ${typeof post?.title === 'object' ? post.title[i18n.language] || post.title.en : post?.title} on Half Half Man Blog`,
+              imageUrl: getOgImageUrl(post?.mainImage?.asset?.url) || 'https://half-half-man.com/images/og-image.jpg',
+              datePublished: post?.publishedAt,
+              authorName: post?.author?.name || 'Half Half Man',
+              url: canonicalUrl,
+              publisherName: 'Half Half Man',
+              publisherLogoUrl: 'https://half-half-man.com/images/og-image.jpg',
+            }),
+            buildBreadcrumbList([
+              { name: 'Home', url: '/' },
+              { name: 'Blog', url: '/blog' },
+              {
+                name: typeof post?.title === 'object' ? post.title[i18n.language] || post.title.en : post?.title,
+                url: `/blog/${slug}`,
+              },
+            ]),
+          ])}
         </script>
       </Helmet>
       
       <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
-        <article className="max-w-4xl mx-auto px-4 pt-32 pb-24">
+        <article className="max-w-3xl lg:max-w-4xl mx-auto px-4 sm:px-6 pt-32 pb-24">
           <motion.div 
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            <Link 
-              to="/blog" 
-              className="inline-flex items-center text-primary hover:text-primary-dark mb-8 transition-colors duration-300"
-            >
-              <motion.span 
-                className="mr-2"
-                whileHover={{ x: -4 }}
-                transition={{ type: "spring", stiffness: 400 }}
+            <div className="flex justify-center mt-6 mb-8">
+              <Link 
+                to="/blog" 
+                className="inline-flex items-center text-primary hover:text-primary-dark transition-colors duration-300"
               >
-                ←
-              </motion.span>
-              Back to Blog
-            </Link>
+                <motion.span 
+                  className="mr-2"
+                  whileHover={{ x: -4 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  ←
+                </motion.span>
+                Back to Blog
+              </Link>
+            </div>
 
             <header className="mb-12 text-center">
               <motion.h1 
@@ -301,7 +297,7 @@ const BlogPost = () => {
             </header>  
 
             <motion.div 
-              className="prose prose-lg max-w-none text-left [&>h1]:text-center [&>h2]:text-center [&>h3]:text-center [&>h4]:text-center [&>h5]:text-center [&>h6]:text-center"
+              className="prose prose-lg max-w-none text-left leading-relaxed text-[17px]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
@@ -319,9 +315,24 @@ const BlogPost = () => {
                   }
                   components={{
                     block: {
-                      normal: ({children}) => <p className="mb-4 text-gray-700 text-left">{children}</p>,
-                      h2: ({children}) => <h2 className="text-2xl font-bold text-primary mt-8 mb-4 text-center">{children}</h2>,
-                      h3: ({children}) => <h3 className="text-xl font-bold text-primary mt-6 mb-3 text-center">{children}</h3>,
+                      // Enforce a single H1 on the page (the post title above).
+                      // Downgrade any CMS-provided h1 blocks to h2 for proper hierarchy.
+                      h1: ({ children }) => (
+                        <h2 className="text-2xl font-bold text-primary mt-10 mb-4 text-left">
+                          {children}
+                        </h2>
+                      ),
+                      normal: ({ children }) => <p className="mb-5 text-gray-700 text-left">{children}</p>,
+                      h2: ({ children }) => (
+                        <h2 className="text-2xl font-bold text-primary mt-10 mb-4 text-left">
+                          {children}
+                        </h2>
+                      ),
+                      h3: ({ children }) => (
+                        <h3 className="text-xl font-bold text-primary mt-8 mb-3 text-left">
+                          {children}
+                        </h3>
+                      ),
                     },
                     list: {
                       bullet: ({children}) => (

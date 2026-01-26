@@ -28,6 +28,44 @@ const translation = {
             description: 'Istražite tehnologije i alate koje koristimo za izradu aplikacija visokih performansi.',
             categoryDescription: 'Istražite alate i tehnologije povezane sa {{category}}.'
         },
+        systemMap: {
+            title: 'Mapa sistema',
+            subtitle: 'Kako se stack povezuje kroz frontend, backend, bezbednost i ops.',
+            groups: {
+                frontend: 'Frontend',
+                backend: 'Backend',
+                security: 'Bezbednost',
+                ops: 'Ops'
+            },
+            nodes: {
+                reactTailwindVite: 'React, Tailwind, Vite',
+                webflow: 'Webflow',
+                djangoNode: 'Django / Node',
+                xano: 'Xano',
+                penTesting: 'Pen testing',
+                secureCoding: 'Secure coding',
+                deployment: 'Deployment',
+                monitoring: 'Monitoring'
+            }
+        },
+        bestForLabel: 'Najbolje za:',
+        bestFor: {
+            mvp: 'Lansiranje MVP-a',
+            educational: 'Edukativna platforma',
+            internalTools: 'Interni alati',
+            marketingSite: 'Marketing sajt',
+            securityAudits: 'Bezbednosni audit',
+            securityAutomation: 'Automatizacija bezbednosti',
+            performance: 'Poboljšanje performansi',
+            stability: 'Stabilnost i dostupnost',
+            securityHardening: 'Hardening bezbednosti'
+        },
+        related: {
+            projectsLabel: 'Primeri projekata',
+            postsLabel: 'Relevantni blog postovi',
+            seeAllPosts: 'Pogledaj sve postove',
+            noneYet: 'Uskoro.'
+        },
         title: 'Inženjering Stack-a',
         subtitle: 'Alati koji služe svrsi. Precizna realizacija. Sistemi spremni za budućnost.',
         seeFullStack: 'Pogledaj ceo stack',
@@ -345,6 +383,18 @@ je retka. On nije samo developer — on je inženjer sa okom dizajnera i umom st
         viewDetails: 'Pogledaj detalje',
         backToProjects: '← Nazad na projekte',
         projectNotFound: 'Projekat nije pronađen',
+        list: {
+            searchLabel: 'Pretraži projekte',
+            searchPlaceholder: 'Pretraži projekte…',
+            clearAll: 'Obriši sve',
+            filters: {
+                technology: 'Tehnologija',
+                projectType: 'Tip projekta'
+            },
+            pagination: {
+                pageOf: 'Strana {{page}} od {{total}}'
+            }
+        },
         detail: {
             technologiesUsed: 'Korišćene tehnologije',
             keyFeatures: 'Ključne karakteristike',

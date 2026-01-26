@@ -1,9 +1,13 @@
 import { useParams, Link } from 'react-router-dom';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { FaGithub } from 'react-icons/fa';
+import { useSEO } from '../hooks/useSEO';
+import { generateCanonicalUrl } from '../utils/seo';
+import { buildCreativeWork, buildBreadcrumbList } from '../utils/structuredData';
+import { track } from '../utils/events';
 import portfolioImage1 from '../assets/images/Projects/List/portfolio_screenshot.png';
 import portfolioAbout from '../assets/images/Projects/Detail/portfolio_about.png';
 import portfolioStack from '../assets/images/Projects/Detail/portfolio_stack.png';
@@ -27,12 +31,37 @@ const ProjectDetail = () => {
   const { slug } = useParams();
   const [project, setProject] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+  const [absoluteOgImage, setAbsoluteOgImage] = useState(null);
+  const hasTrackedViewRef = useRef(false);
+
+  const canonicalUrl = typeof window !== 'undefined'
+    ? generateCanonicalUrl(window.location.pathname)
+    : 'https://half-half-man.com/projects';
 
   const projectsData = {
     'portfolio': {
       title: t('projects.items.portfolio.title'),
       description: t('projects.items.portfolio.description'),
       technologies: ["ReactJS", "Vite", "TailwindCSS", "Framer Motion", "React Router", "react-helmet-async", "i18next", "Formspree", "Calendly(InlineWidget)", "Google Analytics", "Adjusted Virtual Assistant", "Google Analytics", "DOMPurify", "CSP Headers", "Rate limiting", "Heroku", "GitHub", "Sanity CMS"],
+      types: ['Portfolio'],
+      caseStudy: {
+        context: t('projects.items.portfolio.description'),
+        goals: t('projects.items.portfolio.features', { returnObjects: true }),
+        constraints: t('projects.items.portfolio.challenges', { returnObjects: true }),
+        approach: t('projects.items.portfolio.solutions', { returnObjects: true }),
+        results: [
+          'Improved resilience (Error Boundary + custom 404).',
+          'SEO correctness + structured data.',
+          'Accessibility improvements (modal focus, keyboard activation).',
+        ],
+        stack: {
+          frontend: ['React', 'Vite', 'TailwindCSS', 'Framer Motion', 'React Router'],
+          backend: ['Sanity CMS', 'Formspree'],
+          security: ['CSP headers', 'DOMPurify', 'Rate limiting'],
+          ops: ['Heroku', 'GitHub'],
+        },
+        metrics: ['Faster perceived navigation via improved layouts and UX polish.'],
+      },
       features: t('projects.items.portfolio.features', { returnObjects: true }),
       challenges: t('projects.items.portfolio.challenges', { returnObjects: true }),
       solutions: t('projects.items.portfolio.solutions', { returnObjects: true }),
@@ -49,6 +78,21 @@ const ProjectDetail = () => {
       title: t('projects.items.welearngreek.title'),
       description: t('projects.items.welearngreek.description'),
       technologies: ["React", "Vite" , "Tailwind CSS" , "Framer Motion" , "React Router DOM" , "Axios HTTP client " , "React icons" , "Formspree" , "ESLint" , "PostCSS Autoprefixer" , "Django", "Django REST Framework" , "django-cors-headers" , "djangorestframework-simplejwt" , "PostgreSQL", "guinicorn" , "django-heroku" , "python-dotenv"],
+      types: ['Edu', 'SaaS'],
+      caseStudy: {
+        context: t('projects.items.welearngreek.description'),
+        goals: t('projects.items.welearngreek.features', { returnObjects: true }),
+        constraints: t('projects.items.welearngreek.challenges', { returnObjects: true }),
+        approach: t('projects.items.welearngreek.solutions', { returnObjects: true }),
+        results: ['Full-stack app with auth-ready backend and scalable data model.'],
+        stack: {
+          frontend: ['React', 'Vite', 'Tailwind CSS', 'Framer Motion', 'React Router'],
+          backend: ['Django', 'Django REST Framework', 'PostgreSQL', 'JWT (SimpleJWT)'],
+          security: ['CORS controls', 'JWT auth'],
+          ops: ['Heroku', 'Gunicorn'],
+        },
+        metrics: [],
+      },
       features: t('projects.items.welearngreek.features', { returnObjects: true }),
       challenges: t('projects.items.welearngreek.challenges', { returnObjects: true }),
       solutions: t('projects.items.welearngreek.solutions', { returnObjects: true }),
@@ -65,6 +109,21 @@ const ProjectDetail = () => {
       title: t('projects.items.secureaccess.title'),
       description: t('projects.items.secureaccess.description'),
       technologies: ["Django 5.2", "Python 3.11", "social-auth-app-django", "Google OAuth 2.0", "Classic Django Templating(HTML/CSS) , Railway" , "WhiteNoise", "Git + Github" ], 
+      types: ['Security tool'],
+      caseStudy: {
+        context: t('projects.items.secureaccess.description'),
+        goals: t('projects.items.secureaccess.features', { returnObjects: true }),
+        constraints: t('projects.items.secureaccess.challenges', { returnObjects: true }),
+        approach: t('projects.items.secureaccess.solutions', { returnObjects: true }),
+        results: ['Secure auth flow using OAuth 2.0 and hardened deployment setup.'],
+        stack: {
+          frontend: ['Django Templates', 'HTML/CSS'],
+          backend: ['Django', 'Python'],
+          security: ['Google OAuth 2.0', 'social-auth-app-django'],
+          ops: ['Railway', 'WhiteNoise'],
+        },
+        metrics: [],
+      },
       features: t('projects.items.secureaccess.features', { returnObjects: true }),
       challenges: t('projects.items.secureaccess.challenges', { returnObjects: true }),
       solutions: t('projects.items.secureaccess.solutions', { returnObjects: true }),
@@ -78,6 +137,21 @@ const ProjectDetail = () => {
       title: t('projects.items.bughunters.title'),
       description: t('projects.items.bughunters.description'),
       technologies: ["Python 3.13", "Django", "HTML/CSS", "Gunicorn", "Railway", "Requests", "python-nmap"],
+      types: ['Security tool'],
+      caseStudy: {
+        context: t('projects.items.bughunters.description'),
+        goals: t('projects.items.bughunters.features', { returnObjects: true }),
+        constraints: t('projects.items.bughunters.challenges', { returnObjects: true }),
+        approach: t('projects.items.bughunters.solutions', { returnObjects: true }),
+        results: ['Automated scanning workflows packaged behind a clean UI.'],
+        stack: {
+          frontend: ['HTML/CSS'],
+          backend: ['Python', 'Django'],
+          security: ['python-nmap', 'Requests'],
+          ops: ['Railway', 'Gunicorn'],
+        },
+        metrics: [],
+      },
       features: t('projects.items.bughunters.features', { returnObjects: true }),
       challenges: t('projects.items.bughunters.challenges', { returnObjects: true }),
       solutions: t('projects.items.bughunters.solutions', { returnObjects: true }),
@@ -94,6 +168,21 @@ const ProjectDetail = () => {
       title: t('projects.items.webflow.title'),
       description: t('projects.items.webflow.description'),
       technologies: ["Webflow", "Google Fonts", "SVG/PNG/JPG Images" , "Cursor IDE", "Python", "Git", "Netlify"],
+      types: ['Marketing site'],
+      caseStudy: {
+        context: t('projects.items.webflow.description'),
+        goals: t('projects.items.webflow.features', { returnObjects: true }),
+        constraints: t('projects.items.webflow.challenges', { returnObjects: true }),
+        approach: t('projects.items.webflow.solutions', { returnObjects: true }),
+        results: ['Modern marketing site built fast with clean CMS-friendly structure.'],
+        stack: {
+          frontend: ['Webflow', 'Google Fonts'],
+          backend: [],
+          security: [],
+          ops: ['Netlify', 'Git'],
+        },
+        metrics: [],
+      },
       features: t('projects.items.webflow.features', { returnObjects: true }),
       challenges: t('projects.items.webflow.challenges', { returnObjects: true }),
       solutions: t('projects.items.webflow.solutions', { returnObjects: true }),
@@ -116,6 +205,33 @@ const ProjectDetail = () => {
       setProject(projectData);
     }
   }, [slug]);
+
+  useEffect(() => {
+    if (!slug || !project) return;
+    if (hasTrackedViewRef.current) return;
+    hasTrackedViewRef.current = true;
+    track('project_detail_view', { slug });
+  }, [slug, project]);
+
+  useEffect(() => {
+    if (!project?.images?.[0]) {
+      setAbsoluteOgImage(null);
+      return;
+    }
+    try {
+      const abs = new URL(project.images[0], window.location.origin).toString();
+      setAbsoluteOgImage(abs);
+    } catch {
+      setAbsoluteOgImage(null);
+    }
+  }, [project]);
+
+  useSEO({
+    title: project ? `${project.title} | ${t('projects.meta.title')}` : `Project | ${t('projects.meta.title')}`,
+    description: project?.description,
+    image: absoluteOgImage || 'https://half-half-man.com/images/og-image.jpg',
+    type: 'website',
+  });
 
   const handleImageClick = (index) => {
     setSelectedImageIndex(index);
@@ -171,11 +287,57 @@ const ProjectDetail = () => {
     );
   }
 
+  const allProjectsList = Object.entries(projectsData).map(([s, p]) => ({
+    slug: s,
+    title: p.title,
+    description: p.description,
+    types: p.types || [],
+    tech: Array.isArray(p.technologies) ? p.technologies : [],
+    image: Array.isArray(p.images) ? p.images[0] : null,
+  }));
+
+  const normalize = (v) => (v || '').toString().toLowerCase();
+  const setFrom = (arr) => new Set((arr || []).map(normalize));
+
+  const currentTech = setFrom(project?.technologies);
+  const currentTypes = setFrom(project?.types);
+
+  const relatedProjects = allProjectsList
+    .filter((p) => p.slug !== slug)
+    .map((p) => {
+      const tech = setFrom(p.tech);
+      const types = setFrom(p.types);
+      const techOverlap = Array.from(currentTech).filter((x) => tech.has(x)).length;
+      const typeOverlap = Array.from(currentTypes).filter((x) => types.has(x)).length;
+      const score = techOverlap * 2 + typeOverlap;
+      return { ...p, score, techOverlap, typeOverlap };
+    })
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3);
+
+  const cs = project.caseStudy || {};
+
   return (
     <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
       <Helmet>
         <title>{`${project.title} | ${t('projects.meta.title')}`}</title>
         <meta name="description" content={project.description} />
+        <script type="application/ld+json">
+          {JSON.stringify([
+            buildCreativeWork({
+              name: project.title,
+              description: project.description,
+              imageUrl: absoluteOgImage || 'https://half-half-man.com/images/og-image.jpg',
+              url: canonicalUrl,
+              authorName: 'Half Half Man',
+            }),
+            buildBreadcrumbList([
+              { name: 'Home', url: '/' },
+              { name: 'Projects', url: '/projects' },
+              { name: project.title, url: `/projects/${slug}` },
+            ]),
+          ])}
+        </script>
       </Helmet>
       <div className="max-w-6xl mx-auto px-4 pt-48 pb-12">
         {/* Navigation */}
@@ -203,99 +365,101 @@ const ProjectDetail = () => {
           <p className="text-[17px] text-primary/80">{project.description}</p>
         </motion.div>
 
-        {/* Technologies */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="bg-[#f8fafc]/80 backdrop-blur-sm shadow-xl rounded-2xl p-8 mb-8 border border-[#e2e8f0]"
-        >
-          <h2 className="text-2xl font-semibold text-primary mb-4">{t('projects.detail.technologiesUsed')}</h2>
-          <div className="flex flex-wrap gap-3">
-            {Array.isArray(project.technologies) && project.technologies.map((tech, index) => (
-              <motion.span 
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium hover:bg-primary/20 transition-colors duration-300"
-              >
-                {tech}
-              </motion.span>
-            ))}
+        {/* Case study structure */}
+        <div className="space-y-8 mb-8">
+          <div className="bg-[#f8fafc]/80 backdrop-blur-sm shadow-xl rounded-2xl p-8 border border-[#e2e8f0]">
+            <h2 className="text-2xl font-semibold text-primary mb-3">Context</h2>
+            <p className="text-[17px] text-primary/80">{cs.context || project.description}</p>
           </div>
-        </motion.div>
 
-        {/* Features */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="bg-[#f8fafc]/80 backdrop-blur-sm shadow-xl rounded-2xl p-8 mb-8 border border-[#e2e8f0]"
-        >
-          <h2 className="text-2xl font-semibold text-primary mb-4">{t('projects.detail.keyFeatures')}</h2>
-          <ul className="space-y-2 text-[17px] text-primary/80">
-            {Array.isArray(project.features) && project.features.map((feature, index) => (
-              <motion.li 
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="flex items-center"
-              >
-                <span className="w-2 h-2 rounded-full bg-primary/60 mr-3"></span>
-                {feature}
-              </motion.li>
-            ))}
-          </ul>
-        </motion.div>
-
-        {/* Challenges & Solutions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="bg-[#f8fafc]/80 backdrop-blur-sm shadow-xl rounded-2xl p-8 border border-[#e2e8f0]"
-          >
-            <h2 className="text-2xl font-semibold text-primary mb-4">{t('projects.detail.challenges')}</h2>
+          <div className="bg-[#f8fafc]/80 backdrop-blur-sm shadow-xl rounded-2xl p-8 border border-[#e2e8f0]">
+            <h2 className="text-2xl font-semibold text-primary mb-3">Goals</h2>
             <ul className="space-y-2 text-[17px] text-primary/80">
-              {Array.isArray(project.challenges) && project.challenges.map((challenge, index) => (
-                <motion.li 
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className="flex items-center"
-                >
+              {(cs.goals || project.features || []).map((x, i) => (
+                <li key={i} className="flex items-center">
                   <span className="w-2 h-2 rounded-full bg-primary/60 mr-3"></span>
-                  {challenge}
-                </motion.li>
+                  {x}
+                </li>
               ))}
             </ul>
-          </motion.div>
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="bg-[#f8fafc]/80 backdrop-blur-sm shadow-xl rounded-2xl p-8 border border-[#e2e8f0]"
-          >
-            <h2 className="text-2xl font-semibold text-primary mb-4">{t('projects.detail.solutions')}</h2>
+          </div>
+
+          <div className="bg-[#f8fafc]/80 backdrop-blur-sm shadow-xl rounded-2xl p-8 border border-[#e2e8f0]">
+            <h2 className="text-2xl font-semibold text-primary mb-3">Constraints</h2>
             <ul className="space-y-2 text-[17px] text-primary/80">
-              {Array.isArray(project.solutions) && project.solutions.map((solution, index) => (
-                <motion.li 
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className="flex items-center"
-                >
+              {(cs.constraints || project.challenges || []).map((x, i) => (
+                <li key={i} className="flex items-center">
                   <span className="w-2 h-2 rounded-full bg-primary/60 mr-3"></span>
-                  {solution}
-                </motion.li>
+                  {x}
+                </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
+
+          <div className="bg-[#f8fafc]/80 backdrop-blur-sm shadow-xl rounded-2xl p-8 border border-[#e2e8f0]">
+            <h2 className="text-2xl font-semibold text-primary mb-3">Approach</h2>
+            <ul className="space-y-2 text-[17px] text-primary/80">
+              {(cs.approach || project.solutions || []).map((x, i) => (
+                <li key={i} className="flex items-center">
+                  <span className="w-2 h-2 rounded-full bg-primary/60 mr-3"></span>
+                  {x}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="bg-[#f8fafc]/80 backdrop-blur-sm shadow-xl rounded-2xl p-8 border border-[#e2e8f0]">
+            <h2 className="text-2xl font-semibold text-primary mb-3">Results</h2>
+            <ul className="space-y-2 text-[17px] text-primary/80">
+              {(cs.results || []).length > 0 ? (
+                cs.results.map((x, i) => (
+                  <li key={i} className="flex items-center">
+                    <span className="w-2 h-2 rounded-full bg-primary/60 mr-3"></span>
+                    {x}
+                  </li>
+                ))
+              ) : (
+                <li className="text-primary/70">Delivered a production-ready solution aligned with the goals.</li>
+              )}
+            </ul>
+
+            {Array.isArray(cs.metrics) && cs.metrics.length > 0 && (
+              <div className="mt-4">
+                <div className="text-sm font-semibold text-primary/70 mb-2">Approx. metrics</div>
+                <div className="flex flex-wrap gap-2">
+                  {cs.metrics.map((m, i) => (
+                    <span key={i} className="px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold">
+                      {m}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="bg-[#f8fafc]/80 backdrop-blur-sm shadow-xl rounded-2xl p-8 border border-[#e2e8f0]">
+            <h2 className="text-2xl font-semibold text-primary mb-3">Stack</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {['frontend', 'backend', 'security', 'ops'].map((group) => (
+                <div key={group} className="rounded-xl border border-primary/10 bg-white/60 p-4">
+                  <div className="text-sm font-semibold text-primary mb-2">
+                    {group.charAt(0).toUpperCase() + group.slice(1)}
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {(cs.stack?.[group] || []).length > 0 ? (
+                      cs.stack[group].map((item, i) => (
+                        <span key={i} className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
+                          {item}
+                        </span>
+                      ))
+                    ) : (
+                      <span className="text-xs text-primary/60">—</span>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Project Images */}
@@ -354,6 +518,36 @@ const ProjectDetail = () => {
             {t('projects.detail.visitDemo')}
           </a>
         </motion.div>
+
+        {/* Related projects */}
+        {relatedProjects.length > 0 && (
+          <div className="mt-16">
+            <h2 className="text-2xl font-semibold text-primary mb-6 text-center">
+              Related projects
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {relatedProjects.map((rp) => (
+                <Link
+                  key={rp.slug}
+                  to={`/projects/${rp.slug}`}
+                  className="bg-[#f8fafc]/80 backdrop-blur-sm shadow-xl rounded-2xl p-6 border border-[#e2e8f0] hover:bg-[#f1f5f9]/90 transition-colors"
+                >
+                  <div className="text-lg font-semibold text-primary">{rp.title}</div>
+                  <div className="mt-2 text-sm text-primary/80 line-clamp-3">
+                    {rp.description}
+                  </div>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {(rp.types || []).slice(0, 2).map((type) => (
+                      <span key={type} className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
+                        {type}
+                      </span>
+                    ))}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Image Modal */}
         <AnimatePresence>

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { client, postsQuery } from '../utils/sanityClient';
 import { useSEO } from '../hooks/useSEO';
+import { buildBreadcrumbList } from '../utils/structuredData';
 
 const Blog = () => {
   const { t, i18n } = useTranslation();
@@ -14,7 +15,7 @@ const Blog = () => {
     title: 'Blog | Half Half Man - Freelance Programmer & Developer Insights',
     description: 'Developer blog with insights on web development, React, cybersecurity, and programming. Expert articles from Half Half Man - freelance programmer and developer.',
     keywords: 'Half Half Man blog, developer blog, programmer blog, web development blog, React blog, cybersecurity blog, coding blog, programming insights, developer articles, freelance developer blog',
-    image: 'https://half-half-man.com/public/images/og-image.jpg',
+    image: 'https://half-half-man.com/images/og-image.jpg',
     type: 'website'
   });
 
@@ -101,6 +102,14 @@ const Blog = () => {
       <Helmet>
         <title>{typeof t('blog.meta.title') === 'object' ? t('blog.meta.title')[i18n.language] || t('blog.meta.title').en : t('blog.meta.title')}</title>
         <meta name="description" content={typeof t('blog.meta.description') === 'object' ? t('blog.meta.description')[i18n.language] || t('blog.meta.description').en : t('blog.meta.description')} />
+        <script type="application/ld+json">
+          {JSON.stringify(
+            buildBreadcrumbList([
+              { name: 'Home', url: '/' },
+              { name: 'Blog', url: '/blog' },
+            ])
+          )}
+        </script>
       </Helmet>
       <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
         <section className="w-full py-16">

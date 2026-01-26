@@ -14,12 +14,11 @@ import Faq from './pages/Faq';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import { initGA, trackPageView } from './utils/analytics';
 import TechStackDetail from './pages/TechStackDetail';
+import NotFound from './pages/NotFound';
 import Chatbot from './components/Chatbot';
+import ErrorBoundary from './components/common/ErrorBoundary';
 import './App.css'
 import logoSpinner from './assets/logo/logo_cropped.png';
-
-// Initialize GA4
-initGA();
 
 // ScrollToTop component to handle scroll behavior
 const ScrollToTop = () => {
@@ -32,14 +31,21 @@ const ScrollToTop = () => {
   return null;
 };
 
+const AnalyticsTracker = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Only actually sends if user consented (see utils/analytics + consent).
+    initGA();
+    trackPageView(location.pathname + location.search);
+  }, [location.pathname, location.search]);
+
+  return null;
+};
+
 const App = () => {
   const [isAppLoading, setIsAppLoading] = useState(false);
   const [dotCount, setDotCount] = useState(1);
-
-  useEffect(() => {
-    // Track initial page view
-    trackPageView(window.location.pathname + window.location.search);
-  }, []);
 
   // Show loader only on first visit to home page
   useEffect(() => {
@@ -78,57 +84,61 @@ const App = () => {
     <HelmetProvider>
       <Router>
         <ScrollToTop />
-        <div className="relative min-h-screen">
-          {isAppLoading && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90">
-              <motion.div
-                className="flex flex-col items-center gap-4"
-                initial={{ opacity: 0, scale: 0.9, y: 10 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <motion.img
-                  src={logoSpinner}
-                  alt="Half Half Man loading"
-                  className="w-[7.5rem] h-[7.5rem] rounded-full shadow-lg"
-                  initial={{ opacity: 0.85, scale: 1 }}
-                  animate={{ 
-                    opacity: [0.85, 1, 0.85],
-                    scale: [1, 1.04, 1],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                />
-                <motion.p
-                  className="text-tertiary text-sm tracking-wide font-medium"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
+        <AnalyticsTracker />
+        <ErrorBoundary>
+          <div className="relative min-h-screen">
+            {isAppLoading && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90">
+                <motion.div
+                  className="flex flex-col items-center gap-4"
+                  initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  Loading{'.'.repeat(dotCount)}
-                </motion.p>
-              </motion.div>
-            </div>
-          )}
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/tech-stack" element={<TechStack />} />
-              <Route path="/tech-stack/:category" element={<TechStackDetail />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/projects/:slug" element={<ProjectDetail />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/faq" element={<Faq />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            </Routes>
-          </Layout>
-          <Chatbot />
-        </div>
+                  <motion.img
+                    src={logoSpinner}
+                    alt="Half Half Man loading"
+                    className="w-[7.5rem] h-[7.5rem] rounded-full shadow-lg"
+                    initial={{ opacity: 0.85, scale: 1 }}
+                    animate={{ 
+                      opacity: [0.85, 1, 0.85],
+                      scale: [1, 1.04, 1],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }}
+                  />
+                  <motion.p
+                    className="text-tertiary text-sm tracking-wide font-medium"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                  >
+                    Loading{'.'.repeat(dotCount)}
+                  </motion.p>
+                </motion.div>
+              </div>
+            )}
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/tech-stack" element={<TechStack />} />
+                <Route path="/tech-stack/:category" element={<TechStackDetail />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/projects/:slug" element={<ProjectDetail />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/faq" element={<Faq />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Layout>
+            <Chatbot />
+          </div>
+        </ErrorBoundary>
       </Router>
     </HelmetProvider>
   );

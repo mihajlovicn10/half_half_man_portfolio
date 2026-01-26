@@ -25,6 +25,44 @@ const translation = {
       description: "Explore the technologies and tools we use to build high-performance applications.",
       categoryDescription: "Explore tools and technologies related to {{category}}."
     },
+    systemMap: {
+      title: "System map",
+      subtitle: "How the stack connects across frontend, backend, security, and ops.",
+      groups: {
+        frontend: "Frontend",
+        backend: "Backend",
+        security: "Security",
+        ops: "Ops"
+      },
+      nodes: {
+        reactTailwindVite: "React, Tailwind, Vite",
+        webflow: "Webflow",
+        djangoNode: "Django / Node",
+        xano: "Xano",
+        penTesting: "Pen testing",
+        secureCoding: "Secure coding",
+        deployment: "Deployment",
+        monitoring: "Monitoring"
+      }
+    },
+    bestForLabel: "Best for:",
+    bestFor: {
+      mvp: "MVP launch",
+      educational: "Educational platform",
+      internalTools: "Internal tools",
+      marketingSite: "Marketing site",
+      securityAudits: "Security audits",
+      securityAutomation: "Security automation",
+      performance: "Performance improvements",
+      stability: "Stability & uptime",
+      securityHardening: "Security hardening"
+    },
+    related: {
+      projectsLabel: "Example projects",
+      postsLabel: "Relevant blog posts",
+      seeAllPosts: "See all posts",
+      noneYet: "Coming soon."
+    },
     title: "Engineering the Stack",
     subtitle: "Purposeful tools. Precision execution. Future-ready systems.",
     seeFullStack: "See Full Stack",
@@ -239,6 +277,18 @@ is rare. He's not just a developer — he's an engineer with a designer's eye an
     viewDetails: "View Details",
     backToProjects: "← Back to Projects",
     projectNotFound: "Project not found",
+    list: {
+      searchLabel: "Search projects",
+      searchPlaceholder: "Search projects…",
+      clearAll: "Clear all",
+      filters: {
+        technology: "Technology",
+        projectType: "Project type"
+      },
+      pagination: {
+        pageOf: "Page {{page}} of {{total}}"
+      }
+    },
     detail: {
       technologiesUsed: "Technologies Used",
       keyFeatures: "Key Features",

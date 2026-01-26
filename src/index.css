@@ -93,6 +93,12 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* Consistent focus visibility across interactive elements (keyboard) */
+:where(a, button, [role="button"], [role="menuitem"], [role="option"], input, textarea, select):focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.95) !important;
+  outline-offset: 3px !important;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

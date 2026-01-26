@@ -88,14 +88,14 @@ const Footer = () => {
           </div>
 
           {/* Navigation Links */}
-          <div>
+          <div className="text-center">
             <h3 className="text-tertiary font-medium mb-2">{t('footer.navigationTitle')}</h3>
-            <ul className="space-y-1">
+            <ul className="space-y-1 flex flex-col items-center">
               {footerLinks.navigation.map((link) => (
                 <li key={link.name}>
                   <Link
                     to={link.path}
-                    className="text-muted hover:text-tertiary text-sm transition-all duration-200 hover:translate-x-1 inline-block"
+                    className="text-muted hover:text-tertiary text-sm transition-colors duration-200 inline-flex justify-center"
                     aria-label={t(`footer.links.${link.name}`)}
                   >
                     {t(`footer.links.${link.name}`)}

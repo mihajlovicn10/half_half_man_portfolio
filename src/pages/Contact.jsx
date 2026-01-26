@@ -2,10 +2,12 @@ import { useState, useRef, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { InlineWidget } from 'react-calendly';
 import { trackEvent } from '../utils/analytics';
+import { track } from '../utils/events';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import DOMPurify from 'dompurify';
 import { useSEO } from '../hooks/useSEO';
+import { Link } from 'react-router-dom';
 // Temporarily commenting out reCAPTCHA for Formspree free plan
 // import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
@@ -16,11 +18,22 @@ const ContactForm = () => {
     subject: '',
     message: ''
   });
+  const [honeypot, setHoneypot] = useState('');
+  const mountedAtRef = useRef(Date.now());
+  const hasInteractedRef = useRef(false);
+  const startedFlowRef = useRef(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
   const [validationErrors, setValidationErrors] = useState({});
+  const [touched, setTouched] = useState({
+    name: false,
+    email: false,
+    subject: false,
+    message: false,
+  });
   const [calendlyError, setCalendlyError] = useState(false);
   const lastSubmitTime = useRef(0);
+  const nameInputRef = useRef(null);
   const { t } = useTranslation();
   // Temporarily commenting out reCAPTCHA for Formspree free plan
   // const { executeRecaptcha } = useGoogleReCaptcha();
@@ -129,47 +142,57 @@ const ContactForm = () => {
     }
   };
 
+  const validateField = (field, rawValue) => {
+    const sanitized = sanitizeInput(rawValue || '', field);
+
+    if (field === 'name') {
+      if (!sanitized) return 'Name is required';
+      if (!VALIDATION_PATTERNS.name.test(sanitized)) return 'Please enter a valid name';
+      return null;
+    }
+
+    if (field === 'email') {
+      if (!sanitized) return 'Email is required';
+      if (!VALIDATION_PATTERNS.email.test(sanitized)) return 'Please enter a valid email address';
+      return null;
+    }
+
+    if (field === 'subject') {
+      if (!sanitized) return 'Subject is required';
+      if (!VALIDATION_PATTERNS.subject.test(sanitized)) return 'Please enter a valid subject';
+      return null;
+    }
+
+    if (field === 'message') {
+      if (!sanitized) return 'Message is required';
+      if (sanitized.length < 10) return 'Message must be at least 10 characters long';
+      return null;
+    }
+
+    return null;
+  };
+
   const validateForm = () => {
+    const sanitized = {
+      name: sanitizeInput(formData.name, 'name'),
+      email: sanitizeInput(formData.email, 'email'),
+      subject: sanitizeInput(formData.subject, 'subject'),
+      message: sanitizeInput(formData.message, 'message'),
+    };
+
     const errors = {};
-    
-    // Name validation
-    const sanitizedName = sanitizeInput(formData.name, 'name');
-    if (!sanitizedName) {
-      errors.name = 'Name is required';
-    } else if (!VALIDATION_PATTERNS.name.test(sanitizedName)) {
-      errors.name = 'Please enter a valid name';
-    }
-
-    // Email validation
-    const sanitizedEmail = sanitizeInput(formData.email, 'email');
-    if (!sanitizedEmail) {
-      errors.email = 'Email is required';
-    } else if (!VALIDATION_PATTERNS.email.test(sanitizedEmail)) {
-      errors.email = 'Please enter a valid email address';
-    }
-
-    // Subject validation
-    const sanitizedSubject = sanitizeInput(formData.subject, 'subject');
-    if (!sanitizedSubject) {
-      errors.subject = 'Subject is required';
-    } else if (!VALIDATION_PATTERNS.subject.test(sanitizedSubject)) {
-      errors.subject = 'Please enter a valid subject';
-    }
-
-    // Message validation
-    const sanitizedMessage = sanitizeInput(formData.message, 'message');
-    if (!sanitizedMessage) {
-      errors.message = 'Message is required';
-    } else if (sanitizedMessage.length < 10) {
-      errors.message = 'Message must be at least 10 characters long';
-    }
+    (['name', 'email', 'subject', 'message']).forEach((field) => {
+      const err = validateField(field, sanitized[field]);
+      if (err) errors[field] = err;
+    });
 
     // Update form data with sanitized values
-    setFormData({
-      name: sanitizedName,
-      email: sanitizedEmail,
-      subject: sanitizedSubject,
-      message: sanitizedMessage
+    setFormData(sanitized);
+    setTouched({
+      name: true,
+      email: true,
+      subject: true,
+      message: true,
     });
 
     setValidationErrors(errors);
@@ -178,6 +201,7 @@ const ContactForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    hasInteractedRef.current = true;
     // Sanitize input as user types
     const sanitizedValue = DOMPurify.sanitize(value);
     
@@ -186,14 +210,62 @@ const ContactForm = () => {
       [name]: sanitizedValue
     }));
 
-    if (validationErrors[name]) {
-      setValidationErrors(prev => {
-        const newErrors = { ...prev };
-        delete newErrors[name];
-        return newErrors;
-      });
-    }
+    // Real-time validation: once a field has been interacted with, validate as the user types.
+    const shouldValidateLive = Boolean(touched?.[name]);
+    const nextError = shouldValidateLive ? validateField(name, sanitizedValue) : null;
+
+    setValidationErrors((prev) => {
+      const next = { ...prev };
+
+      // If we haven't "touched" the field yet, be forgiving and clear existing errors while typing.
+      if (!shouldValidateLive && next[name]) {
+        delete next[name];
+        return next;
+      }
+
+      if (shouldValidateLive) {
+        if (nextError) next[name] = nextError;
+        else delete next[name];
+      }
+
+      return next;
+    });
+
     trackEvent('Contact Form', 'Input', name);
+  };
+
+  const handleStartContactFlow = (method) => {
+    if (startedFlowRef.current) return;
+    startedFlowRef.current = true;
+    track('start_contact_flow', { method });
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+
+    const sanitized = sanitizeInput(value, name);
+    setFormData((prev) => ({ ...prev, [name]: sanitized }));
+
+    const err = validateField(name, sanitized);
+    setValidationErrors((prev) => {
+      const next = { ...prev };
+      if (err) next[name] = err;
+      else delete next[name];
+      return next;
+    });
+  };
+
+  const handleSendAnother = () => {
+    setSubmitStatus(null);
+    setValidationErrors({});
+    setTouched({
+      name: false,
+      email: false,
+      subject: false,
+      message: false,
+    });
+    requestAnimationFrame(() => nameInputRef.current?.focus?.());
   };
 
   // Generate a unique submission ID
@@ -217,6 +289,21 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Honeypot (bots will often fill hidden fields)
+    if (honeypot && honeypot.trim().length > 0) {
+      setSubmitStatus('blocked');
+      trackEvent('Contact Form', 'Blocked', 'Honeypot');
+      return;
+    }
+
+    // Simple behavior-based checks
+    const elapsedMs = Date.now() - mountedAtRef.current;
+    if (!hasInteractedRef.current || elapsedMs < 3500) {
+      setSubmitStatus('blocked');
+      trackEvent('Contact Form', 'Blocked', `Behavior (${elapsedMs}ms)`);
+      return;
+    }
     
     // Check rate limiting
     if (!isSubmissionAllowed()) {
@@ -263,6 +350,7 @@ const ContactForm = () => {
         headers: getSecurityHeaders(),
         body: JSON.stringify({
           ...formData,
+          _honeypot: honeypot,
           _timestamp: Date.now(),
           _userAgent: navigator.userAgent,
           _referrer: document.referrer,
@@ -328,11 +416,6 @@ const ContactForm = () => {
       <Helmet>
         <title>{t('contact.meta.title')}</title>
         <meta name="description" content={t('contact.meta.description')} />
-        {/* Security-related meta tags */}
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; form-action 'self' https://formspree.io;" />
-        <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-        <meta http-equiv="X-Frame-Options" content="DENY" />
-        <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
       </Helmet>
       <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
         <div className="max-w-7xl mx-auto px-4 pt-48 pb-12">
@@ -354,6 +437,7 @@ const ContactForm = () => {
               className="bg-white shadow-xl rounded-2xl p-6 pb-8 h-auto"
               role="complementary"
               aria-label="Schedule a meeting"
+              id="schedule"
             >
               <motion.h2 
                 initial={{ opacity: 0 }}
@@ -363,6 +447,27 @@ const ContactForm = () => {
               >
                 {t('contact.calendly.title')}
               </motion.h2>
+
+              <div className="mb-4 rounded-xl border border-primary/10 bg-primary/5 p-4">
+                <p className="text-sm font-semibold text-primary mb-2">
+                  {t('contact.calendly.beforeYouBook', { defaultValue: 'Before you book:' })}
+                </p>
+                <ul className="text-sm text-primary/80 space-y-1 list-disc pl-5">
+                  <li>
+                    <span className="font-medium text-primary">
+                      {t('contact.calendly.bullets.whatHappensLabel', { defaultValue: 'What happens on the call:' })}
+                    </span>{' '}
+                    {t('contact.calendly.bullets.whatHappens', { defaultValue: 'quick intro, your goals, scope, and next steps.' })}
+                  </li>
+                  <li>
+                    <span className="font-medium text-primary">
+                      {t('contact.calendly.bullets.whoForLabel', { defaultValue: 'Who it’s for / not for:' })}
+                    </span>{' '}
+                    {t('contact.calendly.bullets.whoFor', { defaultValue: 'new builds, audits, or improvements — not urgent “fix in 5 minutes” requests.' })}
+                  </li>
+                </ul>
+              </div>
+
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -409,7 +514,10 @@ const ContactForm = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
-                      onClick={() => trackEvent('Contact', 'Calendly Direct Link', 'Contact Page')}
+                      onClick={() => {
+                        handleStartContactFlow('calendly');
+                        trackEvent('Contact', 'Calendly Direct Link', 'Contact Page');
+                      }}
                     >
                       {t('contact.calendly.error.button') || 'Schedule on Calendly'}
                     </a>
@@ -436,6 +544,60 @@ const ContactForm = () => {
               >
                 {t('contact.form.title')}
               </motion.h2>
+              {submitStatus === 'success' ? (
+                <div className="rounded-2xl border border-green-200 bg-green-50 p-6">
+                  <h3 className="text-lg font-semibold text-green-900">
+                    {t('contact.form.success')}
+                  </h3>
+                  <p className="mt-2 text-green-900/80">
+                    {t('contact.form.nextSteps', { defaultValue: 'Next steps:' })}
+                  </p>
+                  <ul className="mt-3 space-y-2 text-green-900/80">
+                    <li>
+                      <span className="font-medium text-green-900">
+                        {t('contact.form.nextStepsScheduleLabel', { defaultValue: 'Schedule:' })}
+                      </span>{' '}
+                      {t('contact.form.nextStepsSchedule', { defaultValue: 'book a 30‑min call if you want to move faster.' })}
+                    </li>
+                    <li>
+                      <span className="font-medium text-green-900">
+                        {t('contact.form.nextStepsEmailLabel', { defaultValue: 'Email:' })}
+                      </span>{' '}
+                      {t('contact.form.nextStepsEmail', { defaultValue: 'I’ll reply to the address you provided.' })}
+                    </li>
+                    <li>
+                      <span className="font-medium text-green-900">
+                        {t('contact.form.nextStepsFaqLabel', { defaultValue: 'FAQ:' })}
+                      </span>{' '}
+                      {t('contact.form.nextStepsFaq', { defaultValue: 'check common questions while you wait.' })}
+                    </li>
+                  </ul>
+
+                  <div className="mt-6 flex flex-col sm:flex-row gap-3">
+                    <a
+                      href="#schedule"
+                      className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-dark transition-colors"
+                      onClick={() => trackEvent('Contact Form', 'Next Steps', 'Schedule')}
+                    >
+                      {t('contact.form.scheduleButton', { defaultValue: 'Schedule a Call' })}
+                    </a>
+                    <Link
+                      to="/faq"
+                      className="inline-flex items-center justify-center rounded-full border border-primary/20 bg-white px-5 py-2.5 text-sm font-semibold text-primary hover:bg-primary/5 transition-colors"
+                      onClick={() => trackEvent('Contact Form', 'Next Steps', 'FAQ')}
+                    >
+                      {t('contact.form.faqButton', { defaultValue: 'Read FAQ' })}
+                    </Link>
+                    <button
+                      type="button"
+                      className="inline-flex items-center justify-center rounded-full border border-green-300 bg-white px-5 py-2.5 text-sm font-semibold text-green-900 hover:bg-green-100/40 transition-colors"
+                      onClick={handleSendAnother}
+                    >
+                      {t('contact.form.sendAnother', { defaultValue: 'Send Another Message' })}
+                    </button>
+                  </div>
+                </div>
+              ) : (
               <motion.form 
                 onSubmit={handleSubmit} 
                 className="space-y-6"
@@ -450,15 +612,37 @@ const ContactForm = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.7 }}
                 >
+                  {/* Honeypot field (hidden from users, visible to basic bots) */}
+                  <div
+                    style={{ position: 'absolute', left: '-10000px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' }}
+                    aria-hidden="true"
+                  >
+                    <label htmlFor="company">
+                      Company
+                    </label>
+                    <input
+                      id="company"
+                      name="company"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                    />
+                  </div>
+
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                     {t('contact.form.name.label')}
                   </label>
                   <input
+                    ref={nameInputRef}
                     type="text"
                     id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
+                    onBlur={handleBlur}
+                    onFocus={() => handleStartContactFlow('form')}
                     required
                     maxLength={100}
                     aria-required="true"
@@ -491,6 +675,7 @@ const ContactForm = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     required
                     maxLength={100}
                     aria-required="true"
@@ -523,6 +708,7 @@ const ContactForm = () => {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     required
                     maxLength={200}
                     aria-required="true"
@@ -554,6 +740,7 @@ const ContactForm = () => {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     required
                     maxLength={2000}
                     rows={6}
@@ -573,14 +760,13 @@ const ContactForm = () => {
                 </motion.div>
 
                 <AnimatePresence mode="wait">
-                  {submitStatus && (
+                  {submitStatus && submitStatus !== 'success' && (
                     <motion.div 
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.3 }}
                       className={`p-4 rounded-lg ${
-                        submitStatus === 'success' ? 'bg-green-50 text-green-800' :
                         submitStatus === 'error' ? 'bg-red-50 text-red-800' :
                         submitStatus === 'rateLimit' ? 'bg-yellow-50 text-yellow-800' :
                         'bg-blue-50 text-blue-800'
@@ -588,10 +774,10 @@ const ContactForm = () => {
                       role="alert"
                       aria-live="assertive"
                     >
-                      {submitStatus === 'success' ? t('contact.form.success') :
-                       submitStatus === 'error' ? t('contact.form.error') :
-                       submitStatus === 'rateLimit' ? t('contact.form.rateLimit') :
-                       t('contact.form.validationError')}
+                      {submitStatus === 'error' ? t('contact.form.error') :
+                       submitStatus === 'rateLimit' ? (t('contact.form.rateLimit') || 'Please wait a bit before trying again.') :
+                       submitStatus === 'blocked' ? (t('contact.form.blocked') || 'Submission blocked. Please take a moment and try again.') :
+                       (t('contact.form.validationError') || 'Please fix the highlighted fields.')}
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -623,6 +809,7 @@ const ContactForm = () => {
                   ) : t('contact.form.submit')}
                 </motion.button>
               </motion.form>
+              )}
             </motion.div>
           </div>
         </div>
@@ -637,7 +824,7 @@ const Contact = () => {
     title: 'Contact | Half Half Man - Freelance Programmer & Developer',
     description: 'Get in touch with Half Half Man for freelance programming and web development services. Schedule a call or send a message for expert developer consultation.',
     keywords: 'contact Half Half Man, freelance programmer contact, developer consultation, web development services, schedule call, hire developer',
-    image: 'https://half-half-man.com/public/images/og-image.jpg',
+    image: 'https://half-half-man.com/images/og-image.jpg',
     type: 'website'
   });
 

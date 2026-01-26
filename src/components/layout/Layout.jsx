@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { useEffect } from 'react';
 import { useSEO } from '../../hooks/useSEO';
+import CookieBanner from '../common/CookieBanner';
 
 const Layout = ({ children }) => {
   // Initialize SEO with default meta tags
@@ -18,7 +19,7 @@ const Layout = ({ children }) => {
     <>
       <Helmet>
         {/* Security Headers */}
-        <meta http-equiv="Content-Security-Policy" content="
+        <meta httpEquiv="Content-Security-Policy" content="
           default-src 'self';
           script-src 'self' 'unsafe-inline' 'unsafe-eval'
             https://www.google.com
@@ -115,42 +116,25 @@ const Layout = ({ children }) => {
           base-uri 'self';
           form-action 'self' https://formspree.io;
         " />
-        <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-        <meta http-equiv="X-Frame-Options" content="DENY" />
-        <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-        <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
+        <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
+        <meta httpEquiv="X-Frame-Options" content="DENY" />
+        <meta httpEquiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+        <meta httpEquiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
         
         {/* Additional Security Headers */}
-        <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains" />
-        <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+        <meta httpEquiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains" />
+        <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
         
-        {/* Google Tag Manager */}
-        <script>
-          {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-MSWNC7DL');
-          `}
-        </script>
+        {/* Google Tag Manager is loaded after consent (see CookieBanner). */}
         
         {/* SEO Meta Tags - These will be dynamically updated by useSEO hook */}
         {/* Canonical and alternate URLs are handled by useSEO hook per page */}
       </Helmet>
       
-      {/* Google Tag Manager (noscript) */}
-      <noscript>
-        <iframe 
-          src="https://www.googletagmanager.com/ns.html?id=GTM-MSWNC7DL"
-          height="0" 
-          width="0" 
-          style={{display:'none',visibility:'hidden'}}
-        />
-      </noscript>
+      {/* Google Tag Manager (noscript) is intentionally omitted until consent. */}
       
       <div 
-        className="flex flex-col min-h-screen h-screen w-full"
+        className="flex flex-col min-h-screen w-full"
         role="application"
         aria-label="Main application"
         style={{ margin: 0, padding: 0 }}
@@ -164,6 +148,7 @@ const Layout = ({ children }) => {
           {children}
         </main>
         <Footer />
+        <CookieBanner />
       </div>
     </>
   );

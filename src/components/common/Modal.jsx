@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 
@@ -10,8 +10,25 @@ const Modal = ({
   size = 'medium',
   className = '',
 }) => {
+  const modalRef = useRef(null);
+  const previouslyFocusedRef = useRef(null);
+
+  const focusableSelector = useMemo(
+    () =>
+      [
+        'a[href]',
+        'button:not([disabled])',
+        'input:not([disabled])',
+        'select:not([disabled])',
+        'textarea:not([disabled])',
+        '[tabindex]:not([tabindex="-1"])',
+      ].join(','),
+    []
+  );
+
   useEffect(() => {
     if (isOpen) {
+      previouslyFocusedRef.current = document.activeElement;
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -20,6 +37,63 @@ const Modal = ({
       document.body.style.overflow = 'unset';
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    // Focus the first focusable element inside the modal for keyboard users
+    const root = modalRef.current;
+    if (!root) return;
+    const focusables = root.querySelectorAll(focusableSelector);
+    const first = focusables[0];
+    if (first && typeof first.focus === 'function') {
+      first.focus();
+    } else {
+      // Ensure modal itself can receive focus
+      root.focus();
+    }
+  }, [isOpen, focusableSelector]);
+
+  useEffect(() => {
+    if (isOpen) return undefined;
+    // Restore focus to the element that opened the modal
+    const prev = previouslyFocusedRef.current;
+    if (prev && typeof prev.focus === 'function') {
+      prev.focus();
+    }
+    return undefined;
+  }, [isOpen]);
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Escape') {
+      e.stopPropagation();
+      onClose();
+      return;
+    }
+
+    if (e.key !== 'Tab') return;
+    const root = modalRef.current;
+    if (!root) return;
+
+    const focusables = Array.from(root.querySelectorAll(focusableSelector));
+    if (focusables.length === 0) return;
+
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    const active = document.activeElement;
+
+    if (e.shiftKey) {
+      if (active === first || active === root) {
+        e.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -38,7 +112,7 @@ const Modal = ({
   ].join(' ');
 
   return createPortal(
-    <div className="fixed inset-0 z-50 overflow-y-auto">
+    <div className="fixed inset-0 z-50 overflow-y-auto" onKeyDown={handleKeyDown}>
       {/* Backdrop */}
       <div 
         className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
@@ -47,7 +121,14 @@ const Modal = ({
       
       {/* Modal */}
       <div className="flex min-h-screen items-center justify-center p-4">
-        <div className={modalClasses}>
+        <div
+          ref={modalRef}
+          className={modalClasses}
+          role="dialog"
+          aria-modal="true"
+          aria-label={title}
+          tabIndex={-1}
+        >
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-secondary/20">
             <h3 className="text-xl font-medium text-primary">

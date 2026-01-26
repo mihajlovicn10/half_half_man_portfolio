@@ -11,6 +11,10 @@ import Card from '../components/common/Card';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import logo from '../assets/logo/LOGO.jpg'; 
 import { useSEO } from '../hooks/useSEO';
+import { Helmet } from 'react-helmet-async';
+import { buildOrganization, buildService } from '../utils/structuredData';
+import { useSectionView } from '../hooks/useSectionView';
+import { track } from '../utils/events';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -20,7 +24,7 @@ const Home = () => {
     title: 'Half Half Man | Freelance Programmer & Developer - Web Development & Security',
     description: 'Professional freelance programmer and developer specializing in web development, React, and cybersecurity. Expert developer services and portfolio. Half Half Man - your trusted developer partner.',
     keywords: 'Half Half Man, freelance programmer, developer, web development, React developer, cybersecurity, freelance developer, programmer, coding, software development, web developer, frontend developer, backend developer, security consultant',
-    image: 'https://half-half-man.com/public/images/og-image.jpg',
+    image: 'https://half-half-man.com/images/og-image.jpg',
     type: 'website'
   });
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
@@ -164,8 +168,43 @@ const Home = () => {
     link: "#about"
   };
 
+  // Analytics: section views (once per session)
+  useSectionView('about');
+  useSectionView('services');
+  useSectionView('testimonials');
+
   return (
     <div className="min-h-screen bg-tertiary w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-16">
+      <Helmet>
+        <title>Half Half Man | Freelance Programmer & Developer - Web Development & Security</title>
+        <meta
+          name="description"
+          content="Professional freelance programmer and developer specializing in web development, React, and cybersecurity. Expert developer services and portfolio. Half Half Man - your trusted developer partner."
+        />
+        <script type="application/ld+json">
+          {JSON.stringify([
+            buildOrganization({
+              name: 'Half Half Man',
+              url: 'https://half-half-man.com/',
+              logoUrl: 'https://half-half-man.com/images/og-image.jpg',
+              sameAs: [
+                'https://github.com/mihajlovicn10',
+                'https://www.linkedin.com/in/nikolamihajlovic9/',
+              ],
+            }),
+            buildService({
+              name: 'Web Development',
+              description: 'Full-stack web development with modern frameworks and best practices.',
+              url: 'https://half-half-man.com/#services',
+            }),
+            buildService({
+              name: 'Cybersecurity',
+              description: 'Security audits, consulting, and secure-by-default implementation.',
+              url: 'https://half-half-man.com/#services',
+            }),
+          ])}
+        </script>
+      </Helmet>
       <motion.div 
         ref={heroRef}
         style={{ 
@@ -175,7 +214,10 @@ const Home = () => {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
-        className="relative w-full h-screen overflow-hidden"
+        // Note: the page wrapper uses `-mt-16` to offset the fixed navbar.
+        // Add 4rem to the hero height so the overlay/hero covers the full
+        // visible viewport and doesn't reveal the next section at the bottom.
+        className="relative w-full h-[calc(100vh+4rem)] overflow-hidden"
       >
         {shouldLoadVideo && (
           <video
@@ -255,7 +297,10 @@ const Home = () => {
                       <Button 
                         variant="primary" 
                         size="large"
-                        onClick={() => window.location.href = slide.link}
+                        onClick={() => {
+                          track('click_cta', { label: slide.buttonText, destination: slide.link });
+                          window.location.href = slide.link;
+                        }}
                         className="group relative overflow-hidden"
                       >
                         <span className="relative z-10 flex items-center gap-2">
@@ -288,7 +333,7 @@ const Home = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
+          className="absolute bottom-16 sm:bottom-12 left-1/2 transform -translate-x-1/2 z-10"
         >
           <div className="flex flex-col items-center">
             <span className="text-white/70 text-sm mb-2">{t('common.scrollToExplore')}</span>

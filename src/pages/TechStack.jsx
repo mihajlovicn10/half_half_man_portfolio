@@ -6,6 +6,10 @@ import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
+import { useSEO } from '../hooks/useSEO';
+import { buildBreadcrumbList } from '../utils/structuredData';
+import SystemMap from '../components/techStack/SystemMap';
+import { TECH_STACK_CATEGORY_META } from '../data/techStackMeta';
 
 const categories = [
   {
@@ -44,6 +48,13 @@ const TechStack = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const navigate = useNavigate();
 
+  useSEO({
+    title: t('techStack.meta.title'),
+    description: t('techStack.meta.description'),
+    image: 'https://half-half-man.com/images/og-image.jpg',
+    type: 'website',
+  });
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (!isAnimating) {
@@ -70,9 +81,17 @@ const TechStack = () => {
       <Helmet>
         <title>{t('techStack.meta.title')}</title>
         <meta name="description" content={t('techStack.meta.description')} />
+        <script type="application/ld+json">
+          {JSON.stringify(
+            buildBreadcrumbList([
+              { name: 'Home', url: '/' },
+              { name: 'Tech Stack', url: '/tech-stack' },
+            ])
+          )}
+        </script>
       </Helmet>
       <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
-        <div className="max-w-7xl mx-auto px-4 pt-48">
+        <div className="max-w-7xl mx-auto px-4 pt-48 pb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -127,6 +146,28 @@ const TechStack = () => {
                   >
                     {t(`techStack.categories.${categories[currentSlide].key}.description`)}
                   </motion.p>
+
+                  {/* Best for */}
+                  <motion.div
+                    className="mb-8"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.25 }}
+                  >
+                    <div className="text-sm font-semibold text-primary/80 text-center">
+                      {t('techStack.bestForLabel')}
+                    </div>
+                    <div className="mt-2 flex flex-wrap justify-center gap-2">
+                      {(TECH_STACK_CATEGORY_META[categories[currentSlide].slug]?.bestForKeys || []).map((k) => (
+                        <span
+                          key={k}
+                          className="px-2.5 py-1 rounded-full bg-white/70 text-primary text-xs font-semibold border border-primary/10"
+                        >
+                          {t(`techStack.bestFor.${k}`)}
+                        </span>
+                      ))}
+                    </div>
+                  </motion.div>
                   <motion.div 
                     className="flex justify-center"
                     initial={{ opacity: 0, y: 10 }}
@@ -149,7 +190,7 @@ const TechStack = () => {
           </div>
 
           <motion.div 
-            className="flex justify-center gap-2 mt-8"
+            className="flex justify-center gap-2 mt-8 mb-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
@@ -164,6 +205,11 @@ const TechStack = () => {
               />
             ))}
           </motion.div>
+
+          {/* System map */}
+          <div className="mt-14">
+            <SystemMap />
+          </div>
         </div>
       </div>
     </>

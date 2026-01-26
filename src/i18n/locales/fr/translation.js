@@ -25,6 +25,44 @@ const translation = {
       description: "Découvrez les technologies et outils que nous utilisons pour créer des applications hautes performances.",
       categoryDescription: "Découvrez les outils et technologies liés à {{category}}."
     },
+    systemMap: {
+      title: "Carte du système",
+      subtitle: "Comment le stack se connecte entre frontend, backend, sécurité et ops.",
+      groups: {
+        frontend: "Frontend",
+        backend: "Backend",
+        security: "Sécurité",
+        ops: "Ops"
+      },
+      nodes: {
+        reactTailwindVite: "React, Tailwind, Vite",
+        webflow: "Webflow",
+        djangoNode: "Django / Node",
+        xano: "Xano",
+        penTesting: "Test d'intrusion",
+        secureCoding: "Code sécurisé",
+        deployment: "Déploiement",
+        monitoring: "Monitoring"
+      }
+    },
+    bestForLabel: "Idéal pour :",
+    bestFor: {
+      mvp: "Lancement MVP",
+      educational: "Plateforme éducative",
+      internalTools: "Outils internes",
+      marketingSite: "Site marketing",
+      securityAudits: "Audits de sécurité",
+      securityAutomation: "Automatisation sécurité",
+      performance: "Amélioration des performances",
+      stability: "Stabilité et disponibilité",
+      securityHardening: "Renforcement de sécurité"
+    },
+    related: {
+      projectsLabel: "Projets d'exemple",
+      postsLabel: "Articles pertinents",
+      seeAllPosts: "Voir tous les articles",
+      noneYet: "Bientôt disponible."
+    },
     title: "Ingénierie du Stack",
     subtitle: "Des outils ciblés. Une exécution précise. Des systèmes prêts pour l’avenir.",
     seeFullStack: "Voir le Stack Complet",
@@ -299,6 +337,18 @@ J'apprécie sincèrement son dévouement, sa réactivité et son expertise techn
     viewDetails: "Voir les Détails",
     backToProjects: "← Retour aux Projets",
     projectNotFound: "Projet non trouvé",
+    list: {
+      searchLabel: "Rechercher des projets",
+      searchPlaceholder: "Rechercher des projets…",
+      clearAll: "Tout effacer",
+      filters: {
+        technology: "Technologie",
+        projectType: "Type de projet"
+      },
+      pagination: {
+        pageOf: "Page {{page}} sur {{total}}"
+      }
+    },
     detail: {
       technologiesUsed: "Technologies Utilisées",
       keyFeatures: "Fonctionnalités Clés",

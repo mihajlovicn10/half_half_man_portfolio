@@ -28,6 +28,44 @@ const translation = {
           description: 'Δες τις τεχνολογίες και τα εργαλεία που χρησιμοποιώ για να χτίζω εφαρμογές με απόδοση και αντοχή.',
           categoryDescription: 'Δες εργαλεία και τεχνολογίες που χρησιμοποιώ στον τομέα {{category}}.'
         },
+        systemMap: {
+          title: 'Χάρτης συστήματος',
+          subtitle: 'Πώς συνδέεται το stack ανάμεσα σε frontend, backend, ασφάλεια και ops.',
+          groups: {
+            frontend: 'Frontend',
+            backend: 'Backend',
+            security: 'Ασφάλεια',
+            ops: 'Ops'
+          },
+          nodes: {
+            reactTailwindVite: 'React, Tailwind, Vite',
+            webflow: 'Webflow',
+            djangoNode: 'Django / Node',
+            xano: 'Xano',
+            penTesting: 'Pen testing',
+            secureCoding: 'Secure coding',
+            deployment: 'Deployment',
+            monitoring: 'Monitoring'
+          }
+        },
+        bestForLabel: 'Ιδανικό για:',
+        bestFor: {
+          mvp: 'Λανσάρισμα MVP',
+          educational: 'Εκπαιδευτική πλατφόρμα',
+          internalTools: 'Εσωτερικά εργαλεία',
+          marketingSite: 'Marketing site',
+          securityAudits: 'Security audits',
+          securityAutomation: 'Security automation',
+          performance: 'Βελτίωση απόδοσης',
+          stability: 'Σταθερότητα & uptime',
+          securityHardening: 'Security hardening'
+        },
+        related: {
+          projectsLabel: 'Παραδείγματα έργων',
+          postsLabel: 'Σχετικά άρθρα',
+          seeAllPosts: 'Δες όλα τα άρθρα',
+          noneYet: 'Σύντομα.'
+        },
         title: 'Το Τεχνολογικό Stack',
         subtitle: 'Ό,τι χρησιμοποιώ, το χρησιμοποιώ με λόγο. Καθαρή εκτέλεση. Υποδομή για το αύριο.',
         seeFullStack: 'Δες ολόκληρο το stack',
@@ -175,6 +213,18 @@ const translation = {
         viewDetails: 'Δείτε Λεπτομέρειες',
         backToProjects: '← Επιστροφή στα Έργα',
         projectNotFound: 'Το έργο δεν βρέθηκε',
+        list: {
+            searchLabel: 'Αναζήτηση έργων',
+            searchPlaceholder: 'Αναζήτηση έργων…',
+            clearAll: 'Καθαρισμός',
+            filters: {
+                technology: 'Τεχνολογία',
+                projectType: 'Τύπος έργου'
+            },
+            pagination: {
+                pageOf: 'Σελίδα {{page}} από {{total}}'
+            }
+        },
         detail: {
             technologiesUsed: 'Τεχνολογίες',
             keyFeatures: 'Βασικά Χαρακτηριστικά',

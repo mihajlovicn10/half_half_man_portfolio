@@ -24,20 +24,33 @@ const Card = ({
     large: 'p-7',
   };
 
-  const hoverStyles = hover ? 'hover:shadow-lg hover:scale-[1.02] cursor-pointer' : '';
+  const isInteractive = Boolean(onClick) || hover;
+  const hoverStyles = isInteractive ? 'hover:shadow-lg hover:scale-[1.02] cursor-pointer' : '';
+  const focusStyles = isInteractive ? 'focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80' : '';
 
   const classes = [
     baseStyles,
     variants[variant],
     paddings[padding],
     hoverStyles,
+    focusStyles,
     className,
   ].join(' ');
+
+  const handleKeyDown = (e) => {
+    if (!onClick) return;
+    // Make non-button card activate on Enter/Space like a real button
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onClick(e);
+    }
+  };
 
   return (
     <div 
       className={classes}
       onClick={onClick}
+      onKeyDown={handleKeyDown}
       role={onClick ? 'button' : undefined}
       tabIndex={onClick ? 0 : undefined}
     >
