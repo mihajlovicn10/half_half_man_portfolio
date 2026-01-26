@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { FaArrowRight } from 'react-icons/fa';
 import Card from '../common/Card';
 import { TECH_STACK_SYSTEM_MAP } from '../../data/techStackMeta';
 
@@ -11,7 +12,7 @@ const NodeButton = ({ label, onClick }) => {
     <button
       type="button"
       onClick={onClick}
-      className="w-full rounded-xl border border-primary/15 bg-white/70 px-3 py-2 text-left text-sm font-semibold text-primary transition-colors hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/90"
+      className="w-full rounded-xl border border-primary/15 bg-white/70 px-3 py-2 text-left text-sm font-semibold text-primary transition-all duration-200 hover:bg-white hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
     >
       {label}
     </button>
@@ -42,21 +43,32 @@ const SystemMap = () => {
     <Card
       variant="primary"
       padding="large"
-      className="relative overflow-hidden bg-white/60 backdrop-blur-sm border border-primary/10"
+      className="relative overflow-hidden bg-gradient-to-br from-white/80 via-white/60 to-[#e2f0fa]/70 backdrop-blur-sm border border-primary/10"
     >
       <div className="flex flex-col gap-2">
         <h2 className="text-2xl font-semibold text-primary">{t('techStack.systemMap.title')}</h2>
         <p className="text-primary/70">{t('techStack.systemMap.subtitle')}</p>
       </div>
 
+      {/* High-level flow (layers) */}
+      <div className="mt-6 hidden md:flex items-center justify-center gap-3 text-sm font-medium text-primary/80">
+        {groups.map((g, idx) => (
+          <React.Fragment key={g.id}>
+            <div className="rounded-full bg-white/90 px-4 py-1.5 shadow-sm border border-primary/10">
+              {t(g.labelKey)}
+            </div>
+            {idx < groups.length - 1 && (
+              <FaArrowRight className="text-primary/40" aria-hidden="true" />
+            )}
+          </React.Fragment>
+        ))}
+      </div>
+
       {/* Desktop map */}
-      <div className="relative mt-6 hidden md:block">
-        <div className="grid grid-cols-4 gap-4">
+      <div className="relative mt-8 hidden md:block">
+        <div className="grid grid-cols-4 gap-6">
           {groups.map((g) => (
-            <div key={g.id} className="relative">
-              <div className="mb-3 rounded-xl bg-primary/10 px-3 py-2 text-sm font-bold text-primary">
-                {t(g.labelKey)}
-              </div>
+            <div key={g.id} className="relative group">
               <div className="space-y-2">
                 {g.nodes.map((node) => (
                   <NodeButton
@@ -69,25 +81,6 @@ const SystemMap = () => {
             </div>
           ))}
         </div>
-
-        {/* Simple connector overlay (group-to-group) */}
-        <svg
-          className="pointer-events-none absolute inset-0"
-          viewBox="0 0 1000 220"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          {/* Frontend -> Backend */}
-          <path d="M125 40 C 250 40, 250 40, 375 40" fill="none" stroke="rgba(2, 44, 90, 0.35)" strokeWidth="2" />
-          {/* Frontend -> Ops */}
-          <path d="M125 55 C 300 120, 650 120, 875 55" fill="none" stroke="rgba(2, 44, 90, 0.25)" strokeWidth="2" />
-          {/* Backend -> Security */}
-          <path d="M375 40 C 500 40, 500 40, 625 40" fill="none" stroke="rgba(2, 44, 90, 0.35)" strokeWidth="2" />
-          {/* Backend -> Ops */}
-          <path d="M375 55 C 520 120, 720 120, 875 55" fill="none" stroke="rgba(2, 44, 90, 0.25)" strokeWidth="2" />
-          {/* Security -> Ops */}
-          <path d="M625 40 C 750 40, 750 40, 875 40" fill="none" stroke="rgba(2, 44, 90, 0.35)" strokeWidth="2" />
-        </svg>
       </div>
 
       {/* Mobile map (stacked) */}

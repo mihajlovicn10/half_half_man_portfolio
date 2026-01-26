@@ -16,7 +16,10 @@ const ContactForm = () => {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
+    projectType: '',
+    budgetRange: '',
+    timeline: '',
   });
   const [honeypot, setHoneypot] = useState('');
   const mountedAtRef = useRef(Date.now());
@@ -30,8 +33,12 @@ const ContactForm = () => {
     email: false,
     subject: false,
     message: false,
+    projectType: false,
+    budgetRange: false,
+    timeline: false,
   });
   const [calendlyError, setCalendlyError] = useState(false);
+  const [step, setStep] = useState(1);
   const lastSubmitTime = useRef(0);
   const nameInputRef = useRef(null);
   const { t } = useTranslation();
@@ -70,6 +77,11 @@ const ContactForm = () => {
 
   // Check if form submission is allowed
   const isSubmissionAllowed = () => {
+    // Disable rate limiting in development/localhost to make testing easier
+    if (import.meta.env.DEV || window.location.hostname === 'localhost') {
+      return true;
+    }
+
     const now = Date.now();
     
     // Reset attempts if enough time has passed
@@ -93,6 +105,11 @@ const ContactForm = () => {
 
   // Update rate limit state
   const updateRateLimitState = () => {
+    // Skip updating rate limit while developing locally
+    if (import.meta.env.DEV || window.location.hostname === 'localhost') {
+      return;
+    }
+
     const now = Date.now();
     const newAttempts = rateLimitState.attempts + 1;
     const delay = calculateDelay(newAttempts);
@@ -169,30 +186,61 @@ const ContactForm = () => {
       return null;
     }
 
+    if (field === 'projectType') {
+      if (!sanitized) return 'Please select a project type';
+      return null;
+    }
+
+    if (field === 'budgetRange') {
+      if (!sanitized) return 'Please select a budget range';
+      return null;
+    }
+
+    if (field === 'timeline') {
+      if (!sanitized) return 'Please select a timeline';
+      return null;
+    }
+
     return null;
   };
 
-  const validateForm = () => {
+  const validateForm = (currentStep = 3) => {
     const sanitized = {
       name: sanitizeInput(formData.name, 'name'),
       email: sanitizeInput(formData.email, 'email'),
       subject: sanitizeInput(formData.subject, 'subject'),
       message: sanitizeInput(formData.message, 'message'),
+      projectType: sanitizeInput(formData.projectType, 'projectType'),
+      budgetRange: sanitizeInput(formData.budgetRange, 'budgetRange'),
+      timeline: sanitizeInput(formData.timeline, 'timeline'),
     };
 
     const errors = {};
-    (['name', 'email', 'subject', 'message']).forEach((field) => {
+
+    const step1Fields = ['name', 'email', 'subject', 'projectType'];
+    const step2Fields = ['budgetRange', 'timeline'];
+    const step3Fields = ['message'];
+
+    const fieldsToValidate = [];
+    if (currentStep >= 1) fieldsToValidate.push(...step1Fields);
+    if (currentStep >= 2) fieldsToValidate.push(...step2Fields);
+    if (currentStep >= 3) fieldsToValidate.push(...step3Fields);
+
+    fieldsToValidate.forEach((field) => {
       const err = validateField(field, sanitized[field]);
       if (err) errors[field] = err;
     });
 
     // Update form data with sanitized values
-    setFormData(sanitized);
+    setFormData((prev) => ({ ...prev, ...sanitized }));
     setTouched({
       name: true,
       email: true,
       subject: true,
       message: true,
+      projectType: true,
+      budgetRange: true,
+      timeline: true,
     });
 
     setValidationErrors(errors);
@@ -256,14 +304,33 @@ const ContactForm = () => {
     });
   };
 
+  const handleNextStep = () => {
+    const isValid = validateForm(step);
+    if (!isValid) {
+      setSubmitStatus('validationError');
+      return;
+    }
+    setSubmitStatus(null);
+    setStep((prev) => Math.min(3, prev + 1));
+  };
+
+  const handlePrevStep = () => {
+    setSubmitStatus(null);
+    setStep((prev) => Math.max(1, prev - 1));
+  };
+
   const handleSendAnother = () => {
     setSubmitStatus(null);
     setValidationErrors({});
+    setStep(1);
     setTouched({
       name: false,
       email: false,
       subject: false,
       message: false,
+      projectType: false,
+      budgetRange: false,
+      timeline: false,
     });
     requestAnimationFrame(() => nameInputRef.current?.focus?.());
   };
@@ -276,14 +343,9 @@ const ContactForm = () => {
   // Add security headers
   const getSecurityHeaders = () => {
     return {
+      // Keep headers minimal so Formspree CORS preflight passes
       'Content-Type': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest',
-      'X-Form-Submission-ID': generateSubmissionId(),
-      'X-Form-Timestamp': Date.now().toString(),
       'Accept': 'application/json',
-      'Cache-Control': 'no-cache, no-store, must-revalidate',
-      'Pragma': 'no-cache',
-      'Expires': '0'
     };
   };
 
@@ -313,8 +375,8 @@ const ContactForm = () => {
       return;
     }
 
-    // Validate form
-    if (!validateForm()) {
+    // Validate form (all steps)
+    if (!validateForm(3)) {
       setSubmitStatus('validationError');
       return;
     }
@@ -376,7 +438,15 @@ const ContactForm = () => {
       if (data.ok) {
         setSubmitStatus('success');
         trackEvent('Contact Form', 'Submit', 'Success');
-        setFormData({ name: '', email: '', subject: '', message: '' });
+        setFormData({ 
+          name: '', 
+          email: '', 
+          subject: '', 
+          message: '',
+          projectType: '',
+          budgetRange: '',
+          timeline: '',
+        });
         // Reset rate limit on successful submission
         setRateLimitState({
           attempts: 0,
@@ -607,157 +677,300 @@ const ContactForm = () => {
                 noValidate
                 aria-live="polite"
               >
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.7 }}
+                {/* Honeypot field (hidden from users, visible to basic bots) */}
+                <div
+                  style={{ position: 'absolute', left: '-10000px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' }}
+                  aria-hidden="true"
                 >
-                  {/* Honeypot field (hidden from users, visible to basic bots) */}
-                  <div
-                    style={{ position: 'absolute', left: '-10000px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' }}
-                    aria-hidden="true"
-                  >
-                    <label htmlFor="company">
-                      Company
-                    </label>
-                    <input
-                      id="company"
-                      name="company"
-                      type="text"
-                      tabIndex={-1}
-                      autoComplete="off"
-                      value={honeypot}
-                      onChange={(e) => setHoneypot(e.target.value)}
-                    />
-                  </div>
-
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                    {t('contact.form.name.label')}
+                  <label htmlFor="company">
+                    Company
                   </label>
                   <input
-                    ref={nameInputRef}
+                    id="company"
+                    name="company"
                     type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    onFocus={() => handleStartContactFlow('form')}
-                    required
-                    maxLength={100}
-                    aria-required="true"
-                    aria-invalid={!!validationErrors.name}
-                    aria-describedby={validationErrors.name ? "name-error" : undefined}
-                    className={`w-full px-4 py-2 border ${
-                      validationErrors.name ? 'border-red-500' : 'border-gray-300'
-                    } rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors`}
-                    placeholder={t('contact.form.name.placeholder')}
-                    autoComplete="name"
-                  />
-                  {validationErrors.name && (
-                    <p id="name-error" className="mt-1 text-sm text-red-600" role="alert">
-                      {validationErrors.name}
-                    </p>
-                  )}
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.8 }}
-                >
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                    {t('contact.form.email.label')}
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    required
-                    maxLength={100}
-                    aria-required="true"
-                    aria-invalid={!!validationErrors.email}
-                    aria-describedby={validationErrors.email ? "email-error" : undefined}
-                    className={`w-full px-4 py-2 border ${
-                      validationErrors.email ? 'border-red-500' : 'border-gray-300'
-                    } rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors`}
-                    placeholder={t('contact.form.email.placeholder')}
-                    autoComplete="email"
-                  />
-                  {validationErrors.email && (
-                    <p id="email-error" className="mt-1 text-sm text-red-600" role="alert">
-                      {validationErrors.email}
-                    </p>
-                  )}
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.9 }}
-                >
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
-                    {t('contact.form.subject.label')}
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    required
-                    maxLength={200}
-                    aria-required="true"
-                    aria-invalid={!!validationErrors.subject}
-                    aria-describedby={validationErrors.subject ? "subject-error" : undefined}
-                    className={`w-full px-4 py-2 border ${
-                      validationErrors.subject ? 'border-red-500' : 'border-gray-300'
-                    } rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors`}
-                    placeholder={t('contact.form.subject.placeholder')}
+                    tabIndex={-1}
                     autoComplete="off"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
                   />
-                  {validationErrors.subject && (
-                    <p id="subject-error" className="mt-1 text-sm text-red-600" role="alert">
-                      {validationErrors.subject}
-                    </p>
-                  )}
-                </motion.div>
+                </div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 1.0 }}
-                >
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                    {t('contact.form.message.label')}
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    required
-                    maxLength={2000}
-                    rows={6}
-                    aria-required="true"
-                    aria-invalid={!!validationErrors.message}
-                    aria-describedby={validationErrors.message ? "message-error" : undefined}
-                    className={`w-full px-4 py-2 border ${
-                      validationErrors.message ? 'border-red-500' : 'border-gray-300'
-                    } rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors resize-none`}
-                    placeholder={t('contact.form.message.placeholder')}
-                  />
-                  {validationErrors.message && (
-                    <p id="message-error" className="mt-1 text-sm text-red-600" role="alert">
-                      {validationErrors.message}
+                {step === 1 && (
+                  <>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.7 }}
+                    >
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                        {t('contact.form.name.label')}
+                      </label>
+                      <input
+                        ref={nameInputRef}
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        onFocus={() => handleStartContactFlow('form')}
+                        required
+                        maxLength={100}
+                        aria-required="true"
+                        aria-invalid={!!validationErrors.name}
+                        aria-describedby={validationErrors.name ? "name-error" : undefined}
+                        className={`w-full px-4 py-2 border ${
+                          validationErrors.name ? 'border-red-500' : 'border-gray-300'
+                        } rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors`}
+                        placeholder={t('contact.form.name.placeholder')}
+                        autoComplete="name"
+                      />
+                      {validationErrors.name && (
+                        <p id="name-error" className="mt-1 text-sm text-red-600" role="alert">
+                          {validationErrors.name}
+                        </p>
+                      )}
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.8 }}
+                    >
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                        {t('contact.form.email.label')}
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        required
+                        maxLength={100}
+                        aria-required="true"
+                        aria-invalid={!!validationErrors.email}
+                        aria-describedby={validationErrors.email ? "email-error" : undefined}
+                        className={`w-full px-4 py-2 border ${
+                          validationErrors.email ? 'border-red-500' : 'border-gray-300'
+                        } rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors`}
+                        placeholder={t('contact.form.email.placeholder')}
+                        autoComplete="email"
+                      />
+                      {validationErrors.email && (
+                        <p id="email-error" className="mt-1 text-sm text-red-600" role="alert">
+                          {validationErrors.email}
+                        </p>
+                      )}
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.9 }}
+                    >
+                      <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+                        {t('contact.form.subject.label')}
+                      </label>
+                      <input
+                        type="text"
+                        id="subject"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        required
+                        maxLength={200}
+                        aria-required="true"
+                        aria-invalid={!!validationErrors.subject}
+                        aria-describedby={validationErrors.subject ? "subject-error" : undefined}
+                        className={`w-full px-4 py-2 border ${
+                          validationErrors.subject ? 'border-red-500' : 'border-gray-300'
+                        } rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors`}
+                        placeholder={t('contact.form.subject.placeholder')}
+                        autoComplete="off"
+                      />
+                      {validationErrors.subject && (
+                        <p id="subject-error" className="mt-1 text-sm text-red-600" role="alert">
+                          {validationErrors.subject}
+                        </p>
+                      )}
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 1.0 }}
+                    >
+                      <p className="block text-sm font-medium text-gray-700 mb-1">
+                        {t('contact.form.projectType.label', { defaultValue: 'What do you need help with?' })}
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {[
+                          { value: 'new_website', label: 'New website' },
+                          { value: 'redesign', label: 'Website redesign' },
+                          { value: 'security_review', label: 'Security review' },
+                          { value: 'course_mentoring', label: 'Course / mentoring' },
+                          { value: 'other', label: 'Something else' },
+                        ].map((opt) => (
+                          <label
+                            key={opt.value}
+                            className={`cursor-pointer rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
+                              formData.projectType === opt.value
+                                ? 'bg-primary text-white border-primary'
+                                : 'bg-white text-primary border-gray-300 hover:bg-primary/5'
+                            }`}
+                          >
+                            <input
+                              type="radio"
+                              name="projectType"
+                              value={opt.value}
+                              className="sr-only"
+                              checked={formData.projectType === opt.value}
+                              onChange={handleChange}
+                            />
+                            {opt.label}
+                          </label>
+                        ))}
+                      </div>
+                      {validationErrors.projectType && (
+                        <p className="mt-1 text-sm text-red-600" role="alert">
+                          {validationErrors.projectType}
+                        </p>
+                      )}
+                    </motion.div>
+                  </>
+                )}
+
+                {step === 2 && (
+                  <>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.7 }}
+                    >
+                      <p className="block text-sm font-medium text-gray-700 mb-1">
+                        {t('contact.form.budget.label', { defaultValue: 'Budget range (roughly)' })}
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {[
+                          { value: '<1000', label: '< 1.000€' },
+                          { value: '1000-3000', label: '1.000–3.000€' },
+                          { value: '3000-7000', label: '3.000–7.000€' },
+                          { value: '7000+', label: '7.000€+' },
+                        ].map((opt) => (
+                          <label
+                            key={opt.value}
+                            className={`cursor-pointer rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
+                              formData.budgetRange === opt.value
+                                ? 'bg-primary text-white border-primary'
+                                : 'bg-white text-primary border-gray-300 hover:bg-primary/5'
+                            }`}
+                          >
+                            <input
+                              type="radio"
+                              name="budgetRange"
+                              value={opt.value}
+                              className="sr-only"
+                              checked={formData.budgetRange === opt.value}
+                              onChange={handleChange}
+                            />
+                            {opt.label}
+                          </label>
+                        ))}
+                      </div>
+                      {validationErrors.budgetRange && (
+                        <p className="mt-1 text-sm text-red-600" role="alert">
+                          {validationErrors.budgetRange}
+                        </p>
+                      )}
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.9 }}
+                    >
+                      <p className="block text-sm font-medium text-gray-700 mb-1">
+                        {t('contact.form.timeline.label', { defaultValue: 'When would you like to start?' })}
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {[
+                          { value: 'asap', label: 'ASAP (1–4 weeks)' },
+                          { value: 'quarter', label: 'This quarter (1–3 months)' },
+                          { value: 'flexible', label: 'Flexible (3+ months)' },
+                        ].map((opt) => (
+                          <label
+                            key={opt.value}
+                            className={`cursor-pointer rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
+                              formData.timeline === opt.value
+                                ? 'bg-primary text-white border-primary'
+                                : 'bg-white text-primary border-gray-300 hover:bg-primary/5'
+                            }`}
+                          >
+                            <input
+                              type="radio"
+                              name="timeline"
+                              value={opt.value}
+                              className="sr-only"
+                              checked={formData.timeline === opt.value}
+                              onChange={handleChange}
+                            />
+                            {opt.label}
+                          </label>
+                        ))}
+                      </div>
+                      {validationErrors.timeline && (
+                        <p className="mt-1 text-sm text-red-600" role="alert">
+                          {validationErrors.timeline}
+                        </p>
+                      )}
+                    </motion.div>
+
+                    <p className="text-xs text-gray-500 mt-2">
+                      {t('contact.form.step2Hint', { defaultValue: 'Rough numbers are fine – this just helps set expectations.' })}
                     </p>
-                  )}
-                </motion.div>
+                  </>
+                )}
+
+                {step === 3 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.7 }}
+                  >
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                      {t('contact.form.message.label')}
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      required
+                      maxLength={2000}
+                      rows={6}
+                      aria-required="true"
+                      aria-invalid={!!validationErrors.message}
+                      aria-describedby={validationErrors.message ? "message-error" : undefined}
+                      className={`w-full px-4 py-2 border ${
+                        validationErrors.message ? 'border-red-500' : 'border-gray-300'
+                      } rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-colors resize-none`}
+                      placeholder={t('contact.form.message.placeholder')}
+                    />
+                    {validationErrors.message && (
+                      <p id="message-error" className="mt-1 text-sm text-red-600" role="alert">
+                        {validationErrors.message}
+                      </p>
+                    )}
+                    <p className="text-xs text-gray-500 mt-2">
+                      {t('contact.form.step3Hint', { defaultValue: 'Share a bit of context: current state, goals, and what would make this a win.' })}
+                    </p>
+                  </motion.div>
+                )}
 
                 <AnimatePresence mode="wait">
                   {submitStatus && submitStatus !== 'success' && (
@@ -782,32 +995,54 @@ const ContactForm = () => {
                   )}
                 </AnimatePresence>
 
-                <motion.button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full px-6 py-3 bg-primary text-white rounded-full hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                  aria-busy={isSubmitting}
-                  aria-disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <span className="flex items-center justify-center">
-                      <svg 
-                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        fill="none" 
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      {t('contact.form.sending')}
-                    </span>
-                  ) : t('contact.form.submit')}
-                </motion.button>
+                <div className="mt-4 flex flex-col sm:flex-row justify-between gap-3">
+                  {step > 1 && (
+                    <button
+                      type="button"
+                      onClick={handlePrevStep}
+                      className="w-full sm:w-auto px-6 py-3 rounded-full border border-primary/20 text-primary bg-white hover:bg-primary/5 transition-colors"
+                    >
+                      {t('contact.form.back', { defaultValue: 'Back' })}
+                    </button>
+                  )}
+
+                  {step < 3 ? (
+                    <button
+                      type="button"
+                      onClick={handleNextStep}
+                      className="w-full sm:w-auto px-6 py-3 rounded-full bg-primary text-white hover:bg-primary-dark transition-colors"
+                    >
+                      {t('contact.form.next', { defaultValue: 'Next' })}
+                    </button>
+                  ) : (
+                    <motion.button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full sm:w-auto px-6 py-3 bg-primary text-white rounded-full hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ type: "spring", stiffness: 400 }}
+                      aria-busy={isSubmitting}
+                      aria-disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <span className="flex items-center justify-center">
+                          <svg 
+                            className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            fill="none" 
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          {t('contact.form.sending')}
+                        </span>
+                      ) : t('contact.form.submit')}
+                    </motion.button>
+                  )}
+                </div>
               </motion.form>
               )}
             </motion.div>
