@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import logo from '../../assets/logo/LOGO.jpg';
+import logo from '../../assets/logo/hhm_logo.png';
 import DOMPurify from 'dompurify';
 
 const Footer = () => {
@@ -69,12 +69,12 @@ const Footer = () => {
             <Link to="/" className="block" aria-label="Home">
               <div className="flex flex-col items-center text-center space-y-2">
                 <img
-                  className="w-20 h-20 object-cover rounded-full"
+                  className="w-32 h-32 object-cover rounded-full"
                   src={logo}
                   alt="Half Half Man Logo"
                   loading="lazy"
-                  width="80"
-                  height="80"
+                  width="128"
+                  height="128"
                   decoding="async"
                 />
                 <span className="text-tertiary font-serif text-2xl font-bold">

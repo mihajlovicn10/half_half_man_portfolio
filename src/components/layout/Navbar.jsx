@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import logo from '../../assets/logo/LOGO.jpg';
+import logo from '../../assets/logo/hhm_logo.png';
 import LanguageSwitcher from '../common/LanguageSwitcher';
 
 const Navbar = () => {
@@ -89,7 +89,7 @@ const Navbar = () => {
           aria-label="Home"
         >
           <img
-            className="h-10 w-auto"
+            className="h-20 w-auto"
             src={logo}
             alt={t('common.logoAlt')}
             loading="lazy"

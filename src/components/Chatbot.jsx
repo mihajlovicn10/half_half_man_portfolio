@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import avatarImage from '../assets/logo/logo_cropped.png';
+import avatarImage from '../assets/logo/hhm_logo.png';
 import { track } from '../utils/events';
 
 const INTENTIONS = [

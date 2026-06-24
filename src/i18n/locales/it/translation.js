@@ -20,6 +20,42 @@ const translation = {
     cta: 'Vedi i Progetti'
   },
   techStack: {
+    webflowMastery: {
+      name: "Padronanza di Webflow",
+      description: "Interfacce pixel-perfect, design responsive e animazioni fluide — tutto costruito visivamente, pronto per la produzione su larga scala."
+    },
+    xanoBackend: {
+      name: "Backend Xano",
+      description: "Un potente backend no-code che si integra perfettamente con Webflow. API sicure, autenticazione degli utenti e logica di database — senza scrivere codice lato server."
+    },
+    wizedIntegrations: {
+      name: "Integrazioni Wized",
+      description: "Collega Webflow a dati dinamici con Wized. Crea vere applicazioni con logica condizionale, flussi utente e interattività in tempo reale — senza un framework frontend tradizionale."
+    },
+    penetrationTesting: {
+      name: "Penetration Testing",
+      description: "Simulare gli attacchi prima che accadano — individuando le vulnerabilità che gli scanner non rilevano, attraverso test manuali e automatizzati basati sull'esperienza."
+    },
+    securityConsulting: {
+      name: "Consulenza sulla sicurezza",
+      description: "La sicurezza non è un prodotto, è un processo. Dalla valutazione dei rischi alla conformità, riceverai assistenza per prendere decisioni informate e resilienti."
+    },
+    secureCodingAudits: {
+      name: "Coding sicuro e audit",
+      description: "Ogni riga di codice viene esaminata nell'ottica della sicurezza, utilizzando analisi statica, best practice e audit per eliminare i punti ciechi prima che diventino minacce."
+    },
+    performanceOptimization: {
+      name: "Ottimizzazione delle prestazioni",
+      description: "Dal rendering front-end ai tempi di risposta del server, ogni millisecondo è ottimizzato per esperienze fluide e senza interruzioni."
+    },
+    uptimeStability: {
+      name: "Uptime e stabilità",
+      description: "Half-Half Man monitora, applica patch e mantiene i sistemi affinché la tua piattaforma resti online e resiliente — giorno dopo giorno."
+    },
+    technicalLongevity: {
+      name: "Longevità tecnica",
+      description: "Con una manutenzione proattiva e un'architettura scalabile, la tua soluzione evolve con la tua attività, senza cedimenti."
+    },
     meta: {
       title: "Stack Tecnologico - Half Half Man",
       description: "Esplora le tecnologie e gli strumenti che utilizziamo per creare applicazioni ad alte prestazioni.",
@@ -63,27 +99,27 @@ const translation = {
       seeAllPosts: "Vedi tutti i post",
       noneYet: "In arrivo."
     },
-    title: "Ingegneria dello Stack",
-    subtitle: "Strumenti mirati. Esecuzione precisa. Sistemi pronti per il futuro.",
+    title: "Lo stack dietro il lavoro",
+    subtitle: "Strumenti mirati, esecuzione precisa, sistemi fatti per durare — scelti in base ai tuoi obiettivi, non alla moda.",
     seeFullStack: "Vedi Stack Completo",
     backToTechStack: "Torna allo Stack Tecnologico",
     categoryNotFound: "Categoria non trovata.",
     categories: {
       code: {
         title: "Ingegneria del Codice",
-        description: "Codice realizzato con precisione. Architettura ponderata. Creato per la crescita."
+        description: "Codice realizzato con precisione e architettura ben pensata — costruiti per crescere con la tua azienda, non contro di essa."
       },
       nocode: {
         title: "Soluzioni No-Code/Low-Code",
-        description: "Performance con uno scopo. Ogni strumento scelto con precisione — ogni risultato, intenzionale."
+        description: "Quando la velocità conta, gli strumenti no-code giusti rilasciano la tua idea in fretta — senza compromessi sulla qualità."
       },
       security: {
         title: "Pratiche di Cybersecurity",
-        description: "La sicurezza non è uno strato – è integrata in ogni riga di codice."
+        description: "La sicurezza non è uno strato aggiunto dopo — è integrata in ogni riga e protegge i tuoi dati fin dal primo giorno."
       },
       optimization: {
         title: "Ottimizzazione & Manutenzione",
-        description: "Le prestazioni sono un requisito — non una richiesta. Ogni sistema è progettato per offrirle fin dall'inizio."
+        description: "Prestazioni e stabilità by design — così il tuo prodotto resta veloce e online a lungo dopo il lancio."
       }
     },
     tools: {
@@ -175,29 +211,29 @@ const translation = {
   },
   slider: {
     ideas: {
-      title: 'Hai bisogno di una soluzione web moderna e sicura?',
-      subtitle: 'Assumi uno sviluppatore full-stack che conosce sia il codice che la sicurezza informatica',
-      button: 'Assumimi'
+      title: 'Half-Half Man crea il software sicuro su cui conta la tua azienda.',
+      subtitle: 'Ingegneria, architettura e sicurezza — in un unico sistema affidabile.',
+      button: 'Avvia il tuo progetto'
     },
     blog: {
-      title: 'Scopri le ultime riflessioni dal mondo della tecnologia',
-      subtitle: 'Sicurezza, pattern di programmazione, strategia da freelance e molto altro',
-      button: 'Leggi di più'
+      title: 'Scopri come ragiona Half-Half Man.',
+      subtitle: 'Contenuti pratici su sicurezza, architettura e rilascio di prodotti reali — senza fronzoli.',
+      button: 'Leggi il blog'
     },
     projects: {
-      title: 'Guarda come le idee diventano codice',
-      subtitle: 'Esplora applicazioni reali con implementazioni concrete',
-      button: 'Vedi i progetti'
+      title: 'Fatti, non promesse.',
+      subtitle: 'Esplora prodotti reali che Half-Half Man ha progettato, protetto e rilasciato.',
+      button: 'Guarda i lavori'
     },
     stack: {
-      title: 'Strumenti del mestiere',
-      subtitle: 'Dal backend al frontend, scelgo sempre le tecnologie migliori per ogni progetto',
-      button: 'Scopri lo stack tecnologico'
+      title: 'Gli strumenti giusti, usati nel modo giusto.',
+      subtitle: 'Scopri lo stack dietro le soluzioni sicure e performanti di Half-Half Man.',
+      button: 'Esplora lo stack tecnico'
     },
     services: {
-      title: 'Servizi digitali su misura',
-      subtitle: 'Dal codice sicuro a interfacce curate — costruisco soluzioni pensate per durare',
-      button: 'Scopri i servizi'
+      title: 'Dall\'idea a un prodotto sicuro e pronto.',
+      subtitle: 'Web, mobile, backend e sicurezza — su misura per ciò di cui la tua azienda ha davvero bisogno.',
+      button: 'Vedi i servizi'
     },
     about: {
       title: 'Chi è Half Half Man?',
@@ -206,7 +242,7 @@ const translation = {
     }
   },
   testimonials: {
-    title: 'Esperienze vere. Soluzioni concrete. Risultati affidabili.',
+    title: 'Clienti veri. Progetti veri. Risultati veri.',
     items: {
       giota: {
         name: 'dr.Giota Gatsi',
@@ -224,32 +260,32 @@ Apprezzo sinceramente la sua dedizione, reattività e competenza tecnica, e racc
     }
   },
   about: {
-    title: 'Chi è Half Half Man',
-    subtitle: 'Half Half Man non è solo un brand — è una mentalità.',
+    title: 'Chi è Half-Half Man',
+    subtitle: 'Più di un brand — un modo disciplinato di costruire su cui la tua azienda può contare.',
     blocks: {
       code: {
-        title: 'Scopo nel codice',
-        description: 'Ogni riga che scrivo ha uno scopo preciso. Creo soluzioni che non solo funzionano, ma che lasciano un impatto concreto.'
+        title: 'Uno scopo in ogni riga',
+        description: 'Half-Half Man scrive codice con intenzione — soluzioni costruite per risolvere il tuo problema reale, non solo per superare una demo.'
       },
       athlete: {
-        title: 'Disciplina da atleta',
-        description: 'La disciplina che ho sviluppato attraverso il nuoto competitivo si riflette nel mio modo di programmare: precisione, costanza e miglioramento continuo.'
+        title: 'La disciplina di un atleta',
+        description: 'Anni di nuoto agonistico hanno costruito la disciplina dietro ogni progetto: precisione, costanza e progressi costanti su cui puoi contare.'
       },
       design: {
-        title: 'Funzionalità nel design',
-        description: 'Progetto interfacce che combinano estetica e funzionalità per offrire la migliore esperienza possibile.'
+        title: 'Design prima di tutto funzionale',
+        description: 'Interfacce pulite e davvero usabili — così i tuoi utenti vivono un\'esperienza che funziona, non solo che è bella da vedere.'
       },
       security: {
-        title: 'Focus sulla sicurezza',
-        description: 'La sicurezza è presente fin dall’inizio — è parte integrante di ogni progetto che sviluppo.'
+        title: 'Sicurezza per impostazione predefinita',
+        description: 'La sicurezza è integrata dal primo commit, non aggiunta prima del lancio — proteggendo i tuoi dati e i tuoi utenti fin dal primo giorno.'
       },
       communication: {
         title: 'Comunicazione chiara',
-        description: 'Credo in una comunicazione diretta, trasparente ed efficace lungo tutto il processo di sviluppo.'
+        description: 'Sai sempre a che punto è il tuo progetto — aggiornamenti in linguaggio semplice, senza gergo, senza sorprese.'
       },
       brand: {
-        title: 'Filosofia del brand',
-        description: 'Half Half Man rappresenta l’equilibrio tra competenza tecnica e creatività autentica.'
+        title: 'Due metà, un solo sistema',
+        description: 'Profondità ingegneristica e disciplina sportiva come una cosa sola — l\'equilibrio che trasforma le buone intenzioni in software consegnato e affidabile.'
       }
     },
     meta: {
@@ -260,30 +296,30 @@ Apprezzo sinceramente la sua dedizione, reattività e competenza tecnica, e racc
   
   services: {
     title: 'Servizi',
-    subtitle: 'Soluzioni complete per sfide moderne',
+    subtitle: 'Soluzioni complete — progettate in sicurezza, costruite per crescere con la tua azienda.',
     webDev: {
-      title: 'Sviluppo web',
-      description: 'Sviluppo applicazioni web personalizzate usando tecnologie moderne e best practice.'
+      title: 'Sviluppo Web e Mobile',
+      description: 'App web e mobile veloci e sicure costruite attorno ai tuoi obiettivi — dal sito vetrina al prodotto cross-platform completo.'
     },
     security: {
       title: 'Cybersecurity',
-      description: 'Implemento soluzioni di sicurezza robuste e conduco penetration test per proteggere i tuoi sistemi.'
+      description: 'Penetration testing e hardening che trovano le falle prima degli attaccanti — proteggendo i tuoi dati e i tuoi utenti.'
     },
     tools: {
       title: 'Strumenti e automazione',
-      description: 'Creo strumenti su misura per ottimizzare i processi e aumentare la produttività.'
+      description: 'Strumenti su misura che eliminano il lavoro ripetitivo, così il tuo team consegna più velocemente e perde meno tempo.'
     },
     maintenance: {
       title: 'Manutenzione',
-      description: 'Offro supporto continuo e aggiornamenti per garantire stabilità e performance nel tempo.'
+      description: 'Aggiornamenti e monitoraggio continui che mantengono la tua piattaforma stabile, aggiornata e online.'
     },
     performance: {
       title: 'Ottimizzazione delle prestazioni',
-      description: 'Miglioro la velocità delle applicazioni e l’esperienza utente attraverso audit e interventi mirati.'
+      description: 'Analisi e correzioni che velocizzano la tua app — caricamenti più rapidi, esperienza più fluida, conversioni migliori.'
     },
     consulting: {
       title: 'Consulenza tecnica',
-      description: 'Ti aiuto a scegliere lo stack tecnologico e l’architettura più adatti al tuo progetto.'
+      description: 'Indicazioni chiare su architettura, stack e sicurezza — le scelte giuste finché costano ancora poco.'
     },
     services: [
       "Offro soluzioni digitali su misura, pensate per adattarsi alle tue reali esigenze.",
@@ -293,8 +329,139 @@ Apprezzo sinceramente la sua dedizione, reattività e competenza tecnica, e racc
     ]
   },
   projects: {
-    title: 'Progetti',
-    subtitle: 'Soluzioni digitali in azione',
+    items: {
+      portfolio: {
+        title: "Dentro il Portfolio di Half Half Man",
+        summary: "Un sito full-stack sicuro in React, Tailwind e Sanity — la prova di un'architettura pulita, velocità e portata multilingue.",
+        description: "Un sito portfolio completo costruito con React e Tailwind CSS, con animazioni fluide, internazionalizzazione e un assistente virtuale.",
+        features: [
+          "Design responsive con UI/UX moderna",
+          "Supporto all'internazionalizzazione (i18n)",
+          "Animazioni interattive con Framer Motion",
+          "Integrazione di un assistente virtuale",
+          "Ottimizzazione SEO",
+          "Modulo di contatto con Formspree",
+          "Integrazione con Calendly per la pianificazione"
+        ],
+        challenges: [
+          "Implementare transizioni di pagina fluide",
+          "Gestire le traduzioni in più lingue",
+          "Ottimizzare le prestazioni su diversi dispositivi",
+          "Integrare più servizi di terze parti"
+        ],
+        solutions: [
+          "Uso di Framer Motion per animazioni fluide",
+          "Implementazione di i18next per la gestione delle traduzioni",
+          "Ottimizzazione delle immagini e code splitting",
+          "Creazione di un sistema modulare di integrazione dei servizi"
+        ]
+      },
+      welearngreek: {
+        title: "Grammatica, Progettata",
+        summary: "Un'app web che trasforma la complessa grammatica greca in strumenti intuitivi — come Half-Half Man progetta prodotti reali attorno a utenti reali.",
+        description: "Uno strumento di apprendimento non formale creato per supportare studenti e appassionati di lingue nell'acquisizione naturale della grammatica greca. La piattaforma include utilità come un declinatore di sostantivi, un coniugatore di verbi, una registrazione intelligente del vocabolario e un analizzatore etimologico unico per le parole di radice greca nelle lingue straniere. Attualmente in fase di sviluppo attivo. Si prevede che evolverà in un'app pienamente utilizzabile a supporto di studenti ed educatori nello studio del greco ed eventualmente di altre lingue.",
+        features: [
+          "Declinatore di sostantivi – genera le forme dei sostantivi per caso in greco.",
+          "Coniugatore di verbi – presenta le coniugazioni in base a tempo e persona.",
+          "Strumento di vocabolario personalizzato – registra nuove parole greche come pronunciate, con la lingua madre",
+          "Motore delle parole trasparenti – mostra e spiega le parole di origine greca nelle diverse lingue.",
+          "Focalizzato sull'applicazione reale – progettato per supportare apprendimento e memorizzazione concreti attraverso l'interazione dell'utente, non la semplice lettura passiva."
+        ],
+        challenges: [
+          "Progettare uno strumento pedagogicamente valido ma informale e amichevole.",
+          "Gestire regole linguistiche complesse (declinazioni, tempi) attraverso un'interfaccia dinamica.",
+          "Garantire l'adattabilità multilingue (scalabile ad altre lingue in futuro).",
+          "Integrare il modulo delle Parole Trasparenti (sensibilità relativa alla proprietà intellettuale)."
+        ],
+        solutions: [
+          "Backend Django modulare che gestisce ogni strumento come un servizio separato basato su API.",
+          "Frontend React per interazione responsive e rendering dinamico della grammatica.",
+          "PostgreSQL per la gestione del vocabolario utente e dei set di regole.",
+          "Implementazione di archiviazione e recupero dati sicuri",
+          "Regex avanzate e modelli di dati per la morfologia di verbi e sostantivi.",
+          "Pattern UX puliti per semplificare le interazioni ad alta densità grammaticale."
+        ]
+      },
+      secureaccess: {
+        title: "Decodificare il Flusso OAuth",
+        summary: "Una demo chiara del flusso OAuth 2.0 — autenticazione sicura, progettata e spiegata nel modo giusto.",
+        description: "Una simulazione frontend completa dei moderni flussi di autenticazione tramite il protocollo OAuth 2.0. Questo progetto dimostra come l'accesso sicuro venga concesso tramite scambio di token, reindirizzamento e autorizzazione dell'utente — senza affidarsi a provider di terze parti. Introduce il controllo degli accessi basato sui ruoli (RBAC) e mostra come la logica dei permessi sia strutturata e applicata all'interno di un'applicazione. Progettato per chiarezza e adattabilità, questo showcase funge da modello per costruire sistemi di login sicuri e scalabili che danno priorità alla protezione dei dati degli utenti e all'integrità del sistema.",
+        features: [
+          "Autenticazione sicura con Google OAuth 2.0",
+          "Client/secret memorizzati come variabili d'ambiente",
+          "Impostazioni separate per sviluppo e produzione",
+          "Schermata di login riuscito pulita e minimalista",
+          "Endpoint di produzione completamente distribuito e funzionante",
+          "URI di reindirizzamento completamente autorizzati e testati",
+          "Utilizzo di SECURE_SSL_REDIRECT, ALLOWED_HOSTS e adeguata protezione CSRF"
+        ],
+        challenges: [
+          "Errori OAuth 401 / 400 dovuti a: ID eliminato o non corrispondente, URI di reindirizzamento errati o mancanti, dizionario tra virgolette nel file .env, variabili d'ambiente non sincronizzate tra .env e Railway",
+          "Railway che inserisce automaticamente le virgolette nelle variabili",
+          "Tracce di errore che non mostrano il contesto completo in produzione",
+          "La vaga traccia AuthCanceled di social-auth"
+        ],
+        solutions: [
+          "Abbinamento accurato di GOOGLE_OAUTH2_CLIENT_ID e secret tra GCP e .env",
+          "Correzione di tutti gli URI di reindirizzamento nella Google Cloud Console",
+          "Uso di json.loads() con una stringa JSON formattata correttamente (solo doppie virgolette)",
+          "Verifica manuale delle variabili d'ambiente di Railway tramite l'editor Raw",
+          "Avvio di un nuovo deploy dopo le modifiche invece di affidarsi agli aggiornamenti impliciti",
+          "Tailwind tenuto da parte per chiarezza e controllo (templating classico HTML/CSS)",
+          "Registrazione e ispezione di tutti i percorsi di risposta tramite i log di Railway per il debug finale"
+        ]
+      },
+      bughunters: {
+        title: "Simulare la Caccia",
+        summary: "Un ambiente controllato che dimostra la logica del penetration testing e una pratica di sicurezza etica e responsabile.",
+        description: "Un ambiente controllato che replica scenari di sicurezza reali, creato per mostrare la logica del penetration testing, i flussi di divulgazione responsabile e le pratiche etiche di bug hunting.",
+        features: [
+          "Scansione di porte Nmap simulata - Emula l'output della CLI di Nmap per dimostrare i fondamenti della ricognizione di rete in un ambiente sicuro e isolato.",
+          "Ispettore di header HTTP - Recupera e mostra gli header di risposta da siti web reali, offrendo approfondimenti sul comportamento e sulla configurazione del server.",
+          "Simulazione di brute force - Dimostra un attacco a dizionario su un bersaglio fittizio con risposte di credenziali simulate, a scopo puramente didattico.",
+          "Report esportabili - Tutte le simulazioni possono essere esportate come file .txt per documentazione o riferimento didattico.",
+          "Disclaimer etico incluso - Messaggi chiari in tutta l'app ne sottolineano la natura didattica, con link alle migliori pratiche di sicurezza e alle linee guida dell'hacking etico."
+        ],
+        challenges: [
+          "La piattaforma di deploy (Nixpacks) non è riuscita a rilevare automaticamente Django, richiedendo un provisioning manuale con Procfile, requirements.txt e runtime.txt personalizzati.",
+          "I vincoli dell'ORM di Django hanno reso necessarie configurazioni di database simulate, nonostante l'app non sia persistente.",
+          "È stata prestata particolare attenzione affinché il progetto non potesse essere frainteso o utilizzato impropriamente come un vero strumento di attacco."
+        ],
+        solutions: [
+          "Pipeline di build personalizzata aggiunta per il deploy su Railway, con requisiti minimi di Django.",
+          "Le migrazioni sono state soddisfatte usando schemi simulati per rispettare le aspettative di Django senza memorizzare dati reali.",
+          "Considerazioni etiche implementate tramite disclaimer statici e riferimenti alle best practice, ribadendo che il toolkit è una simulazione controllata, non una piattaforma di exploit."
+        ]
+      },
+      webflow: {
+        title: "Da Webflow a Workflow",
+        summary: "Un progetto no-code Webflow rifattorizzato con l'IA in codice pulito, semantico e pronto per la produzione — velocità e qualità insieme.",
+        description: "Un concept visivo costruito in Webflow, poi rifinito in codice di livello produttivo. Utilizzando il refactoring con IA tramite Cursor IDE, il layout esportato è stato trasformato in una base di codice pulita, scalabile e accessibile, unendo la velocità del no-code alla qualità del full-code.",
+        features: [
+          "Refactoring del codice basato su IA - Trasforma l'HTML/CSS esportato da Webflow in codice pulito, semantico e pronto per la produzione usando GPT in Cursor IDE",
+          "Struttura HTML5 semantica - Sostituisce il layout generico basato su div con tag semantici (section, main, article, ecc.) per accessibilità e SEO.",
+          "CSS pulito e ottimizzato - Fogli di stile rifattorizzati per migliore leggibilità, manutenibilità e coerenza nei design token e nelle spaziature.",
+          "Testi ottimizzati per la conversione - Riscrittura di sezioni hero, CTA e microcopy per migliorare chiarezza, tono e coinvolgimento.",
+          "Anteprima locale con Python - Anteprima locale basata su Python",
+          "Controllo versione tramite GitHub - Tutte le modifiche al codice tracciate con cronologia dei commit, branch e setup pronto per la collaborazione.",
+          "Deploy rapido tramite Netlify - Build finale ospitata su Netlify con deploy istantaneo da GitHub, a supporto dei flussi CI."
+        ],
+        challenges: [
+          "Webflow esporta codice con annidamento di <div> non semantico e classi disordinate.",
+          "Le risorse statiche (immagini, font) a volte si disallineano durante le anteprime locali",
+          "La mancanza di supporto all'importazione diretta dell'HTML in Webflow limita il round-tripping"
+        ],
+        solutions: [
+          "Ristrutturazione dell'HTML usando GPT per applicare tag semantici (section, main, article)",
+          "CSS pulito e raggruppato per migliore manutenibilità e leggibilità",
+          "Riscrittura di titoli e CTA per messaggi più persuasivi e orientati alla UX.",
+          "Uso di Python per servire i file statici localmente e garantire la corretta mappatura delle risorse",
+          "Versionamento di tutte le modifiche tramite GitHub per la tracciabilità, e deploy senza problemi con Netlify"
+        ]
+      }
+    },
+    title: 'La prova, in produzione',
+    subtitle: 'Progetti reali che mostrano come Half-Half Man progetta, protegge e rilascia.',
     viewAll: 'Vedi tutti i progetti',
     viewProject: 'Vedi progetto',
     viewDetails: 'Vedi dettagli',
@@ -346,7 +513,7 @@ Apprezzo sinceramente la sua dedizione, reattività e competenza tecnica, e racc
 
   blog: {
     title: 'Intuizioni e Riflessioni',
-    description: 'Aggiornamenti tech, idee senza tempo e riflessioni mirate — dal codice al contesto.',
+    description: 'Contenuti pratici su ingegneria, sicurezza e rilascio di prodotti reali — pensiero chiaro, senza fronzoli.',
     readMore: 'Leggi di più',
     backToBlog: 'Torna al blog',
     publishedOn: 'Pubblicato il',
@@ -381,7 +548,7 @@ Apprezzo sinceramente la sua dedizione, reattività e competenza tecnica, e racc
     },
     meta: {
       title: 'Intuizioni e Riflessioni',
-      description: 'Aggiornamenti tech, idee senza tempo e riflessioni mirate — dal codice al contesto.'
+      description: 'Contenuti pratici su ingegneria, sicurezza e rilascio di prodotti reali — pensiero chiaro, senza fronzoli.'
     },
     blog: [
       "Ogni riga scritta ha il suo significato.",
@@ -393,11 +560,23 @@ Apprezzo sinceramente la sua dedizione, reattività e competenza tecnica, e racc
   contact: {
     meta: {
       title: "Contatto - Half Half Man",
-      description: "Contattami o prenota una chiamata."
+      description: 'Prenota una chiamata o invia un messaggio a Half-Half Man — e inizia a costruire il tuo progetto nel modo giusto.'
     },
-    title: "Prenota una chiamata o scrivimi — ti risponderò al più presto.",
+    title: 'Racconta a Half-Half Man il tuo progetto — prenota una chiamata o invia un messaggio, e riceverai presto una risposta.',
     calendly: {
-      title: "Prenota una chiamata di 30 minuti"
+      title: "Prenota una chiamata di 30 minuti",
+      beforeYouBook: 'Prima di prenotare:',
+      bullets: {
+        whatHappensLabel: 'Cosa succede durante la chiamata:',
+        whatHappens: 'una breve presentazione, i tuoi obiettivi, l\'ambito e i prossimi passi.',
+        whoForLabel: 'Per chi è / non è:',
+        whoFor: 'nuovi progetti, audit o miglioramenti — non richieste urgenti del tipo «risolvi in 5 minuti».'
+      },
+      error: {
+        title: 'Prenota una chiamata',
+        description: 'Impossibile caricare il widget di pianificazione. Usa il modulo di contatto qui sotto o prenota direttamente.',
+        button: 'Prenota su Calendly'
+      }
     },
     form: {
       title: "Invia un messaggio",

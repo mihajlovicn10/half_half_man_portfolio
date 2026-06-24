@@ -66,27 +66,27 @@ const translation = {
             seeAllPosts: 'Pogledaj sve postove',
             noneYet: 'Uskoro.'
         },
-        title: 'Inženjering Stack-a',
-        subtitle: 'Alati koji služe svrsi. Precizna realizacija. Sistemi spremni za budućnost.',
+        title: 'Stack iza svakog projekta',
+        subtitle: 'Svrsishodni alati, precizna realizacija, sistemi napravljeni da traju — birani prema vašim ciljevima, ne zbog pompe.',
         seeFullStack: 'Pogledaj ceo stack',
         backToTechStack: 'Nazad na tehnološki stack',
         categoryNotFound: 'Kategorija nije pronađena.',
         categories: {
             code: {
                 title: 'Inženjering koda',
-                description: 'Precizno izrađen kod. Promišljena arhitektura. Pravljeno za rast.'
+                description: 'Precizno izrađen kod i promišljena arhitektura — napravljeni da rastu sa vašim poslovanjem, a ne protiv njega.'
             },
             nocode: {
                 title: 'No-Code/Low-Code rešenja',
-                description: 'Performanse sa svrhom. Svaki alat pažljivo izabran — svaki rezultat, nameran.'
+                description: 'Kada je brzina važna, pravi no-code alati brzo isporučuju vašu ideju — bez kompromisa po kvalitetu.'
             },
             security: {
                 title: 'Prakse sajber bezbednosti',
-                description: 'Bezbednost nije sloj – ona je ugrađena u svaku liniju koda.'
+                description: 'Bezbednost nije sloj koji se naknadno dodaje — ugrađena je u svaku liniju, štiteći vaše podatke od prvog dana.'
             },
             optimization: {
                 title: 'Optimizacija i održavanje',
-                description: 'Performanse se podrazumevaju — ne traže se. Svaki sistem je dizajniran da ih pruži od samog početka.'
+                description: 'Performanse i stabilnost po dizajnu — da vaš proizvod ostane brz i dostupan i dugo nakon lansiranja.'
             }
         },
         python: {
@@ -203,7 +203,7 @@ const translation = {
         },
         uptimeStability: {
             name: 'Dostupnost i stabilnost',
-            description: 'Pratimo, ažuriramo i održavamo sisteme kako bi vaša platforma bila online i otporna — iz dana u dan.'
+            description: 'Half-Half Man prati, krpi i održava sisteme kako bi vaša platforma ostala dostupna i otporna — iz dana u dan.'
         },
         technicalLongevity: {
             name: 'Tehnička dugovečnost',
@@ -211,7 +211,7 @@ const translation = {
         }
     },
     testimonials: {
-        title: 'Prava iskustva. Opipljiva rešenja. Pouzdani rezultati',
+        title: 'Pravi klijenti. Pravi projekti. Pravi rezultati.',
         items: {
 
             giota: {
@@ -232,60 +232,67 @@ je retka. On nije samo developer — on je inženjer sa okom dizajnera i umom st
         }
     },
     about: {
-        title: 'O Half Half Man-u',
-        subtitle: 'Half Half Man nije samo brend — to je način razmišljanja.',
+        title: 'O Half-Half Man-u',
+        subtitle: 'Više od brenda — disciplinovan način gradnje na koji vaše poslovanje može da računa.',
         blocks: {
             code: {
-                title: 'Kodiranje sa svrhom',
-                description: 'Svaka linija napisanog koda ima svrhu. Verujemo u kreiranje rešenja koja ne samo da rade već ostavljaju značajan uticaj.'
+                title: 'Svrha u svakoj liniji',
+                description: 'Half-Half Man piše kod sa namerom — rešenja napravljena da reše vaš stvarni problem, a ne samo da prođu demo.'
             },
             athlete: {
-                title: 'Disciplina Sportiste',
-                description: 'Disciplina naučena kroz sport se direktno prenosi u prakse kodiranja. Preciznost, posvećenost i kontinuirano poboljšanje su naše osnovne vrednosti.'
+                title: 'Disciplina sportiste',
+                description: 'Godine takmičarskog plivanja izgradile su disciplinu iza svakog projekta: preciznost, doslednost i postojan napredak na koji možete da računate.'
             },
             design: {
-                title: 'Funkcionalan dizajn',
-                description: 'Kreiram dizajne koji su i estetski prijatni i visoko funkcionalni, osiguravajući najbolje moguće korisničko iskustvo.'
+                title: 'Dizajn pre svega funkcionalan',
+                description: 'Interfejsi koji su čisti i zaista upotrebljivi — da vaši korisnici dobiju iskustvo koje radi, a ne samo koje lepo izgleda.'
             },
             security: {
-                title: 'Fokus na sajber bezbednost',
-                description: 'Bezbednost je ugrađena u svaki aspekt našeg rada, od dizajna do implementacije.'
+                title: 'Bezbednost po difoltu',
+                description: 'Bezbednost je ugrađena od prvog commit-a, a ne dodata pred lansiranje — štiteći vaše podatke i vaše korisnike od prvog dana.'
             },
             communication: {
-                title: 'Moć komunikacije',
-                description: 'Otvorena i jasna komunikacija je temelj uspešnih projekata i dugoročnih partnerstava.'
+                title: 'Jasna komunikacija',
+                description: 'Uvek znate u kojoj je fazi vaš projekat — ažuriranja jednostavnim jezikom, bez žargona, bez iznenađenja.'
             },
             brand: {
-                title: 'Snaga brenda',
-                description: 'Gradimo brendove koji inspirišu poverenje, prepoznatljivost i lojalnost kod korisnika.'
+                title: 'Dve polovine, jedan sistem',
+                description: 'Inženjerska dubina i sportska disciplina, kao jedno — ravnoteža koja dobre namere pretvara u isporučen, pouzdan softver.'
             }
         }
     },
+    common: {
+        next: 'Sledeće',
+        prev: 'Prethodno',
+        close: 'Zatvori',
+        scrollToExplore: 'Skrolujte za istraživanje',
+        logoAlt: 'Half Half Man logo'
+    },
     slider: {
         ideas: {
-            title: 'Potrebno vam je moderno i sigurno web rešenje?',
-            subtitle: 'Zaposlite full-stack programera koji razume i kod i sajber bezbednost',
-            button: 'Zaposlite me'
+            title: 'Half-Half Man gradi siguran softver na koji vaše poslovanje može da se osloni.',
+            subtitle: 'Inženjerstvo, arhitektura i bezbednost — isporučeni kao jedan, pouzdan sistem.',
+            button: 'Započnite projekat'
         },
         blog: {
-            title: 'Istražite najnovije uvide iz sveta tehnologije',
-            subtitle: 'Bezbednost, obrasci kodiranja, freelance strategija i više',
-            button: 'Pročitajte više'
+            title: 'Pogledajte kako Half-Half Man razmišlja.',
+            subtitle: 'Praktični tekstovi o bezbednosti, arhitekturi i isporuci stvarnih proizvoda — bez pompe.',
+            button: 'Pročitajte blog'
         },
         projects: {
-            title: 'Pogledajte kako ideje postaju kod',
-            subtitle: 'Pogledajte demonstracione aplikacije sa realnim implementacijama',
-            button: 'Pogledajte projekte'
+            title: 'Dokazi, ne obećanja.',
+            subtitle: 'Istražite stvarne proizvode koje je Half-Half Man osmislio, obezbedio i isporučio.',
+            button: 'Pogledajte radove'
           },
         stack: {
-            title: 'Alati koji vrše posao',
-            subtitle: 'Od backend-a do frontend-a, koristim najbolje alate za posao',
-            button: 'Pogledajte Tech Stack'
+            title: 'Pravi alati, korišćeni na pravi način.',
+            subtitle: 'Pogledajte tehnologije iza bezbednih i brzih rešenja Half-Half Man-a.',
+            button: 'Istražite tehnologije'
         },
         services: {
-            title: 'Prilagođene digitalne usluge',
-            subtitle: 'Od sigurnog koda do impresivnog UI-a - Gradim rešenja koja traju.',
-            button: 'Otkrijte usluge'
+            title: 'Od ideje do bezbednog, isporučenog proizvoda.',
+            subtitle: 'Veb, mobilne aplikacije, backend i bezbednost — prilagođeni onome što vašem poslovanju zaista treba.',
+            button: 'Pogledajte usluge'
         },
         about: {
             title: 'Ko je Half Half Man?',
@@ -295,7 +302,7 @@ je retka. On nije samo developer — on je inženjer sa okom dizajnera i umom st
     },
     blog: {
         title: 'Uvidi i refleksije',
-        description: 'Tehničke novosti, bezvremenske ideje i promišljanja — od koda do konteksta.',
+        description: 'Praktični tekstovi o inženjerstvu, bezbednosti i isporuci stvarnih proizvoda — jasno razmišljanje, bez pompe.',
         readMore: 'Pročitajte više',
         backToBlog: 'Nazad na blog',
         publishedOn: 'Objavljeno',
@@ -330,7 +337,7 @@ je retka. On nije samo developer — on je inženjer sa okom dizajnera i umom st
         },
         meta: {
             title: 'Uvidi i refleksije',
-            description: 'Tehničke novosti, bezvremenske ideje i promišljanja — od koda do konteksta.'
+            description: 'Praktični tekstovi o inženjerstvu, bezbednosti i isporuci stvarnih proizvoda — jasno razmišljanje, bez pompe.'
         },
         blog: [
             'Svaki red koji je napisan ima svoje značenje.',
@@ -341,30 +348,30 @@ je retka. On nije samo developer — on je inženjer sa okom dizajnera i umom st
     },
     services: {
         title: 'Usluge',
-        subtitle: 'Kompletna rešenja za savremene izazove',
+        subtitle: 'Kompletna rešenja — bezbedno projektovana, napravljena da rastu sa vašim poslovanjem.',
         webDev: {
-            title: 'Razvoj Web Aplikacija',
-            description: 'Prilagođene web aplikacije bazirane na savremenim tehnologijama i najboljim praksama.'
+            title: 'Veb i mobilni razvoj',
+            description: 'Brze i bezbedne veb i mobilne aplikacije napravljene oko vaših ciljeva — od prezentacionog sajta do potpunog cross-platform proizvoda.'
         },
         security: {
             title: 'Sajber bezbednost',
-            description: 'Robusna bezbednosna rešenja i usluge testiranja probojnosti (penetration testing).'
+            description: 'Penetraciono testiranje i hardening koji pronalaze propuste pre napadača — čuvajući vaše podatke i korisnike.'
         },
         tools: {
             title: 'Alati i automatizacija',
-            description: 'Prilagođeni alati za optimizaciju radnih tokova i povećanje produktivnosti.'
+            description: 'Prilagođeni alati koji uklanjaju ponavljajući posao, da vaš tim isporučuje brže i gubi manje vremena.'
         },
         maintenance: {
             title: 'Održavanje',
-            description: 'Neprekidna podrška i ažuriranja radi osiguranja performansi i stabilnosti.'
+            description: 'Kontinuirana ažuriranja i nadzor koji održavaju vašu platformu stabilnom, aktuelnom i dostupnom.'
         },
         performance: {
             title: 'Optimizacija performansi',
-            description: 'Ubrzajte svoje aplikacije i poboljšajte korisničko iskustvo kroz analize i optimizacije.'
+            description: 'Analize i ispravke koje ubrzavaju vašu aplikaciju — brže učitavanje, glatkije iskustvo, bolja konverzija.'
         },
         consulting: {
             title: 'Tehnički konsalting',
-            description: 'Stručno vođstvo pri izboru tehnologija i arhitekture.'
+            description: 'Jasne smernice o arhitekturi, tehnologijama i bezbednosti — prave odluke dok su još jeftine.'
         },
         services: [
             'Pružamo sveobuhvatna digitalna rešenja prilagođena vašim potrebama.',
@@ -377,8 +384,8 @@ je retka. On nije samo developer — on je inženjer sa okom dizajnera i umom st
             title: 'Projekti - Half Half Man',
             description: 'Istražite naš portfelj inovativnih web aplikacija i rešenja.'
         },
-        title: 'Digitalna rešenja na delu',
-        subtitle: 'Projekti koji odražavaju viziju, preciznost i tehničku dubinu.',
+        title: 'Dokaz, u produkciji',
+        subtitle: 'Stvarni projekti koji pokazuju kako Half-Half Man projektuje, obezbeđuje i isporučuje.',
         featured: 'Istaknuti projekat',
         viewDetails: 'Pogledaj detalje',
         backToProjects: '← Nazad na projekte',
@@ -408,7 +415,7 @@ je retka. On nije samo developer — on je inženjer sa okom dizajnera i umom st
         items: {
             portfolio: {
                 title: 'Unutar Half Half Man portfolija',
-                summary: 'Siguran, full-stack portfolio sajt izgrađen sa React, Tailwind i Sanity – optimizovan za jasnoću, brzinu i angažovanje klijenata.',
+                summary: 'Bezbedan, full-stack sajt u React-u, Tailwind-u i Sanity-ju — dokaz čiste arhitekture, brzine i višejezičnog dometa.',
                 description: 'Sveobuhvatan portfolio sajt izgrađen sa React i Tailwind CSS, sa glatkim animacijama, internacionalizacijom i virtuelnim asistentom.',
                 features: [
                     'Responzivan dizajn sa modernim UI/UX',
@@ -434,7 +441,7 @@ je retka. On nije samo developer — on je inženjer sa okom dizajnera i umom st
             },
             welearngreek: {
                 title: 'Gramatika, inženjerski',
-                summary: 'Personalizovana web aplikacija za savladavanje grčke gramatike kroz intuitivne alate i neformalno učenje.',
+                summary: 'Veb aplikacija koja složenu grčku gramatiku pretvara u intuitivne alate — kako Half-Half Man pravi prave proizvode oko stvarnih korisnika.',
                 description: 'Neformalni alat za učenje napravljen da podrži studente i ljubitelje jezika u sticanju grčke gramatike na prirodan način. Platforma uključuje alate kao što su deklinacija imenica, konjugacija glagola, pametno beleženje vokabulara i jedinstveni etimološki analizator za reči grčkog porekla u stranim jezicima. Trenutno u aktivnom razvoju. Očekuje se da preraste u potpuno upotrebljivu aplikaciju koja podržava studente i nastavnike grčkog i drugih jezika.',
                 features: [
                     'Deklinator imenica – generiše oblike imenica po padežima na grčkom jeziku.',
@@ -460,7 +467,7 @@ je retka. On nije samo developer — on je inženjer sa okom dizajnera i umom st
             },
             secureaccess: {
                 title: 'Dekodiranje OAuth toka',
-                summary: 'Minimalni demo koji pojednostavljuje OAuth 2.0 proces autorizacije.',
+                summary: 'Jasan prikaz OAuth 2.0 toka — bezbedna autentikacija, osmišljena i objašnjena na pravi način.',
                 description: 'Sveobuhvatna frontend simulacija savremenih autentifikacionih tokova koristeći OAuth 2.0 protokol. Ovaj projekat demonstrira kako se bezbedan pristup omogućava kroz razmenu tokena, preusmeravanje i autorizaciju korisnika — bez oslanjanja na treće strane. Uvodi kontrolu pristupa zasnovanu na ulogama (RBAC) i prikazuje kako se logika dozvola strukturira i sprovodi u aplikaciji. Dizajniran za jasnoću i prilagodljivost, ovaj showcase služi kao vodič za izgradnju sigurnih i skalabilnih sistema za prijavu koji daju prioritet zaštiti podataka korisnika i integritetu sistema.',
                 features: [
                     'Sigurna Google OAuth 2.0 autentifikacija',
@@ -489,7 +496,7 @@ je retka. On nije samo developer — on je inženjer sa okom dizajnera i umom st
             },
             bughunters: {
                 title: 'Simulacija lova',
-                summary: 'Kontrolisano okruženje koje replicira realne bezbednosne scenarije — izgrađeno za demonstraciju logike penetracionog testiranja, procesa odgovornog prijavljivanja i etičkog bug hunta.',
+                summary: 'Kontrolisano okruženje koje demonstrira logiku penetracionog testiranja i etičku, odgovornu bezbednosnu praksu.',
                 description: 'Kontrolisano okruženje koje replicira realne bezbednosne scenarije — izgrađeno za demonstraciju logike penetracionog testiranja, procesa odgovornog prijavljivanja i etičkog bug hunta.',
                 features: [
                     'Simulirano Nmap skeniranje portova - emulira Nmap CLI izlaz radi demonstracije osnova mrežnog izviđanja u sigurnom okruženju.',
@@ -511,7 +518,7 @@ je retka. On nije samo developer — on je inženjer sa okom dizajnera i umom st
             },
             webflow: {
                 title: 'Od Webflow-a do workflow-a',
-                summary: 'No-code projekat baziran na Webflow-u, potpuno refaktorisan uz pomoć AI-a u čist, semantički kod, verzionisan na GitHub-u i deploy-ovan putem Netlify-a.',
+                summary: 'No-code Webflow projekat refaktorisan uz pomoć AI u čist, semantički, produkcijski kod — spoj brzine i kvaliteta.',
                 description: 'Vizuelni koncept izgrađen u Webflow-u, zatim doveden do produkcijskog koda. Korišćenjem AI refaktorisanja kroz Cursor IDE, izvezeni layout je transformisan u čist, skalabilan i pristupačan kod — spajajući brzinu no-code pristupa sa kvalitetom full-code rešenja.',
                 features: [
                     'AI refaktorisanje koda - transformiše Webflow-ov izvezeni HTML/CSS u čist, semantički, produkcioni kod koristeći GPT u Cursor IDE',
@@ -540,11 +547,23 @@ je retka. On nije samo developer — on je inženjer sa okom dizajnera i umom st
     contact: {
         meta: {
             title: 'Kontakt - Half Half Man',
-            description: 'Stupite u kontakt ili zakažite poziv.'
+            description: 'Zakažite poziv ili pošaljite poruku Half-Half Man-u — i počnite da gradite svoj projekat na pravi način.'
         },
-        title: 'Zakažite poziv ili pošaljite poruku — odgovoriću vam u najkraćem roku.',
+        title: 'Recite Half-Half Man-u o svom projektu — zakažite poziv ili pošaljite poruku, i dobićete odgovor ubrzo.',
         calendly: {
-            title: 'Zakažite 30-minutni poziv'
+            title: 'Zakažite 30-minutni poziv',
+            beforeYouBook: 'Pre nego što zakažete:',
+            bullets: {
+                whatHappensLabel: 'Šta se dešava na pozivu:',
+                whatHappens: 'kratak uvod, vaši ciljevi, obim i sledeći koraci.',
+                whoForLabel: 'Za koga jeste / nije:',
+                whoFor: 'novi projekti, provere ili poboljšanja — ne hitni zahtevi tipa „popravi za 5 minuta“.'
+            },
+            error: {
+                title: 'Zakažite poziv',
+                description: 'Nije moguće učitati widget za zakazivanje. Koristite kontakt formu ispod ili zakažite direktno.',
+                button: 'Zakažite na Calendly-ju'
+            }
         },
         form: {
             title: 'Pošaljite poruku',

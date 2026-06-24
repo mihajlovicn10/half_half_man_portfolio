@@ -63,27 +63,27 @@ const translation = {
       seeAllPosts: "Alle Posts ansehen",
       noneYet: "Kommt bald."
     },
-    title: "Stack-Engineering",
-    subtitle: "Zielgerichtete Tools. Präzise Umsetzung. Zukunftssichere Systeme.",
+    title: "Der Stack hinter der Arbeit",
+    subtitle: "Zielgerichtete Tools, präzise Umsetzung, Systeme, die Bestand haben — gewählt nach Ihren Zielen, nicht nach Hype.",
     seeFullStack: "Vollständigen Stack ansehen",
     backToTechStack: "Zurück zum Tech Stack",
     categoryNotFound: "Kategorie nicht gefunden.",
     categories: {
       code: {
         title: "Code-Entwicklung",
-        description: "Präzise entwickelter Code. Durchdachte Architektur. Für Wachstum gebaut."
+        description: "Präzise entwickelter Code und durchdachte Architektur — gebaut, um mit Ihrem Unternehmen zu wachsen, nicht gegen es."
       },
       nocode: {
         title: "No-Code/Low-Code-Lösungen",
-        description: "Leistung mit Zweck. Jedes Tool sorgfältig gewählt – jedes Ergebnis beabsichtigt."
+        description: "Wenn es auf Geschwindigkeit ankommt, bringen die richtigen No-Code-Tools Ihre Idee schnell an den Start — ohne Abstriche bei der Qualität."
       },
       security: {
         title: "Cybersicherheitspraktiken",
-        description: "Sicherheit ist keine Schicht – sie ist in jede Codezeile eingebaut."
+        description: "Sicherheit ist keine nachträgliche Schicht — sie ist in jede Zeile eingebaut und schützt Ihre Daten von Tag eins an."
       },
       optimization: {
         title: "Optimierung & Wartung",
-        description: "Leistung wird erwartet – nicht erbeten. Jedes System ist von Anfang an darauf ausgelegt."
+        description: "Leistung und Stabilität von Grund auf — damit Ihr Produkt lange nach dem Launch schnell und online bleibt."
       }
     },
     tools: {
@@ -202,38 +202,45 @@ const translation = {
     },
     uptimeStability: {
       name: "Verfügbarkeit & Stabilität",
-      description: "Wir überwachen, patchen und warten Systeme, damit Ihre Plattform Tag für Tag online und widerstandsfähig bleibt."
+      description: "Half-Half Man überwacht, patcht und wartet Systeme, damit Ihre Plattform online und widerstandsfähig bleibt — Tag für Tag."
     },
     technicalLongevity: {
       name: "Technische Langlebigkeit",
       description: "Mit proaktiver Wartung und skalierbarer Architektur entwickelt sich Ihre Lösung mit Ihrem Unternehmen weiter – ohne Ausfälle."
     }
   },
+  common: {
+    next: 'Weiter',
+    prev: 'Zurück',
+    close: 'Schließen',
+    scrollToExplore: 'Zum Erkunden scrollen',
+    logoAlt: 'Half Half Man Logo'
+  },
   slider: {
     ideas: {
-      title: 'Du brauchst eine moderne und sichere Web-Lösung?',
-      subtitle: 'Ich bin Full-Stack-Entwickler mit Know-how in Code und Cybersicherheit',
-      button: 'Kontaktiere mich'
+      title: 'Half-Half Man entwickelt die sichere Software, auf die sich Ihr Unternehmen verlässt.',
+      subtitle: 'Engineering, Architektur und Sicherheit — als ein verantwortliches System geliefert.',
+      button: 'Projekt starten'
     },
     blog: {
-      title: 'Gedanken und Einblicke aus der Tech-Welt',
-      subtitle: 'Sicherheit, Code-Patterns, Freelance-Strategien und mehr',
-      button: 'Mehr erfahren'
+      title: 'Sehen Sie, wie Half-Half Man denkt.',
+      subtitle: 'Praxisnahe Beiträge über Sicherheit, Architektur und das Ausliefern echter Produkte — ohne Hype.',
+      button: 'Zum Blog'
     },
     projects: {
-      title: 'So werden Ideen zu Code',
-      subtitle: 'Schau dir Apps mit echter Umsetzung an',
-      button: 'Projekte ansehen'
+      title: 'Beweise statt Versprechen.',
+      subtitle: 'Entdecken Sie echte Produkte, die Half-Half Man entworfen, abgesichert und ausgeliefert hat.',
+      button: 'Arbeiten ansehen'
     },
     stack: {
-      title: 'Meine Werkzeuge',
-      subtitle: 'Vom Backend bis zum Frontend – ich nutze, was wirklich funktioniert',
-      button: 'Zum Tech Stack'
+      title: 'Die richtigen Werkzeuge, richtig eingesetzt.',
+      subtitle: 'Sehen Sie den Stack hinter den sicheren, leistungsstarken Builds von Half-Half Man.',
+      button: 'Tech-Stack entdecken'
     },
     services: {
-      title: 'Digitale Services nach Maß',
-      subtitle: 'Von sicherem Code bis zur durchdachten UI – ich baue Lösungen, die Bestand haben',
-      button: 'Services entdecken'
+      title: 'Von der Idee zum sicheren, fertigen Produkt.',
+      subtitle: 'Web, Mobile, Backend und Sicherheit — zugeschnitten auf das, was Ihr Unternehmen wirklich braucht.',
+      button: 'Leistungen ansehen'
     },
     about: {
       title: 'Wer ist Half Half Man?',
@@ -242,23 +249,8 @@ const translation = {
     }
   },
   testimonials: {
-    title: 'Echte Erfahrungen. Konkrete Lösungen. Verlässliche Ergebnisse.',
+    title: 'Echte Kunden. Echte Projekte. Echte Ergebnisse.',
     items: {
-      elena: {
-        name: 'Elena Papadopoulou',
-        company: 'CEO @ Helix Digital',
-        feedback: 'Die Zusammenarbeit mit Half Half Man war eine bahnbrechende Erfahrung für unser Unternehmen. Ihre Aufmerksamkeit für Details und der sicherheitsorientierte Ansatz gaben uns volles Vertrauen in unsere Webanwendung.'
-      },
-      thomas: {
-        name: 'Thomas Schneider',
-        company: 'CTO @ NovaTech Systems',
-        feedback: 'Die Kombination aus technischer Expertise und kreativer Problemlösung machte Half Half Man besonders. Sie lieferten genau das, was wir brauchten, genau dann, wenn wir es brauchten.'
-      },
-      maria: {
-        name: 'Maria Georgiou',
-        company: 'Operations Lead @ Bluewave',
-        feedback: 'Außergewöhnlicher Service und herausragende Ergebnisse. Half Half Man hat nicht nur unsere Erwartungen erfüllt, sondern sie in jeder Hinsicht übertroffen.'
-      },
       giota: {
         name: 'dr.Giota Gatsi',
         company: 'Lehrerin @ Schule für Neugriechische Sprache an der Aristoteles-Universität Thessaloniki ; SEP @ Hellenische Offene Universität',
@@ -275,32 +267,32 @@ Ich schätze seine Hingabe, Reaktionsfähigkeit und technische Kompetenz sehr un
     }
   },
   about: {
-    title: 'Über Half Half Man',
-    subtitle: 'Half Half Man ist nicht nur ein Name – es ist eine Haltung.',
+    title: 'Über Half-Half Man',
+    subtitle: 'Mehr als eine Marke — eine disziplinierte Art zu bauen, auf die sich Ihr Unternehmen verlassen kann.',
     blocks: {
       code: {
-        title: 'Zweck im Code',
-        description: 'Jede Zeile, die ich schreibe, verfolgt einen klaren Zweck. Ich entwickle Lösungen, die nicht nur funktionieren, sondern etwas bewirken.'
+        title: 'Sinn in jeder Zeile',
+        description: 'Half-Half Man schreibt Code mit Absicht — Lösungen, die Ihr echtes Problem lösen, nicht nur eine Demo bestehen.'
       },
       athlete: {
-        title: 'Disziplin eines Athleten',
-        description: 'Was ich durch den Leistungssport gelernt habe – Ausdauer, Präzision und ständiges Verbessern – bringe ich direkt in meine Arbeit als Entwickler ein.'
+        title: 'Disziplin eines Sportlers',
+        description: 'Jahre des Wettkampfschwimmens haben die Disziplin hinter jedem Projekt geprägt: Präzision, Beständigkeit und stetiger Fortschritt, auf den Sie sich verlassen können.'
       },
       design: {
-        title: 'Design mit Funktion',
-        description: 'Ich gestalte Oberflächen, die nicht nur gut aussehen, sondern sich auch klar und intuitiv bedienen lassen.'
+        title: 'Funktion-zuerst-Design',
+        description: 'Oberflächen, die klar und wirklich benutzbar sind — damit Ihre Nutzer ein Erlebnis bekommen, das funktioniert, nicht nur gut aussieht.'
       },
       security: {
         title: 'Sicherheit von Anfang an',
-        description: 'Cybersicherheit ist kein Zusatz, sondern fester Bestandteil jedes Projekts, das ich umsetze.'
+        description: 'Sicherheit ist vom ersten Commit an eingebaut, nicht vor dem Launch aufgesetzt — sie schützt Ihre Daten und Ihre Nutzer von Tag eins an.'
       },
       communication: {
         title: 'Klare Kommunikation',
-        description: 'Ich lege Wert auf Offenheit, Verständlichkeit und regelmäßigen Austausch während des gesamten Prozesses.'
+        description: 'Sie wissen jederzeit, wo Ihr Projekt steht — Updates in klarer Sprache, kein Fachjargon, keine Überraschungen.'
       },
       brand: {
-        title: 'Meine Philosophie',
-        description: 'Half Half Man steht für das Gleichgewicht zwischen technischer Präzision und kreativer Umsetzung.'
+        title: 'Zwei Hälften, ein System',
+        description: 'Technische Tiefe und sportliche Disziplin als Einheit — die Balance, die gute Absichten in ausgelieferte, zuverlässige Software verwandelt.'
       }
     },
     meta: {
@@ -310,30 +302,30 @@ Ich schätze seine Hingabe, Reaktionsfähigkeit und technische Kompetenz sehr un
   },
   services: {
     title: 'Dienstleistungen',
-    subtitle: 'Zielgerichtete Lösungen für moderne Herausforderungen',
+    subtitle: 'End-to-End-Lösungen — sicher entwickelt, gebaut, um mit Ihrem Unternehmen zu wachsen.',
     webDev: {
-      title: 'Webentwicklung',
-      description: 'Ich entwickle individuelle Webanwendungen mit modernen Technologien und bewährten Methoden.'
+      title: 'Web- & Mobile-Entwicklung',
+      description: 'Schnelle, sichere Web- und Mobile-Apps rund um Ihre Ziele — von der Marketing-Website bis zum vollständigen plattformübergreifenden Produkt.'
     },
     security: {
       title: 'Cybersicherheit',
-      description: 'Ich biete durchdachte Sicherheitslösungen und führe Penetrationstests durch, um Systeme abzusichern.'
+      description: 'Penetrationstests und Hardening, die Lücken finden, bevor Angreifer es tun — zum Schutz Ihrer Daten und Nutzer.'
     },
     tools: {
       title: 'Tools & Automatisierung',
-      description: 'Ich entwickle maßgeschneiderte Werkzeuge, die Arbeitsabläufe vereinfachen und die Effizienz steigern.'
+      description: 'Maßgeschneiderte Tools, die wiederkehrende Arbeit beseitigen, damit Ihr Team schneller liefert und weniger Zeit verliert.'
     },
     maintenance: {
       title: 'Wartung',
-      description: 'Ich betreue deine Anwendung langfristig – mit Updates, Support und Monitoring.'
+      description: 'Laufende Updates und Monitoring, die Ihre Plattform stabil, aktuell und online halten.'
     },
     performance: {
       title: 'Performance-Optimierung',
-      description: 'Ich analysiere und verbessere die Ladezeiten und Nutzererfahrung deiner Anwendung gezielt.'
+      description: 'Audits und Optimierungen, die Ihre App beschleunigen — kürzere Ladezeiten, flüssigeres Erlebnis, bessere Conversions.'
     },
     consulting: {
       title: 'Technische Beratung',
-      description: 'Ich unterstütze dich bei Technologieentscheidungen und Architekturfragen – pragmatisch und lösungsorientiert.'
+      description: 'Klare Beratung zu Architektur, Stack und Sicherheit — die richtigen Entscheidungen, solange sie noch günstig sind.'
     },
     services: [
       "Ich biete individuelle digitale Services, die auf deine Anforderungen zugeschnitten sind.",
@@ -343,8 +335,8 @@ Ich schätze seine Hingabe, Reaktionsfähigkeit und technische Kompetenz sehr un
     ]
   },
   projects: {
-    title: 'Digitale Lösungen im Einsatz',
-    subtitle: 'Projekte, die Vision, Präzision und technisches Tiefenverständnis zeigen.', 
+    title: 'Beweise, in Produktion',
+    subtitle: 'Echte Projekte, die zeigen, wie Half-Half Man entwirft, absichert und ausliefert.',
     viewAll: 'Alle Projekte anzeigen',
     viewProject: 'Projekt öffnen',
     viewDetails: 'Details zeigen',
@@ -414,7 +406,7 @@ Ich schätze seine Hingabe, Reaktionsfähigkeit und technische Kompetenz sehr un
       },
       portfolio: {
         title: 'Mein Portfolio',
-        summary: 'Diese Seite ist mein digitales Zuhause – gebaut mit React, Tailwind und Sanity. Schnell, sicher, klar strukturiert.',
+        summary: 'Eine sichere Full-Stack-Website in React, Tailwind und Sanity — Beweis für saubere Architektur, Geschwindigkeit und Mehrsprachigkeit.',
         description: 'Ich habe mein Portfolio als Full-Stack-Projekt umgesetzt: mit Internationalisierung, Animationen und einem persönlichen virtuellen Assistenten. Alles, was dich durch meine Arbeit führt – minimalistisch, direkt, funktional.',
         features: [
           'Responsives UI mit durchdachtem UX',
@@ -440,7 +432,7 @@ Ich schätze seine Hingabe, Reaktionsfähigkeit und technische Kompetenz sehr un
       },
       welearngreek: {
         title: 'Griechisch verstehen, spielerisch',
-        summary: 'Ich entwickle eine Web-App, die griechische Grammatik verständlich macht – durch intuitive Tools und echtes Lernen.',
+        summary: 'Eine Web-App, die komplexe griechische Grammatik in intuitive Tools verwandelt — wie Half-Half Man echte Produkte rund um echte Nutzer gestaltet.',
         description: 'Diese App ist für alle, die Griechisch nicht büffeln, sondern erleben wollen. Ich habe Tools gebaut wie einen Nomen-Dekliniator, Verbkonjugator, Vokabeltrainer und ein Modul, das griechischstämmige Wörter in anderen Sprachen erklärt. Die Plattform wächst noch – aber das Ziel ist klar: nachhaltiges, freies Lernen für Schüler und Lehrer.',
         features: [
           'Nomen-Dekliniator – alle Fälle automatisch generiert',
@@ -466,7 +458,7 @@ Ich schätze seine Hingabe, Reaktionsfähigkeit und technische Kompetenz sehr un
       } ,
       secureaccess: {
         title: 'OAuth entschlüsseln',
-        summary: 'Ich habe den OAuth-Flow so gebaut, dass ihn jeder versteht – clean, sicher, ohne Third-Party.',
+        summary: 'Eine klare Demo des OAuth-2.0-Flows — sichere Authentifizierung, richtig konzipiert und erklärt.',
         description: 'Dieses Projekt zeigt den vollständigen Ablauf von OAuth 2.0 – vom Token bis zur Weiterleitung. Ich habe RBAC integriert und dafür gesorgt, dass alles DSGVO-konform und verständlich ist. Ideal als Blueprint für eigene Authentifizierungssysteme.',
         features: [
           'Sichere Auth mit Google OAuth 2.0',
@@ -495,7 +487,7 @@ Ich schätze seine Hingabe, Reaktionsfähigkeit und technische Kompetenz sehr un
       },
       bughunters: {
         title: 'Ich simuliere den Angriff',
-        summary: 'Ich habe eine sichere Umgebung geschaffen, um echte Hacking-Szenarien nachzubilden – lehrreich, ethisch, kontrolliert.',
+        summary: 'Eine kontrollierte Umgebung, die Penetrationstest-Logik und ethische, verantwortungsvolle Sicherheitspraxis demonstriert.',
         description: 'In dieser App zeige ich, wie Penetrationstests in der Praxis aussehen – mit simulierten Scans, Header-Analysen, Brute-Force-Abläufen und mehr. Alles ist dokumentierbar, exportierbar und klar als Lernwerkzeug gekennzeichnet.',
         features: [
           'Nmap-Port-Scan-Simulation mit echten CLI-Ausgaben',
@@ -517,7 +509,7 @@ Ich schätze seine Hingabe, Reaktionsfähigkeit und technische Kompetenz sehr un
       },
       webflow: {
         title: 'Von Webflow zu echtem Code',
-        summary: 'Ich habe ein visuelles Layout in sauberen Code verwandelt – mit Hilfe von KI, klaren Strukturen und semantischem HTML.',
+        summary: 'Ein No-Code-Webflow-Projekt, mit KI in sauberen, semantischen Produktionscode refaktoriert — Geschwindigkeit trifft Qualität.',
         description: 'Dieses Projekt war ein No-Code-Entwurf, den ich in Produktionscode umgewandelt habe. Mit GPT (Cursor IDE) habe ich die Struktur bereinigt, Styles refaktoriert und die Seite auf Netlify deployt. Schnell, sauber, nachvollziehbar.',
         features: [
           'Refaktorierung via GPT in Cursor IDE',
@@ -549,6 +541,13 @@ Ich schätze seine Hingabe, Reaktionsfähigkeit und technische Kompetenz sehr un
     ]
   },
   blog: {
+    loading: 'Blogbeiträge werden geladen...',
+    error: {
+      title: 'Fehler beim Laden der Blogbeiträge',
+      fetchError: 'Blogbeiträge konnten nicht geladen werden. Bitte versuche es später erneut.',
+      tryAgain: 'Erneut versuchen'
+    },
+    featuredImageAlt: 'Beitragsbild für',
     title: 'Einblicke & Reflexionen',
     readMore: 'Mehr lesen',
     backToBlog: '← Zurück zum Blog',
@@ -573,7 +572,7 @@ Ich schätze seine Hingabe, Reaktionsfähigkeit und technische Kompetenz sehr un
     },
     meta: {
       title: 'Blog – Half Half Man',
-      description: 'Technik-Updates, zeitlose Ideen und durchdachte Perspektiven – vom Code bis zum Kontext.'
+      description: 'Praxisnahe Beiträge über Engineering, Sicherheit und das Ausliefern echter Produkte — klares Denken, kein Hype.'
     },
     blog: [
       'Jede Zeile, die ich schreibe, hat ein Ziel.',
@@ -586,11 +585,23 @@ Ich schätze seine Hingabe, Reaktionsfähigkeit und technische Kompetenz sehr un
   contact: {
     meta: {
       title: 'Kontakt – Half Half Man',
-      description: 'Schreib mir oder buche direkt ein Gespräch.'
+      description: 'Buchen Sie einen Anruf oder senden Sie Half-Half Man eine Nachricht — und bauen Sie Ihr Projekt von Anfang an richtig.'
     },
-    title: 'Buche einen Anruf oder schick mir eine Nachricht – ich melde mich schnellstmöglich zurück.',
+    title: 'Erzählen Sie Half-Half Man von Ihrem Projekt — buchen Sie einen Anruf oder senden Sie eine Nachricht, und Sie hören in Kürze zurück.',
     calendly: {
-      title: '30 Minuten – dein Termin mit mir'
+      title: '30 Minuten – dein Termin mit mir',
+      beforeYouBook: 'Bevor Sie buchen:',
+      bullets: {
+        whatHappensLabel: 'Was im Gespräch passiert:',
+        whatHappens: 'kurze Vorstellung, Ihre Ziele, Umfang und nächste Schritte.',
+        whoForLabel: 'Für wen es geeignet ist / nicht:',
+        whoFor: 'neue Projekte, Audits oder Verbesserungen — keine dringenden „in 5 Minuten beheben“-Anfragen.'
+      },
+      error: {
+        title: 'Anruf buchen',
+        description: 'Das Planungs-Widget konnte nicht geladen werden. Bitte nutzen Sie das Kontaktformular unten oder buchen Sie direkt.',
+        button: 'Auf Calendly buchen'
+      }
     },
     form: {
       title: 'Schick mir eine Nachricht',

@@ -18,7 +18,7 @@ import NotFound from './pages/NotFound';
 import Chatbot from './components/Chatbot';
 import ErrorBoundary from './components/common/ErrorBoundary';
 import './App.css'
-import logoSpinner from './assets/logo/logo_cropped.png';
+import logoSpinner from './assets/logo/hhm_logo.png';
 
 // ScrollToTop component to handle scroll behavior
 const ScrollToTop = () => {

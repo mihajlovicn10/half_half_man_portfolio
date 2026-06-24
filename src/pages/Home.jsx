@@ -9,7 +9,7 @@ import servicesBackground from '../assets/images/services_background.jpg';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import logo from '../assets/logo/LOGO.jpg'; 
+import profileImg from '../assets/images/about/profile_img.jpg';
 import { useSEO } from '../hooks/useSEO';
 import { Helmet } from 'react-helmet-async';
 import { buildOrganization, buildService } from '../utils/structuredData';
@@ -369,9 +369,9 @@ const Home = () => {
             <motion.img 
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
-              src={logo}
-              alt={t('common.logoAlt')}
-              className="w-24 h-24 mb-6 rounded-full shadow-lg ring-2 ring-teal-300/20" 
+              src={profileImg}
+              alt={t('about.profileAlt', { defaultValue: 'Half Half Man profile photo' })}
+              className="w-24 h-24 mb-6 rounded-full object-cover shadow-lg ring-2 ring-teal-300/20" 
             />
             <h2 className="text-4xl font-bold text-white mb-4 text-center">
               {t('about.title')}

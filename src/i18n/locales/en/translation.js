@@ -63,27 +63,27 @@ const translation = {
       seeAllPosts: "See all posts",
       noneYet: "Coming soon."
     },
-    title: "Engineering the Stack",
-    subtitle: "Purposeful tools. Precision execution. Future-ready systems.",
+    title: "The Stack Behind the Work",
+    subtitle: "Purposeful tools, precise execution, systems built to last — chosen for your goals, not for hype.",
     seeFullStack: "See Full Stack",
     backToTechStack: "Back to Tech Stack",
     categoryNotFound: "Category not found.",
     categories: {
       code: {
         title: "Code Engineering",
-        description: "Precision-crafted code. Thoughtful architecture. Built for growth."
+        description: "Precision-crafted code and thoughtful architecture — built to grow with your business, not against it."
       },
       nocode: {
         title: "No-Code/Low-Code Solutions",
-        description: "Performance with purpose. Every tool, precisely chosen — every result, intentional."
+        description: "When speed matters, the right no-code tools ship your idea fast — without cutting corners on quality."
       },
       security: {
         title: "Cybersecurity Practices",
-        description: "Security isn't a layer – it's built into every line of code."
+        description: "Security isn't a layer added later — it's built into every line, protecting your data from day one."
       },
       optimization: {
         title: "Optimization & Maintenance",
-        description: "Performance is expected — not requested. Every system is designed to deliver it from the start."
+        description: "Performance and stability by design — so your product stays fast and online long after launch."
       }
     },
     backendSystems: {
@@ -140,7 +140,7 @@ const translation = {
     },
     uptimeStability: {
       name: "Uptime & Stability",
-      description: "I monitor, patch, and maintain systems to ensure your platform stays online and resilient—day after day."
+      description: "Half-Half Man monitors, patches, and maintains systems so your platform stays online and resilient — day after day."
     },
     technicalLongevity: {
       name: "Technical Longevity",
@@ -149,29 +149,29 @@ const translation = {
   },
   slider: {
     ideas: {
-      title: 'Need a modern and secure web solution?',
-      subtitle: 'Hire a full-stack developer who understands both code and cybersecurity',
-      button: 'Hire me'
+      title: 'Half-Half Man builds the secure software your business depends on.',
+      subtitle: 'Engineering, architecture, and security — delivered as one accountable system.',
+      button: 'Start your project'
     },
     blog: {
-      title: 'Explore latest insights from the world of technology',
-      subtitle: 'Security, coding patterns, freelance strategy & more',
-      button: 'Read More'
+      title: 'See how Half-Half Man thinks.',
+      subtitle: 'Practical writing on security, architecture, and shipping real products — no hype.',
+      button: 'Read the blog'
     },
     projects: {
-      title: 'See how ideas become code',
-      subtitle: 'Browse showcase apps with real-world implementation',
-      button: 'View Projects'
+      title: 'Proof, not promises.',
+      subtitle: 'Explore real products Half-Half Man has designed, secured, and shipped.',
+      button: 'View the work'
     },
     stack: {
-      title: 'Tools of the trade',
-      subtitle: 'From backend to frontend, I use the best tools for the job',
-      button: 'See Tech Stack'
+      title: 'The right tools, used the right way.',
+      subtitle: 'See the stack behind Half-Half Man\'s secure, high-performance builds.',
+      button: 'Explore the tech stack'
     }, 
     services: {
-      title: 'Tailored Digital Services',
-      subtitle: 'From secure code to stunning UI - I build solutions that last.',
-      button: 'Discover Services'
+      title: 'From idea to secure, shipped product.',
+      subtitle: 'Web, mobile, backend, and security — tailored to what your business actually needs.',
+      button: 'See services'
     },
     about: {
       title: 'Who is Half Half Man?',
@@ -180,7 +180,7 @@ const translation = {
     }
   },
   testimonials: {
-    title: 'True experiences. Tangible solutions. Trusted outcomes',
+    title: 'Real clients. Real projects. Real results.',
     items: {
       giota: {
         name: 'dr.Giota Gatsi',
@@ -200,32 +200,32 @@ is rare. He's not just a developer — he's an engineer with a designer's eye an
     }
   },
   about: {
-    title: 'About Half Half Man',
-    subtitle: 'Half Half Man is not just a brand — it\'s a mindset.',
+    title: 'About Half-Half Man',
+    subtitle: 'More than a brand — a disciplined way of building your business can rely on.',
     blocks: {
       code: {
-        title: 'Purpose in Coding',
-        description: 'Every line of code written serves a purpose. I believe in creating solutions that not only work but make a meaningful impact.'
+        title: 'Purpose in Every Line',
+        description: 'Half-Half Man writes code with intent — solutions built to solve your real problem, not just pass a demo.'
       },
       athlete: {
         title: 'Discipline of an Athlete',
-        description: 'The discipline learned through competitive swimming translates directly into coding practices. Precision, dedication, and continuous improvement are my core values.'
+        description: 'Years of competitive swimming built the discipline behind every project: precision, consistency, and steady progress you can count on.'
       },
       design: {
-        title: 'Design Functionality',
-        description: 'I create designs that are both aesthetically pleasing and highly functional, ensuring the best user experience possible.'
+        title: 'Function-First Design',
+        description: 'Interfaces that are clean and genuinely usable — so your users get an experience that works, not just one that looks good.'
       },
       security: {
-        title: 'Cybersecurity Focus',
-        description: 'Security is not an afterthought but a fundamental aspect of every project I undertake.'
+        title: 'Security by Default',
+        description: 'Security is built in from the first commit, not bolted on before launch — protecting your data and your users from day one.'
       },
       communication: {
         title: 'Clear Communication',
-        description: 'I believe in transparent and effective communication throughout the development process.'
+        description: 'You always know where your project stands — plain-language updates, no jargon, no surprises.'
       },
       brand: {
-        title: 'Brand Philosophy',
-        description: 'Half Half Man represents the balance between technical expertise and creative innovation.'
+        title: 'Two Halves, One System',
+        description: 'Engineering depth and athletic discipline, working as one — the balance that turns good intentions into shipped, reliable software.'
       }
     },
     meta: {
@@ -235,30 +235,30 @@ is rare. He's not just a developer — he's an engineer with a designer's eye an
   },
   services: {
     title: 'Services',
-    subtitle: 'Complete Solutions for Modern Challenges',
+    subtitle: 'End-to-end solutions — engineered securely, built to grow with your business.',
     webDev: {
-      title: 'Web Development',
-      description: 'Custom web applications built with modern technologies and best practices.'
+      title: 'Web & Mobile Development',
+      description: 'Fast, secure web and mobile apps built around your goals — from a marketing site to a full cross-platform product.'
     },
     security: {
       title: 'Cybersecurity',
-      description: 'Robust security solutions and penetration testing services.'
+      description: 'Penetration testing and hardening that find the gaps before attackers do — keeping your data and users safe.'
     },
     tools: {
       title: 'Tooling & Automation',
-      description: 'Custom-built tools to optimize workflows and boost productivity.'
+      description: 'Custom tools that remove the repetitive work, so your team ships faster and wastes less time.'
     },
     maintenance: {
       title: 'Maintenance',
-      description: 'Ongoing support and updates to ensure performance and stability.'
+      description: 'Ongoing updates and monitoring that keep your platform stable, current, and online.'
     },
     performance: {
       title: 'Performance Optimization',
-      description: 'Speed up your apps and improve user experience through audits and fixes.'
+      description: 'Audits and fixes that speed up your app — faster load times, a smoother experience, better conversions.'
     },
     consulting: {
       title: 'Technical Consulting',
-      description: 'Expert guidance on technology stack and architecture decisions.'
+      description: 'Clear guidance on architecture, stack, and security — the right calls made while they\'re still cheap to make.'
     },
     services: [
       "We deliver comprehensive digital solutions tailored to your needs.",
@@ -271,8 +271,8 @@ is rare. He's not just a developer — he's an engineer with a designer's eye an
       title: "Projects - Half Half Man",
       description: "Explore my portfolio of innovative web applications and solutions."
     },
-    title: "Digital Solutions in Action",
-    subtitle: "Projects that reflect vision, precision, and technical depth.",
+    title: "Proof, in Production",
+    subtitle: "Real builds that show how Half-Half Man designs, secures, and ships.",
     featured: "Featured Project",
     viewDetails: "View Details",
     backToProjects: "← Back to Projects",
@@ -302,7 +302,7 @@ is rare. He's not just a developer — he's an engineer with a designer's eye an
     items: {
       portfolio: {
         title: "Inside the Half Half Man Portfolio",
-        summary: "A secure, full-stack portfolio site built with React, Tailwind, and Sanity – optimized for clarity, speed, and client engagement.",
+        summary: "A secure, full-stack site in React, Tailwind, and Sanity — proof of clean architecture, speed, and multilingual reach.",
         description: "A comprehensive portfolio website built with React and Tailwind CSS, featuring smooth animations, internationalization, and a virtual assistant.",
         features: [
           "Responsive design with modern UI/UX",
@@ -328,12 +328,12 @@ is rare. He's not just a developer — he's an engineer with a designer's eye an
       },
       welearngreek: {
         title: "Grammar, Engineered",
-        summary: "A personalized web app for mastering Greek grammar through intuitive tools and informal learning.",
+        summary: "A web app that turns complex Greek grammar into intuitive tools — how Half-Half Man designs real products around real users.",
         description: "A non-formal learning tool built to support students and language enthusiasts in acquiring Greek grammar naturally. The platform includes utilities like a noun decliner, verb conjugator, smart vocabulary recording, and a unique etymological analyzer for Greek-rooted words in foreign languages. Currently under active development. Expected to evolve into a fully usable app supporting students and educators in Greek and possibly other language studies.",
         features: [
           "Noun Declinator – generates case-based noun forms in Greek.",
           "Verb Conjugator – presents conjugations based on tense and person.",
-          "Custom Vocabulary Tool – records new Greek words as pronounced, with native-language",
+          "Custom Vocabulary Tool – records new Greek words as pronounced, with native-language translations.",
           "Transparent Words Engine – displays and explains words of Greek origin across different languages.",
           "Focused on real-world application – designed to support actual learning and retention through user interaction, not just passive reading.",
         ],
@@ -354,7 +354,7 @@ is rare. He's not just a developer — he's an engineer with a designer's eye an
       },
       secureaccess: {
         title: "Decoding OAuth Flow",
-        summary: "A minimal demo that simplifies the OAuth 2.0 authorization process.",
+        summary: "A clean demo of the OAuth 2.0 flow — secure authentication, designed and explained the right way.",
         description: "A comprehensive frontend simulation of modern authentication workflows using the OAuth 2.0 protocol. This project demonstrates how secure access is granted through token exchange, redirection, and user authorization — without relying on third-party providers. It introduces role-based access control (RBAC) and showcases how permission logic is structured and enforced within an application. Designed for clarity and adaptability, this showcase serves as a blueprint for building secure and scalable login systems that prioritize user data protection and system integrity.",
         features: [
           "Secure Google OAuth 2.0 authentication",
@@ -366,7 +366,7 @@ is rare. He's not just a developer — he's an engineer with a designer's eye an
           "Uses SECURE_SSL_REDIRECT, ALLOWED_HOSTS, and proper CSRF protection"
         ],
         challenges: [
-          "OAuth 401 / 400 errors due to: deleted or mismatched ID, Incorrect or missing redirect URI's, quoted dictionary in .env, environment variables desynced between .env and Railway",
+          "OAuth 401 / 400 errors due to: deleted or mismatched ID, incorrect or missing redirect URIs, quoted dictionary in .env, environment variables desynced between .env and Railway",
           "Railway auto-injecting quotes in variables",
           "Error tracebacks not showing full context in production",
           "Social-auth's vague AuthCanceled traceback"
@@ -383,7 +383,7 @@ is rare. He's not just a developer — he's an engineer with a designer's eye an
       },
       bughunters: {
         title: "Simulating the Hunt",
-        summary: "A controlled environment that replicates real-world security scenarios—built for showcasing penetration testing logic, responsible disclosure workflows, and ethical bug hunting practices.",
+        summary: "A controlled environment demonstrating penetration-testing logic and ethical, responsible security practice.",
         description: "A controlled environment that replicates real-world security scenarios—built for showcasing penetration testing logic, responsible disclosure workflows, and ethical bug hunting practices.",
         features: [
           "Simulated Nmap Port Scanning - Emulates Nmap CLI output to demonstrate the fundamentals of network reconnaissance in a safe, sandboxed environment.",
@@ -399,20 +399,20 @@ is rare. He's not just a developer — he's an engineer with a designer's eye an
         ],
         solutions: [
           "Custom build pipeline added for Railway deployment, including minimal Django requirements.",
-          "Migrations were satisfied using mock schemas to fulfill Django's expectations without storing real data.e",
+          "Migrations were satisfied using mock schemas to fulfill Django's expectations without storing real data.",
           "Ethical considerations implemented via static disclaimers and best-practice references—reinforcing that the toolkit is a controlled simulation, not an exploit platform.",
         ]
       },
       webflow: {
         title: "From Webflow to Workflow",
-        summary: "A Webflow-based no-code project, fully refactored with AI to produce clean, semantic code, versioned on GitHub, and deployed via Netlify.",
+        summary: "A no-code Webflow build refactored with AI into clean, semantic, production-grade code — bridging speed and quality.",
         description: "A visual concept built in Webflow, then refined into production-grade code. Using AI refactoring via Cursor IDE, the exported layout was transformed into a clean, scalable, and accessible codebase—bridging no-code speed with full-code quality.", 
         features: [
           "AI-powered code refactoring - Transforms Webflow's exported HTML/CSS into clean, semantic, production-ready code using GPT in Cursor IDE",
           "Semantic HTML5 structure - Replaces generic div-based layout with semantic tags (section, main, article, etc.) for accessibility and SEO. ",
           "Cleaned and optimized CSS - Refactored style sheets for better readability, maintainability, and consistency in design tokens and spacing.",
           "Conversion-optimized copy - Rewritten hero sections, CTAs, and microcopy to improve clarity, tone, and user engagement ",
-          "Python-powered local preview - Python-powered local preview",
+          "Python-powered local preview - A lightweight local server to preview the static build and verify asset mapping before deployment.",
           "Version control via GitHub - All code changes tracked with commit history, branches, and collaboration-ready setup.", 
           "Fast deployment via Netlify - Final build hosted on Netlify with instant deployment from GitHub, supporting CI workflows."
         ],
@@ -433,7 +433,7 @@ is rare. He's not just a developer — he's an engineer with a designer's eye an
   },
   blog: {
     title: 'Insights & Reflections',
-    description: 'Tech updates, timeless ideas, and thoughtful takes — from code to context.',
+    description: 'Practical writing on engineering, security, and shipping real products — clear thinking, no hype.',
     readMore: 'Read More',
     backToBlog: 'Back to Blog',
     publishedOn: 'Published on',
@@ -468,7 +468,7 @@ is rare. He's not just a developer — he's an engineer with a designer's eye an
     },
     meta: {
       title: 'Insights & Reflections',
-      description: 'Tech updates, timeless ideas, and thoughtful takes — from code to context.',
+      description: 'Practical writing on engineering, security, and shipping real products — clear thinking, no hype.',
     },
     blog: [
       "Every row that's written has its meaning.",
@@ -480,11 +480,23 @@ is rare. He's not just a developer — he's an engineer with a designer's eye an
   contact: {
     meta: {
       title: "Contact - Half Half Man",
-      description: "Get in touch or schedule a call."
+      description: 'Schedule a call or send a message to Half-Half Man — and start building your project the right way.'
     },
-    title: "Schedule a call or drop a message — I'll get back to you shortly.",
+    title: 'Tell Half-Half Man about your project — book a call or send a message, and you\'ll hear back shortly.',
     calendly: {
-      title: "Schedule a 30-Min Call"
+      title: "Schedule a 30-Min Call",
+      beforeYouBook: 'Before you book:',
+      bullets: {
+        whatHappensLabel: 'What happens on the call:',
+        whatHappens: 'quick intro, your goals, scope, and next steps.',
+        whoForLabel: 'Who it\'s for / not for:',
+        whoFor: 'new builds, audits, or improvements — not urgent "fix in 5 minutes" requests.'
+      },
+      error: {
+        title: 'Schedule a Call',
+        description: 'Unable to load the scheduling widget. Please use the contact form below or schedule directly.',
+        button: 'Schedule on Calendly'
+      }
     },
     form: {
       title: "Send a Message",
