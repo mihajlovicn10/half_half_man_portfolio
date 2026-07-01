@@ -8,11 +8,11 @@
     "node": ">=18 <26"
   },
   "scripts": {
-    "dev": "sanity dev",
-    "start": "sanity start",
-    "build": "sanity build",
-    "deploy": "sanity deploy",
-    "deploy-graphql": "sanity graphql deploy"
+    "dev": "PATH=\"/opt/homebrew/opt/node@20/bin:$PATH\" sanity dev",
+    "start": "PATH=\"/opt/homebrew/opt/node@20/bin:$PATH\" sanity start",
+    "build": "PATH=\"/opt/homebrew/opt/node@20/bin:$PATH\" sanity build",
+    "deploy": "PATH=\"/opt/homebrew/opt/node@20/bin:$PATH\" sanity deploy",
+    "deploy-graphql": "PATH=\"/opt/homebrew/opt/node@20/bin:$PATH\" sanity graphql deploy"
   },
   "keywords": [
     "sanity"

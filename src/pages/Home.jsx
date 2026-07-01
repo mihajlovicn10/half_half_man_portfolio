@@ -14,10 +14,13 @@ import { useSEO } from '../hooks/useSEO';
 import { Helmet } from 'react-helmet-async';
 import { buildOrganization, buildService } from '../utils/structuredData';
 import { useSectionView } from '../hooks/useSectionView';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 import { track } from '../utils/events';
+import PageShell from '../components/layout/PageShell';
 
 const Home = () => {
   const { t } = useTranslation();
+  const prefersReducedMotion = useReducedMotion();
   
   // SEO meta tags for Home page
   useSEO({
@@ -48,14 +51,16 @@ const Home = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const interval = setInterval(() => {
       setCurrentSlideIndex((prevIndex) => 
         prevIndex === sliderData.length - 1 ? 0 : prevIndex + 1
       );
-    }, 5000); // Change slide every 5 seconds
+    }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [prefersReducedMotion]);
 
   // Lazy-load hero video when hero section enters viewport
   useEffect(() => {
@@ -83,6 +88,8 @@ const Home = () => {
   }, [shouldLoadVideo]);
 
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const interval = setInterval(() => {
       setIsTransitioning(true);
       setTimeout(() => {
@@ -90,11 +97,11 @@ const Home = () => {
           prevIndex === heroTexts.length - 1 ? 0 : prevIndex + 1
         );
         setIsTransitioning(false);
-      }, 600); // Half of the transition time
-    }, 4000); // Total time for each text
+      }, 600);
+    }, 4000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [prefersReducedMotion]);
 
   // Handle hash in URL for scrolling to sections
   useEffect(() => {
@@ -106,11 +113,11 @@ const Home = () => {
       if (element) {
         // Add a small delay to ensure the page is fully loaded
         setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth' });
+          element.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
         }, 100);
       }
     }
-  }, []);
+  }, [prefersReducedMotion]);
 
   const toggle = (index) => {
     setExpanded(expanded === index ? null : index);
@@ -174,7 +181,7 @@ const Home = () => {
   useSectionView('testimonials');
 
   return (
-    <div className="min-h-screen bg-tertiary w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-16">
+    <PageShell variant="home">
       <Helmet>
         <title>Half Half Man | Freelance Programmer & Developer - Web Development & Security</title>
         <meta
@@ -189,7 +196,9 @@ const Home = () => {
               logoUrl: 'https://half-half-man.com/images/og-image.jpg',
               sameAs: [
                 'https://github.com/mihajlovicn10',
-                'https://www.linkedin.com/in/nikolamihajlovic9/',
+                'https://www.facebook.com/profile.php?id=61591582768040',
+                'https://www.instagram.com/half_half_man/',
+                'https://www.linkedin.com/company/half-half-man/',
               ],
             }),
             buildService({
@@ -208,16 +217,15 @@ const Home = () => {
       <motion.div 
         ref={heroRef}
         style={{ 
-          y, 
-          opacity,
+          ...(prefersReducedMotion ? {} : { y, opacity }),
           backgroundImage: `url(${heroPoster})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
-        // Note: the page wrapper uses `-mt-16` to offset the fixed navbar.
-        // Add 4rem to the hero height so the overlay/hero covers the full
+        // Note: the page wrapper uses `-mt-20` to offset the fixed navbar.
+        // Add 5rem to the hero height so the overlay/hero covers the full
         // visible viewport and doesn't reveal the next section at the bottom.
-        className="relative w-full h-[calc(100vh+4rem)] overflow-hidden"
+        className="relative w-full h-[calc(100vh+5rem)] overflow-hidden"
       >
         {shouldLoadVideo && (
           <video
@@ -236,6 +244,7 @@ const Home = () => {
         
         {/* Single overlay with matrix effect */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/50">
+          {!prefersReducedMotion && (
           <div className="absolute inset-0 overflow-hidden">
             {[...Array(20)].map((_, i) => (
               <motion.div
@@ -260,6 +269,7 @@ const Home = () => {
               </motion.div>
             ))}
           </div>
+          )}
         </div>
         
         <div className="relative z-10 h-full flex items-center justify-center">
@@ -276,13 +286,13 @@ const Home = () => {
                     className="relative"
                   >
                     <motion.h1 
-                      className="text-6xl font-bold font-mono mb-4 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]"
+                      className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-mono mb-4 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]"
                       layout
                     >
                       {slide.title}
                     </motion.h1>
                     <motion.p
-                      className="text-xl mb-6"
+                      className="text-base sm:text-lg md:text-xl mb-6"
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.2 }}
@@ -337,6 +347,11 @@ const Home = () => {
         >
           <div className="flex flex-col items-center">
             <span className="text-white/70 text-sm mb-2">{t('common.scrollToExplore')}</span>
+            {prefersReducedMotion ? (
+              <svg className="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            ) : (
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
@@ -345,6 +360,7 @@ const Home = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
             </motion.div>
+            )}
           </div>
         </motion.div>
       </motion.div>
@@ -601,9 +617,9 @@ const Home = () => {
           </div>
         </div>
       </section>
-    </div>
+    </PageShell>
   );
 };
 
-export default Home; 
+export default Home;
 

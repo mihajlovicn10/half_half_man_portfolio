@@ -14,6 +14,7 @@ export default {
         'primary-dark': '#1a4557',
         secondary: '#e2f0fa',
         tertiary: '#f5f5f5',
+        muted: '#cbd5e1',
       },
       fontFamily: {
         sans: ['Poppins', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useSEO } from '../hooks/useSEO';
+import PageShell from '../components/layout/PageShell';
 
 const NotFound = () => {
   useSEO({
@@ -12,7 +13,7 @@ const NotFound = () => {
   });
 
   return (
-    <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-16 bg-gradient-to-b from-white to-[#e2f0fa]">
+    <PageShell>
       <div className="max-w-3xl mx-auto px-6 pt-40 pb-16 text-center">
         <p className="text-primary/80 font-medium">404</p>
         <h1 className="mt-3 text-4xl sm:text-5xl font-bold text-primary">
@@ -43,7 +44,7 @@ const NotFound = () => {
           </Link>
         </div>
       </div>
-    </div>
+    </PageShell>
   );
 };
 

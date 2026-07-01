@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { client, postsQuery } from '../utils/sanityClient';
 import { useSEO } from '../hooks/useSEO';
 import { buildBreadcrumbList } from '../utils/structuredData';
+import PageShell from '../components/layout/PageShell';
 
 const Blog = () => {
   const { t, i18n } = useTranslation();
@@ -59,8 +60,8 @@ const Blog = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
-        <div className="max-w-6xl mx-auto px-4 pt-48">
+      <PageShell>
+        <div className="max-w-6xl mx-auto px-4 pt-28 sm:pt-36 lg:pt-48">
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -70,14 +71,14 @@ const Blog = () => {
             <p className="mt-4 text-primary">{t('blog.loading')}</p>
           </motion.div>
         </div>
-      </div>
+      </PageShell>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
-        <div className="max-w-6xl mx-auto px-4 pt-48">
+      <PageShell>
+        <div className="max-w-6xl mx-auto px-4 pt-28 sm:pt-36 lg:pt-48">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -93,7 +94,7 @@ const Blog = () => {
             </button>
           </motion.div>
         </div>
-      </div>
+      </PageShell>
     );
   }
 
@@ -111,9 +112,9 @@ const Blog = () => {
           )}
         </script>
       </Helmet>
-      <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
+      <PageShell>
         <section className="w-full py-16">
-          <div className="max-w-6xl mx-auto px-4 pt-48">
+          <div className="max-w-6xl mx-auto px-4 pt-28 sm:pt-36 lg:pt-48">
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -146,9 +147,9 @@ const Blog = () => {
                         transition={{ type: "spring", stiffness: 300 }}
                         className="bg-[#f8fafc]/80 backdrop-blur-sm shadow-xl rounded-2xl p-8 border border-[#e2e8f0] transition-all duration-300 hover:bg-[#f1f5f9]/90"
                       >
-                        <div className="flex items-center justify-between">
-                          <div className="flex-grow">
-                            <h3 className="text-2xl font-semibold text-primary">{post.title}</h3>
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                          <div className="flex-grow min-w-0">
+                            <h3 className="text-xl sm:text-2xl font-semibold text-primary">{post.title}</h3>
                             {post.abstract && (
                               <p className="mt-2 text-primary/90 text-base italic">{post.abstract}</p>
                             )}
@@ -169,12 +170,12 @@ const Blog = () => {
                             <motion.div 
                               whileHover={{ scale: 1.05 }}
                               transition={{ type: "spring", stiffness: 300 }}
-                              className="ml-6 flex-shrink-0"
+                              className="sm:ml-6 flex-shrink-0 w-full sm:w-auto"
                             >
                               <img 
                                 src={post.mainImage}
                                 alt={`${t('blog.featuredImageAlt')} ${post.title}`}
-                                className="w-32 h-32 object-cover rounded-xl shadow-md"
+                                className="w-full sm:w-32 h-48 sm:h-32 object-cover rounded-xl shadow-md"
                               />
                             </motion.div>
                           )}
@@ -230,7 +231,7 @@ const Blog = () => {
             </div>
           </div>
         </section>
-      </div>
+      </PageShell>
     </>
   );
 };

@@ -11,6 +11,7 @@ import { useSEO } from '../hooks/useSEO';
 import { generateCanonicalUrl } from '../utils/seo';
 import { buildBlogPosting, buildBreadcrumbList } from '../utils/structuredData';
 import { track } from '../utils/events';
+import PageShell from '../components/layout/PageShell';
 
 const BlogPost = () => {
   const { slug } = useParams();
@@ -139,8 +140,8 @@ const BlogPost = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
-        <div className="max-w-4xl mx-auto px-4 pt-48">
+      <PageShell>
+        <div className="max-w-4xl mx-auto px-4 pt-28 sm:pt-36 lg:pt-48">
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -150,14 +151,14 @@ const BlogPost = () => {
             <p className="mt-4 text-primary">Loading blog post...</p>
           </motion.div>
         </div>
-      </div>
+      </PageShell>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
-        <div className="max-w-4xl mx-auto px-4 pt-48">
+      <PageShell>
+        <div className="max-w-4xl mx-auto px-4 pt-28 sm:pt-36 lg:pt-48">
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -173,7 +174,7 @@ const BlogPost = () => {
             </button>
           </motion.div>
         </div>
-      </div>
+      </PageShell>
     );
   }
 
@@ -211,8 +212,8 @@ const BlogPost = () => {
         </script>
       </Helmet>
       
-      <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
-        <article className="max-w-3xl lg:max-w-4xl mx-auto px-4 sm:px-6 pt-32 pb-24">
+      <PageShell>
+        <article className="max-w-3xl lg:max-w-4xl mx-auto px-4 sm:px-6 pt-24 sm:pt-28 lg:pt-32 pb-24">
           <motion.div 
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -290,7 +291,7 @@ const BlogPost = () => {
                   <img
                     src={post.mainImage.asset.url}
                     alt={post.title}
-                    className="w-full h-[400px] object-cover rounded-2xl shadow-xl"
+                    className="w-full h-48 sm:h-64 md:h-[400px] object-cover rounded-2xl shadow-xl"
                   />
                 </motion.div>
               )}
@@ -458,7 +459,7 @@ const BlogPost = () => {
             </div>
           </motion.div>
         </article>
-      </div>
+      </PageShell>
     </>
   );
 };

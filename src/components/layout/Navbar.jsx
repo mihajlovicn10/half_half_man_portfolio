@@ -80,7 +80,7 @@ const Navbar = () => {
       role="navigation"
       aria-label="Main navigation"
     >
-      <div className="flex justify-between items-center h-16">
+      <div className="flex justify-between items-center h-20">
         {/* Logo */}
         <Link 
           to="/" 
@@ -89,7 +89,7 @@ const Navbar = () => {
           aria-label="Home"
         >
           <img
-            className="h-20 w-auto"
+            className="h-16 md:h-20 w-auto"
             src={logo}
             alt={t('common.logoAlt')}
             loading="lazy"
@@ -98,7 +98,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center pr-4">
+        <div className="hidden lg:flex items-center pr-4">
           <div className="flex items-center space-x-1">
             {navItems.map((item) => (
               <Link
@@ -180,7 +180,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile menu button */}
-        <div className="md:hidden pr-4">
+        <div className="lg:hidden pr-4">
           <button
             ref={menuButtonRef}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -229,7 +229,7 @@ const Navbar = () => {
       {/* Mobile Navigation */}
       <div 
         id="mobile-menu"
-        className={`md:hidden transition-all duration-300 ease-in-out ${
+        className={`lg:hidden transition-all duration-300 ease-in-out ${
           isMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
         } overflow-hidden`}
         role="menu"

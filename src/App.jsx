@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { motion } from 'framer-motion';
+import { useReducedMotion } from './hooks/useReducedMotion';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import TechStack from './pages/TechStack';
@@ -46,6 +47,7 @@ const AnalyticsTracker = () => {
 const App = () => {
   const [isAppLoading, setIsAppLoading] = useState(false);
   const [dotCount, setDotCount] = useState(1);
+  const prefersReducedMotion = useReducedMotion();
 
   // Show loader only on first visit to home page
   useEffect(() => {
@@ -54,10 +56,12 @@ const App = () => {
     const hasSeenLoader = window.localStorage.getItem('hhm_has_seen_loader') === '1';
 
     if (isHome && !hasSeenLoader) {
-      setIsAppLoading(true);
       window.localStorage.setItem('hhm_has_seen_loader', '1');
+      if (!prefersReducedMotion) {
+        setIsAppLoading(true);
+      }
     }
-  }, []);
+  }, [prefersReducedMotion]);
 
   // Simple initial loading screen with logo and animated dots
   useEffect(() => {
@@ -89,6 +93,18 @@ const App = () => {
           <div className="relative min-h-screen">
             {isAppLoading && (
               <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90">
+                {prefersReducedMotion ? (
+                  <div className="flex flex-col items-center gap-4">
+                    <img
+                      src={logoSpinner}
+                      alt="Half Half Man loading"
+                      className="w-[7.5rem] h-[7.5rem] rounded-full shadow-lg"
+                    />
+                    <p className="text-tertiary text-sm tracking-wide font-medium">
+                      Loading
+                    </p>
+                  </div>
+                ) : (
                 <motion.div
                   className="flex flex-col items-center gap-4"
                   initial={{ opacity: 0, scale: 0.9, y: 10 }}
@@ -119,6 +135,7 @@ const App = () => {
                     Loading{'.'.repeat(dotCount)}
                   </motion.p>
                 </motion.div>
+                )}
               </div>
             )}
             <Layout>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import PageShell from '../components/layout/PageShell';
 
 const PrivacyPolicy = () => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -17,8 +18,8 @@ const PrivacyPolicy = () => {
         <title>{t('privacy.meta.title')}</title>
         <meta name="description" content={t('privacy.meta.description')} />
       </Helmet>
-      <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
-        <div className="max-w-4xl mx-auto px-4 pt-48 pb-12">
+      <PageShell>
+        <div className="max-w-4xl mx-auto px-4 pt-28 sm:pt-36 lg:pt-48 pb-12">
           <motion.h1 
             className="text-4xl font-['Poppins'] font-bold text-center text-primary mb-20"
             initial={{ opacity: 0, y: -20 }}
@@ -153,7 +154,7 @@ const PrivacyPolicy = () => {
             </p>
           </motion.div>
         </div>
-      </div>
+      </PageShell>
     </>
   );
 };

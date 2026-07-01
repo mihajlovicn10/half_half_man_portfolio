@@ -10,6 +10,7 @@ import { useSEO } from '../hooks/useSEO';
 import { generateCanonicalUrl } from '../utils/seo';
 import { buildBreadcrumbList } from '../utils/structuredData';
 import { TECH_STACK_CATEGORY_META, TECH_STACK_TOOL_RELATED } from '../data/techStackMeta';
+import PageShell from '../components/layout/PageShell';
 
 const TechStackDetail = () => {
   const { t, i18n } = useTranslation();
@@ -157,7 +158,7 @@ const TechStackDetail = () => {
     requestAnimationFrame(() => {
       const el = document.getElementById(id);
       if (!el) return;
-      const NAV_OFFSET_PX = 96;
+      const NAV_OFFSET_PX = 112;
       const y = el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET_PX;
       window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
       setHighlightedId(id);
@@ -181,7 +182,7 @@ const TechStackDetail = () => {
 
   if (!currentCategory) {
     return (
-      <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa] flex items-center justify-center">
+      <PageShell className="flex items-center justify-center">
         <Card variant="primary" padding="large" className="text-center">
           <h2 className="text-2xl font-bold text-primary mb-4">{t('techStack.categoryNotFound')}</h2>
           <Button variant="primary" onClick={() => navigate('/tech-stack')}>
@@ -189,7 +190,7 @@ const TechStackDetail = () => {
             {t('techStack.backToTechStack')}
           </Button>
         </Card>
-      </div>
+      </PageShell>
     );
   }
 
@@ -213,8 +214,8 @@ const TechStackDetail = () => {
           )}
         </script>
       </Helmet>
-      <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
-        <div className="max-w-7xl mx-auto px-4 pt-48 pb-24">
+      <PageShell>
+        <div className="max-w-7xl mx-auto px-4 pt-28 sm:pt-36 lg:pt-48 pb-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -342,7 +343,7 @@ const TechStackDetail = () => {
             })}
           </div>
         </div>
-      </div>
+      </PageShell>
     </>
   );
 };

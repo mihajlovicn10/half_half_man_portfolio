@@ -536,6 +536,7 @@ is rare. He's not just a developer — he's an engineer with a designer's eye an
     prev: 'Previous',
     close: 'Close',
     scrollToExplore: 'Scroll to explore',
+    skipToContent: 'Skip to content',
     logoAlt: 'Half Half Man Logo'
   },
   faq: {

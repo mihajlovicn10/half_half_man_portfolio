@@ -10,6 +10,7 @@ import { useSEO } from '../hooks/useSEO';
 import { buildBreadcrumbList } from '../utils/structuredData';
 import SystemMap from '../components/techStack/SystemMap';
 import { TECH_STACK_CATEGORY_META } from '../data/techStackMeta';
+import PageShell from '../components/layout/PageShell';
 
 const categories = [
   {
@@ -90,8 +91,8 @@ const TechStack = () => {
           )}
         </script>
       </Helmet>
-      <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
-        <div className="max-w-7xl mx-auto px-4 pt-48 pb-16">
+      <PageShell>
+        <div className="max-w-7xl mx-auto px-4 pt-28 sm:pt-36 lg:pt-48 pb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -211,7 +212,7 @@ const TechStack = () => {
             <SystemMap />
           </div>
         </div>
-      </div>
+      </PageShell>
     </>
   );
 };

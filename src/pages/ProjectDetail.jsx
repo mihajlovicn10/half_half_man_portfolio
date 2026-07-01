@@ -8,6 +8,7 @@ import { useSEO } from '../hooks/useSEO';
 import { generateCanonicalUrl } from '../utils/seo';
 import { buildCreativeWork, buildBreadcrumbList } from '../utils/structuredData';
 import { track } from '../utils/events';
+import PageShell from '../components/layout/PageShell';
 import portfolioImage1 from '../assets/images/Projects/List/portfolio_screenshot.png';
 import portfolioAbout from '../assets/images/Projects/Detail/portfolio_about.png';
 import portfolioStack from '../assets/images/Projects/Detail/portfolio_stack.png';
@@ -274,7 +275,7 @@ const ProjectDetail = () => {
 
   if (!project) {
     return (
-      <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
+      <PageShell>
         <div className="max-w-6xl mx-auto px-4 pt-24">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-primary">{t('projects.projectNotFound')}</h2>
@@ -283,7 +284,7 @@ const ProjectDetail = () => {
             </Link>
           </div>
         </div>
-      </div>
+      </PageShell>
     );
   }
 
@@ -318,7 +319,7 @@ const ProjectDetail = () => {
   const cs = project.caseStudy || {};
 
   return (
-    <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
+    <PageShell>
       <Helmet>
         <title>{`${project.title} | ${t('projects.meta.title')}`}</title>
         <meta name="description" content={project.description} />
@@ -339,7 +340,7 @@ const ProjectDetail = () => {
           ])}
         </script>
       </Helmet>
-      <div className="max-w-6xl mx-auto px-4 pt-48 pb-12">
+      <div className="max-w-6xl mx-auto px-4 pt-28 sm:pt-36 lg:pt-48 pb-12">
         {/* Navigation */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -595,7 +596,7 @@ const ProjectDetail = () => {
           )}
         </AnimatePresence>
       </div>
-    </div>
+    </PageShell>
   );
 };
 

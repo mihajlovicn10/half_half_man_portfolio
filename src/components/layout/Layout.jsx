@@ -1,11 +1,12 @@
 import { Helmet } from 'react-helmet-async';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import { useEffect } from 'react';
 import { useSEO } from '../../hooks/useSEO';
 import CookieBanner from '../common/CookieBanner';
+import { useTranslation } from 'react-i18next';
 
 const Layout = ({ children }) => {
+  const { t } = useTranslation();
   // Initialize SEO with default meta tags
   useSEO({
     title: 'Half Half Man | Web Development & Security',
@@ -139,11 +140,19 @@ const Layout = ({ children }) => {
         aria-label="Main application"
         style={{ margin: 0, padding: 0 }}
       >
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-tertiary focus:px-4 focus:py-2 focus:text-primary focus:font-semibold focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary"
+        >
+          {t('common.skipToContent', { defaultValue: 'Skip to content' })}
+        </a>
         <Navbar />
         <main 
+          id="main-content"
           className="flex-1 w-full"
           role="main"
           style={{ margin: 0, padding: 0 }}
+          tabIndex={-1}
         >
           {children}
         </main>

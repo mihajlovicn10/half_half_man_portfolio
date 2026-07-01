@@ -10,6 +10,7 @@ import bughuntersThumb from '../assets/images/Projects/List/bht_home.png';
 import webflowThumb from '../assets/images/Projects/List/webflow_home.png';
 import { useSEO } from '../hooks/useSEO';
 import { buildBreadcrumbList } from '../utils/structuredData';
+import PageShell from '../components/layout/PageShell';
 
 const Projects = () => {
   const { t } = useTranslation();
@@ -137,7 +138,7 @@ const Projects = () => {
       return;
     }
 
-    const NAV_OFFSET_PX = 96; // fixed navbar + breathing room
+    const NAV_OFFSET_PX = 112; // fixed navbar (h-20) + breathing room
     const y = el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET_PX;
     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
   }, [safePage]);
@@ -225,9 +226,9 @@ const Projects = () => {
           )}
         </script>
       </Helmet>
-      <div className="min-h-screen w-screen -ml-[calc((100vw-100%)/2)] -mr-[calc((100vw-100%)/2)] -mt-[64px] bg-gradient-to-b from-white to-[#e2f0fa]">
+      <PageShell>
         <section className="w-full py-16">
-          <div ref={listTopRef} className="max-w-6xl mx-auto px-4 pt-48">
+          <div ref={listTopRef} className="max-w-6xl mx-auto px-4 pt-28 sm:pt-36 lg:pt-48">
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -461,7 +462,7 @@ const Projects = () => {
             )}
           </div>
         </section>
-      </div>
+      </PageShell>
     </>
   );
 };
